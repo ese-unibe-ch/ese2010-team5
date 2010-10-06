@@ -1,0 +1,100 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<!-- some javascript funcions -->
+<script type="text/javascript" charset="utf-8">
+
+
+   function rateQuestion(questionId, up){ 
+    
+    $.post( "@{Posts.rate()}"
+        ,{id:questionId,up:up}
+        ,function (data){
+          //update rating                    
+          $("#questionRating").html(data);
+                
+        },"text/html"); 
+
+  }
+
+
+   
+  function rateAnswer(answerId, up){ 
+        
+    $.post( "@{Posts.rate()}"
+        ,{id:answerId,up:up}
+        ,function (data){
+          //update rating                    
+          $("#answerRating-"+answerId).html(data);
+                
+        },"text/html"); 
+
+  }
+
+</script>
+
+
+<h1>Question ${q.getId()}</h1>
+<table>
+<tr>
+  <td>Owner:</td><td>${q.getOwner().getName()}</td> 
+</tr>
+<tr>
+  <td>Rating:</td><td>
+    <span id="questionRating">${q.getVotation()}</span> 
+
+  </td> 
+</tr>
+<tr>
+<td></td>
+<td>
+    <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a>, 
+    <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
+</td>
+</tr>
+<tr>
+  <td>Created At:</td><td>${q.getTimestamp()}</td>
+</tr>
+<tr>
+  <td>Content: </td><td>${q.getContent()}</td>
+</tr>
+<tr>
+  <td></td>
+  <td>
+    <table>
+
+    </table>
+  </td>
+</tr>
+</table>
+<br></br>
+<h2> Answers (${q.getAnswers().size()})</h2>
+<div class="list">
+    #{list items:q.getAnswers(), as:'answer'}
+      <div class="list-item ${answer_parity}">
+        <div class="details">From: ${answer.getOwner().getName()}, Rating: <span id="answerRating-${answer.getId()}">${answer.getVotation()}</span></div>          
+        <div class="answer x-large">
+            ${answer.getContent()}
+        </div>        
+        <div class="actions">
+          <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a>
+          <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
+        </div>
+      </div>
+    #{/list}
+</div>
+
+<div id="actions">
+<h3> Your Answer</h3>
+#{form @Questions.addAnswer(), id:'addAnswerForm' } 
+  <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  
+  <input type="text" name="answer" id="answer"></input>
+  <br></br>
+  <a href="#" onclick="$('#addAnswerForm').submit()">add</a>
+#{/form}
+</div>
+
+
+
+
+

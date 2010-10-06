@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">        
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
+    </head>
+    <body>
+     
+     <div id="wrapper">    
+      <div id="header">
+       <div id="logo">
+        <a href="/">Q & A</a>
+       </div>    	
+    	 <div id="loginbox">
+	       #{if user}    
+    		  Logged in as: ${user}, <a href="@{Secure.logout()}">logout</a>
+    	   #{/if}
+    	   #{else}
+	    	  Please <a href="@{Secure.login()}">login</a>    	
+ 	       #{/else}
+ 	     </div>
+ 	     
+      </div><!-- end header -->
+      
+      <!-- messages from flash scopes -->
+      #{if flash.error }
+	     <div id="message" class="error">
+ 	       ${flash.error}
+	 	   </div>
+ 	    #{/if}
+ 	    #{if flash.info }
+       <div id="message" class="info">
+         ${flash.info}
+       </div>
+      #{/if}
+ 	    
+      
+      <!-- content -->
+      <div id="content">
+        #{doLayout /}
+      </div>     
+      
+      
+      <div id="footer">      
+        <div class="content">Q & A by Cédric Reginster & Alexander Striffeler</div>
+      </div>
+     </div><!-- end wrapper -->
+     
+    </body>
+</html>

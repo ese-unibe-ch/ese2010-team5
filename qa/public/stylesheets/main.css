@@ -1,0 +1,100 @@
+*{
+	margin: 0;
+	padding: 0;	
+}
+
+html,body{
+	min-height:100%;
+	height:100%;
+	font-family: helvetica, verdana;
+}
+
+
+#wrapper{
+	width: 100%;
+	min-height: 100%;	
+	position: relative;		
+}
+
+#header {	
+	background-color: grey;
+	position: relative;
+	padding: 10px;
+}
+
+#header #loginbox{
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	
+}
+
+#content{
+  min-height: 100%;
+  padding: 10px;	
+  padding-bottom: 30px;
+}
+
+#footer{
+	width:100%;	
+	background-color: grey;
+	position: absolute;
+	/*because we have 10px padding on #wrapper*/
+	bottom: 0px;	
+	left:0px;			
+}
+#footer .content{
+  padding-left: 10px;
+}
+
+/* some actions like add question */
+#content #actions{	
+	padding: 10px;
+  border: 1px solid black;	
+	
+}
+
+/* question list*/
+
+.list-item{    
+  border: 0px solid black;
+  padding: 10px;
+}
+.list-item.odd{
+  background-color: white;
+}
+
+.list-item.even{
+  background-color: #dddddd;
+}
+.list-item .question{
+  font-size: x-large;
+}
+
+.list-item .actions{
+  
+}
+.list-item .details{
+  
+}
+
+/* flash messages */
+#message{  
+  border: 1px solid black;
+  margin: 10px;
+}
+
+#message.error{
+	background-color: red;
+}
+#message.info{
+  background-color: green;
+}
+
+.x-large{
+  font-size: x-large;
+}
+
+
+
+
