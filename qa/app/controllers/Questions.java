@@ -26,6 +26,7 @@ public class Questions extends Posts {
 		if(p == null){
 			flash.error("could not find Question with id "+id);
 		}else{
+			p.delete();
 			flash.put("info","Question "+p.getId()+" deleted");
 		}	
 				

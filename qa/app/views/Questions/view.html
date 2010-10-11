@@ -34,7 +34,11 @@
 </script>
 
 
-<h1>Question ${q.getId()}</h1>
+<h1>Question ${q.getId()} 
+#{myPost id:q.getId(), user:user}
+ - <a href="@{Questions.delete(q.getId())}">delete</a>
+#{/myPost}
+</h1>
 <table>
 <tr>
   <td>Owner:</td><td>${q.getOwner().getName()}</td> 

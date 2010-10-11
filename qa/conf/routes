@@ -6,7 +6,7 @@
 GET     /	  					                 Questions.list
 GET		  /questions/list			           Questions.list
 GET		  /questions/{id}			           Questions.view
-GET     /posts/delete/{id}             Posts.delete
+GET     /questions/delete/{id}         Questions.delete
 
 # Import Secure routes
 *       /     module:secure                                  
