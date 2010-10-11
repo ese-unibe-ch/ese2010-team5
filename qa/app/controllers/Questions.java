@@ -3,6 +3,7 @@ package controllers;
 import java.util.Collection;
 
 import models.Answer;
+import models.Post;
 import models.Question;
 
 import play.Logger;
@@ -17,6 +18,22 @@ public class Questions extends Posts {
 		Collection<Question> questions = Question.findAll();
 		render(questions);
 	}
+	
+	public static void delete(long id){
+		
+		Post p = Post.findById(id);
+		
+		if(p == null){
+			flash.error("could not find Question with id "+id);
+		}else{
+			flash.put("info","Question "+p.getId()+" deleted");
+		}	
+				
+		
+		list();		
+		
+	}
+	
 	
 	public static void create(String content){
 		

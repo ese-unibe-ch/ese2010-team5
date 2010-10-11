@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Post {
+import play.Logger;
+
+public abstract class Post {
 	
 	private User owner;
 	private String content;
@@ -14,7 +16,9 @@ public class Post {
 	private long id;
 	private LinkedList<Vote> votes;	
 	
-	private static long idCounter = 1;
+	private static long idCounter = 1;	
+ 
+	protected static Map<Long,Post> instanceMap = new HashMap();
 	
 	private Post(){}
 	
@@ -24,6 +28,8 @@ public class Post {
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();		
+		instanceMap.put(getId(), this);
+		
 	}
 	
 	public User getOwner() {
@@ -41,6 +47,16 @@ public class Post {
 	public long getId(){
 		return id;
 	}
+	
+	/**
+	 * override this method 
+	 */
+	public void delete(){
+		instanceMap.remove(getId());
+		doDelete();
+	}
+	
+	protected abstract void doDelete();
 	
 	
 	/**
@@ -93,20 +109,21 @@ public class Post {
 	}
 
 	/**
-	 * Calculates the average mark for the entry.
+	 * Calculates the average mark for the entry. 
 	 * 
-	 * @return The average mark - an integer value between 1 and 10.
 	 */
 	public int getVotation() {		
 		
 		int votation = 0;
 		for (Vote singleVote : votes) {
 			votation += singleVote.getValue();
-		}
-		
-		
+		}		
 		return votation;
 
+	}
+	
+	public static <T> T findById(long id) {
+		return (T)instanceMap.get(id);    
 	}
 	
 

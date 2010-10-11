@@ -11,10 +11,8 @@ import java.util.Map;
 public class Question extends Post {
 
 	
-	private List<Answer> answers= new LinkedList<Answer>();
-
-	private static Map<Long,Question> instanceMap = new HashMap();
-	//keep also a List
+	private List<Answer> answers= new LinkedList<Answer>();	
+	
 	private static List<Question> questionList = new LinkedList<Question>();
 	
 	private static Comparator<Post> ratingSorter = new Comparator<Post>() {		
@@ -26,18 +24,14 @@ public class Question extends Post {
     		return 1;
     	    	
 	    return 0;
-    }
-	
-	
-	
+    }	
 	};
 		
   
 	
 	
 	public Question(User user, String content) {
-		super(user, content);
-		instanceMap.put(getId(),this);
+		super(user, content);		
 		questionList.add(this);
 		
 	}
@@ -48,11 +42,8 @@ public class Question extends Post {
 
 	public void addAnswer(Answer newAnswer) {
 		this.answers.add(newAnswer);
-	}
-	
-	public static Question findById(long inId){
-		return instanceMap.get(inId);
-	}
+	}	
+
 	
 	public static Collection<Question> findAll(){						
 		Collections.sort(questionList, ratingSorter);	
@@ -64,7 +55,7 @@ public class Question extends Post {
 		
 		Collection<Question> result = new LinkedList<Question>();
 		
-		for(Question q : instanceMap.values()){
+		for(Question q : questionList){
 			if(q.getOwner().equals(inUser))
 				result.add(q);
 		}
@@ -72,5 +63,10 @@ public class Question extends Post {
 		return result;
 		
 	}
+
+	@Override
+  protected void doDelete() {
+	  questionList.remove(this);	  
+  }
 
 }

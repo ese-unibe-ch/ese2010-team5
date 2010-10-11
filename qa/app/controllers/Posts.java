@@ -6,14 +6,12 @@ import models.Question;
 
 public class Posts extends Auth {
 
+		
+	
 	
 	public static void rate(long id, boolean up){
 		
-		Post post = Answer.findById(id);
-		
-		if(post == null)
-			post = Question.findById(id);
-		
+		Post post = Post.findById(id);
 		
 		if(post == null){
 			error("could not find post with id: "+id);
