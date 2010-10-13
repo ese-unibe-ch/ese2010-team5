@@ -10,11 +10,21 @@ import java.util.Map;
 public class Answer extends Post {
 	
 	private static List<Answer> answerList = new LinkedList<Answer>();
+	
+	//Answer belongs to a Question
+	private Question question;
+	
 		
-	public Answer(User owner, String content) {
+	public Answer(User owner, String content, Question inQuestion) {
 		super(owner,content);		
 		answerList.add(this);
+		this.question = inQuestion;
+		question.addAnswer(this);
 	}	
+	
+	public Question getQuestion(){
+		return question;
+	}
 	
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();

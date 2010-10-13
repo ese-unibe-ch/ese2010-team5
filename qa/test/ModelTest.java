@@ -11,8 +11,9 @@ public class ModelTest extends UnitTest {
     	User u = new User("tester");    	
     	assertNotNull(u);    	
     	
-    	assertNotNull(new Question(u, "test"));
-    	assertNotNull(new Answer(u,"testanswer"));
+    	Question q = new Question(u, "test"); 
+    	assertNotNull(q);
+    	assertNotNull(new Answer(u,"testanswer",q));
     	assertNotNull(new Vote(1, u));   	
     	
     }

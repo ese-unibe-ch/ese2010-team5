@@ -55,6 +55,7 @@
 <td>
     <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a>, 
     <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
+    
 </td>
 </tr>
 <tr>
@@ -84,6 +85,9 @@
         <div class="actions">
           <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a>
           <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
+          #{myPost id:q.getId(), user:user}
+            ,<a href="@{Answers.edit(answer.getId())}">edit</a>
+          #{/myPost}
         </div>
       </div>
     #{/list}

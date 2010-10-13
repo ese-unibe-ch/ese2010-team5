@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set title:'Edit Answer' /}
+
+<h1>Answer ${a.getId()}</h1>
+#{form @Answers.setContent(),id:'editForm'}
+
+	<table cellspacing="10px">
+	<tr>
+	  <td>Rating:</td>
+	  <td>
+	    <span id="answerRating">${a.getVotation()}</span>
+	  </td> 
+	</tr>	
+	<tr>
+	  <td>Created At:</td><td>${a.getTimestamp()}</td>
+	</tr>	
+	<tr>
+	    <input type="hidden" id="id" name="id" value="${a.getId()}"/>
+	    <td>
+	      Edit content:
+	    </td>
+	    <td>
+	      <input type="text" id="content" name="content" value="${a.getContent()}"/>
+	      <br/><a href="#" onclick="$('#editForm').submit();">update</a>      
+	    </td>   
+	</tr>
+	</table>
+
+#{/form}

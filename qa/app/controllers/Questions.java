@@ -53,8 +53,7 @@ public class Questions extends Posts {
 			flash.error("could not find question q: "+qId);			
 			redirect("/");
 		}
-		Answer newAnswer = new Answer(user, answer);
-		q.addAnswer(newAnswer);
+		Answer newAnswer = new Answer(user, answer,q);		
 				
 		flash.put("info", "new Answer created");		
 		view(qId);		

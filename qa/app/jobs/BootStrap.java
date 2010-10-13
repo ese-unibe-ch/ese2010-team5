@@ -58,8 +58,7 @@ public class BootStrap extends Job {
     		
     		if( i++ % 2 == 0){
     			User u = User.findById(random.nextInt(users)+1);
-    			Answer a = new Answer(u, "Answer to question "+q.getId());
-    			q.addAnswer(a);
+    			Answer a = new Answer(u, "Answer to question "+q.getId(),q);    			
     			randomVote(a, u);
     			randomVote(q, u);
     		}
