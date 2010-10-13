@@ -74,7 +74,7 @@ public class Questions extends Posts {
 		
 	}
 	
-	public static void edit(String editedContent, long id){
+	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
 		
 		Question q = Question.findById(id);		
@@ -82,8 +82,22 @@ public class Questions extends Posts {
 			flash("error", "could not find question with id "+id);
 			redirect("/");
 		}
-		q.setContent(editedContent);
+		
 		render(q);
+		
+	}
+	
+	public static void setContent(long id, String content){
+		Logger.debug("Setting new content: \""+content+"\"");
+		
+		Question q = Question.findById(id);		
+		if(q == null){
+			flash("error", "could not find question with id "+id);
+			redirect("/");
+		}
+		q.setContent(content);
+		flash.put("info","Content of question "+id+" changed");
+		view(id);
 		
 	}
 	

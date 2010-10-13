@@ -17,9 +17,10 @@
   <td>Content: </td><td>${q.getContent()}</td>
 </tr>
 </table>
+
 #{form @Questions.setContent(),id:'editForm'}
 		<input type="hidden" id="id" name="id" value="${q.getId()}"></input>  
-        Edit question: <input type="text" id="editedContent" name="editedContent"/>
+        Edit content: <input type="text" id="content" name="content"/>
         <br></br>
         <a href="#" onclick="$('#editForm').submit();">update</a>
      #{/form}
