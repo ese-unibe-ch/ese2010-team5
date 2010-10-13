@@ -1,0 +1,18 @@
+# don't commit eclipse stuff
+/.classpath
+/.buildpath
+/.project
+/.settings
+/eclipse
+/log
+/cache
+
+
+# don't commit temporary play! stuff
+/logs
+/tmp
+/test-result
+/server.pid
+
+
+.DS_Store
