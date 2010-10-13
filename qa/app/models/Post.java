@@ -20,8 +20,6 @@ public abstract class Post {
  
 	protected static Map<Long,Post> instanceMap = new HashMap();
 	
-	private Post(){}
-	
 	protected Post(User inUser, String inContent){
 		this.owner = inUser;
 		this.content = inContent;
@@ -29,7 +27,6 @@ public abstract class Post {
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();		
 		instanceMap.put(getId(), this);
-		
 	}
 	
 	public User getOwner() {
@@ -124,6 +121,10 @@ public abstract class Post {
 	
 	public static <T> T findById(long id) {
 		return (T)instanceMap.get(id);    
+	}
+	
+	public void setContent(String editedContent){
+		content = editedContent;
 	}
 	
 

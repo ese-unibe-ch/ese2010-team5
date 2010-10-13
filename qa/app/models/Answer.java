@@ -11,7 +11,6 @@ public class Answer extends Post {
 	
 	private static List<Answer> answerList = new LinkedList<Answer>();
 		
-
 	public Answer(User owner, String content) {
 		super(owner,content);		
 		answerList.add(this);
@@ -20,14 +19,14 @@ public class Answer extends Post {
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
 	}	
-
 	
 	public static Collection<Answer> findAll(){
 		return answerList;
 	}
 	
-  protected void doDelete() {	  
-  	answerList.remove(this);	  
-  }	
+	@Override
+	protected void doDelete() {	  
+		answerList.remove(this);	  
+	}	
 
 }

@@ -28,13 +28,11 @@ public class Questions extends Posts {
 		}else{
 			p.delete();
 			flash.put("info","Question "+p.getId()+" deleted");
-		}	
-				
+		}			
 		
 		list();		
 		
 	}
-	
 	
 	public static void create(String content){
 		
@@ -63,7 +61,6 @@ public class Questions extends Posts {
 			
 	}
 	
-	
 	public static void view(long id){
 		Logger.debug("Show question: "+id);
 		
@@ -73,6 +70,19 @@ public class Questions extends Posts {
 			redirect("/");
 		}
 		
+		render(q);
+		
+	}
+	
+	public static void edit(String editedContent, long id){
+		Logger.debug("Edit question: "+id);
+		
+		Question q = Question.findById(id);		
+		if(q == null){
+			flash("error", "could not find question with id "+id);
+			redirect("/");
+		}
+		q.setContent(editedContent);
 		render(q);
 		
 	}

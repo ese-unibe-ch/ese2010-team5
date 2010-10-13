@@ -5,10 +5,7 @@ import models.Post;
 import models.Question;
 
 public class Posts extends Auth {
-
-		
-	
-	
+ 
 	public static void rate(long id, boolean up){
 		
 		Post post = Post.findById(id);
@@ -28,5 +25,4 @@ public class Posts extends Auth {
 		
 	}	
 	
-	
-}
+}                      

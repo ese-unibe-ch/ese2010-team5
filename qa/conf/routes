@@ -3,13 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /	  					                 Questions.list
-GET		  /questions/list			           Questions.list
-GET		  /questions/{id}			           Questions.view
-GET     /questions/delete/{id}         Questions.delete
+GET     /	  					               Questions.list
+GET		/questions/list			               Questions.list
+GET	    /questions/{id}			               Questions.view
+GET     /questions/delete/{id}                 Questions.delete
+GET     /questions/edit/{id}                   Questions.edit
 
 # Import Secure routes
-*       /     module:secure                                  
+*       /                                      module:secure                                  
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

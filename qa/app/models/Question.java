@@ -16,24 +16,19 @@ public class Question extends Post {
 	private static List<Question> questionList = new LinkedList<Question>();
 	
 	private static Comparator<Post> ratingSorter = new Comparator<Post>() {		
-    public int compare(Post post1, Post post2) {
-	    // TODO Auto-generated method stub
-    	if(post1.getVotation() > post2.getVotation())
-    		return -1;
-    	else if(post1.getVotation() < post2.getVotation())
-    		return 1;
-    	    	
-	    return 0;
-    }	
+	    public int compare(Post post1, Post post2) {
+	    	if(post1.getVotation() > post2.getVotation())
+	    		return -1;
+	    	else if(post1.getVotation() < post2.getVotation())
+	    		return 1;
+	    	    	
+		    return 0;
+	    }	
 	};
 		
-  
-	
-	
 	public Question(User user, String content) {
 		super(user, content);		
 		questionList.add(this);
-		
 	}
 
 	public List<Answer> getAnswers() {
@@ -43,11 +38,9 @@ public class Question extends Post {
 	public void addAnswer(Answer newAnswer) {
 		this.answers.add(newAnswer);
 	}	
-
 	
 	public static Collection<Question> findAll(){						
 		Collections.sort(questionList, ratingSorter);	
-		
 		return questionList;
 	}
 	
@@ -61,12 +54,12 @@ public class Question extends Post {
 		}
 		
 		return result;
-		
+	
 	}
 
 	@Override
-  protected void doDelete() {
-	  questionList.remove(this);	  
-  }
+	protected void doDelete() {
+		questionList.remove(this);	  
+	}
 
 }
