@@ -34,44 +34,34 @@
 </script>
 
 
-<h1>Question ${q.getId()} 
-#{myPost id:q.getId(), user:user}
- - <a href="@{Questions.delete(q.getId())}">delete</a>
- | <a href="@{Questions.edit(q.getId())}">edit</a>
-#{/myPost}
-</h1>
+<h1>${q.getContent()}</h1>
+<br></br>
+<div class="actions">
+ <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a> |  
+ <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
+#{if q.ownPost()}
+ | <a href="@{Questions.delete(q.getId())}">delete</a> | 
+ <a href="@{Questions.edit(q.getId())}">edit</a> |
+#{/if}
+</div>
+
+
 <table>
+<tr>
+  <td>id:</td><td>${q.getId()}</td> 
+</tr>
 <tr>
   <td>Owner:</td><td>${q.getOwner().getName()}</td> 
 </tr>
 <tr>
   <td>Rating:</td><td>
-    <span id="questionRating">${q.getVotation()}</span> 
-
+    <span id="questionRating">${q.getVotation()}</span>
   </td> 
-</tr>
-<tr>
-<td></td>
-<td>
-    <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a>, 
-    <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
-    
-</td>
 </tr>
 <tr>
   <td>Created At:</td><td>${q.getTimestamp()}</td>
 </tr>
-<tr>
-  <td>Content: </td><td>${q.getContent()}</td>
-</tr>
-<tr>
-  <td></td>
-  <td>
-    <table>
 
-    </table>
-  </td>
-</tr>
 </table>
 <br></br>
 <h2> Answers (${q.getAnswers().size()})</h2>
@@ -80,19 +70,28 @@
       <div class="list-item ${answer_parity}">
         <div class="details">From: ${answer.getOwner().getName()}, Rating: <span id="answerRating-${answer.getId()}">${answer.getVotation()}</span></div>          
         <div class="answer x-large">
+          #{if answer.isBest()}
+            <img src="@{'/public/images/tick.png'}"></img>
+          #{/if}
             ${answer.getContent()}
         </div>        
         <div class="actions">
           <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a>
           <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
-          #{myPost id:q.getId(), user:user}
-            ,<a href="@{Answers.edit(answer.getId())}">edit</a>
-          #{/myPost}
+          #{if answer.ownPost()}
+            ,<a href="@{Answers.edit(answer.getId())}">edit</a>            
+          #{/if}
+          #{if q.ownPost()}
+            ,<a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> mark as best</a>  
+          #{/if}
+          
         </div>
       </div>
     #{/list}
 </div>
-
+<br></br>
+<hr></hr>
+<br></br>
 <div id="actions">
 <h3> Your Answer</h3>
 #{form @Questions.addAnswer(), id:'addAnswerForm' } 

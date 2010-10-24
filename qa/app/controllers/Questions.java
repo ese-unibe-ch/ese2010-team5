@@ -38,6 +38,31 @@ public class Questions extends Posts {
 		
 	}
 	
+	public static void markBestAnswer(long qId, long aId){
+		
+		Logger.debug("marking best answer "+aId+" for question "+qId);
+		
+		Question q = QaDB.findQuestionById(qId);		
+		
+		if(q == null){
+			flash("error", "failed setting best answer for q: "+qId);
+			redirect("/");
+		}
+		
+		Collection<Answer> answers = q.getAnswers();		
+		for(Answer a : answers){
+			if(!a.isBest() && a.getId() == aId)
+				a.setIsBest(true);
+			else
+				a.setIsBest(false);
+		}
+		
+		flash("info","answer "+aId+" marked as best");
+		view(qId);
+		
+		
+	}
+	
 	public static void create(String content){
 		
 		Logger.debug("Create Question with content: "+content);		

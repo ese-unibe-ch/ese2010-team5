@@ -11,7 +11,7 @@ public class Answer extends Post {
 	
 	//Answer belongs to a Question
 	private Question question;
-	
+	private boolean isBest = false;
 		
 	public Answer(User owner, String content, Question inQuestion) {
 		super(owner,content);
@@ -25,7 +25,15 @@ public class Answer extends Post {
 	
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
-	}	
+	}
+	
+	public boolean isBest(){
+		return isBest;
+	}
+	
+	public void setIsBest(boolean inIsBest){
+		this.isBest = inIsBest;
+	}
 	
 	
 	protected void doDelete() {	  
