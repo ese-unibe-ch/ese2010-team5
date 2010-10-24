@@ -16,17 +16,15 @@ public abstract class Post {
 	private long id;
 	private LinkedList<Vote> votes;	
 	
-	private static long idCounter = 1;	
- 
-	protected static Map<Long,Post> instanceMap = new HashMap();
+	private static long idCounter = 1;
+	
 	
 	protected Post(User inUser, String inContent){
 		this.owner = inUser;
 		this.content = inContent;
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
-		this.votes = new LinkedList<Vote>();		
-		instanceMap.put(getId(), this);
+		this.votes = new LinkedList<Vote>();
 	}
 	
 	public User getOwner() {
@@ -47,11 +45,7 @@ public abstract class Post {
 	
 	/**
 	 * override this method 
-	 */
-	public void delete(){
-		instanceMap.remove(getId());
-		doDelete();
-	}
+	 */	
 	
 	protected abstract void doDelete();
 	
@@ -119,9 +113,6 @@ public abstract class Post {
 
 	}
 	
-	public static <T> T findById(long id) {
-		return (T)instanceMap.get(id);    
-	}
 	
 	public void setContent(String editedContent){
 		content = editedContent;

@@ -10,13 +10,14 @@ import models.Question;
 import models.User;
 import play.Logger;
 import play.data.validation.Required;
+import utils.QaDB;
 
 public class Answers extends Posts {
 	
 	
 	public static void edit(long id){
 				
-		Answer a = Answer.findById(id);		
+		Answer a = QaDB.findAnswerById(id);		
 		if(a == null){
 			flash("error", "could not find answer with id "+id);
 			redirect("/");
@@ -29,7 +30,7 @@ public class Answers extends Posts {
 	public static void setContent(long id, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
-		Answer a = Answer.findById(id);		
+		Answer a = QaDB.findAnswerById(id);		
 		if(a == null){
 			flash("error", "could not find answer with id "+id);
 			redirect("/");

@@ -1,11 +1,10 @@
 %{
-  
   postId    = _id;
   user      = _user;  
   showBody  = false;
   
   if( postId && user ){
-    post      = models.Post.findById(postId);
+    post      = utils.QaDB.findPostById(postId);
     showBody  = post != null && post.getOwner().getName().equals(user);
   }  
 
