@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import play.cache.Cache;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
+import utils.QaDB;
 
 @OnApplicationStart
 public class BootStrap extends Job {
@@ -43,22 +44,22 @@ public class BootStrap extends Job {
     	
     	//create some users
     	for(int i=1;  i <= users ; i++){
-    		User u = new User("user-"+i);
+    		User u = QaDB.addUser(new User("user-"+i));
     		//5 questions per user
     		for(int j = 1; j <= questionsPerUser; j++){
-        		Question q = new Question(u, "question "+j+", from "+u.getName());
+        		Question q = QaDB.addQuestion(new Question(u, "question "+j+", from "+u.getName()));
         	}	
     	}
     	
-    	Collection<Question> questions = Question.findAll();
+    	Collection<Question> questions = QaDB.findAllQuestions();
     	
     	//an answer for every second question, from a random user
     	int i = 0;
     	for(Question q : questions){    		    		
     		
     		if( i++ % 2 == 0){
-    			User u = User.findById(random.nextInt(users)+1);
-    			Answer a = new Answer(u, "Answer to question "+q.getId(),q);    			
+    			User u = QaDB.findUserById((random.nextInt(users)+1));
+    			Answer a = QaDB.addAnswer(new Answer(u, "Answer to question "+q.getId(),q));    			
     			randomVote(a, u);
     			randomVote(q, u);
     		}

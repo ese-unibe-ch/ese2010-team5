@@ -7,9 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Answer extends Post {
-	
-	private static List<Answer> answerList = new LinkedList<Answer>();
+public class Answer extends Post {	
 	
 	private List<CommentAnswer> commentsA = new LinkedList<CommentAnswer>();
 
@@ -18,11 +16,10 @@ public class Answer extends Post {
 	
 	//Answer belongs to a Question
 	private Question question;
-	
+	private boolean isBest = false;
 		
 	public Answer(User owner, String content, Question inQuestion) {
-		super(owner,content);		
-		answerList.add(this);
+		super(owner,content);
 		this.question = inQuestion;
 		question.addAnswer(this);
 	}	
@@ -43,15 +40,19 @@ public class Answer extends Post {
 	
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
-	}	
-	
-	public static Collection<Answer> findAll(){
-		return answerList;
 	}
 	
-	@Override
+	public boolean isBest(){
+		return isBest;
+	}
+	
+	public void setIsBest(boolean inIsBest){
+		this.isBest = inIsBest;
+	}
+	
+	
 	protected void doDelete() {	  
-		answerList.remove(this);	  
+		/* do somthing when im getting deleted*/	  
 	}	
 
 }

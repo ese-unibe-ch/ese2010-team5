@@ -6,6 +6,7 @@ import play.mvc.Controller;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
+import utils.QaDB;
 
 @With(Secure.class)
 public class Auth extends Controller{
@@ -15,7 +16,7 @@ public class Auth extends Controller{
 	@Before
 	static void setUser() {
 		if (Security.isConnected()) {
-			user = User.findByName(Security.connected());
+			user = QaDB.findUserByName(Security.connected());
 			renderArgs.put("user", user.getName());
 		}
 	}	

@@ -1,6 +1,7 @@
 import org.junit.*;
 import java.util.*;
 import play.test.*;
+import utils.QaDB;
 import models.*;
 
 public class ModelTest extends UnitTest {
@@ -23,9 +24,9 @@ public class ModelTest extends UnitTest {
        	
     	
     	//user
-    	User u = User.findByName("user-1");
+    	User u = QaDB.findUserByName("user-1");
     	assertNotNull(u);
-    	assertEquals(User.findById(u.getId()),u);
+    	assertEquals(QaDB.findUserById(u.getId()),u);
     	
     	//answer
     	
@@ -37,9 +38,9 @@ public class ModelTest extends UnitTest {
     @Test
     public void testRateFuntions(){
     	
-    	User user1 = User.findByName("user-1");
+    	User user1 = QaDB.findUserByName("user-1");
     	assertNotNull(user1);
-    	User user2 = User.findByName("user-2");
+    	User user2 = QaDB.findUserByName("user-2");
     	assertNotNull(user2);
     	
     	Post post = new Question(user1, "test");

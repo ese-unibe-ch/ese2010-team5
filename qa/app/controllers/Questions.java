@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.List;
 
 import models.Answer;
 import models.Post;
@@ -10,28 +11,57 @@ import models.CommentQuestion;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
+import utils.QaDB;
+import utils.QaDB.OrderBy;
 
 public class Questions extends Posts {	
 	
 	
 	public static void list(){
 		
-		Collection<Question> questions = Question.findAll();
+		Collection<Question> questions = QaDB.findAllQuestions(OrderBy.RATING);
 		render(questions);
 	}
 	
 	public static void delete(long id){
 		
-		Post p = Post.findById(id);
+		Post p = QaDB.findPostById(id);
 		
 		if(p == null){
 			flash.error("could not find Question with id "+id);
 		}else{
-			p.delete();
-			flash.put("info","Question "+p.getId()+" deleted");
+			if(QaDB.delPost(p))
+				flash.put("info","Question "+p.getId()+" deleted");
+			else
+				flash.put("error","Could not delete "+p.getId());
 		}			
 		
 		list();		
+		
+	}
+	
+	public static void markBestAnswer(long qId, long aId){
+		
+		Logger.debug("marking best answer "+aId+" for question "+qId);
+		
+		Question q = QaDB.findQuestionById(qId);		
+		
+		if(q == null){
+			flash("error", "failed setting best answer for q: "+qId);
+			redirect("/");
+		}
+		
+		Collection<Answer> answers = q.getAnswers();		
+		for(Answer a : answers){
+			if(!a.isBest() && a.getId() == aId)
+				a.setIsBest(true);
+			else
+				a.setIsBest(false);
+		}
+		
+		flash("info","answer "+aId+" marked as best");
+		view(qId);
+		
 		
 	}
 	
@@ -47,23 +77,21 @@ public class Questions extends Posts {
 	}
 	
 	public static void addAnswer(String answer, long qId){
-		Question q = Question.findById(qId);		
-		
-		
+		Question q = QaDB.findQuestionById(qId);
 		if(q == null){
 			flash.error("could not find question q: "+qId);			
 			redirect("/");
 		}
-		Answer newAnswer = new Answer(user, answer,q);		
+		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));		
 				
-		flash.put("info", "new Answer created");		
+		flash.put("info", "answer Created: "+newAnswer.getId());		
 		view(qId);		
 			
 	}
 	
 	//alper
 	public static void addComment(String comment, long cId){
-		Question q = Question.findById(cId);
+		Question q = QaDB.findQuestionById(cId);
 		
 		if(q == null){
 			flash.error("could not find question q: "+cId);
@@ -78,20 +106,38 @@ public class Questions extends Posts {
 	public static void view(long id){
 		Logger.debug("Show question: "+id);
 		
-		Question q = Question.findById(id);		
+		Question q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
 		}
 		
-		render(q);
+		List<Answer> answers = q.getAnswers();
+		if(! answers.isEmpty()){			
+			/* find best answer*/
+			int idx = -1;
+			for(Answer a: answers){
+				idx++;
+				if(a.isBest()){					
+					break;
+				}
+			}
+			/* move to the head if found*/
+			if(idx >= 0){
+				Answer bestAnswer = answers.remove(idx);
+				answers.add(0, bestAnswer);
+			}
+			
+		}
+		
+		render(q,answers);
 		
 	}
 	
 	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
 		
-		Question q = Question.findById(id);		
+		Question q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
@@ -104,7 +150,7 @@ public class Questions extends Posts {
 	public static void setContent(long id, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
-		Question q = Question.findById(id);		
+		Question q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
