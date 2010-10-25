@@ -1,12 +1,9 @@
 package models;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
-import play.Logger;
 
 public abstract class Post {
 	
@@ -15,9 +12,10 @@ public abstract class Post {
 	private Date timestamp;
 	private long id;
 	private LinkedList<Vote> votes;	
-	
-	private static long idCounter = 1;
-	
+
+	private static long idCounter = 1;	
+ 
+	protected static Map<Long,Post> instanceMap = new HashMap();
 	
 	protected Post(User inUser, String inContent){
 		this.owner = inUser;
