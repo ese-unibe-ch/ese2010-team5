@@ -22,6 +22,7 @@ public class QaDB {
 	private static HashMap<Long,Answer> 	answers 		= new HashMap<Long, Answer>();
 	private static HashMap<Long,Question> questions 	= new HashMap<Long, Question>();
 	private static HashMap<Long,User> 		users 			= new HashMap<Long, User>();
+	private static HashMap<Long, Comment> comments = new HashMap<Long, Comment>();
 	
 	/* functions to add*/
 	public static Answer addAnswer(Answer a){
@@ -40,6 +41,12 @@ public class QaDB {
 		if(u== null) return null;		
 		users.put(u.getId(), u);
 		return u;
+	}
+	
+	public static Comment addComment(Comment c){
+		if(c== null) return null;		
+		comments.put(c.getId(), c);
+		return c;
 	}
 	
 	/* functions to delete*/
@@ -81,6 +88,10 @@ public class QaDB {
 		else return answers.get(id);
 	}
 	
+	public static Comment findCommentById(long id){
+		return comments.get(id);
+	}
+	
 	/* find multiple instances */
 	
 	public static Collection<User> findAllUsers(){
@@ -107,5 +118,9 @@ public class QaDB {
 	public static Collection<Answer> findAllAnswers(){
 		return answers.values();
 	}	
+	
+	public static Collection<Comment> findAllComments(){
+		return comments.values();
+	}
 	
 }

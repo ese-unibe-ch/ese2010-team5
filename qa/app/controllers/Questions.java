@@ -61,10 +61,10 @@ public class Questions extends Posts {
 		
 		flash("info","answer "+aId+" marked as best");
 		view(qId);
-		
-		
+
 	}
-	
+
+	// TODO need to update DB
 	public static void create(String content){
 		
 		Logger.debug("Create Question with content: "+content);		

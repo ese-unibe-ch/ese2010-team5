@@ -17,8 +17,10 @@
         <a href="/">Q & A</a>
        </div>    	
     	 <div id="loginbox">
+    	 
 	       #{if user}    
-    		  Logged in as: ${user}, <a href="@{Secure.logout()}">logout</a>
+    		  Logged in as: ${user},</a> <a href="@{Secure.logout()}">logout</a>
+    		  
     	   #{/if}
     	   #{else}
 	    	  Please <a href="@{Secure.login()}">login</a>    	

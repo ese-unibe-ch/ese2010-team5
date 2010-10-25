@@ -68,47 +68,47 @@
 <tr>
   <td>Created At:</td><td>${q.getTimestamp()}</td>
 </tr>
-<tr>
-  <td>Comments (${q.getComments().size()}):</td>
-  <td>
-<div class="list">
-    #{list items:q.getComments(), as:'comment'}
-      <div class="list-item ${comment_parity}">
-        <div class="details">From: ${comment.getOwner().getName()}, Rating: <span id="commentRating-${comment.getId()}">${comment.getVotation()}</span></div>          
-        <div class="comment x-large">
-            ${comment.getContent()}
-        </div>        
-        <div class="actions">
-          <a href="#" onclick="rateComment(${comment.getId()},true)">rate Up</a>
-          <a href="#" onclick="rateComment(${comment.getId()},false)">rate Down</a>
-          #{myPost id:q.getId(), user:user}
-            ,<a href="@{CommentQuestions.edit(comment.getId())}">edit</a>
-          #{/myPost}
-        </div>
-      </div>
-    #{/list}
-</div>
-  </td>
-</tr>
-<tr>
-  <td>Your Comment:</td><td><div id="actions">
-	#{form @Questions.addComment(), id:'addCommentForm' } 
- 	 <input type="hidden" id="cId" name="cId" value="${q.getId()}"></input>  
- 	 <input type="text" name="comment" id="comment"></input>
-  	<br></br>
- 	 <a href="#" onclick="$('#addCommentForm').submit()">add</a>
-	#{/form}
-</div></td>
-  <td>
-  
-  </td>
-    <table>
-
- 
-
-    </table>
-  </td>
-</tr>
+<!--<tr>-->
+<!--  <td>Comments (${q.getComments().size()}):</td>-->
+<!--  <td>-->
+<!--<div class="list">-->
+<!--    #{list items:q.getComments(), as:'comment'}-->
+<!--      <div class="list-item ${comment_parity}">-->
+<!--        <div class="details">From: ${comment.getOwner().getName()}, Rating: <span id="commentRating-${comment.getId()}">${comment.getVotation()}</span></div>          -->
+<!--        <div class="comment x-large">-->
+<!--            ${comment.getContent()}-->
+<!--        </div>        -->
+<!--        <div class="actions">-->
+<!--          <a href="#" onclick="rateComment(${comment.getId()},true)">rate Up</a>-->
+<!--          <a href="#" onclick="rateComment(${comment.getId()},false)">rate Down</a>-->
+<!--          #{myPost id:q.getId(), user:user}-->
+<!--            ,<a href="@{CommentQuestions.edit(comment.getId())}">edit</a>-->
+<!--          #{/myPost}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    #{/list}-->
+<!--</div>-->
+<!--  </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--  <td>Your Comment:</td><td><div id="actions">-->
+<!--	#{form @Questions.addComment(), id:'addCommentForm' } -->
+<!-- 	 <input type="hidden" id="cId" name="cId" value="${q.getId()}"></input>  -->
+<!-- 	 <input type="text" name="comment" id="comment"></input>-->
+<!--  	<br></br>-->
+<!-- 	 <a href="#" onclick="$('#addCommentForm').submit()">add</a>-->
+<!--	#{/form}-->
+<!--</div></td>-->
+<!--  <td>-->
+<!--  -->
+<!--  </td>-->
+<!--    <table>-->
+<!---->
+<!-- -->
+<!---->
+<!--    </table>-->
+<!--  </td>-->
+<!--</tr>-->
 
 </table>
 <br></br>

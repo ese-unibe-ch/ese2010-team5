@@ -11,9 +11,6 @@ public class Answer extends Post {
 	
 	private List<CommentAnswer> commentsA = new LinkedList<CommentAnswer>();
 
-	
-	
-	
 	//Answer belongs to a Question
 	private Question question;
 	private boolean isBest = false;

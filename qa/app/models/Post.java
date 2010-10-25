@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Post {
@@ -11,7 +12,8 @@ public abstract class Post {
 	private String content;
 	private Date timestamp;
 	private long id;
-	private LinkedList<Vote> votes;	
+	private LinkedList<Vote> votes;
+	private List<Comment> comments = new LinkedList<Comment>();	
 
 	private static long idCounter = 1;	
  
@@ -23,6 +25,10 @@ public abstract class Post {
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
+	}
+	
+	public void addComment(Comment comment){
+		this.comments.add(comment);
 	}
 	
 	public User getOwner() {
