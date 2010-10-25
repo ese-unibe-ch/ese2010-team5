@@ -11,6 +11,11 @@ public class Answer extends Post {
 	
 	private static List<Answer> answerList = new LinkedList<Answer>();
 	
+	private List<CommentAnswer> commentsA = new LinkedList<CommentAnswer>();
+
+	
+	
+	
 	//Answer belongs to a Question
 	private Question question;
 	
@@ -24,6 +29,16 @@ public class Answer extends Post {
 	
 	public Question getQuestion(){
 		return question;
+	}
+	
+	//alper
+	public List<CommentAnswer> getComments(){
+		return this.commentsA;
+	}
+	
+	//alper
+	public void addComment(CommentAnswer newComment){
+		this.commentsA.add(newComment);
 	}
 	
 	public  String toString(){

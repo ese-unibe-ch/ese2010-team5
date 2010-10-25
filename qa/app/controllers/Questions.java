@@ -5,6 +5,7 @@ import java.util.Collection;
 import models.Answer;
 import models.Post;
 import models.Question;
+import models.CommentQuestion;
 
 import play.Logger;
 import play.mvc.Controller;
@@ -58,6 +59,20 @@ public class Questions extends Posts {
 		flash.put("info", "new Answer created");		
 		view(qId);		
 			
+	}
+	
+	//alper
+	public static void addComment(String comment, long cId){
+		Question q = Question.findById(cId);
+		
+		if(q == null){
+			flash.error("could not find question q: "+cId);
+			redirect("/");
+		}
+		CommentQuestion newComment = new CommentQuestion(user, comment, q);
+		
+		flash.put("info", "new Comment created");
+		view(cId);
 	}
 	
 	public static void view(long id){

@@ -31,6 +31,13 @@
 
   }
 
+  //alper
+  	$.post("@{Posts.rate()}"
+  		  	,{id:commentId,up:up}
+  		  	,function (data){
+  	  		  	//update rating
+  	  		  	$("#commentRating").html(data)
+
 </script>
 
 
@@ -65,9 +72,42 @@
   <td>Content: </td><td>${q.getContent()}</td>
 </tr>
 <tr>
-  <td></td>
+  <td>Comments (${q.getComments().size()}):</td>
   <td>
+<div class="list">
+    #{list items:q.getComments(), as:'comment'}
+      <div class="list-item ${comment_parity}">
+        <div class="details">From: ${comment.getOwner().getName()}, Rating: <span id="commentRating-${comment.getId()}">${comment.getVotation()}</span></div>          
+        <div class="comment x-large">
+            ${comment.getContent()}
+        </div>        
+        <div class="actions">
+          <a href="#" onclick="rateComment(${comment.getId()},true)">rate Up</a>
+          <a href="#" onclick="rateComment(${comment.getId()},false)">rate Down</a>
+          #{myPost id:q.getId(), user:user}
+            ,<a href="@{CommentQuestions.edit(comment.getId())}">edit</a>
+          #{/myPost}
+        </div>
+      </div>
+    #{/list}
+</div>
+  </td>
+</tr>
+<tr>
+  <td>Your Comment:</td><td><div id="actions">
+	#{form @Questions.addComment(), id:'addCommentForm' } 
+ 	 <input type="hidden" id="cId" name="cId" value="${q.getId()}"></input>  
+ 	 <input type="text" name="comment" id="comment"></input>
+  	<br></br>
+ 	 <a href="#" onclick="$('#addCommentForm').submit()">add</a>
+	#{/form}
+</div></td>
+  <td>
+  
+  </td>
     <table>
+
+ 
 
     </table>
   </td>
@@ -75,6 +115,8 @@
 </table>
 <br></br>
 <h2> Answers (${q.getAnswers().size()})</h2>
+<tr>
+<td>
 <div class="list">
     #{list items:q.getAnswers(), as:'answer'}
       <div class="list-item ${answer_parity}">
@@ -92,6 +134,16 @@
       </div>
     #{/list}
 </div>
+</td>
+<td>Your Comment:</td><td><div id="actions">
+	#{form @Answers.addCommentA(), id:'addCommentAForm' } 
+ 	 <input type="hidden" id="cAId" name="cAId" value="${q.getId()}"></input>  
+ 	 <input type="text" name="comment" id="comment"></input>
+  	<br></br>
+ 	 <a href="#" onclick="$('#addCommentAForm').submit()">add</a>
+	#{/form}
+</div></td>
+</tr>
 
 <div id="actions">
 <h3> Your Answer</h3>

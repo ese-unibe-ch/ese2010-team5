@@ -13,7 +13,12 @@ public class Question extends Post {
 	
 	private List<Answer> answers= new LinkedList<Answer>();	
 	
+	//alper
+	private List<CommentQuestion> commentsQ = new LinkedList<CommentQuestion>();
+	
 	private static List<Question> questionList = new LinkedList<Question>();
+	
+	
 	
 	private static Comparator<Post> ratingSorter = new Comparator<Post>() {		
 	    public int compare(Post post1, Post post2) {
@@ -38,6 +43,16 @@ public class Question extends Post {
 	public void addAnswer(Answer newAnswer) {
 		this.answers.add(newAnswer);
 	}	
+	
+	//alper
+	public List<CommentQuestion> getComments(){
+		return this.commentsQ;
+	}
+	
+	//alper
+	public void addComment(CommentQuestion newComment){
+		this.commentsQ.add(newComment);
+	}
 	
 	public static Collection<Question> findAll(){						
 		Collections.sort(questionList, ratingSorter);	
