@@ -10,23 +10,21 @@
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
     </head>
     <body>
-     
      <div id="wrapper">    
       <div id="header">
        <div id="logo">
         <a href="/">Q & A</a>
        </div>    	
     	 <div id="loginbox">
-    	 
 	       #{if user}    
     		  Logged in as: ${user},</a> <a href="@{Secure.logout()}">logout</a>
-    		  
+    		  <br></br>
+    		  <a href="@{Users.edit(user)}">edit user profile</a>
     	   #{/if}
     	   #{else}
 	    	  Please <a href="@{Secure.login()}">login</a>    	
  	       #{/else}
  	     </div>
- 	     
       </div><!-- end header -->
       
       <!-- messages from flash scopes -->
