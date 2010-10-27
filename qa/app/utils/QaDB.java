@@ -60,6 +60,12 @@ public class QaDB {
 		return answers.remove(inPost.getId()) != null;
 	}
 	
+	public static void removeUser(User user){
+		if (user == null)
+			return;
+		users.remove(user);
+	}
+	
 	/* find single instance*/
 	public static User findUserById(long id){
 		return users.get(id);

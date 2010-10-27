@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,15 @@ public class User implements IUser {
 
 	private String username;
 	private String email;
-	private String dateOfBirth;
+	private Date birthDate;
+	private String homepage;
 	private long id;	  
 	private static long idCounter = 1;	 
-	
 
 	public User(String username) {
 		this.username = new String(username);
-		this.id = idCounter++;	
+		this.id = idCounter++;
+		this.birthDate = new Date(0);
 	}
 
 	public String getName() {
@@ -30,6 +32,7 @@ public class User implements IUser {
 		return username;
 	}
 
+	// TODO: inform DB when username is changed!
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -42,12 +45,21 @@ public class User implements IUser {
 		this.email = email;
 	}
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public Date getBirthDate() {
+		
+		return birthDate;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
 	}
 
 	public long getId(){
