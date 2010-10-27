@@ -15,9 +15,7 @@ public abstract class Post {
 	private LinkedList<Vote> votes;
 	private List<Comment> comments = new LinkedList<Comment>();	
 
-	private static long idCounter = 1;	
- 
-	protected static Map<Long,Post> instanceMap = new HashMap();
+	private static long idCounter = 1;
 	
 	protected Post(User inUser, String inContent){
 		this.owner = inUser;
@@ -29,6 +27,10 @@ public abstract class Post {
 	
 	public void addComment(Comment comment){
 		this.comments.add(comment);
+	}
+	
+	public List<Comment> getComments(){
+		return comments;
 	}
 	
 	public User getOwner() {

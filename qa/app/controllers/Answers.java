@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import models.Answer;
-import models.CommentAnswer;
+import models.Comment;
 import models.Question;
 import models.User;
 import play.Logger;
@@ -45,20 +45,21 @@ public class Answers extends Posts {
 		
 	}
 	
-	public static void addCommentA(String comment, long cAId){
-		Answer ac = QaDB.findAnswerById(cAId);		
+	public static void addComment(String comment, long aId){
 		
+		Answer a = QaDB.findAnswerById(aId);
 		
-		if(ac == null){
-			flash.error("could not find comment a: "+cAId);			
+		if(a == null){
+			flash.error("could not find question q: "+aId);
 			redirect("/");
+			return;
 		}
-		CommentAnswer newAnswer = new CommentAnswer(user, comment,ac);		
-				
-		flash.put("info", "new Answer created");		
-		view(cAId);		
-			
-	}
+		
+		Comment newComment = QaDB.addComment(new Comment(user,comment,a));
+		
+		flash.put("info", "new Comment created "+newComment.getId());
+		view(aId);
+	}	
 	
 	public static void view(long id){
 		Logger.debug("Show Answer: " +id);

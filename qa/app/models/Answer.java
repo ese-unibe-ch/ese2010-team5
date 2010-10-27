@@ -7,9 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Answer extends Post {	
-	
-	private List<CommentAnswer> commentsA = new LinkedList<CommentAnswer>();
+public class Answer extends Post {
 
 	//Answer belongs to a Question
 	private Question question;
@@ -25,15 +23,6 @@ public class Answer extends Post {
 		return question;
 	}
 	
-	//alper
-	public List<CommentAnswer> getComments(){
-		return this.commentsA;
-	}
-	
-	//alper
-	public void addComment(CommentAnswer newComment){
-		this.commentsA.add(newComment);
-	}
 	
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
