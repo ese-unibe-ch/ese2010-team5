@@ -8,6 +8,7 @@ import java.util.Locale;
 import play.*;
 import play.mvc.Controller;
 
+import models.IUser;
 import models.User;
 import utils.QaDB;
 
@@ -15,7 +16,7 @@ public class Users extends Auth{
 
 	public static void edit(String username) {
 		Logger.debug("Edit user: " + username);
-		User u = QaDB.findUserByName(username);
+		IUser u = QaDB.findUserByName(username);
 		if(u == null){
 			error("could not find user: \""+username+"\"");
 			return;

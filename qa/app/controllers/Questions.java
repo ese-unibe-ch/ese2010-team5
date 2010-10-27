@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import models.Answer;
+import models.Comment;
 import models.Post;
 import models.Question;
-import models.CommentQuestion;
 
 import play.Logger;
 import play.mvc.Controller;
@@ -68,7 +68,7 @@ public class Questions extends Posts {
 	public static void create(String content){
 		
 		Logger.debug("Create Question with content: "+content);		
-		Question q = new Question(user, content);	
+		Question q = QaDB.addQuestion(new Question(user, content));	
 		
 		flash.put("info", "Question "+q.getId()+" created");
 		
@@ -91,15 +91,18 @@ public class Questions extends Posts {
 	
 	//alper
 	public static void addComment(String comment, long cId){
+		
 		Question q = QaDB.findQuestionById(cId);
 		
 		if(q == null){
 			flash.error("could not find question q: "+cId);
 			redirect("/");
+			return;
 		}
-		CommentQuestion newComment = new CommentQuestion(user, comment, q);
 		
-		flash.put("info", "new Comment created");
+		Comment newComment = QaDB.addComment(new Comment(user,comment,q));
+		
+		flash.put("info", "new Comment created "+newComment.getId());
 		view(cId);
 	}
 	

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import edu.emory.mathcs.backport.java.util.LinkedList;
 
-public class User {
+public class User implements IUser {
 
 	private String username;
 	private String email;
@@ -26,6 +26,7 @@ public class User {
 	public String getName() {
 		return this.username;
 	}
+
 	
 	public String getUsername() {
 		return username;

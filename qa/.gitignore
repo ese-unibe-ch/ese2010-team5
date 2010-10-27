@@ -1,8 +1,10 @@
 # don't commit eclipse stuff
+/.metadata
 /.classpath
 /.buildpath
 /.project
 /.settings
+/.metadata
 /eclipse
 /log
 /cache
@@ -13,6 +15,6 @@
 /tmp
 /test-result
 /server.pid
-
+/cobertura.ser
 
 .DS_Store

@@ -8,18 +8,16 @@ import java.util.Map;
 
 public abstract class Post {
 	
-	private User owner;
+	private IUser owner;
 	private String content;
 	private Date timestamp;
 	private long id;
 	private LinkedList<Vote> votes;
 	private List<Comment> comments = new LinkedList<Comment>();	
 
-	private static long idCounter = 1;	
- 
-	protected static Map<Long,Post> instanceMap = new HashMap();
+	private static long idCounter = 1;
 	
-	protected Post(User inUser, String inContent){
+	protected Post(IUser inUser, String inContent){
 		this.owner = inUser;
 		this.content = inContent;
 		this.timestamp = new Date(System.currentTimeMillis());
@@ -31,7 +29,11 @@ public abstract class Post {
 		this.comments.add(comment);
 	}
 	
-	public User getOwner() {
+	public List<Comment> getComments(){
+		return comments;
+	}
+	
+	public IUser getOwner() {
 		return this.owner;
 	}
 	
@@ -60,7 +62,7 @@ public abstract class Post {
 	 * @param user
 	 *            - The User who rates the entry.
 	 */
-	private void rate(User user, boolean up) {
+	private void rate(IUser user, boolean up) {
 		
 		if(user == null) return;
 		
@@ -89,7 +91,7 @@ public abstract class Post {
 	 * @param user
 	 *            - The user who rates the entry.
 	 */
-	public void rateUp(User user) {
+	public void rateUp(IUser user) {
 		rate(user,true);
 	}
 
@@ -99,7 +101,7 @@ public abstract class Post {
 	 * @param user
 	 *            - The user who rates the entry.
 	 */
-	public void rateDown(User user) {
+	public void rateDown(IUser user) {
 		rate(user,false);
 	}
 

@@ -12,17 +12,17 @@ public class Comment extends Post{
 	//Comment belongs to a Post(either a Question or an Answer)
 	private Post post;
 	
-	protected Comment(User owner, String content) {
+	public Comment(IUser owner, String content, Post inPost) {
 		super(owner, content);
-		
-		QaDB.addComment(this);
+		this.post = inPost;
+		this.post.addComment(this);
 	}
 
 	public Post getPost() {
 		return post;
 	}
 
-	@Override
+	
 	protected void doDelete() {
 		// TODO Auto-generated method stub
 		

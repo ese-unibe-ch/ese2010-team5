@@ -91,7 +91,12 @@ public class QaDB {
 	public static Post findPostById(long id){
 		if(questions.containsKey(id))
 			return questions.get(id);
-		else return answers.get(id);
+		else if(answers.containsKey(id))
+		  return answers.get(id);
+		else
+		  return comments.get(id);
+		  
+		  
 	}
 	
 	public static Comment findCommentById(long id){

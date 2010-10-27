@@ -10,14 +10,12 @@ import java.util.Map;
 
 public class Question extends Post {
 	
-	//alper
-	private List<CommentQuestion> commentsQ = new LinkedList<CommentQuestion>();
-	
+		
 	private static List<Question> questionList = new LinkedList<Question>();
 	private List<Answer> answers= new LinkedList<Answer>();
 	
 
-	public Question(User user, String content) {
+	public Question(IUser user, String content) {
 		super(user, content);
 	}
 
@@ -27,16 +25,6 @@ public class Question extends Post {
 
 	public void addAnswer(Answer newAnswer) {
 		this.answers.add(newAnswer);
-	}	
-	
-	//alper
-	public List<CommentQuestion> getComments(){
-		return this.commentsQ;
-	}
-	
-	//alper
-	public void addComment(CommentQuestion newComment){
-		this.commentsQ.add(newComment);
 	}
 	
 			

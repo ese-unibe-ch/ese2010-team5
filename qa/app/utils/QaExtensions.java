@@ -12,7 +12,7 @@ public class QaExtensions extends JavaExtensions {
 		if(inPost == null) return false;
 		
 		if(Security.isConnected()){
-			User connectedUser = QaDB.findUserByName(Security.connected());			
+			IUser connectedUser = QaDB.findUserByName(Security.connected());			
 			if(connectedUser != null)				
 				return connectedUser.equals(inPost.getOwner());			
 			
