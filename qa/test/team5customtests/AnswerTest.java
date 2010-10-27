@@ -15,7 +15,6 @@ public class AnswerTest extends UnitTest{
 
 	@Before
 	public void setUp() throws Exception {
-		//Noch Mockclasses erstellen für User,Question,Comment
 		use1 = new MockUser("Hans");
 		use2 = new MockUser("Peter");
 		quest = new MockQuestion(use1,"Will this UnitTest work?");
@@ -38,6 +37,12 @@ public class AnswerTest extends UnitTest{
 	@Test
 	public void shouldReturnQuestion(){
 		assertEquals(quest,ans.getQuestion());
+	}
+	
+	@Test
+	public void shouldReturnProperTextRepresentation(){
+		ans.rateUp(use2);
+		assertEquals("rating: 1, This UnitTest will work sometime!",ans.toString());
 	}
 
 }

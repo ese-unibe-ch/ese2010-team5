@@ -24,8 +24,7 @@ public class Comment extends Post{
 
 	
 	protected void doDelete() {
-		// TODO Auto-generated method stub
-		
+				
 	}
     
 }
