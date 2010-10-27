@@ -1,6 +1,9 @@
 package team5customtests;
 
 import static org.junit.Assert.*;
+
+import java.util.Date;
+
 import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
@@ -9,11 +12,13 @@ import org.junit.Before;
 import org.junit.*;
 
 public class UserTest extends UnitTest{
+	Date curDate;
 	User use;
 
 	@Before
 	public void setUp() throws Exception {
 		use = new User("Hans");
+		curDate = new Date(System.currentTimeMillis());
 	}
 	
 	@Test
@@ -40,10 +45,16 @@ public class UserTest extends UnitTest{
 		assertTrue(use.getId()>0);
 	}
 	
+	@Test 
+	public void shouldProperlySetAndGetHomePage(){
+		use.setHomepage("www.internet.ch");
+		assertEquals("www.internet.ch",use.getHomepage());
+	}
+	
 	@Test
 	public void shouldProperlySetAndGetDateOfBirth(){
-		use.setDateOfBirth("01.01.1901");
-		assertEquals("01.01.1901",use.getDateOfBirth());
+		use.setBirthDate(curDate);
+		assertEquals(curDate,use.getBirthDate());
 	}
 
 }
