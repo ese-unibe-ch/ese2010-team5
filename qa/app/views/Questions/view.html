@@ -31,13 +31,14 @@
 
   }
 
-  //alper
+  function rateComment(commentId, up){
   	$.post("@{Posts.rate()}"
   		  	,{id:commentId,up:up}
   		  	,function (data){
   	  		  	//update rating
-  	  		  	$("#commentRating").html(data)
-
+  	  		  	$("#commentRating").html(data);
+		},"text/html");
+   }
 </script>
 
 
