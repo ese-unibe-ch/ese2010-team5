@@ -9,7 +9,7 @@ public class ModelTest extends UnitTest {
     @Test
     public void testAllModelContructors() {
     	
-    	User u = new User("tester");    	
+    	IUser u = new MockUser("tester");    	
     	assertNotNull(u);    	
     	
     	Question q = new Question(u, "test"); 
@@ -38,9 +38,9 @@ public class ModelTest extends UnitTest {
     @Test
     public void testRateFuntions(){
     	
-    	User user1 = QaDB.findUserByName("user-1");
+    	IUser user1 = QaDB.findUserByName("user-1");
     	assertNotNull(user1);
-    	User user2 = QaDB.findUserByName("user-2");
+    	IUser user2 = QaDB.findUserByName("user-2");
     	assertNotNull(user2);
     	
     	Post post = new Question(user1, "test");

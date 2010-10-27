@@ -13,7 +13,7 @@ public class Answer extends Post {
 	private Question question;
 	private boolean isBest = false;
 		
-	public Answer(User owner, String content, Question inQuestion) {
+	public Answer(IUser owner, String content, Question inQuestion) {
 		super(owner,content);
 		this.question = inQuestion;
 		question.addAnswer(this);
