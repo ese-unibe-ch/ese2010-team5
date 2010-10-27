@@ -1,21 +1,21 @@
 package models;
 
-public class Vote {
+public class Vote{
 	
 	//either +1 or -1
 	private int value;
-	private User user;
+	private IUser user;
 	private long id;
 	
 	private static long idCounter = 1;
 	
-	public Vote(int value,User user){
+	public Vote(int value,IUser user){
 		this.value=value;
 		this.user=user;
 		this.id = idCounter++;
 	}
 	
-	public User getUser(){
+	public IUser getUser(){
 		return this.user;
 	}
 	

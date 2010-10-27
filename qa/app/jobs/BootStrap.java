@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import models.Answer;
+import models.IUser;
 import models.Post;
 import models.Question;
 import models.User;
@@ -23,7 +24,7 @@ public class BootStrap extends Job {
 		private static final Log log = LogFactory.getLog(BootStrap.class);
 		private static Random random = new Random();
 		
-		private static void randomVote(Post post, User user){
+		private static void randomVote(Post post, IUser user){
 			
 			boolean up = (random.nextInt(2) == 0 ? true : false);
   		if(up)
@@ -58,7 +59,7 @@ public class BootStrap extends Job {
     	for(Question q : questions){    		    		
     		
     		if( i++ % 2 == 0){
-    			User u = QaDB.findUserById((random.nextInt(users)+1));
+    			IUser u = QaDB.findUserById((random.nextInt(users)+1));
     			Answer a = QaDB.addAnswer(new Answer(u, "Answer to question "+q.getId(),q));    			
     			randomVote(a, u);
     			randomVote(q, u);

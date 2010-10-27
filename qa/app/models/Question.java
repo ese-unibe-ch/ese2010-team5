@@ -15,7 +15,7 @@ public class Question extends Post {
 	private List<Answer> answers= new LinkedList<Answer>();
 	
 
-	public Question(User user, String content) {
+	public Question(IUser user, String content) {
 		super(user, content);
 	}
 
