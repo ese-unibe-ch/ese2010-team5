@@ -50,7 +50,7 @@ public class Answers extends Posts {
 		Answer a = QaDB.findAnswerById(aId);
 		
 		if(a == null){
-			flash.error("could not find question q: "+aId);
+			flash.error("could not find answer a: "+aId);
 			redirect("/");
 			return;
 		}

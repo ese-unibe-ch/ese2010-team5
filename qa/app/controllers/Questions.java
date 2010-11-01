@@ -89,7 +89,7 @@ public class Questions extends Posts {
 			
 	}
 	
-	//alper
+
 	public static void addComment(String comment, long cId){
 		
 		Question q = QaDB.findQuestionById(cId);
