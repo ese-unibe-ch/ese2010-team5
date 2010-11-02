@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import play.*;
 import play.mvc.Controller;
+import play.mvc.Scope.Session;
 
 import models.IUser;
 import models.User;
@@ -48,5 +49,18 @@ public class Users extends Auth{
 		Logger.debug("updated user profile of: " + user.getName());
 		flash.put("info","Profile information of " + user.getName() + " changed");
 		redirect("/users/edit/"+user.getName());
+	}
+	
+	public static void view(String username) {
+		Logger.debug("Show user profile of: " + username);
+		User u = QaDB.findUserByName(username);
+		if(u == null){
+			error("could not find user: \""+username+"\"");
+			return;
+		}
+		if (session.contains(u.getName()))
+			edit(u.getName());
+		else
+			render(u);
 	}
 }

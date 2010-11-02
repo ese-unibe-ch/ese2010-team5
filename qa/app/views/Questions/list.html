@@ -5,8 +5,8 @@
   <div>
    #{ if user}
      #{form @Questions.create(),id:'questionForm'}
-        Add question: <input type="text" id="content" name="content"/>
-        <br></br>
+        Add question:<br></br>
+        <textarea name="content" cols="60" rows="10"></textarea><br></br>
         <a href="#" onclick="$('#questionForm').submit();">add</a>
      #{/form}
    #{/if}
@@ -20,7 +20,7 @@
 <div class="list">
     #{list items:questions, as:'q' }
       <div class="list-item ${q_parity}">
-        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}</div>          
+        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>          
         <div class="question">
             <a href="@{Questions.view(q.getId())}">${q.getContent()}</a>
         </div>        

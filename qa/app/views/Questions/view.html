@@ -67,7 +67,7 @@
   </td> 
 </tr>
 <tr>
-  <td>Created At:</td><td>${q.getTimestamp()}</td>
+  <td>Created At:</td><td>${q.getTimestamp().format('dd.MM.yyyy hh:mm')}</td>
 </tr>
 <tr>
   <td>Comments (${q.getComments().size()}):</td>
