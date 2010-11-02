@@ -54,6 +54,11 @@ html,body{
 	
 }
 
+#actions h1{
+	font-style: bold;
+	font-size: 20px;
+}
+
 /* question list*/
 
 .list-item{    
@@ -67,8 +72,11 @@ html,body{
 .list-item.even{
   background-color: #dddddd;
 }
+.list-item .title{
+	font-size: x-large;
+
 .list-item .question{
-  font-size: x-large;
+  font-size: 20px;
 }
 
 .list-item .actions{

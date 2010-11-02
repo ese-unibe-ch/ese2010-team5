@@ -1,22 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'Edit question' /}
-<h1>Question ${q.getId()}</h1>
-<table>
-<tr>
-  <td>Rating:</td><td>
-    <span id="questionRating">${q.getVotation()}</span> 
-  </td> 
-</tr>
-<tr>
-  <td>Created At:</td><td>${q.getTimestamp()}</td>
-</tr>
-<tr>
-  <td>Content: </td><td>${q.getContent()}</td>
-</tr>
-</table>
+<h1>Editing question: ${q.getTitle()}</h1>
+<br></br>
 #{form @Questions.setContent(),id:'editForm'}
-		  <input type="hidden" id="id" name="id" value="${q.getId()}"></input>  
-        Edit content: <input type="text" id="content" name="content" value="${q.getContent()}"/>
+		<input type="hidden" id="id" name="id" value="${q.getId()}"></input>  
+		Edit title: <input type="text" name="title" value="${q.getTitle()}"></input><br></br>
+        Edit content:<br></br>
+        <textarea cols="60" rows="20" id="content" name="content">${q.getContent()}</textarea>
         <br></br>
         <a href="#" onclick="$('#editForm').submit();">update</a>
 #{/form}
