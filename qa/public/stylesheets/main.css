@@ -48,7 +48,7 @@ html,body{
 }
 
 /* some actions like add question */
-#content #actions{	
+.actions{	
 	padding: 10px;
   border: 1px solid black;
   
@@ -69,15 +69,16 @@ html,body{
   margin-left: 300px;
   margin-bottom:10px;
 }
-.list-item.odd{
+.list-item.even{
   background-color: white;
 }
 
-.list-item.even{
+.list-item.odd{
   background-color: #dddddd;
 }
 .list-item .title{
 	font-size: x-large;
+}
 
 .list-item .question{
   font-size: 20px;
@@ -91,15 +92,17 @@ html,body{
 }
 
 /* flash messages */
-#message{  
+.message{  
   border: 1px solid black;
   margin: 10px;
+  padding:10px;
+  font-size: large;
 }
 
-#message.error{
+.message.error{
 	background-color: red;
 }
-#message.info{
+.message.info{
   background-color: green;
 }
 

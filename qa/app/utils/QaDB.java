@@ -1,11 +1,11 @@
 package utils;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.emory.mathcs.backport.java.util.Collections;
 
 import models.*;
 
@@ -22,7 +22,8 @@ public class QaDB {
 	private static HashMap<Long,Answer> 	answers 		= new HashMap<Long, Answer>();
 	private static HashMap<Long,Question> questions 	= new HashMap<Long, Question>();
 	private static HashMap<Long,User> 		users 			= new HashMap<Long, User>();
-	private static HashMap<Long, Comment> comments = new HashMap<Long, Comment>();
+	private static HashMap<Long,Comment> comments 		= new HashMap<Long, Comment>();
+		
 	
 	/* functions to add*/
 	public static Answer addAnswer(Answer a){
@@ -47,7 +48,8 @@ public class QaDB {
 		if(c== null) return null;		
 		comments.put(c.getId(), c);
 		return c;
-	}
+	}	
+	
 	
 	/* functions to delete*/
 	public static boolean delPost(Post inPost){
@@ -124,7 +126,7 @@ public class QaDB {
 		
 		return result;		
 		
-	}
+	}	
 	
 	public static Collection<Answer> findAllAnswers(){
 		return answers.values();
@@ -132,6 +134,7 @@ public class QaDB {
 	
 	public static Collection<Comment> findAllComments(){
 		return comments.values();
-	}
+	}	
+	
 	
 }

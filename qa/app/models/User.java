@@ -3,10 +3,11 @@ package models;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
-import edu.emory.mathcs.backport.java.util.LinkedList;
 
 public class User implements IUser {
 
@@ -15,24 +16,24 @@ public class User implements IUser {
 	private Date birthDate;
 	private String homepage;
 	private long id;	  
-	private static long idCounter = 1;	 
+	private List<Notification> notifications;
+	private static long idCounter = 1;	
 
 	public User(String username) {
 		this.username = new String(username);
 		this.id = idCounter++;
 		this.birthDate = new Date(0);
+		this.notifications = new LinkedList<Notification>();
 	}
 
 	public String getName() {
 		return this.username;
-	}
-
+	}	
 	
 	public String getUsername() {
 		return username;
 	}
-
-	// TODO: inform DB when username is changed!
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -64,6 +65,14 @@ public class User implements IUser {
 
 	public long getId(){
 		return id;
+	}
+	
+	public void addNotification(Notification n){
+		notifications.add(n);
+	}
+	
+	public List<Notification> getNotifications(){
+		return notifications;
 	}
 
 }
