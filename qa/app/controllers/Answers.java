@@ -48,6 +48,7 @@ public class Answers extends Posts {
 	public static void addComment(String comment, long aId){
 		
 		Answer a = QaDB.findAnswerById(aId);
+		Question q = a.getQuestion();
 		
 		if(a == null){
 			flash.error("could not find answer a: "+aId);
@@ -58,7 +59,9 @@ public class Answers extends Posts {
 		Comment newComment = QaDB.addComment(new Comment(user,comment,a));
 		
 		flash.put("info", "new Comment created "+newComment.getId());
-		view(aId);
+		
+		long qId = q.getId();
+		Questions.view(qId);
 	}	
 	
 	public static void view(long id){

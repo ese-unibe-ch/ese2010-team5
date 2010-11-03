@@ -4,14 +4,14 @@
 
 # Home page
 
-GET     /	  					                     Questions.list
-GET 		/questions/list			               Questions.list
+GET     /	  				               Questions.list
+GET 	/questions/list		               Questions.list
 GET     /questions/{qId}/mark/{aId}        Questions.markBestAnswer
 GET     /questions/delete/{id}             Questions.delete
 GET     /questions/edit/{id}               Questions.edit
-GET	    /questions/{id}   			           Questions.view
+GET	    /questions/{id}   		           Questions.view
 GET     /setContent                        Questions.view
-GET     /users/edit/{username}                       Users.edit
+GET     /users/edit/{username}             Users.edit
 GET     /users/updateProfile               Users.edit
 
 # Import Secure routes
