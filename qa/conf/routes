@@ -15,6 +15,7 @@ GET	    /questions/{id}   			                     Questions.view
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 
+
 # Import Secure routes
 *       /                                      module:secure                                  
 
