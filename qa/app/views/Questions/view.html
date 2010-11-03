@@ -137,7 +137,7 @@
 <td>
 <div class="list">
     #{list items:answer.getComments(), as:'commentA'}
-      <div class="list-item ${commentA_parity}">
+      <div class="list-item ${comment_parity}">
         <div class="details">From: ${commentA.getOwner().getName()}</div>          
         <div class="commentA x-large">
             ${commentA.getContent()}
@@ -146,10 +146,10 @@
           #{if commentA.ownPost()}
             <a href="@{Comments.edit(commentA.getId())}">edit</a>
           #{/if}
-        </div>
+        </div>#{/list}
       </div>
    
-</div>#{/list} 
+</div> 
 </td>
 <td> 
 <div id="actions">
