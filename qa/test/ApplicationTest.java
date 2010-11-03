@@ -1,5 +1,3 @@
-import org.apache.asyncweb.common.HttpResponse;
-import org.apache.commons.httpclient.HttpStatus;
 import org.junit.*;
 import play.test.*;
 import play.mvc.*;
