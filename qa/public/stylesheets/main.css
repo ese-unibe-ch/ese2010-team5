@@ -9,7 +9,6 @@ html,body{
 	font-family: helvetica, verdana;
 }
 
-
 #wrapper{
 	width: 100%;
 	min-height: 100%;	
@@ -33,6 +32,7 @@ html,body{
   min-height: 100%;
   padding: 10px;	
   padding-bottom: 30px;
+
 }
 
 #footer{
@@ -50,7 +50,8 @@ html,body{
 /* some actions like add question */
 #content #actions{	
 	padding: 10px;
-  border: 1px solid black;	
+  border: 1px solid black;
+  
 	
 }
 
@@ -62,8 +63,11 @@ html,body{
 /* question list*/
 
 .list-item{    
-  border: 0px solid black;
+  border: 1px solid black;
   padding: 10px;
+  width: 600px;
+  margin-left: 300px;
+  margin-bottom:10px;
 }
 .list-item.odd{
   background-color: white;
@@ -103,6 +107,20 @@ html,body{
   font-size: x-large;
 }
 
+/* profile view */
+.profileview{
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  background-color: red;
+}
 
+.profile-view h1{
+  font-size: 20 px;
+}
+
+.profile-view .info{
+  display: block;
+}
 
 

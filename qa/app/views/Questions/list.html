@@ -23,10 +23,8 @@
     #{list items:questions, as:'q' }
       <div class="list-item ${q_parity}">
       	<div class="title"><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></div>
-        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>          
-        <div class="question">
-            ${q.getContent()}
-        </div>        
+      	<div class="question">${q.getContent()}</div>  
+        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>      
       </div>       
     #{/list}
 </div>
