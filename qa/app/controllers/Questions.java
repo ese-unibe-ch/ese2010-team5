@@ -65,10 +65,10 @@ public class Questions extends Posts {
 	}
 
 	// TODO need to update DB
-	public static void create(String content){
+	public static void create(String content, String title){
 		
 		Logger.debug("Create Question with content: "+content);		
-		Question q = QaDB.addQuestion(new Question(user, content));	
+		Question q = QaDB.addQuestion(new Question(user, title, content));	
 		
 		flash.put("info", "Question "+q.getId()+" created");
 		
@@ -150,7 +150,7 @@ public class Questions extends Posts {
 		
 	}
 	
-	public static void setContent(long id, String content){
+	public static void setContent(long id, String title, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
 		Question q = QaDB.findQuestionById(id);
@@ -158,6 +158,7 @@ public class Questions extends Posts {
 			flash("error", "could not find question with id "+id);
 			redirect("/");
 		}
+		q.setTitle(title);
 		q.setContent(content);
 		flash.put("info","Content of question "+id+" changed");
 		view(id);
