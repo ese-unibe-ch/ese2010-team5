@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
         <title>#{get 'title' /}</title>
@@ -16,10 +15,11 @@
         <a href="/">Q & A</a>
        </div>    	
     	 <div id="loginbox">
-	       #{if user}    
-    		  Logged in as: ${user},</a> <a href="@{Secure.logout()}">logout</a>
+	       #{if user}
+	        Notifications: ${user.getNotifications().size()}    
+    		  Logged in as: ${username},</a> <a href="@{Secure.logout()}">logout</a>
     		  <br></br>
-    		  <a href="@{Users.edit(user)}">edit user profile</a>
+    		  <a href="@{Users.edit(username)}">edit user profile</a>
     	   #{/if}
     	   #{else}
 	    	  Please <a href="@{Secure.login()}">login</a>    	
@@ -29,16 +29,15 @@
       
       <!-- messages from flash scopes -->
       #{if flash.error }
-	     <div id="message" class="error">
+	     <div class="message error">
  	       ${flash.error}
 	 	   </div>
  	    #{/if}
  	    #{if flash.info }
-       <div id="message" class="info">
+       <div class="message info">
          ${flash.info}
        </div>
       #{/if}
- 	    
       
       <!-- content -->
       <div id="content">

@@ -5,8 +5,10 @@ import java.util.List;
 
 import models.Answer;
 import models.Comment;
+import models.Notification;
 import models.Post;
 import models.Question;
+import models.User;
 
 import play.Logger;
 import play.mvc.Controller;
@@ -82,20 +84,26 @@ public class Questions extends Posts {
 			flash.error("could not find question q: "+qId);			
 			redirect("/");
 		}
-		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));		
-				
-		flash.put("info", "answer Created: "+newAnswer.getId());		
+		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));
+		flash.put("info", "answer Created: "+newAnswer.getId());
+		
+		/*publish notifications for subscribers*/
+		List<User> subscribers = q.getSubscribers();
+		for(User subscriber : subscribers){
+			subscriber.addNotification(new Notification(q, Notification.Type.NEW_ANSWER));
+		}
+		
 		view(qId);		
 			
 	}
 	
 
-	public static void addComment(String comment, long cId){
+	public static void addComment(String comment, long qId){
 		
-		Question q = QaDB.findQuestionById(cId);
+		Question q = QaDB.findQuestionById(qId);
 		
 		if(q == null){
-			flash.error("could not find question q: "+cId);
+			flash.error("could not find question q: "+qId);
 			redirect("/");
 			return;
 		}
@@ -103,7 +111,7 @@ public class Questions extends Posts {
 		Comment newComment = QaDB.addComment(new Comment(user,comment,q));
 		
 		flash.put("info", "new Comment created "+newComment.getId());
-		view(cId);
+		view(qId);
 	}
 	
 	public static void view(long id){

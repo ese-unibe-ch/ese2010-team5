@@ -55,10 +55,12 @@ public class Answers extends Posts {
 			return;
 		}
 		
-		Comment newComment = QaDB.addComment(new Comment(user,comment,a));
-		
+		Comment newComment = QaDB.addComment(new Comment(user,comment,a));		
 		flash.put("info", "new Comment created "+newComment.getId());
-		view(aId);
+		
+		/*go back to question owning this answer*/
+		
+		Questions.view(a.getQuestion().getId());
 	}	
 	
 	public static void view(long id){

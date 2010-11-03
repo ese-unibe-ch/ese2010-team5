@@ -17,7 +17,8 @@ public class Auth extends Controller{
 	static void setUser() {
 		if (Security.isConnected()) {
 			user = QaDB.findUserByName(Security.connected());
-			renderArgs.put("user", user.getName());
+			renderArgs.put("username", user.getName());
+			renderArgs.put("user", user);
 		}
 	}	
 	

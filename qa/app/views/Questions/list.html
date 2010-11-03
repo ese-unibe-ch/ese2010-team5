@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<div id="actions">
+<div class="actions">
   <div>
    #{ if user}
      #{form @Questions.create(),id:'questionForm'}
@@ -16,8 +16,8 @@
      Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..
    #{/else} 
   </div>
-
 </div>
+
 <br></br>
 <div class="list">
     #{list items:questions, as:'q' }
