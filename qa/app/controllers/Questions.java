@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import models.Comment;
 import models.Notification;
 import models.Post;
 import models.Question;
+import models.Tag;
 import models.User;
 
 import play.Logger;
@@ -66,11 +68,13 @@ public class Questions extends Posts {
 
 	}
 
-	// TODO need to update DB
-	public static void create(String content, String title){
+	public static void create(String content, String title, String tags){
 		
-		Logger.debug("Create Question with content: "+content);		
-		Question q = QaDB.addQuestion(new Question(user, title, content));	
+		Logger.debug("Create Question with content: "+content);	
+		
+		String[] tagArray = tags.split(", ");
+		
+		Question q = QaDB.addQuestion(new Question(user, title, content, tagArray));	
 		
 		flash.put("info", "Question "+q.getId()+" created");
 		
@@ -78,6 +82,11 @@ public class Questions extends Posts {
 		
 	}
 	
+	public static void createquestion(){
+		redirect("/questions/createquestion.html");
+		
+	}
+
 	public static void addAnswer(String answer, long qId){
 		Question q = QaDB.findQuestionById(qId);
 		if(q == null){

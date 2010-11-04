@@ -44,7 +44,7 @@
 
 <h1>${q.getTitle()}</h1>
 <h2>${q.getContent()}</h2>
-<br></br>
+<div class="tags">${q.getTags()}</div>
 <div class="actions">
  <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a> |  
  <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>

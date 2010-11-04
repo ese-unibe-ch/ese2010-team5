@@ -14,6 +14,7 @@ GET	    /questions/{id}   			                     Questions.view
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
+GET     /questions/createquestion                    Questions.createquestion
 
 # Import Secure routes
 *       /                                      module:secure                                  

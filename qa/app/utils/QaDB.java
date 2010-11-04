@@ -23,7 +23,7 @@ public class QaDB {
 	private static HashMap<Long,Question> questions 	= new HashMap<Long, Question>();
 	private static HashMap<Long,User> 		users 			= new HashMap<Long, User>();
 	private static HashMap<Long,Comment> comments 		= new HashMap<Long, Comment>();
-		
+	private static HashMap<Long,Tag> tags = new HashMap<Long, Tag>();	
 	
 	/* functions to add*/
 	public static Answer addAnswer(Answer a){
@@ -50,6 +50,13 @@ public class QaDB {
 		return c;
 	}	
 	
+	public static Tag addTag(Tag tag) {
+		if(tag == null)
+			return null;
+		tags.put(tag.getId(), tag);
+		return tag;
+		
+	}	
 	
 	/* functions to delete*/
 	public static boolean delPost(Post inPost){
@@ -96,13 +103,20 @@ public class QaDB {
 		else if(answers.containsKey(id))
 		  return answers.get(id);
 		else
-		  return comments.get(id);
-		  
-		  
+		  return comments.get(id);  
 	}
 	
 	public static Comment findCommentById(long id){
 		return comments.get(id);
+	}
+	
+	public static Tag findTagByName(String name){
+		for(Tag tag : tags.values()){
+			if(tag.getName().equals(name))
+				return tag;
+		}
+		
+		return null;
 	}
 	
 	/* find multiple instances */
@@ -134,7 +148,9 @@ public class QaDB {
 	
 	public static Collection<Comment> findAllComments(){
 		return comments.values();
-	}	
+	}
+
+	
 	
 	
 }

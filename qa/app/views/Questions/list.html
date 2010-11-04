@@ -4,13 +4,7 @@
 <div class="actions">
   <div>
    #{ if user}
-     #{form @Questions.create(),id:'questionForm'}
-        <h1>Add question:</h1>
-        Title:<input type="text" name="title"></input><br></br>
-        Content:<br></br>
-        <textarea name="content" cols="60" rows="10"></textarea><br></br>
-        <a href="#" onclick="$('#questionForm').submit();">add</a>
-     #{/form}
+   	<a href="/Questions/createquestion">Add Question</a>
    #{/if}
    #{else}
      Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..
@@ -24,7 +18,8 @@
       <div class="list-item ${q_parity}">
       	<div class="title"><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></div>
       	<div class="question">${q.getContent()}</div>  
-        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>      
+        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>
+        <div class="tags">Tags: ${q.getTags()}</div>      
       </div>       
     #{/list}
 </div>
