@@ -111,8 +111,13 @@
           #{if answer.isBest()}
             <img src="@{'/public/images/tick.png'}"></img>
           #{/if}
-
+<<<<<<< HEAD
+           <h3> ${answer.getContent()}</h3>
+        </div>        
+=======
+            ${answer.getContent()}
         </div>
+>>>>>>> 73abfb5a0ae704e5aa90078d450075b30a8aedd6
         <div class="actions">
           <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a> |
           <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
@@ -125,7 +130,6 @@
             </a>             
           #{/if}         
         </div>
-
         <hr></hr>
         <!-- maybe some comments to an answer -->
         <div class="comments">

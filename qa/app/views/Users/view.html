@@ -1,10 +1,9 @@
 #{extends 'main.html' /}
 #{set title:'view.html' /}
 
-<h1>Profile of ${u.getName()}</h1>
-<br />
-	Email: ${u.getEmail()}
-	<br />
-    Website: ${u.getHomepage()}
-	<br />
-	Date of birth: ${u.getBirthDate().format('dd.MM.yyyy')}
+<div class="profileview">
+	<h1>Profile of ${u.getName()}</h1>
+	<div class="info">Email: ${u.getEmail()}</div>
+	<div class="info">Website: ${u.getHomepage()}</div>
+	<div class="info">Date of birth: ${u.getBirthDate().format('dd.MM.yyyy')}</div>
+</div>

@@ -45,7 +45,7 @@ public class Answers extends Posts {
 		
 	}
 	
-	public static void addComment(String commentA, long aId){
+	public static void addComment(String comment, long aId){
 		
 		Answer a = QaDB.findAnswerById(aId);
 		Question q = a.getQuestion();
@@ -55,13 +55,13 @@ public class Answers extends Posts {
 			redirect("/");
 			return;
 		}
-		
-		Comment newComment = QaDB.addComment(new Comment(user,commentA,a));
+		Comment newComment = QaDB.addComment(new Comment(user,comment,a));
 		
 		flash.put("info", "new Comment created "+newComment.getId());
 		
 		long qId = q.getId();
 		Questions.view(qId);
+
 	}	
 	
 	public static void view(long id){
