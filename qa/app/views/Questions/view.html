@@ -113,7 +113,7 @@
           #{if answer.isBest()}
             <img src="@{'/public/images/tick.png'}"></img>
           #{/if}
-            ${answer.getContent()}
+           <h3> ${answer.getContent()}</h3>
         </div>        
         <div class="actions">
           <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a> |
@@ -178,8 +178,3 @@ Your Comment:
   <a href="#" onclick="$('#addAnswerForm').submit()">add</a>
 #{/form}
 </div>
-
-
-
-
-
