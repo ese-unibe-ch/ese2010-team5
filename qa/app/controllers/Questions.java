@@ -83,7 +83,7 @@ public class Questions extends Posts {
 	}
 	
 	public static void createquestion(){
-		redirect("/questions/createquestion.html");
+		render();
 		
 	}
 
