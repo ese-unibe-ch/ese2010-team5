@@ -4,8 +4,8 @@
 
 # Home page
 
-GET     /	  					                               Questions.list
-GET 		/questions/list			                         Questions.list
+GET     /	  					                               Questions.list(orderby:'RATING')
+GET     /questions/list/{orderby}                    Questions.list
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete

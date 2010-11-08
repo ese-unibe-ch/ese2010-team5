@@ -1,10 +1,47 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<script type="text/javascript">
+
+function filter(tagstring){	
+
+	if(!tagstring){		
+		$(".list-item").show();
+		return;
+	}
+	
+	/*hide all and show those with the specified tags*/
+	$(".list-item").hide();	
+	
+	/*split*/	
+	var tags = tagstring.split(" ");
+
+	for( idx in tags ){
+		  var tag = tags[idx];		  
+		  if(tag){
+			  /*hide items not containing the tag*/
+			  $(".list-item."+tag).show();		    
+		  }  
+		  
+	}
+	
+
+	
+}
+
+
+
+</script>
+
+
 <div class="actions">
   <div>
    #{ if user}
-   	<a href="@{Questions.create()}">Add Question</a>
+    <b>Sorted by ${sortOrder}</b> 
+    Sort by: <a href="@{Questions.list('DATE')}">date</a> | <a href="@{Questions.list('RATING')}">rating</a><br/>    
+    AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
+    <br/>      
+   	
    #{/if}
    #{else}
      Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..
@@ -15,7 +52,11 @@
 <br></br>
 <div class="list">
     #{list items:questions, as:'q' }
-      <div class="list-item ${q_parity}">
+      #{set tags:null/}
+      #{list items:q.getTags(), as:'tag'}
+        #{set tags:(tags?tags+' ':'')+tag /}
+      #{/list} 
+      <div class="list-item ${q_parity} ${tags}">
       	<div class="title"><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></div>
       	<div class="question">${q.getContent()}</div>  
         <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>

@@ -37,9 +37,18 @@ html,body{
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   border-color:#E9E9E9 #E9E9E9 #F5F5F5;
   border-style:solid;
-  border-width:1px; 
-  
+  border-width:1px;  
 }
+#header #nav{
+  border-color:#E9E9E9 #E9E9E9 #F5F5F5;
+  border-style:solid;
+  border-width:1px;
+  background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+  width:800px;
+  margin-left:auto;
+  margin-right:auto;  
+}
+
 #loginbox img {
   border:1px solid #FFFFFF;
   margin-right:3px;
@@ -97,7 +106,6 @@ html,body{
 }
 
 /* question list*/
-
 .list-item{    
   border: 1px solid black;
   padding: 10px;

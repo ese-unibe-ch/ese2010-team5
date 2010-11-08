@@ -21,10 +21,29 @@ import utils.QaDB.OrderBy;
 public class Questions extends Posts {	
 	
 	
-	public static void list(){
+	
+	public static void list(String orderby, String tags){
 		
-		Collection<Question> questions = QaDB.findAllQuestions(OrderBy.RATING);
-		render(questions);
+		Logger.debug("list orderby %s", orderby);
+		
+		OrderBy sortOrder = OrderBy.DATE;
+		
+		if(orderby != null){
+			sortOrder = OrderBy.valueOf(orderby);
+		}
+		
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
+		render(questions,sortOrder);		
+		
+	}
+	
+	/*default listing*/	
+	public static void list(){		
+		
+		Logger.debug("list default");
+		OrderBy sortOrder = OrderBy.RATING;
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
+		render(questions,sortOrder);		
 	}
 	
 	public static void delete(long id){
