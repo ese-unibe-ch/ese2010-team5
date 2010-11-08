@@ -11,7 +11,7 @@ import org.junit.*;
 
 public class CommentTest extends UnitTest{
 	IUser use;
-	Post quest;
+	IPost quest;
 	Comment comm;
 
 	@Before

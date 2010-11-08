@@ -10,14 +10,32 @@ import java.util.Map;
 
 import utils.QaDB;
 
+/**
+ * The Class Question.
+ */
 public class Question extends Post {
 	
+	/** The title. */
 	private String title;	
-	private List<Answer> 				answers= new LinkedList<Answer>();
-	private List<User>	 				subscribers = new LinkedList<User>();	
+	
+	/** The answers. */
+	private List<Answer> answers= new LinkedList<Answer>();
+	
+	/** The subscribers. */
+	private List<User> subscribers = new LinkedList<User>();	
+	
+	/** The tags. */
 	private List<Tag> tags = new LinkedList<Tag>();
 	
 
+	/**
+	 * Instantiates a new question.
+	 *
+	 * @param user the user who created the question
+	 * @param title the title
+	 * @param content the content
+	 * @param tags the tags
+	 */
 	public Question(IUser user, String title, String content, String...tags) {
 		super(user, content);
 		this.title = title;
@@ -25,6 +43,11 @@ public class Question extends Post {
 		tagWith(tags);
 	}
 
+	/**
+	 * Tag with.
+	 *
+	 * @param tags the tags
+	 */
 	private void tagWith(String... tags) {
 		for(String tagName : tags){
 			//check DB if tag already exists
@@ -39,36 +62,77 @@ public class Question extends Post {
 		}
 	}
 	
+	/**
+	 * Gets the tags.
+	 *
+	 * @return the tags
+	 */
 	public List<Tag> getTags(){
 		return this.tags;
 	}
 	
+	/**
+	 * Instantiates a new question.
+	 *
+	 * @param user the owner
+	 * @param content the content
+	 */
 	public Question(IUser user, String content) {
 		this(user,"",content);
 	}
 
 	
+	/**
+	 * Gets the answers posted to this question.
+	 *
+	 * @return the answers
+	 */
 	public List<Answer> getAnswers() {
 		return this.answers;
 	}
 
+	/**
+	 * Adds a new answer.
+	 *
+	 * @param newAnswer the new answer
+	 */
 	public void addAnswer(Answer newAnswer) {		
 		this.answers.add(newAnswer);		
 	}
 	
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle(){
 		return title;
 	}
 	
+	/**
+	 * Adds the subscriber.
+	 *
+	 * @param inUser the subscriber
+	 */
 	public void addSubscriber(User inUser){
 		subscribers.add(inUser);
 	}
 	
+	/**
+	 * Gets the subscribers.
+	 *
+	 * @return the subscribers
+	 */
 	public List<User> getSubscribers(){
 		return subscribers;
 	}
 	
 
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
 	public void setTitle(String title) {
 		this.title = title;		
 	}

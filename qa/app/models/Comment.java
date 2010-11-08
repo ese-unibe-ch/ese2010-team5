@@ -7,17 +7,32 @@ import utils.QaDB;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * The Class Comment.
+ */
 public class Comment extends Post{
 	
-	//Comment belongs to a Post(either a Question or an Answer)
+	/** The comment belongs to a Post (either a Question or an Answer). */
 	private Post post;
 	
-	public Comment(IUser owner, String content, Post inPost) {
+	/**
+	 * Instantiates a new comment.
+	 *
+	 * @param owner the owner
+	 * @param content the content
+	 * @param quest the post that corresponds to this comment
+	 */
+	public Comment(IUser owner, String content, Post quest) {
 		super(owner, content);
-		this.post = inPost;
+		this.post = quest;
 		this.post.addComment(this);
 	}
 
+	/**
+	 * Returns the corresponding post to this comment.
+	 *
+	 * @return the post
+	 */
 	public Post getPost() {
 		return post;
 	}
