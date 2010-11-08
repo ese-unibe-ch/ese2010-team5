@@ -1,6 +1,5 @@
 *{
-	margin: 0;
-	padding: 0;	
+	margin: 0;		
 }
 
 html,body{
@@ -105,7 +104,7 @@ html,body{
 	font-size: 20px;
 }
 
-/* question list*/
+/* list*/
 .list-item{    
   border: 1px solid black;
   padding: 10px;
@@ -131,6 +130,47 @@ html,body{
 }
 .list-item .details{
   
+}
+
+/*text-editor*/
+.text-editor {
+	  border:1px solid #CCCCCC;
+    padding:10px 11px 0 10px;
+    -moz-border-radius:5px 5px 5px 5px;
+    background:none repeat scroll 0 0 #EEEEEE;    
+}
+.text-editor .tabs{
+  width: 50%;
+  float:left;
+}
+.text-editor .tabs span{
+  cursor: pointer;
+}
+
+.text-editor .help{
+  float:right;  
+}
+
+.text-editor .body{
+  margin: 5px;
+}
+
+.text-editor .tab-preview{
+	display: none;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border: inherit;
+  color:#333333;
+  font-size:12px;
+  overflow:auto;  
+  position:relative;
+  width:100%;
+  height: 20em;
+  -moz-border-radius:5px 5px 5px 5px;
+}
+
+.text-editor textarea{
+  width:100%;
+  height: 20em;
 }
 
 /* flash messages */

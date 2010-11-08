@@ -25,9 +25,9 @@ public class QaSorter implements Comparator<Post>{
   	case DATE:
   		
   		if(p1.getTimestamp().before(p2.getTimestamp()))
-  			return -1;
-  		if(p1.getTimestamp().after(p2.getTimestamp()))
   			return 1;
+  		if(p1.getTimestamp().after(p2.getTimestamp()))
+  			return -1;
   		
   		/* same DATE*/
   		return 0;

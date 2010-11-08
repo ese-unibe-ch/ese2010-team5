@@ -1,11 +1,62 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<script type="text/javascript">
+  function showPreview(flag){
+
+	  var markdown = $(".tab-write textarea").val();
+	  var preview = $(".tab-preview");
+	  var write   = $(".tab-write");
+
+	  $(".body",preview).html("Loading..");	  
+
+	  /*switch tabs*/
+	  if(flag){		  
+		  write.hide();
+		  preview.show();
+
+		  $.post( "@{Posts.markdownPreview()}"
+		            ,{input:markdown}
+		            ,function (data){
+		              //update rating
+		              $(".body",preview).html(data);
+		                    
+		            },"text/html");
+		  
+		}else{
+			write.show();
+		  preview.hide();
+		}
+	  
+	    
+
+  }
+</script>
+<div id="create-question-form">
 #{form @Questions.save(),id:'questionForm'}
 	<h1>Add question:</h1>
-	Title:<input type="text" name="title"></input><br></br>
-	Content:<br></br>
-	<textarea name="content" cols="60" rows="10"></textarea><br></br>
-	Tags:<input type="text" name="tags"></input> Important: Tags must be separated by a comma and a whitespace (", ")<br></br>
+	<h3>Tags:</h3><input type="text" name="tags"></input><br/> 
+	Important: Tags must be separated by a comma and a whitespace (", ")<br/>
+	<h3>Title:</h3><input type="text" name="title"></input><br></br>
+	<h3>Content:</h3><br></br>
+	<div class="text-editor">	 
+	 <div class="tabs">
+	   <span onclick="showPreview(false);">write</span> | <span onclick="showPreview(true);">preview</span>
+	 </div>
+	 <div class="help">
+	   This is Markdown <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">syntax</a>
+	 </div>
+	 <div class="tab-write">
+	   <div class="body">         
+	     <textarea name="content" tabindex="1"></textarea>
+	   </div>
+	 </div>
+	 <div class="tab-preview">
+	   <div class="body">
+	   </div>	   
+	 </div>
+	</div>
+	
 	<a href="#" onclick="$('#questionForm').submit();">add</a>
 #{/form}
+</div>

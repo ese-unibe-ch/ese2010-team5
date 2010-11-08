@@ -6,6 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pegdown.PegDownProcessor;
+
+import utils.QaMarkdown;
+
 /**
  * The abstract Class Post.
  */
@@ -14,8 +18,10 @@ public abstract class Post implements IPost {
 	/** The owner. */
 	private IUser owner;
 	
-	/** The content. */
+	/** The content. in original markdown*/
 	private String content;
+	/** Rendered content in html */
+	private String renderedContent;
 	
 	/** The timestamp. */
 	private Date timestamp;
@@ -40,7 +46,8 @@ public abstract class Post implements IPost {
 	 */
 	protected Post(IUser inUser, String inContent){
 		this.owner = inUser;
-		this.content = inContent;
+		/*also renders the markdown*/
+		setContent(inContent);
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
@@ -74,12 +81,19 @@ public abstract class Post implements IPost {
 	}
 	
 	/**
-	 * Gets the content.
+	 * Return the renderedContent
 	 *
 	 * @return the content
 	 */
 	public String getContent() {
-		return this.content;
+		return this.renderedContent;
+	}
+	
+	/**
+	 * 
+	 */
+	public String getMarkdown(){
+		return content;
 	}
 	
 	/**
@@ -179,7 +193,13 @@ public abstract class Post implements IPost {
 	 */
 	public void setContent(String editedContent){
 		content = editedContent;
+		
+		/*also update the rendered one*/
+		renderedContent = QaMarkdown.toHtml(content);	
+		
 	}
+	
+	
 	
 
 }

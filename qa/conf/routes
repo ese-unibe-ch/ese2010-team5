@@ -4,19 +4,21 @@
 
 # Home page
 
-GET     /	  					                               Questions.list(orderby:'RATING')
 GET     /questions/list/{orderby}                    Questions.list
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete
 GET     /questions/edit/{id}                         Questions.edit
-GET     /questions/save/                             Questions.save
 GET     /questions/create                            Questions.create
 GET	    /questions/{id}   			                     Questions.view
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
+GET     /	  					                               Questions.list
+
+#markdown preview
+POST    /preview/{input}                             Posts.markdownPreview
 
 # Import Secure routes
 *       /                                      module:secure                                  
