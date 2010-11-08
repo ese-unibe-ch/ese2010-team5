@@ -11,14 +11,14 @@ import org.junit.*;
 public class AnswerTest extends UnitTest{
 	public Answer ans;
 	public IUser use1,use2;
-	public MockQuestion quest;
+	public IPost quest;
 
 	@Before
 	public void setUp() throws Exception {
 		use1 = new MockUser("Hans");
 		use2 = new MockUser("Peter");
-		quest = new MockQuestion(use1,"Will this UnitTest work?");
-		ans = new Answer(use1,"This UnitTest will work sometime!",quest);
+		quest = (IPost)new MockQuestion(use1,"Will this UnitTest work?");
+		ans = new Answer((User)use1,"This UnitTest will work sometime!",(Question)quest);
 	}
 	
 	@Test
