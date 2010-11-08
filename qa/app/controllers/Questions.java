@@ -68,7 +68,7 @@ public class Questions extends Posts {
 
 	}
 
-	public static void create(String content, String title, String tags){
+	public static void save(String content, String title, String tags){
 		
 		Logger.debug("Create Question with content: "+content);	
 		
@@ -82,7 +82,7 @@ public class Questions extends Posts {
 		
 	}
 	
-	public static void createquestion(){
+	public static void create(){
 		render();
 		
 	}
@@ -99,7 +99,8 @@ public class Questions extends Posts {
 		/*publish notifications for subscribers*/
 		List<User> subscribers = q.getSubscribers();
 		for(User subscriber : subscribers){
-			subscriber.addNotification(new Notification(q, Notification.Type.NEW_ANSWER));
+			/*the logged in user is the originator of this notification*/
+			subscriber.addNotification(new Notification(user,q, Notification.Type.NEW_ANSWER));
 		}
 		
 		view(qId);		

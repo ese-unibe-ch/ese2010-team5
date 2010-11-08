@@ -4,7 +4,7 @@
 <div class="actions">
   <div>
    #{ if user}
-   	<a href="/Questions/createquestion">Add Question</a>
+   	<a href="@{Questions.create()}">Add Question</a>
    #{/if}
    #{else}
      Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..

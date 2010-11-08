@@ -2,4 +2,4 @@
 # For example, for French create a messages.fr file
 #
 
-notif.newAnswer="an answer has been added to Question %s" 
+notif.NEW_ANSWER=%s added an answer to <a href='%s'>%s</a> 

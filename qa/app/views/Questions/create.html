@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{form @Questions.create(),id:'questionForm'}
+#{form @Questions.save(),id:'questionForm'}
 	<h1>Add question:</h1>
 	Title:<input type="text" name="title"></input><br></br>
 	Content:<br></br>

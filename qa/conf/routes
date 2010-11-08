@@ -10,11 +10,13 @@ GET 		/questions/list			                         Questions.list
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete
 GET     /questions/edit/{id}                         Questions.edit
+GET     /questions/save/                             Questions.save
+GET     /questions/create                            Questions.create
 GET	    /questions/{id}   			                     Questions.view
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
-GET     /questions/createquestion                    Questions.createquestion
+GET     /notifications/                              Notifications.list
 
 # Import Secure routes
 *       /                                      module:secure                                  

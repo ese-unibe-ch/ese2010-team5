@@ -1,0 +1,23 @@
+#{extends 'main.html' /}
+#{set title:'Notifications' /}
+
+
+<h1>Notifications</h1>
+
+<div id="notifications">
+<div class="list">
+  #{list items:notifications, as:'n'}
+    #{set q:n.getQuestion()/}    
+    <div class="list-item ${n.isRead()?'read':'unread'}">
+      <div class="title">
+      &{'notif.'+n.getType(),
+        n.getOriginator().getName(),
+        actionBridge.Questions.view(q.getId()),
+        q.getTitle()
+        }</div>
+  
+    </div>
+  #{/list}
+</div>
+</div>
+

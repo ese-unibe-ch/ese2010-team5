@@ -16,10 +16,9 @@
        </div>    	
     	 <div id="loginbox">
 	       #{if user}
-	        Notifications: ${user.getNotifications().size()}    
-    		  Logged in as: ${username},</a> <a href="@{Secure.logout()}">logout</a>
-    		  <br></br>
-    		  <a href="@{Users.edit(username)}">edit user profile</a>
+	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>
+	        | Notifications: <a href="@{Notifications.list()}" class="unread_count">${user.getNotifications().size()}</a>    
+    		  | <a href="@{Secure.logout()}">logout</a>    		  
     	   #{/if}
     	   #{else}
 	    	  Please <a href="@{Secure.login()}">login</a>    	
