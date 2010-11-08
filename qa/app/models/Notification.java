@@ -4,8 +4,6 @@ import java.security.InvalidParameterException;
 import java.util.Date;
 import java.util.List;
 
-import play.ns.com.jhlabs.image.CraterFilter;
-
 
 
 public class Notification {	
@@ -15,6 +13,7 @@ public class Notification {
 	private boolean read = false;
 	private long createdAt;
 	private Type type;
+	private User originator;
 	
 	
 	/* the text of the notification will depend on the type*/
@@ -24,14 +23,15 @@ public class Notification {
 	}
 	
 	
-	public Notification(Question inQuestion, Type inType){
+	public Notification(User inOriginator, Question inQuestion, Type inType){
 		
-		if(inType == null || inQuestion == null)
-			throw new InvalidParameterException("inUser & inPost are required");
+		if(inOriginator == null || inType == null || inQuestion == null)
+			throw new InvalidParameterException("all params required");
 		
 		question = inQuestion;
 		createdAt = System.currentTimeMillis();
 		type = inType;
+		originator = inOriginator;
 	}
 	
 	public void markAsRead(){
@@ -46,6 +46,9 @@ public class Notification {
 		return question;
 	}
 	
+	public User getOriginator(){
+		return originator;
+	}
 	
 	public Type getType(){
 		return type;

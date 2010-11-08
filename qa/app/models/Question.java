@@ -8,17 +8,39 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import utils.QaDB;
+
 public class Question extends Post {
 	
 	private String title;	
 	private List<Answer> 				answers= new LinkedList<Answer>();
 	private List<User>	 				subscribers = new LinkedList<User>();	
+	private List<Tag> tags = new LinkedList<Tag>();
 	
 
-	public Question(IUser user, String title, String content) {
+	public Question(IUser user, String title, String content, String...tags) {
 		super(user, content);
 		this.title = title;
 		addSubscriber((User) user);
+		tagWith(tags);
+	}
+
+	private void tagWith(String... tags) {
+		for(String tagName : tags){
+			//check DB if tag already exists
+			if(QaDB.findTagByName(tagName) != null){
+				this.tags.add(QaDB.findTagByName(tagName));
+			}
+			else{
+				Tag tag = new Tag(tagName, this);
+				QaDB.addTag(tag);
+				this.tags.add(tag);
+			}
+		}
+	}
+	
+	public List<Tag> getTags(){
+		return this.tags;
 	}
 	
 	public Question(IUser user, String content) {

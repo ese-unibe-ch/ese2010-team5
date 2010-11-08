@@ -20,18 +20,54 @@ html,body{
 	position: relative;
 	padding: 10px;
 }
-
+/*taken from github.com ;)*/
+/*looks nice only on mozilla i think*/
 #header #loginbox{
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	right: 10px;
-	
+	-moz-border-radius-topleft:0;
+  -moz-border-radius-topright:0;
+  border-top:medium none;
+  float:right;
+  font-size:12px;
+  padding:8px 5px 7px 10px;
+  -moz-border-radius:5px 5px 5px 5px;
+  -moz-box-shadow:0 1px 1px rgba(0, 0, 0, 0.2);
+  background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+  border-color:#E9E9E9 #E9E9E9 #F5F5F5;
+  border-style:solid;
+  border-width:1px; 
+  
 }
+#loginbox img {
+  border:1px solid #FFFFFF;
+  margin-right:3px;
+  margin-top:-3px;
+  vertical-align:middle;
+}
+
+#header a.unread_count {
+  -moz-border-radius:5px 5px 5px 5px;
+  background:none repeat scroll 0 0 #DDDDDD;
+  color:#999999;
+  display:inline-block;
+  font-size:10px;
+  font-weight:bold;
+  margin-left:2px;
+  padding:1px 5px;
+  text-decoration:none;
+  text-shadow:none;
+}
+
 
 #wrapper > #content{
   min-height: 100%;
   padding: 10px;	
   padding-bottom: 30px;
+  width:800px;
+  margin-left: auto;
+  margin-right:auto;
 
 }
 
@@ -65,8 +101,6 @@ html,body{
 .list-item{    
   border: 1px solid black;
   padding: 10px;
-  width: 600px;
-  margin-left: 300px;
   margin-bottom:10px;
 }
 .list-item.even{
@@ -124,6 +158,21 @@ html,body{
 
 .profile-view .info{
   display: block;
+}
+
+/* notificatins*/
+#notifications .list-item{
+  padding-left: 30px;
+}
+
+#notifications .list-item.read{  
+  background:url("/public/images/read_message.png") no-repeat scroll 0.5em 1em transparent;
+  
+}
+#notifications .list-item.unread{
+  background:url("/public/images/message.png") no-repeat scroll 0.5em 1em transparent;
+  background-color: #EAF2F5;
+  
 }
 
 

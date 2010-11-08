@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{form @Questions.save(),id:'questionForm'}
+	<h1>Add question:</h1>
+	Title:<input type="text" name="title"></input><br></br>
+	Content:<br></br>
+	<textarea name="content" cols="60" rows="10"></textarea><br></br>
+	Tags:<input type="text" name="tags"></input> Important: Tags must be separated by a comma and a whitespace (", ")<br></br>
+	<a href="#" onclick="$('#questionForm').submit();">add</a>
+#{/form}
