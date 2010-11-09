@@ -11,14 +11,14 @@ import org.junit.*;
 
 public class CommentTest extends UnitTest{
 	IUser use;
-	Post quest;
+	IPost quest;
 	Comment comm;
 
 	@Before
 	public void setUp() throws Exception {
 		use = new MockUser("Hans");
 		quest = new MockQuestion(use,"Will the comments work?");
-		comm = new Comment(use,"I totally think that the comments work",quest);
+		comm = new Comment(use,"I totally think that the comments work",(Post)quest);
 	}
 	
 	@Test

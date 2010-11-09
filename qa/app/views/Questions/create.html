@@ -1,11 +1,31 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<div id="create-question-form">
 #{form @Questions.save(),id:'questionForm'}
-	<h1>Add question:</h1>
-	Title:<input type="text" name="title"></input><br></br>
-	Content:<br></br>
-	<textarea name="content" cols="60" rows="10"></textarea><br></br>
-	Tags:<input type="text" name="tags"></input> Important: Tags must be separated by a comma and a whitespace (", ")<br></br>
-	<a href="#" onclick="$('#questionForm').submit();">add</a>
+	<h1>Create question:</h1>	
+	<h3>Title:</h3><input type="text" name="title"></input><br></br>
+	<h3>Content:</h3><br></br>
+	<div class="text-editor">	 
+	 <div class="tabs">
+	   <span onclick="teTab($(this));">write</span> | <span onclick="teTab($(this));">preview</span>
+	 </div>
+	 <div class="help">
+	   This is Markdown <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">syntax</a>
+	 </div>
+	 <div class="tab-write">
+	   <div class="body">         
+	     <textarea name="content" tabindex="1"></textarea>
+	   </div>
+	 </div>
+	 <div class="tab-preview">
+	   <div class="body">
+	   </div>	   
+	 </div>
+	</div>
+	<h3>Tags:</h3><input type="text" name="tags"></input><br/> 
+  Important: Tags must be separated by a comma and a whitespace (", ")<br/>
+  <br></br>
+	<button class="x-large"  onclick="$('#questionForm').submit();">Create</button>
 #{/form}
+</div>

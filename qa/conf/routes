@@ -4,13 +4,11 @@
 
 # Home page
 
-GET     /	  					                               Questions.list
-GET 		/questions/list			                         Questions.list
+GET     /questions/list/{orderby}                    Questions.list
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete
 GET     /questions/edit/{id}                         Questions.edit
-GET     /questions/save/                             Questions.save
 GET     /questions/create                            Questions.create
 GET	    /questions/{id}   			                     Questions.view
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
@@ -19,6 +17,10 @@ GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
 GET     /tags/                                       Tags.list
 GET     /tags/{tag}                                  Tags.listQuestionsTaggedWith
+GET     /	  					                               Questions.list
+
+#markdown preview
+POST    /preview                                     Posts.markdownPreview
 
 # Import Secure routes
 *       /                                      module:secure                                  

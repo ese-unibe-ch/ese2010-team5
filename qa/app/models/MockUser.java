@@ -1,5 +1,6 @@
 package models;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MockUser used for tests.
  */

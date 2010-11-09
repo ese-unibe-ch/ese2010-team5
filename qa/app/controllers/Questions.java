@@ -21,10 +21,30 @@ import utils.QaDB.OrderBy;
 public class Questions extends Posts {	
 	
 	
-	public static void list(){
+	
+	public static void list(String orderby, String tags){
 		
-		Collection<Question> questions = QaDB.findAllQuestions(OrderBy.RATING);
-		render(questions);
+		Logger.debug("params:", params);
+		
+		OrderBy sortOrder = OrderBy.DATE;
+		
+		if(orderby != null){
+			sortOrder = OrderBy.valueOf(orderby);
+		}
+		
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
+		render(questions,sortOrder);		
+		
+	}
+	
+	/*default listing*/	
+	public static void list(){		
+		
+		OrderBy sortOrder = OrderBy.DATE;
+		
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
+		render(questions,sortOrder);
+			
 	}
 	
 	public static void delete(long id){
@@ -72,10 +92,15 @@ public class Questions extends Posts {
 		
 		Logger.debug("Create Question with content: "+content);	
 		
-		String[] tagArray = tags.split(", ");
+		String[] tagArray = new String[]{};
 		
+		if(tags != null){
+			tagArray = tags.split(", ");
+		}
+		 		
 		Question q = QaDB.addQuestion(new Question(user, title, content, tagArray));	
 		
+		Logger.debug("Question "+" created");
 		flash.put("info", "Question "+q.getId()+" created");
 		
 		list();

@@ -41,10 +41,12 @@
    }
 </script>
 
-<div class="questionview">
-	<div class="question">
-		<h1>${q.getTitle()}</h1>
-		<h2>${q.getContent()}</h2>
+<div class="question">
+		<h1 class="title">${q.getTitle()}</h1>
+		<br></br>
+		<div class="content">
+      ${q.getContent().raw()}
+    </div>
 		<div class="tags">${q.getTags()}</div>
 		<div class="actions">
 			<a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a> |  
@@ -59,10 +61,9 @@
 			<div class="owner">Owner: ${q.getOwner().getName()}</div>
 			<div class="rating">Rating: ${q.getVotation()}</div>
 			<div class="createdAt">${q.getTimestamp().format('dd.MM.yyyy hh:mm')}</div>
-		</div>
-	</div>
+		</div>	
 	<div class="comments">
-		<h1>Comments (${q.getComments().size()}):</h1>
+		<h3>Comments (${q.getComments().size()}):</h3>
 		<div class="comment-list">
 			#{list items:q.getComments(), as:'comment'}
 				<div class="comment-list-item">        
