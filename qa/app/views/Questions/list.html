@@ -8,13 +8,14 @@
 
 function filter(tagstring){	
 
+	
 	if(!tagstring){		
-		$(".list-item").show();
+		$(".question-summary").show();
 		return;
 	}
 	
 	/*hide all and show those with the specified tags*/
-	$(".list-item").hide();	
+	$(".question-summary").hide();	
 	
 	/*split*/	
 	var tags = tagstring.split(" ");
@@ -22,7 +23,7 @@ function filter(tagstring){
 	for( idx in tags ){
 		  var tag = tags[idx];		  
 		  if(tag){			  
-			  $(".list-item."+tag).show();		    
+			  $(".question-summary."+tag).show();		    
 		  }  
 		  
 	}
