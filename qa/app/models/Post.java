@@ -8,7 +8,7 @@ import java.util.Map;
 
 public abstract class Post {
 	
-	private IUser owner;
+	protected IUser owner;
 	private String content;
 	private Date timestamp;
 	private long id;

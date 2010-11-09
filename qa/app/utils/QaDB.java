@@ -17,6 +17,8 @@ public class QaDB {
 		/* maybe more to come here */
 	}
 	
+	/* anonymous user, needed to assign questions of deleted users*/
+	public static User ANONYMOUS = new User("ANONYMOUS");
 
 	/* maps: id -> instance> */
 	private static HashMap<Long,Answer> 	answers 		= new HashMap<Long, Answer>();
@@ -140,7 +142,17 @@ public class QaDB {
 		
 		return result;		
 		
-	}	
+	}
+	
+	public static Collection<Question> findAllQuestionsOfUser(User user){
+		List<Question> result = new LinkedList<Question>();
+		for(Question q : questions.values()){
+			if(q.getOwner() == user){
+				result.add(q);
+			}
+		}
+		return result;
+	}
 	
 	public static Collection<Answer> findAllAnswers(){
 		return answers.values();
@@ -148,6 +160,30 @@ public class QaDB {
 	
 	public static Collection<Comment> findAllComments(){
 		return comments.values();
+	}
+	
+	public static Collection<Tag> findAllTags(){
+		return tags.values();
+	}
+	
+	public static Collection<Question> findAllQuestionsTaggedWith(Tag tag){
+		List<Question> result = new LinkedList<Question>();
+		for(Question q : questions.values()){
+			if(q.isTaggedWith(tag)){
+				result.add(q);
+			}
+		}
+		return result;
+	}
+	
+	public static Collection<Question> findAllQuestionsTaggedWith(Tag[] tags){
+		List<Question> result = new LinkedList<Question>();
+		for(Question q : questions.values()){
+			if(q.isTaggedWith(tags)){
+				result.add(q);
+			}
+		}
+		return result;
 	}
 
 	

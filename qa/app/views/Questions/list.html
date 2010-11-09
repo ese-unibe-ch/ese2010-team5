@@ -1,6 +1,10 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<div class="navigation">
+	<div class="navigation-item"><a href="@{Tags.list()}">Tags</a></div>
+</div>
+
 <div class="actions">
   <div>
    #{ if user}

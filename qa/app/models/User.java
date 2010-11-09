@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import utils.QaDB;
+
 
 public class User implements IUser {
 
@@ -73,6 +75,25 @@ public class User implements IUser {
 	
 	public List<Notification> getNotifications(){
 		return notifications;
+	}
+
+	/**
+	 * Deletes the user and assigns all questions to an anonymous user.
+	 * Answers of the deleted user are deleted too.
+	 */
+	public void delete() {
+		assignQuestionsToAnonymous(this);
+		
+	}
+
+	private void assignQuestionsToAnonymous(User user) {
+		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(user);
+		
+		// for now i just set the owner to anonymous. no changes in DB.
+		for (Question q : result){
+			q.setOwner(QaDB.ANONYMOUS);
+		}
+		
 	}
 
 }

@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import utils.QaDB;
+
 public class Answer extends Post {
 
 	//Answer belongs to a Question
@@ -17,6 +19,7 @@ public class Answer extends Post {
 		super(owner,content);
 		this.question = inQuestion;
 		question.addAnswer(this);
+		QaDB.addAnswer(this);
 	}	
 	
 	public Question getQuestion(){

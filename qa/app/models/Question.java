@@ -21,6 +21,7 @@ public class Question extends Post {
 	public Question(IUser user, String title, String content, String...tags) {
 		super(user, content);
 		this.title = title;
+
 		addSubscriber((User) user);
 		tagWith(tags);
 	}
@@ -76,6 +77,23 @@ public class Question extends Post {
 	
 	protected void doDelete() {
 		/* do somthing when im getting deleted*/	  	  
+	}
+
+	public void setOwner(User user) {
+		this.owner = user;
+		
+	}
+
+	public boolean isTaggedWith(Tag tag) {
+		return tags.contains(tag);
+	}
+
+	public boolean isTaggedWith(Tag[] tags) {
+		for (Tag tag : tags){
+			if (!this.tags.contains(tag))
+				return false;
+		}
+		return true;
 	}
 
 }
