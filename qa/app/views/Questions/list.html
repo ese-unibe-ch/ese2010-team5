@@ -18,8 +18,7 @@ function filter(tagstring){
 
 	for( idx in tags ){
 		  var tag = tags[idx];		  
-		  if(tag){
-			  /*hide items not containing the tag*/
+		  if(tag){			  
 			  $(".list-item."+tag).show();		    
 		  }  
 		  
@@ -58,7 +57,7 @@ function filter(tagstring){
       #{/list} 
       <div class="list-item ${q_parity} ${tags}">
       	<div class="title"><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></div>
-      	<div class="question">${q.getContent()}</div>  
+      	<div class="question">${q.getContent().raw()}</div>  
         <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>
         <div class="tags">Tags: ${q.getTags()}</div>      
       </div>       
