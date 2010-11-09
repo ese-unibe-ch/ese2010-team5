@@ -1,47 +1,14 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<script type="text/javascript">
-  function showPreview(flag){
-
-	  var markdown = $(".tab-write textarea").val();
-	  var preview = $(".tab-preview");
-	  var write   = $(".tab-write");
-
-	  $(".body",preview).html("Loading..");	  
-
-	  /*switch tabs*/
-	  if(flag){		  
-		  write.hide();
-		  preview.show();
-
-		  $.post( "@{Posts.markdownPreview()}"
-		            ,{input:markdown}
-		            ,function (data){
-		              //update rating
-		              $(".body",preview).html(data);
-		                    
-		            },"text/html");
-		  
-		}else{
-			write.show();
-		  preview.hide();
-		}
-	  
-	    
-
-  }
-</script>
 <div id="create-question-form">
 #{form @Questions.save(),id:'questionForm'}
-	<h1>Add question:</h1>
-	<h3>Tags:</h3><input type="text" name="tags"></input><br/> 
-	Important: Tags must be separated by a comma and a whitespace (", ")<br/>
+	<h1>Create question:</h1>	
 	<h3>Title:</h3><input type="text" name="title"></input><br></br>
 	<h3>Content:</h3><br></br>
 	<div class="text-editor">	 
 	 <div class="tabs">
-	   <span onclick="showPreview(false);">write</span> | <span onclick="showPreview(true);">preview</span>
+	   <span onclick="teTab($(this));">write</span> | <span onclick="teTab($(this));">preview</span>
 	 </div>
 	 <div class="help">
 	   This is Markdown <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">syntax</a>
@@ -56,7 +23,9 @@
 	   </div>	   
 	 </div>
 	</div>
-	
-	<a href="#" onclick="$('#questionForm').submit();">add</a>
+	<h3>Tags:</h3><input type="text" name="tags"></input><br/> 
+  Important: Tags must be separated by a comma and a whitespace (", ")<br/>
+  <br></br>
+	<button class="x-large"  onclick="$('#questionForm').submit();">Create</button>
 #{/form}
 </div>

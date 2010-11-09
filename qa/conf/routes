@@ -18,7 +18,7 @@ GET     /notifications/                              Notifications.list
 GET     /	  					                               Questions.list
 
 #markdown preview
-POST    /preview/{input}                             Posts.markdownPreview
+POST    /preview                                     Posts.markdownPreview
 
 # Import Secure routes
 *       /                                      module:secure                                  

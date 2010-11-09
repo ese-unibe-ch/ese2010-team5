@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import utils.QaDB;
+import utils.QaMarkdown;
 
 /**
  * The Class Question.
@@ -27,6 +28,9 @@ public class Question extends Post {
 	/** The tags. */
 	private List<Tag> tags = new LinkedList<Tag>();
 	
+	/** Rendered content in html */
+	private String renderedContent;
+	
 
 	/**
 	 * Instantiates a new question.
@@ -39,6 +43,7 @@ public class Question extends Post {
 	public Question(IUser user, String title, String content, String...tags) {
 		super(user, content);
 		this.title = title;
+		setContent(content);
 		addSubscriber((User) user);
 		tagWith(tags);
 	}
@@ -135,6 +140,26 @@ public class Question extends Post {
 	 */
 	public void setTitle(String title) {
 		this.title = title;		
+	}
+	
+	/**
+	 * override set content from post
+	 */	
+	public void setContent(String editedContent){
+		super.setContent(editedContent);
+		
+		/*render markdown*/
+		/*also update the rendered one*/
+		renderedContent = QaMarkdown.toHtml(editedContent);
+		
+	}
+	
+	public String getContent(){
+		return renderedContent;
+	}
+	
+	public String getMarkdown(){
+		return content;
 	}
 	
 	

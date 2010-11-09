@@ -4,9 +4,36 @@
 <br></br>
 #{form @Questions.setContent(),id:'editForm'}
 		<input type="hidden" id="id" name="id" value="${q.getId()}"></input>  
-		Edit title: <input type="text" name="title" value="${q.getTitle()}"></input><br></br>
-        Edit content:<br></br>
-        <textarea cols="60" rows="20" id="content" name="content">${q.getContent()}</textarea>
-        <br></br>
-        <a href="#" onclick="$('#editForm').submit();">update</a>
+		<h3>Title:</h3>
+		<input type="text" name="title" value="${q.getTitle()}"></input>
+		<br></br>
+    <h3>Content:</h3>
+    <br></br>        
+		<div class="text-editor">  
+		   <div class="tabs">
+		     <span onclick="teTab($(this));">write</span> | <span onclick="teTab($(this));">preview</span>
+		   </div>
+		   <div class="help">
+		     This is Markdown <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">syntax</a>
+		   </div>
+		   <div class="tab-write">
+		     <div class="body">         
+		       <textarea name="content" tabindex="1">${q.getMarkdown()}</textarea>
+		     </div>
+		   </div>
+		   <div class="tab-preview">
+		     <div class="body">
+		     </div>    
+		   </div>
+		</div>
+    <br></br>
+    #{list items:q.getTags(), as:'tag'}
+        #{set tags:(tags?tags+', ':'')+tag /}
+    #{/list}   
+    
+    <h3>Tags:</h3><input type="text" name="tags" value="${tags}"></input><br/> 
+    Important: Tags must be separated by a comma and a whitespace (", ")<br/>
+    <br></br>
+    <button class="x-large"  onclick="$('#editForm').submit();">Update</button>   
+    
 #{/form}

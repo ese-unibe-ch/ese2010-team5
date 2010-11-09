@@ -1,11 +1,15 @@
 *{
-	margin: 0;		
+	margin: 0;			
 }
 
 html,body{
 	min-height:100%;
-	height:100%;
-	font-family: helvetica, verdana;
+	height:100%;		
+}
+
+body{
+	font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+  font-size: 80%;	
 }
 
 #wrapper{
@@ -221,6 +225,71 @@ html,body{
   background:url("/public/images/message.png") no-repeat scroll 0.5em 1em transparent;
   background-color: #EAF2F5;
   
+}
+
+/* question list*/
+.question-list{
+  overflow: auto;	
+}
+
+.question-summary {
+  border-bottom:1px dotted #999999;
+  float:left;
+  overflow:hidden;
+  padding:11px 0;
+  width:100%;  
+}
+.question-summary .votes{
+  background:none repeat scroll 0 0 #EEEEEE;
+  float:left;
+  height:38px;
+  margin:0 3px 0 0;
+  padding:5px;
+  width:38px;
+  text-align:center;		
+}
+
+.question-summary .status {
+  float:left;
+  height:38px;
+  margin:0 3px 0 0;
+  padding:5px;
+  width:48px;
+  text-align:center;
+}
+.unanswered {
+  background:none repeat scroll 0 0 #9A4444;
+  color:#FFFFFF;
+}
+
+.answered {
+  background:none repeat scroll 0 0 #75845C;
+  color:#FFFFFF;
+}
+
+.question-summary .summary {
+  margin-left: 20px;
+  float:left;
+  width:80%;
+}
+.summary .tags {
+  float:left;
+}
+
+.summary .started {
+  float:right;
+}
+
+/*question view*/
+
+.question .title{
+  border-bottom: 1px solid black;
+}
+
+.question .content{
+	
+	height: 15em;
+	
 }
 
 

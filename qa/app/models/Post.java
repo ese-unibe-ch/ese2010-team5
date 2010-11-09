@@ -18,10 +18,8 @@ public abstract class Post implements IPost {
 	/** The owner. */
 	private IUser owner;
 	
-	/** The content. in original markdown*/
-	private String content;
-	/** Rendered content in html */
-	private String renderedContent;
+	/** The content.*/
+	protected String content;	
 	
 	/** The timestamp. */
 	private Date timestamp;
@@ -45,9 +43,8 @@ public abstract class Post implements IPost {
 	 * @param inContent the content of the post
 	 */
 	protected Post(IUser inUser, String inContent){
-		this.owner = inUser;
-		/*also renders the markdown*/
-		setContent(inContent);
+		this.owner = inUser;		
+		this.content = inContent;
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
@@ -81,20 +78,14 @@ public abstract class Post implements IPost {
 	}
 	
 	/**
-	 * Return the renderedContent
+	 * Return the content
 	 *
 	 * @return the content
 	 */
 	public String getContent() {
-		return this.renderedContent;
-	}
+		return this.content;
+	}	
 	
-	/**
-	 * 
-	 */
-	public String getMarkdown(){
-		return content;
-	}
 	
 	/**
 	 * Gets the timestamp of the creation of the post.
@@ -192,10 +183,8 @@ public abstract class Post implements IPost {
 	 * @param editedContent the new content
 	 */
 	public void setContent(String editedContent){
-		content = editedContent;
+		content = editedContent;	
 		
-		/*also update the rendered one*/
-		renderedContent = QaMarkdown.toHtml(content);	
 		
 	}
 	
