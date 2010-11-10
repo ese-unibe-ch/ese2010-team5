@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import play.Logger;
+
 import utils.QaDB;
 import utils.QaMarkdown;
 
@@ -54,15 +56,18 @@ public class Question extends Post {
 	 * @param tags the tags
 	 */
 	private void tagWith(String... tags) {
+				
 		for(String tagName : tags){
 			//check DB if tag already exists
-			if(QaDB.findTagByName(tagName) != null){
-				this.tags.add(QaDB.findTagByName(tagName));
+			Logger.debug("tagwith: %s",tagName);
+			Tag t = QaDB.findTagByName(tagName); 
+			//Logger.debug("tagwith: %s",t.getName());
+			if( t != null){
+				this.tags.add(t);
 			}
 			else{
-				Tag tag = new Tag(tagName, this);
-				QaDB.addTag(tag);
-				this.tags.add(tag);
+				t = QaDB.addTag(new Tag(tagName, this));
+				this.tags.add(t);
 			}
 		}
 	}

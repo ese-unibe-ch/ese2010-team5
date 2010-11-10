@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import play.Logger;
+
 
 import models.*;
 
@@ -112,10 +114,12 @@ public class QaDB {
 		return comments.get(id);
 	}
 	
-	public static Tag findTagByName(String name){
+	public static Tag findTagByName(String name){	
+		
 		for(Tag tag : tags.values()){
-			if(tag.getName().equals(name))
+			if(tag.getName().equals(name)){				
 				return tag;
+			}
 		}
 		
 		return null;

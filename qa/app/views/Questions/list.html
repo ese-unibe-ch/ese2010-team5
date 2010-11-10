@@ -41,7 +41,7 @@ function filter(tagstring){
   <div>
    #{ if user}
     <b>Sorted by ${sortOrder}</b> 
-    Sort by: <a href="@{Questions.list('DATE')}">date</a> | <a href="@{Questions.list('RATING')}">rating</a><br/>    
+    Sort by: <a href="@{Questions.listByOrder('DATE')}">date</a> | <a href="@{Questions.listByOrder('RATING')}">rating</a><br/>    
     AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
     <br/>      
    	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.annotations.SortType;
+
 import models.Answer;
 import models.Comment;
 import models.Notification;
@@ -21,8 +23,20 @@ import utils.QaDB.OrderBy;
 public class Questions extends Posts {	
 	
 	
+	public static void listByTag(String tag){
+		
+		//TODO		
+		
+		OrderBy sortOrder = OrderBy.DATE;
+		
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
+		renderTemplate("list.html",questions,sortOrder);		
+		
+	}
 	
-	public static void list(String orderby, String tags){
+	
+	
+	public static void listByOrder(String orderby){
 		
 		Logger.debug("params:", params);
 		
@@ -33,7 +47,7 @@ public class Questions extends Posts {
 		}
 		
 		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		render(questions,sortOrder);		
+		renderTemplate("Questions/list.html",questions,sortOrder);		
 		
 	}
 	

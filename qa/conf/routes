@@ -4,7 +4,9 @@
 
 # Home page
 
-GET     /questions/list/{orderby}                    Questions.list
+GET     /	  					                               Questions.list
+GET     /{orderby}                                   Questions.listByOrder
+GET     /{tag}                                       Questions.listByTag
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete
@@ -15,9 +17,8 @@ GET	    /questions/{id}   			                     Questions.view
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
-GET     /tags/                                       Tags.list
-GET     /tags/{tag}                                  Tags.listQuestionsTaggedWith
-GET     /	  					                               Questions.list
+GET     /tags/list                                   Tags.list
+#GET     /tags/{tag}                                  Tags.listQuestionsTaggedWith
 
 #markdown preview
 POST    /preview                                     Posts.markdownPreview
