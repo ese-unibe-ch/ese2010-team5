@@ -41,47 +41,77 @@
    }
 </script>
 
-
-<h1>${q.getTitle()}</h1>
-<h2>${q.getContent()}</h2>
-<br></br>
-<div class="actions">
- <a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a> |  
- <a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
-#{if q.ownPost()}
- | <a href="@{Questions.delete(q.getId())}">delete</a> | 
- <a href="@{Questions.edit(q.getId())}">edit</a> |
-#{/if}
-</div>
-
-
-<table >
-	<tr>
-	  <td>Owner:</td><td>${q.getOwner().getName()}</td> 
-	</tr>
-	<tr>
-	  <td>Rating:</td><td>
-	    <span id="questionRating">${q.getVotation()}</span>
-	  </td> 
-	</tr>
-	<tr>
-	  <td>Created At:</td><td>${q.getTimestamp().format('dd.MM.yyyy hh:mm')}</td>
-	</tr>
-	<tr>
-	  <td valign="top"><h2>Comments (${q.getComments().size()}):</h2></td>
-	  <td>
-		  <div class="list">
-		    #{list items:q.getComments(), as:'comment'}
-		      <div class="list-item ${comment_parity}">
-		        <div class="details">From: ${comment.getOwner().getName()}</div>          
-		        <div class="comment x-large">
-		            ${comment.getContent()}
-		        </div>        
-		        <div class="actions">
-		          #{if comment.ownPost()}
-		            <a href="@{Comments.edit(comment.getId())}">edit</a>
+<div class="questionview">
+	<div class="question">
+		<h1>${q.getTitle()}</h1>
+		<h2>${q.getContent()}</h2>
+		<div class="tags">${q.getTags()}</div>
+		<div class="actions">
+			<a href="#" onclick="rateQuestion(${q.getId()},true)">rate Up</a> |  
+			<a href="#" onclick="rateQuestion(${q.getId()},false)">rate Down</a>
+			#{if q.ownPost()}
+			 | <a href="@{Questions.delete(q.getId())}">delete</a>
+			 | <a href="@{Questions.edit(q.getId())}">edit</a>
+			 |
+			#{/if}
+		</div>
+		<div class="about">
+			<div class="owner">Owner: ${q.getOwner().getName()}</div>
+			<div class="rating">Rating: ${q.getVotation()}</div>
+			<div class="createdAt">${q.getTimestamp().format('dd.MM.yyyy hh:mm')}</div>
+		</div>
+	</div>
+	<div class="comments">
+		<h1>Comments (${q.getComments().size()}):</h1>
+		<div class="comment-list">
+			#{list items:q.getComments(), as:'comment'}
+				<div class="comment-list-item">        
+					<div class="comment">${comment.getContent()} - by <span class="owner"></span>${comment.getOwner().getName()}<span class="timestamp"> Timestamp: ${comment.getTimestamp().format('dd.MM.yyyy hh:mm')}</span></div>      
+					<div class="actions">
+						#{if comment.ownPost()}
+							<a href="@{Comments.edit(comment.getId())}">edit</a>
+						#{/if}
+					</div>
+				</div>
+			#{/list}
+		</div>
+		<div class="actions">
+			<div>Your comment:</div>
+			#{form @Questions.addComment(), id:'addCommentForm' } 
+		        <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  
+		        <input type="text" name="comment" id="comment"></input>
+		        <br></br>
+		        <a href="#" onclick="$('#addCommentForm').submit()">add</a>
+	        #{/form}  
+		</div>
+	</div>
+	
+	<div class="answers">
+		<h2> Answers (${q.getAnswers().size()})</h2>
+		<div class="answer-list">
+	    <!-- answers is sorted so that best answer is at the head -->
+		    #{list items:answers, as:'answer'}
+		      <div class="answer-list-item">
+		        <div class="details">From: ${answer.getOwner().getName()}, Rating: <span id="answerRating-${answer.getId()}">${answer.getVotation()}</span></div>          
+		        <div class="answer x-large">
+		          #{if answer.isBest()}
+		            <img src="@{'/public/images/tick.png'}"></img>
 		          #{/if}
+		            ${answer.getContent()}
 		        </div>
+		        <div class="actions">
+		          <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a> |
+		          <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
+		          #{if answer.ownPost()}
+		            | <a href="@{Answers.edit(answer.getId())}">edit</a>            
+		          #{/if}
+		          #{if q.ownPost()}            
+		            | <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 
+		              ${answer.isBest() ? 'unmark as best':'mark as best'}
+		            </a>             
+		          #{/if}         
+		        </div>
+<<<<<<< HEAD
 		      </div>
 		    #{/list}
 		  </div>
@@ -111,13 +141,8 @@
           #{if answer.isBest()}
             <img src="@{'/public/images/tick.png'}"></img>
           #{/if}
-<<<<<<< HEAD
-           <h3> ${answer.getContent()}</h3>
-        </div>        
-=======
-            ${answer.getContent()}
+
         </div>
->>>>>>> 73abfb5a0ae704e5aa90078d450075b30a8aedd6
         <div class="actions">
           <a href="#" onclick="rateAnswer(${answer.getId()},true)">rate Up</a> |
           <a href="#" onclick="rateAnswer(${answer.getId()},false)">rate Down</a>
@@ -130,6 +155,7 @@
             </a>             
           #{/if}         
         </div>
+
         <hr></hr>
         <!-- maybe some comments to an answer -->
         <div class="comments">
@@ -180,3 +206,47 @@
   <a href="#" onclick="$('#addAnswerForm').submit()">add</a>
 #{/form}
 </div>
+=======
+		        <!-- maybe some comments to an answer -->
+		        <div class="comments">
+		          Comments: ${answer.getComments().size()}<br></br>
+		          <div class="comment-list">
+		            #{list items:answer.getComments(), as:'commentA'}
+		              <div class="comment-list-item">        
+						<div class="comment">${commentA.getContent()} - by <span class="owner"></span>${commentA.getOwner().getName()}<span class="timestamp"> Timestamp: ${commentA.getTimestamp().format('dd.MM.yyyy hh:mm')}</span></div>      
+						<div class="actions">
+						#{if comment.ownPost()}
+							<a href="@{Comments.edit(commentA.getId())}">edit</a>
+						#{/if}
+						</div>
+					  </div>
+		                      
+		            #{/list}
+		          </div>
+		          <div class="actions">
+		            Your Comment: 
+		            #{form @Answers.addComment(), id:'addCommentAForm' } 
+		              <input type="hidden" name="aId" value="${answer.getId()}"></input>  
+		              <input type="text"   name="comment"></input>              
+		              <a href="#" onclick="$('#addCommentAForm').submit()">add</a>
+		            #{/form}
+		          </div>      
+		          
+		        </div><!-- end comments -->
+		      </div><!-- end list-item -->
+		    #{/list}    
+		</div><!-- end list answers-->
+	</div><!-- end container answers -->
+	<div class="actions">
+		<div class="add-answer">
+			<h3>Your Answer</h3>
+			#{form @Questions.addAnswer(), id:'addAnswerForm' } 
+				<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
+				<textarea name="answer" cols="60" rows="10"></textarea>
+				<br></br>
+				<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
+			#{/form}
+		</div>
+	</div>
+</div>
+>>>>>>> ac7215a9a28e62deac66858b530b31524b50a5e4

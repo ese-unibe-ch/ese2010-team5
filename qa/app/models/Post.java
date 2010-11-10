@@ -13,8 +13,8 @@ public abstract class Post {
 	private Date timestamp;
 	private long id;
 	private LinkedList<Vote> votes;
-	private List<Comment> comments = new LinkedList<Comment>();	
-
+	private List<Comment> comments = new LinkedList<Comment>();
+	
 	private static long idCounter = 1;
 	
 	protected Post(IUser inUser, String inContent){
@@ -122,7 +122,6 @@ public abstract class Post {
 	
 	public void setContent(String editedContent){
 		content = editedContent;
-	}
-	
+	}	
 
 }

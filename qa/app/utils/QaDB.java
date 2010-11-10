@@ -106,6 +106,25 @@ public class QaDB {
 		  return comments.get(id);  
 	}
 	
+	public static Post findPostByText(String content){
+		
+		Post p = null;
+		boolean b = false;
+		for(int i=1 ; i<40 ; i++){
+			String s = findPostById(i).getContent();
+			b = s.contains(content);
+			if(b==true){p = findPostById(i);}
+		}
+
+		return p;		
+	}
+	
+	public static Post addText(Comment c){
+		if(c== null) return null;		
+		comments.put(c.getId(), c);
+		return c;
+	}	
+	
 	public static Comment findCommentById(long id){
 		return comments.get(id);
 	}

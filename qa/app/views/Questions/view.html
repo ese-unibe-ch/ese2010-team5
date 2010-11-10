@@ -118,7 +118,7 @@
 		              <div class="comment-list-item">        
 						<div class="comment">${commentA.getContent()} - by <span class="owner"></span>${commentA.getOwner().getName()}<span class="timestamp"> Timestamp: ${commentA.getTimestamp().format('dd.MM.yyyy hh:mm')}</span></div>      
 						<div class="actions">
-						#{if comment.ownPost()}
+						#{if commentA.ownPost()}
 							<a href="@{Comments.edit(commentA.getId())}">edit</a>
 						#{/if}
 						</div>
