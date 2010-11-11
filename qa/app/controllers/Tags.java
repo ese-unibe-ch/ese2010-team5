@@ -1,6 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import models.Question;
 import models.Tag;
@@ -11,7 +14,8 @@ public class Tags extends Auth {
 
     public static void list() {
     	Collection<Tag> tags = QaDB.findAllTags();
-        render(tags);
+    	System.out.println(tags);
+        render();
     }
     
     public static void listQuestionsTaggedWith(Tag tag){

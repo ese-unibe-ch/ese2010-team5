@@ -58,4 +58,9 @@ public class Users extends Auth{
 		else
 			render(u);
 	}
+	
+	public static void delete(User user){
+		user.delete();
+		redirect("/");
+	}
 }

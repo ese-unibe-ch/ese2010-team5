@@ -34,6 +34,9 @@ public class User implements IUser {
 	/** The notifications. */
 	private List<Notification> notifications;
 	
+	/** The posts list */
+	private List<Post> posts;
+	
 	/** The id counter. */
 	private static long idCounter = 1;	
 
@@ -47,6 +50,7 @@ public class User implements IUser {
 		this.id = idCounter++;
 		this.birthDate = new Date(0);
 		this.notifications = new LinkedList<Notification>();
+		this.posts = new LinkedList<Post>();
 	}
 
 	/**
@@ -163,18 +167,40 @@ public class User implements IUser {
 	 * Answers of the deleted user are deleted too.
 	 */
 	public void delete() {
-		assignQuestionsToAnonymous(this);
+		//assignQuestionsToAnonymous();
+		//deleteAnswers();
+		for (Post post:posts){
+			post.unregister();
+		}
+		this.posts.clear();
+		QaDB.removeUser(this);
+	}
+
+	private void assignQuestionsToAnonymous() {
+		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(this);
+		// list is empty, why?
+		for (Question q : result){
+			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
+		}
+		
+	}
+	
+	private void deleteAnswers(){
+		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
+		// list is empty, why?
+		for (Answer a : answers){
+			a.setOwner(QaDB.ANONYMOUS);
+			QaDB.removeAnswer(a);
+		}
+	}
+
+	public void registerPost(Post post) {
+		this.posts.add(post);
 		
 	}
 
-	private void assignQuestionsToAnonymous(User user) {
-		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(user);
-		
-		// for now i just set the owner to anonymous. no changes in DB.
-		for (Question q : result){
-			q.setOwner(QaDB.ANONYMOUS);
-		}
-		
+	public void unregister(Post post) {
+		this.posts.remove(post);
 	}
 
 }

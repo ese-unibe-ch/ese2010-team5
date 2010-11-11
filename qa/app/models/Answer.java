@@ -69,6 +69,11 @@ public class Answer extends Post {
 	
 	protected void doDelete() {	  
 		/* do somthing when im getting deleted*/	  
+	}
+
+	public void setOwner(User user) {
+		this.owner = user;
+		
 	}	
 
 }

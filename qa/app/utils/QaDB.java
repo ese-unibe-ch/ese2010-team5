@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hibernate.criterion.CountProjection;
+
 
 import models.*;
 
@@ -184,6 +186,30 @@ public class QaDB {
 			}
 		}
 		return result;
+	}
+
+	public static List<Answer> findAllAnswersOfUser(User user) {
+		List<Answer> result = new LinkedList<Answer>();
+		for(Answer a : answers.values()){
+			if(a.getOwner() == user){
+				result.add(a);
+			}
+		}
+		return result;
+	}
+
+	public static void removeAnswer(Answer answer) {
+		answers.remove(answer);
+		
+	}
+
+	public static void removeQuestion(Question question) {
+		questions.remove(question);
+		
+	}
+
+	public static void removeComment(Comment comment) {
+		comments.remove(comment);
 	}
 
 	
