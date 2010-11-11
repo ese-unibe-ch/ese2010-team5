@@ -8,13 +8,14 @@
 
 function filter(tagstring){	
 
+	
 	if(!tagstring){		
-		$(".list-item").show();
+		$(".question-summary").show();
 		return;
 	}
 	
 	/*hide all and show those with the specified tags*/
-	$(".list-item").hide();	
+	$(".question-summary").hide();	
 	
 	/*split*/	
 	var tags = tagstring.split(" ");
@@ -22,7 +23,7 @@ function filter(tagstring){
 	for( idx in tags ){
 		  var tag = tags[idx];		  
 		  if(tag){			  
-			  $(".list-item."+tag).show();		    
+			  $(".question-summary."+tag).show();		    
 		  }  
 		  
 	}
@@ -40,7 +41,7 @@ function filter(tagstring){
   <div>
    #{ if user}
     <b>Sorted by ${sortOrder}</b> 
-    Sort by: <a href="@{Questions.list('DATE')}">date</a> | <a href="@{Questions.list('RATING')}">rating</a><br/>    
+    Sort by: <a href="@{Questions.listByOrder('DATE')}">date</a> | <a href="@{Questions.listByOrder('RATING')}">rating</a><br/>    
     AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
     <br/>      
    	

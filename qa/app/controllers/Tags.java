@@ -14,8 +14,8 @@ public class Tags extends Auth {
 
     public static void list() {
     	Collection<Tag> tags = QaDB.findAllTags();
-    	System.out.println(tags);
-        render();
+    	
+    	render(tags);
     }
     
     public static void listQuestionsTaggedWith(Tag tag){

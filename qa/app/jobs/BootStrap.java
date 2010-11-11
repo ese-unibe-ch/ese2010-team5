@@ -50,8 +50,12 @@ public class BootStrap extends Job {
     		User u = QaDB.addUser(new User("user-"+i));
     		//5 questions per user
     		for(int j = 1; j <= questionsPerUser; j++){
+
     			String[] tags = {"Tag"+i, "Tag"+(i+1)};
-        		Question q = QaDB.addQuestion(new Question(u, "Title of question "+j+", from "+u.getName(), "content of question "+j+", from "+u.getName(), tags));
+
+        		Question q = QaDB.addQuestion(new Question(u, "Title of question "+j+
+        				", from "+u.getName(), "content of question "+j+", from "+u.getName(), tags));
+
         	}	
     	}
     	
