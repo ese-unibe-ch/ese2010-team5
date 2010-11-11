@@ -14,7 +14,7 @@ import utils.QaMarkdown;
 /**
  * The abstract Class Post.
  */
-public abstract class Post implements IPost {
+public abstract class Post{
 	
 	/** The owner. */
 	protected IUser owner;
@@ -49,7 +49,7 @@ public abstract class Post implements IPost {
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
-		((User) owner).registerPost(this);
+		owner.registerPost(this);
 	}
 	
 	/**
@@ -191,9 +191,9 @@ public abstract class Post implements IPost {
 	}
 
 	public void unregister() {
-		((User) this.owner).unregister(this);
+		((User)this.owner).unregister(this);
 		if (this instanceof Question){
-			QaDB.removeQuestion((Question)this);
+			QaDB.removeQuestion((IQuestion)this);
 		}
 		if (this instanceof Answer){
 			QaDB.removeAnswer((Answer)this);

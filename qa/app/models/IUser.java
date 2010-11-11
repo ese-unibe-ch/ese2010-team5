@@ -5,4 +5,6 @@ package models;
  */
 public interface IUser {
 
+	public abstract void registerPost(Post post);
+
 }

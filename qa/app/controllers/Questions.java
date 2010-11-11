@@ -8,6 +8,8 @@ import org.hibernate.annotations.SortType;
 
 import models.Answer;
 import models.Comment;
+import models.IQuestion;
+import models.IUser;
 import models.Notification;
 import models.Post;
 import models.Question;
@@ -82,7 +84,7 @@ public class Questions extends Posts {
 		
 		Logger.debug("marking best answer "+aId+" for question "+qId);
 		
-		Question q = QaDB.findQuestionById(qId);		
+		IQuestion q = QaDB.findQuestionById(qId);		
 		
 		if(q == null){
 			flash("error", "failed setting best answer for q: "+qId);
@@ -136,10 +138,10 @@ public class Questions extends Posts {
 		flash.put("info", "answer Created: "+newAnswer.getId());
 		
 		/*publish notifications for subscribers*/
-		List<User> subscribers = q.getSubscribers();
-		for(User subscriber : subscribers){
+		List<IUser> subscribers = q.getSubscribers();
+		for(IUser subscriber : subscribers){
 			/*the logged in user is the originator of this notification*/
-			subscriber.addNotification(new Notification(user,q, Notification.Type.NEW_ANSWER));
+			((User) subscriber).addNotification(new Notification(user,q, Notification.Type.NEW_ANSWER));
 		}
 		
 		view(qId);		
@@ -166,7 +168,7 @@ public class Questions extends Posts {
 	public static void view(long id){
 		Logger.debug("Show question: "+id);
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
@@ -197,7 +199,7 @@ public class Questions extends Posts {
 	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
@@ -210,7 +212,7 @@ public class Questions extends Posts {
 	public static void setContent(long id, String title, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");

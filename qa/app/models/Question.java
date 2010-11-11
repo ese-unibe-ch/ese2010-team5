@@ -16,7 +16,7 @@ import utils.QaMarkdown;
 /**
  * The Class Question.
  */
-public class Question extends Post {
+public class Question extends Post implements IQuestion {
 	
 	/** The title. */
 	private String title;	
@@ -25,7 +25,7 @@ public class Question extends Post {
 	private List<Answer> answers= new LinkedList<Answer>();
 	
 	/** The subscribers. */
-	private List<User> subscribers = new LinkedList<User>();	
+	private List<IUser> subscribers = new LinkedList<IUser>();	
 	
 	/** The tags. */
 	private List<Tag> tags = new LinkedList<Tag>();
@@ -46,10 +46,20 @@ public class Question extends Post {
 		super(user, content);
 		this.title = title;
 		setContent(content);
-		addSubscriber((User) user);
+		addSubscriber(user);
 		tagWith(tags);
 	}
-
+	
+	
+	/**
+	 * Instantiates a new question.
+	 *
+	 * @param user the owner
+	 * @param content the content
+	 */
+	public Question(IUser user, String content) {
+		this(user,"",content);
+	}
 	/**
 	 * Tag with.
 	 *
@@ -72,84 +82,67 @@ public class Question extends Post {
 		}
 	}
 	
-	/**
-	 * Gets the tags.
-	 *
-	 * @return the tags
-	 */
+	
 	public List<Tag> getTags(){
 		return this.tags;
 	}
 	
-	/**
-	 * Instantiates a new question.
-	 *
-	 * @param user the owner
-	 * @param content the content
-	 */
-	public Question(IUser user, String content) {
-		this(user,"",content);
-	}
+
 
 	
-	/**
-	 * Gets the answers posted to this question.
-	 *
-	 * @return the answers
+	/* (non-Javadoc)
+	 * @see models.IQuestion#getAnswers()
 	 */
+	
 	public List<Answer> getAnswers() {
 		return this.answers;
 	}
 
-	/**
-	 * Adds a new answer.
-	 *
-	 * @param newAnswer the new answer
+	/* (non-Javadoc)
+	 * @see models.IQuestion#addAnswer(models.Answer)
 	 */
+	
 	public void addAnswer(Answer newAnswer) {		
 		this.answers.add(newAnswer);		
 	}
 	
-	/**
-	 * Gets the title.
-	 *
-	 * @return the title
+	/* (non-Javadoc)
+	 * @see models.IQuestion#getTitle()
 	 */
+	
 	public String getTitle(){
 		return title;
 	}
 	
-	/**
-	 * Adds the subscriber.
-	 *
-	 * @param inUser the subscriber
+	/* (non-Javadoc)
+	 * @see models.IQuestion#addSubscriber(models.User)
 	 */
-	public void addSubscriber(User inUser){
+	
+	public void addSubscriber(IUser inUser){
 		subscribers.add(inUser);
 	}
 	
-	/**
-	 * Gets the subscribers.
-	 *
-	 * @return the subscribers
+	/* (non-Javadoc)
+	 * @see models.IQuestion#getSubscribers()
 	 */
-	public List<User> getSubscribers(){
+	
+	public List<IUser> getSubscribers(){
 		return subscribers;
 	}
 	
 
-	/**
-	 * Sets the title.
-	 *
-	 * @param title the new title
+	/* (non-Javadoc)
+	 * @see models.IQuestion#setTitle(java.lang.String)
 	 */
+	
 	public void setTitle(String title) {
 		this.title = title;		
 	}
 	
-	/**
-	 * override set content from post
+	/* (non-Javadoc)
+	 * @see models.IQuestion#setContent(java.lang.String)
 	 */	
+	@Override
 	public void setContent(String editedContent){
 		super.setContent(editedContent);
 		
@@ -159,9 +152,17 @@ public class Question extends Post {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see models.IQuestion#getContent()
+	 */
+	@Override
 	public String getContent(){
 		return renderedContent;
 	}
+	
+	/* (non-Javadoc)
+	 * @see models.IQuestion#getMarkdown()
+	 */
 	
 	public String getMarkdown(){
 		return content;
@@ -171,15 +172,27 @@ public class Question extends Post {
 		/* do somthing when im getting deleted*/	  	  
 	}
 
-	public void setOwner(User user) {
+	/* (non-Javadoc)
+	 * @see models.IQuestion#setOwner(models.User)
+	 */
+	
+	public void setOwner(IUser user) {
 		this.owner = user;
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see models.IQuestion#isTaggedWith(models.Tag)
+	 */
+	
 	public boolean isTaggedWith(Tag tag) {
 		return tags.contains(tag);
 	}
 
+	/* (non-Javadoc)
+	 * @see models.IQuestion#isTaggedWith(models.Tag[])
+	 */
+	
 	public boolean isTaggedWith(Tag[] tags) {
 		for (Tag tag : tags){
 			if (!this.tags.contains(tag))

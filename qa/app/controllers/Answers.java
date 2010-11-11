@@ -7,6 +7,7 @@ import java.util.List;
 
 import models.Answer;
 import models.Comment;
+import models.IQuestion;
 import models.Question;
 import models.User;
 import play.Logger;
@@ -39,7 +40,7 @@ public class Answers extends Posts {
 		a.setContent(content);
 		flash.put("info","Content of answer "+id+" changed");
 		
-		Question q = a.getQuestion();
+		IQuestion q = a.getQuestion();
 		//sends a redirect
 		Questions.view(q.getId());
 		
@@ -48,7 +49,7 @@ public class Answers extends Posts {
 	public static void addComment(String comment, long aId){
 		
 		Answer a = QaDB.findAnswerById(aId);
-		Question q = a.getQuestion();
+		IQuestion q = a.getQuestion();
 		
 		if(a == null){
 			flash.error("could not find answer a: "+aId);

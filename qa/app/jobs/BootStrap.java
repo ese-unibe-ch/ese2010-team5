@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import models.Answer;
+import models.IQuestion;
 import models.IUser;
 import models.Post;
 import models.Question;
@@ -53,7 +54,7 @@ public class BootStrap extends Job {
 
     			String[] tags = {"Tag"+i, "Tag"+(i+1)};
 
-        		Question q = QaDB.addQuestion(new Question(u, "Title of question "+j+
+        		IQuestion q = QaDB.addQuestion(new Question(u, "Title of question "+j+
         				", from "+u.getName(), "content of question "+j+", from "+u.getName(), tags));
 
         	}	

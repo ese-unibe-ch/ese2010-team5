@@ -9,11 +9,11 @@ import java.util.List;
 public class Notification {	
 	
 	
-	private Question question;	
+	private IQuestion question;	
 	private boolean read = false;
 	private long createdAt;
 	private Type type;
-	private User originator;
+	private IUser originator;
 	
 	
 	/* the text of the notification will depend on the type*/
@@ -23,7 +23,7 @@ public class Notification {
 	}
 	
 	
-	public Notification(User inOriginator, Question inQuestion, Type inType){
+	public Notification(IUser inOriginator, IQuestion inQuestion, Type inType){
 		
 		if(inOriginator == null || inType == null || inQuestion == null)
 			throw new InvalidParameterException("all params required");
@@ -42,11 +42,11 @@ public class Notification {
 		return read;
 	}
 	
-	public Question getQuestion(){
+	public IQuestion getQuestion(){
 		return question;
 	}
 	
-	public User getOriginator(){
+	public IUser getOriginator(){
 		return originator;
 	}
 	

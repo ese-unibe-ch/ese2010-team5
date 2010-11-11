@@ -72,7 +72,7 @@ public class QaDB {
 		return answers.remove(inPost.getId()) != null;
 	}
 	
-	public static void removeUser(User user){
+	public static void removeUser(IUser user){
 		if (user == null)
 			return;
 		users.remove(user);
@@ -147,7 +147,7 @@ public class QaDB {
 		
 	}
 	
-	public static Collection<Question> findAllQuestionsOfUser(User user){
+	public static Collection<Question> findAllQuestionsOfUser(IUser user){
 		List<Question> result = new LinkedList<Question>();
 		for(Question q : questions.values()){
 			if(q.getOwner() == user){
@@ -189,7 +189,7 @@ public class QaDB {
 		return result;
 	}
 
-	public static List<Answer> findAllAnswersOfUser(User user) {
+	public static List<Answer> findAllAnswersOfUser(IUser user) {
 		List<Answer> result = new LinkedList<Answer>();
 		for(Answer a : answers.values()){
 			if(a.getOwner() == user){
@@ -204,7 +204,7 @@ public class QaDB {
 		
 	}
 
-	public static void removeQuestion(Question question) {
+	public static void removeQuestion(IQuestion question) {
 		questions.remove(question);
 		
 	}
