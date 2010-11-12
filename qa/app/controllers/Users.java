@@ -59,7 +59,9 @@ public class Users extends Auth{
 			render(u);
 	}
 	
-	public static void delete(User user){
+	public static void delete(String username){
+		User user = QaDB.findUserByName(username);
+		System.out.println(username);
 		user.delete();
 		redirect("/");
 	}

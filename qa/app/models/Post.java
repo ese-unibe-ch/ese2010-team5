@@ -192,15 +192,27 @@ public abstract class Post{
 
 	public void unregister() {
 		((User)this.owner).unregister(this);
-		if (this instanceof Question){
-			QaDB.removeQuestion((IQuestion)this);
-		}
-		if (this instanceof Answer){
-			QaDB.removeAnswer((Answer)this);
-		}
-		else
-			QaDB.removeComment((Comment)this);
+		removeFromDB();
 	}
+	
+	private void removeFromDB(){
+		System.out.println("DB Remove");
+		if (this.getClass() == Question.class){
+			QaDB.removeQuestion((IQuestion)this);
+			System.out.println("Question");
+		}
+		else{
+			if (this.getClass().equals(Answer.class)){
+				QaDB.removeAnswer((Answer)this);
+				System.out.println("Answer");
+			}
+			else{
+				QaDB.removeComment((Comment)this);
+				System.out.println("Comment");
+			}
+		}
+	}
+		
 	
 	
 	

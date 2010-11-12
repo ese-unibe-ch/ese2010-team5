@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -169,7 +171,14 @@ public class User implements IUser {
 	public void delete() {
 		//assignQuestionsToAnonymous();
 		//deleteAnswers();
-		for (Post post:posts){
+		
+		//clone posts to prevent concurrent modification
+		List<Post> clone = new LinkedList<Post>();
+		for(Post post : posts){
+			clone.add(post);
+		}
+		
+		for (Post post:clone){
 			post.unregister();
 		}
 		this.posts.clear();
