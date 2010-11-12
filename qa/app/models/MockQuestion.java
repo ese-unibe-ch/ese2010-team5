@@ -83,6 +83,11 @@ public class MockQuestion extends Post implements IQuestion{
 	public List<Tag> getTags() {
 		return null;
 	}
+
+	public boolean isTaggedWith(String tagString) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }

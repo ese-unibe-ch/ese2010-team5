@@ -3,14 +3,12 @@
 
 
 <h1>Tags</h1>
-
 <div id="tags">
 <div class="list">
   #{list items:tags, as:'t'}
     <div class="list-item}">
-      <div class="title"><a href="@{Tags.listQuestionsTaggedWith(t)}">&{t.getName()}</a></div>
+      <div class="title"><a href="@{Tags.listQuestionsTaggedWith(t)}">${t.getName()}</a></div>
     </div>
   #{/list}
 </div>
 </div>
-

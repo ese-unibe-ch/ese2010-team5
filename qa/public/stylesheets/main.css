@@ -292,4 +292,22 @@ body{
 	
 }
 
+#tags{
+	
+}
+
+#tags .list{
+	
+} 
+
+#tags.list.list-item{
+	font-style: oblique;
+	background-color: grey;
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+
 

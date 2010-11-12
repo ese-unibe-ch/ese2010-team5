@@ -107,14 +107,8 @@ public class Questions extends Posts {
 	public static void save(String content, String title, String tags){
 		
 		Logger.debug("Create Question with content: "+content);	
-		
-		String[] tagArray = new String[]{};
-		
-		if(tags != null){
-			tagArray = tags.split(", ");
-		}
 		 		
-		Question q = QaDB.addQuestion(new Question(user, title, content, tagArray));	
+		Question q = QaDB.addQuestion(new Question(user, title, content, tags));	
 		
 		Logger.debug("Question "+" created");
 		flash.put("info", "Question "+q.getId()+" created");

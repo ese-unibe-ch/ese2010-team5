@@ -42,7 +42,7 @@ public class Question extends Post implements IQuestion {
 	 * @param content the content
 	 * @param tags the tags
 	 */
-	public Question(IUser user, String title, String content, String...tags) {
+	public Question(IUser user, String title, String content, String tags) {
 		super(user, content);
 		this.title = title;
 		setContent(content);
@@ -58,16 +58,20 @@ public class Question extends Post implements IQuestion {
 	 * @param content the content
 	 */
 	public Question(IUser user, String content) {
-		this(user,"",content);
+		this(user,"",content, "");
 	}
+	
 	/**
 	 * Tag with.
 	 *
 	 * @param tags the tags
 	 */
-	private void tagWith(String... tags) {
+	private void tagWith(String tagString) {
+		String delims = ", ";
+		
+		String[] stringTags = tagString.split(delims);
 				
-		for(String tagName : tags){
+		for(String tagName : stringTags){
 			//check DB if tag already exists
 			Logger.debug("tagwith: %s",tagName);
 			Tag t = QaDB.findTagByName(tagName); 
@@ -186,7 +190,15 @@ public class Question extends Post implements IQuestion {
 	 */
 	
 	public boolean isTaggedWith(Tag tag) {
-		return tags.contains(tag);
+		return this.tags.contains(tag);
+	}
+	
+	public boolean isTaggedWith(String tagString) {
+		for (Tag tag : tags){
+			if (tag.getName().equals(tagString))
+				return true;
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -200,5 +212,8 @@ public class Question extends Post implements IQuestion {
 		}
 		return true;
 	}
+
+
+	
 
 }

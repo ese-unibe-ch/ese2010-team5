@@ -179,6 +179,16 @@ public class QaDB {
 		return result;
 	}
 	
+	public static Collection<Question> findAllQuestionsTaggedWith(String tag){
+		List<Question> result = new LinkedList<Question>();
+		for(Question q : questions.values()){
+			if(q.isTaggedWith(tag)){
+				result.add(q);
+			}
+		}
+		return result;
+	}
+	
 	public static Collection<Question> findAllQuestionsTaggedWith(Tag[] tags){
 		List<Question> result = new LinkedList<Question>();
 		for(Question q : questions.values()){

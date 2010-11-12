@@ -65,6 +65,8 @@ public interface IQuestion {
 	public abstract void setOwner(IUser user);
 
 	public abstract boolean isTaggedWith(Tag tag);
+	
+	public abstract boolean isTaggedWith(String tagString);
 
 	public abstract boolean isTaggedWith(Tag[] tags);
 
