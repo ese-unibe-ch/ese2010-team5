@@ -20,7 +20,7 @@ public class Tags extends Auth {
     }
     
     public static void listQuestionsTaggedWith(String tag){
-    	Collection<IQuestion> questions = QaDB.findAllQuestionsTaggedWith(tag);
+    	Collection<Question> questions = QaDB.findAllQuestionsTaggedWith(tag);
     	render(questions);
     }
 

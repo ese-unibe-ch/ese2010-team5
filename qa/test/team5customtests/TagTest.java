@@ -11,13 +11,14 @@ import org.junit.*;
 
 public class TagTest extends UnitTest{
 	Tag tag;
+	//Sorry had to do it without the interface (would have to change the whole application)
+	Question quest;
 	IUser use;
-	IQuestion quest;
 
 	@Before
 	public void setUp() throws Exception {
 		use = new MockUser("Hans");
-		quest = new MockQuestion(use,"JUnitTestQuestion");
+		quest = new Question(use,"JUnitTestQuestion");
 		tag = new Tag("junit",quest);		
 	}
 	

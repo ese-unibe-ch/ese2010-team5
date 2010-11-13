@@ -12,7 +12,7 @@ public class Tag {
 	private String name;
 	
 	/** The related questions. */
-	private List<IQuestion> relatedQuestions = new LinkedList<IQuestion>();
+	private List<Question> relatedQuestions = new LinkedList<Question>();
 	
 	/** The id. */
 	private long id;
@@ -26,7 +26,7 @@ public class Tag {
 	 * @param name the name
 	 * @param quest the related question
 	 */
-	public Tag(String name, IQuestion quest){
+	public Tag(String name, Question quest){
 		this.name = name;
 		this.relatedQuestions.add(quest);
 		this.id = idCounter++;
