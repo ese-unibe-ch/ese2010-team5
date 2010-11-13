@@ -6,8 +6,8 @@
 <div id="tags">
 <div class="list">
   #{list items:tags, as:'t'}
-    <div class="list-item}">
-      <div class="title"><a href="@{Tags.listQuestionsTaggedWith(t)}">${t.getName()}</a></div>
+    <div class="list-item tag">
+      <span class="title"><a href="@{Tags.listQuestionsTaggedWith(t)}">${t.getName()}</a></span>
     </div>
   #{/list}
 </div>
