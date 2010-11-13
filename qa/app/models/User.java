@@ -34,7 +34,7 @@ public class User implements IUser {
 	private long id;	  
 	
 	/** The notifications. */
-	private List<Notification> notifications;
+	private List<INotification> notifications;
 	
 	/** The posts list */
 	private List<Post> posts;
@@ -51,7 +51,7 @@ public class User implements IUser {
 		this.username = new String(username);
 		this.id = idCounter++;
 		this.birthDate = new Date(0);
-		this.notifications = new LinkedList<Notification>();
+		this.notifications = new LinkedList<INotification>();
 		this.posts = new LinkedList<Post>();
 	}
 
@@ -151,7 +151,7 @@ public class User implements IUser {
 	 *
 	 * @param n the n
 	 */
-	public void addNotification(Notification n){
+	public void addNotification(INotification n){
 		notifications.add(n);
 	}
 	
@@ -160,7 +160,7 @@ public class User implements IUser {
 	 *
 	 * @return the notifications
 	 */
-	public List<Notification> getNotifications(){
+	public List<INotification> getNotifications(){
 		return notifications;
 	}
 

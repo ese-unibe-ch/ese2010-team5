@@ -6,7 +6,7 @@ import java.util.List;
 
 
 
-public class Notification {	
+public class Notification implements INotification {	
 	
 	
 	private IQuestion question;	

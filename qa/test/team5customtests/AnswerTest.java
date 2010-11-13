@@ -45,4 +45,11 @@ public class AnswerTest extends UnitTest{
 		assertEquals("rating: 1, This UnitTest will work sometime!",ans.toString());
 	}
 
+
+	@Test
+	public void shouldReplacePreviousOwnerWithNewOwner(){
+		assertEquals(use1,ans.getOwner());
+		ans.setOwner(use2);
+		assertEquals(use2,ans.getOwner());
+	}
 }

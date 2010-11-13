@@ -16,7 +16,7 @@ public class TagTest extends UnitTest{
 	IUser use;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		use = new MockUser("Hans");
 		quest = new Question(use,"JUnitTestQuestion");
 		tag = new Tag("junit",quest);		

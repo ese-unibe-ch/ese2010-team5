@@ -3,22 +3,52 @@ package team5customtests;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
 import models.*;
+
 import org.junit.Before;
 import org.junit.*;
 
 public class UserTest extends UnitTest{
 	Date curDate;
 	User use;
+	IUser use1,use2;
+	INotification notify1,notify2;
+	IQuestion quest1,quest2;
+	List<INotification> notifications;
 
 	@Before
 	public void setUp() throws Exception {
 		use = new User("Hans");
+		use1 = new MockUser("Fritz");
+		use2 = new MockUser("Johann");
+		quest1 = new MockQuestion(use1,"TestQuestion");
+		quest2 = new MockQuestion(use2,"TestQuestion2");
+		notify1 = new MockNotification(use2,quest1);
+		notify2 = new MockNotification(use1,quest2);
 		curDate = new Date(System.currentTimeMillis());
+		notifications = new LinkedList<INotification>();
+	}
+	
+	@Test
+	public void shouldProperlyAddAndReturnNotifications(){
+		use.addNotification(notify1);
+		notifications.add(notify1);
+		assertEquals(use.getNotifications(),notifications);
+		use.addNotification(notify2);
+		notifications.add(notify2);
+		assertEquals(use.getNotifications(),notifications);
+	}
+	
+	@Test
+	public void shouldProperlyRegisterandUnregister(){
+		use.registerPost((Post) quest1);
+		use.unregister((Post) quest1);
 	}
 	
 	@Test
