@@ -186,7 +186,7 @@ public class User implements IUser {
 	}
 
 	private void assignQuestionsToAnonymous() {
-		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(this);
+		List<IQuestion> result = (List<IQuestion>) QaDB.findAllQuestionsOfUser(this);
 		// list is empty, why?
 		for (IQuestion q : result){
 			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import models.IQuestion;
 import models.Question;
 import models.Tag;
 
@@ -19,7 +20,7 @@ public class Tags extends Auth {
     }
     
     public static void listQuestionsTaggedWith(String tag){
-    	Collection<Question> questions = QaDB.findAllQuestionsTaggedWith(tag);
+    	Collection<IQuestion> questions = QaDB.findAllQuestionsTaggedWith(tag);
     	render(questions);
     }
 
