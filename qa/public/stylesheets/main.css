@@ -293,3 +293,43 @@ body{
 }
 
 
+#tags .list-item.tag{
+	
+	font-style: oblique;
+	background-image: url("/public/images/icon_small_tag.gif");
+	background-repeat: no-repeat;
+	background-position: left center;
+	border: none;
+}
+
+#tags a{
+	padding-left: 2px;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	
+}
+	
+#tags a:hover{
+	text-decoration: none;
+	color: #FFFFFF;
+	background-color: blue;
+}
+
+.navigation{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: blue;
+	padding: 2px;
+}
+
+.navigation-item a{
+	text-decoration: none;
+	color: white;
+}
+
+.navigation-item a:hover{
+	text-decoration: none;
+	color: #000000;
+	background-color: white;
+}

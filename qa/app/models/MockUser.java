@@ -18,4 +18,7 @@ public class MockUser implements IUser {
 		this.username = new String(username);
 	}
 
+	public void registerPost(Post post) {
+	}
+
 }

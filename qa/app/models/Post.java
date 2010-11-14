@@ -8,12 +8,13 @@ import java.util.Map;
 
 import org.pegdown.PegDownProcessor;
 
+import utils.QaDB;
 import utils.QaMarkdown;
 
 /**
  * The abstract Class Post.
  */
-public abstract class Post implements IPost {
+public abstract class Post{
 	
 	/** The owner. */
 	protected IUser owner;
@@ -48,6 +49,7 @@ public abstract class Post implements IPost {
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
+		owner.registerPost(this);
 	}
 	
 	/**
@@ -187,6 +189,30 @@ public abstract class Post implements IPost {
 		
 		
 	}
+
+	public void unregister() {
+		((User)this.owner).unregister(this);
+		removeFromDB();
+	}
+	
+	private void removeFromDB(){
+		System.out.println("DB Remove");
+		if (this.getClass() == Question.class){
+			QaDB.removeQuestion((IQuestion)this);
+			System.out.println("Question");
+		}
+		else{
+			if (this.getClass().equals(Answer.class)){
+				QaDB.removeAnswer((Answer)this);
+				System.out.println("Answer");
+			}
+			else{
+				QaDB.removeComment((Comment)this);
+				System.out.println("Comment");
+			}
+		}
+	}
+		
 	
 	
 	

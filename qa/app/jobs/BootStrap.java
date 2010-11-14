@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import models.Answer;
+import models.IQuestion;
 import models.IUser;
 import models.Post;
 import models.Question;
@@ -38,6 +39,8 @@ public class BootStrap extends Job {
 		
     public void doJob() {
     	
+    	QaDB.addUser(QaDB.ANONYMOUS);
+    	
     	log.info("fill Model with test-data");
     	
     	int users = 5;
@@ -48,9 +51,10 @@ public class BootStrap extends Job {
     		User u = QaDB.addUser(new User("user-"+i));
     		//5 questions per user
     		for(int j = 1; j <= questionsPerUser; j++){
-    			String[] tags = {"Tag"+i, "Tag"+i+1};
-        		Question q = QaDB.addQuestion(new Question(u, "Title of question "+j+
-        				", from "+u.getName(), "content of question "+j+", from "+u.getName(), tags));
+
+        		IQuestion q = QaDB.addQuestion(new Question(u, "Title of question "+j+
+        				", from "+u.getName(), "content of question "+j+", from "+u.getName(), "Tag"+i+", Tag"+(i+1)));
+
         	}	
     	}
     	

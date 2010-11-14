@@ -7,6 +7,7 @@ import java.util.List;
 
 import models.Answer;
 import models.Comment;
+import models.IQuestion;
 import models.Post;
 import models.Question;
 import models.User;
@@ -51,7 +52,7 @@ public class Comments extends Posts {
 			Questions.view(a.getId());
 		else if (a instanceof Answer){
 			Answer b = (Answer) a;
-			Question q = b.getQuestion();
+			IQuestion q = b.getQuestion();
 			Questions.view(q.getId());
 		}
 		

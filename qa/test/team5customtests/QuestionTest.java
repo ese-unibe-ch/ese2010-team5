@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import play.test.UnitTest;
+import utils.QaMarkdown;
 
 public class QuestionTest extends UnitTest {
 	public Question quest;
@@ -27,9 +28,11 @@ public class QuestionTest extends UnitTest {
 
 	@Test
 	public void shouldSetProperNewContent() {
-		assertEquals("Testquestion for JUnit", quest.getContent());
+		String firstcontent = new String(QaMarkdown.toHtml("Testquestion for JUnit"));
+		String latercontent = new String(QaMarkdown.toHtml("Changed testquestion for JUnit"));
+		assertEquals(firstcontent, quest.getContent());
 		quest.setContent("Changed testquestion for JUnit");
-		assertEquals("Changed testquestion for JUnit", quest.getContent());
+		assertEquals(latercontent, quest.getContent());
 	}
 
 	@Test
