@@ -83,6 +83,52 @@ body{
 
 }
 
+#content .subnav{
+  border-bottom:1px solid #666666;
+  clear:both;
+  height:34px;
+  margin-bottom:15px;
+}
+
+.subnav h1 {
+  float:left;
+  /*
+  font-size:170%;
+  line-height:34px;*/
+  margin-bottom:0;
+}
+
+.subnav .tabs{
+  float:right;
+  font-weight: bold;
+}
+
+.tabs a{
+	background:inherit;
+	border:1px solid #FFFFFF;
+	color:#777777;
+	display:block;
+	float:left;
+	font-size:90%;
+	height:24px;
+	line-height:22px;
+	margin:8px 8px 0 0;
+	padding:0 11px;
+	text-decoration:none;
+}
+.tabs a.active{
+  background:none repeat scroll 0 0 #FFFFFF;
+  border-color:#777777 #777777 #FFFFFF;
+  border-style:solid;
+  border-width:1px;
+  color:black;
+  font-size:120%;
+  height:30px;
+  line-height:28px;
+  margin-top:3px;
+  padding:0 11px;	
+}
+
 #footer{
 	width:100%;	
 	background-color: grey;

@@ -172,14 +172,24 @@ public class QaDB {
 	public static Collection<Tag> findAllTags() {
 		return tags.values();
 	}
-
+	
 	public static Collection<Question> findAllQuestionsTaggedWith(Tag tag) {
+		return findAllQuestionsTaggedWith(tag,null);
+	}
+	
+
+	public static Collection<Question> findAllQuestionsTaggedWith(Tag tag, OrderBy orderBy) {
 		List<Question> result = new LinkedList<Question>();
 		for (Question q : questions.values()) {
 			if (q.isTaggedWith(tag)) {
 				result.add(q);
 			}
 		}
+		
+		if(orderBy != null){
+			Collections.sort(result, new QaSorter(orderBy));
+		}
+		
 		return result;
 	}
 

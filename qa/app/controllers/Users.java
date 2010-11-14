@@ -53,7 +53,7 @@ public class Users extends Auth{
 			error("could not find user: \""+username+"\"");
 			return;
 		}
-		if (session.get("username").equals(username))
+		if (Security.isConnected() && Security.connected().equals(username))
 			edit(u.getName());
 		else
 			render(u);
@@ -61,7 +61,10 @@ public class Users extends Auth{
 	
 	public static void delete(String username){
 		User user = QaDB.findUserByName(username);
-		System.out.println(username);
+		if(user == null){
+			error("could not find user: \""+username+"\"");
+			return;
+		}
 		user.delete();
 		redirect("/");
 	}

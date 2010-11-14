@@ -1,21 +1,20 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<div class="navigation">
-	<div class="navigation-item"><a href="@{Tags.list()}">Tags</a></div>
-</div>
+
 <script type="text/javascript">
 
 function filter(tagstring){	
 
+	var match = ".question-summary";
 	
 	if(!tagstring){		
-		$(".question-summary").show();
+		$(match).show();
 		return;
 	}
 	
 	/*hide all and show those with the specified tags*/
-	$(".question-summary").hide();	
+	$(match).hide();	
 	
 	/*split*/	
 	var tags = tagstring.split(" ");
@@ -23,34 +22,32 @@ function filter(tagstring){
 	for( idx in tags ){
 		  var tag = tags[idx];		  
 		  if(tag){			  
-			  $(".question-summary."+tag).show();		    
+			  $(match+".tag").show();		    
 		  }  
 		  
-	}
-	
-
-	
+	}	
 }
-
-
 
 </script>
 
 
-<div class="actions">
-  <div>
-   #{ if user}
-    <b>Sorted by ${sortOrder}</b> 
-    Sort by: <a href="@{Questions.listByOrder('DATE')}">date</a> | <a href="@{Questions.listByOrder('RATING')}">rating</a><br/>    
-    AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
-    <br/>      
-   	
-   #{/if}
-   #{else}
-     Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..
-   #{/else} 
+<div class="subnav">
+#{if tagname}
+  <h1>Tagged Questions (${tagname})</h1>
+#{/if}  
+#{else}
+  <h1>Questions</h1>
+#{/else}
+  <div class="tabs">  
+    <a class="${sort == 'DATE' ? 'active':'' }"    href="@{Questions.list('DATE',tagname)}">Newest</a>
+    <a class="${sort == 'RATING' ? 'active':''}"  href="@{Questions.list('RATING',tagname)}">Votes</a>
   </div>
+  
+  <!--
+  AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>
+  !-->
 </div>
+
 
 <br></br>
 <div class="question-list">

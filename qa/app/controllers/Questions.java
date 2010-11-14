@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.annotations.SortType;
@@ -20,46 +21,49 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaDB;
+import utils.QaSorter;
 import utils.QaDB.OrderBy;
 
 public class Questions extends Posts {	
 	
 	
-	public static void listByTag(String tag){
+	public static void list(String sort, String tagname){
 		
-		//TODO		
+		Tag tag 											 = null;		
+		Collection<Question> questions = null;
+		OrderBy	orderBy								 = OrderBy.DATE;
 		
-		OrderBy sortOrder = OrderBy.DATE;
-		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		renderTemplate("list.html",questions,sortOrder);		
-		
-	}
-	
-	
-	
-	public static void listByOrder(String orderby){
-		
-		Logger.debug("params:", params);
-		
-		OrderBy sortOrder = OrderBy.DATE;
-		
-		if(orderby != null){
-			sortOrder = OrderBy.valueOf(orderby);
+		if(tagname != null){
+			tag = QaDB.findTagByName(tagname);			
 		}
+		if(sort != null && sort.length() > 0){
+			orderBy = OrderBy.valueOf(sort);
+		}else{
+			sort = orderBy.name();
+		}	
 		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		renderTemplate("Questions/list.html",questions,sortOrder);		
+				
+		if(tag != null){
+			questions = QaDB.findAllQuestionsTaggedWith(tag, orderBy);			
+		}else{
+			questions = QaDB.findAllQuestions(orderBy);
+		}		 		
 		
-	}
+		render(questions,sort,tagname);		
+		
+				
+		
+	}	
+	
 	
 	/*default listing*/	
-	public static void list(){		
+	public static void listAll(){		
 		
-		OrderBy sortOrder = OrderBy.DATE;
+		OrderBy sortOrderEnum = OrderBy.DATE;
 		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		render(questions,sortOrder);
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrderEnum);
+		String sort = sortOrderEnum.name();
+		renderTemplate("Questions/list.html",questions,sort);
 			
 	}
 	
@@ -76,7 +80,7 @@ public class Questions extends Posts {
 				flash.put("error","Could not delete "+p.getId());
 		}			
 		
-		list();		
+		listAll();		
 		
 	}
 	
@@ -113,7 +117,7 @@ public class Questions extends Posts {
 		Logger.debug("Question "+" created");
 		flash.put("info", "Question "+q.getId()+" created");
 		
-		list();
+		listAll();
 		
 	}
 	

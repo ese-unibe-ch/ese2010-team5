@@ -72,10 +72,9 @@ public class Question extends Post implements IQuestion {
 		String[] stringTags = tagString.split(delims);
 				
 		for(String tagName : stringTags){
-			//check DB if tag already exists
-			Logger.debug("tagwith: %s",tagName);
-			Tag t = QaDB.findTagByName(tagName); 
-			//Logger.debug("tagwith: %s",t.getName());
+			//check DB if tag already exists			
+			Tag t = QaDB.findTagByName(tagName);
+			
 			if( t != null){
 				this.tags.add(t);
 			}
