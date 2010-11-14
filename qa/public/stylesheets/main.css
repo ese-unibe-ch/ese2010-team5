@@ -91,10 +91,7 @@ body{
 }
 
 .subnav h1 {
-  float:left;
-  /*
-  font-size:170%;
-  line-height:34px;*/
+  float:left;  
   margin-bottom:0;
 }
 
@@ -140,48 +137,6 @@ body{
 #footer .content{
   padding-left: 10px;
 }
-
-/* some actions like add question */
-.actions{	
-	padding: 10px;
-  border: 1px solid black;
-  
-	
-}
-
-#actions h1{
-	font-style: bold;
-	font-size: 20px;
-}
-
-/* list*/
-.list-item{    
-  border: 1px solid black;
-  padding: 10px;
-  margin-bottom:10px;
-}
-.list-item.even{
-  background-color: white;
-}
-
-.list-item.odd{
-  background-color: #dddddd;
-}
-.list-item .title{
-	font-size: x-large;
-}
-
-.list-item .question{
-  font-size: 20px;
-}
-
-.list-item .actions{
-  
-}
-.list-item .details{
-  
-}
-
 /*text-editor*/
 .text-editor {
 	  border:1px solid #CCCCCC;
@@ -327,15 +282,47 @@ body{
 }
 
 /*question view*/
-
+.question{
+  clear: both;  
+}
 .question .title{
   border-bottom: 1px solid black;
 }
+.question .question-table{
+  width: 100%;
 
-.question .content{
-	
+}
+.question .vote{		
+	text-align: center;
+	font-size: x-large;
+	width: 50px;	
+}
+.vote a{
+	text-decoration: none;	
+}
+
+.question .content{	
 	height: 15em;
-	
+	padding: 20px;	
+}
+.question .taglist{
+  margin-bottom:10px;  
+}
+.question .actions{
+	float: left;
+	margin-right: 10em;
+}
+.question .time{
+	float: left;
+	margin-right: 10px;
+}
+.question .owner{
+	float: right;
+	margin-right: 10px;
+}
+.question .comments{
+	 clear:both;
+	 margin-top: 20px;
 }
 
 
