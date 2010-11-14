@@ -4,9 +4,9 @@
 
 # Home page
 
-GET     /	  					                               Questions.list
-GET     /{orderby}                                   Questions.listByOrder
-GET     /{tag}                                       Questions.listByTag
+GET     /	  					                     Questions.list
+GET     /list/{orderby}                              Questions.listByOrder
+GET     /list/{tag}                                  Questions.listByTag
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete

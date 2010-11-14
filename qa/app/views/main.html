@@ -25,7 +25,15 @@
     		  | <a href="@{Secure.logout()}">logout</a>    		  
     	   #{/if}
     	   #{else}
-	    	  Please <a href="@{Secure.login()}">login</a>    	
+    	      #{form @Secure.authenticate(), id:'loginForm'}
+    	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
+    	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
+    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br> 
+    	      <button type='submit'>Login</button>
+    	      #{/form}
+    	      <!-- 
+	    	  Please <a href="@{Secure.login()}">login</a>
+	    	   -->    	
  	       #{/else}
  	     </div>
       </div><!-- end header -->

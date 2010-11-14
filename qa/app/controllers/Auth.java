@@ -8,7 +8,7 @@ import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaDB;
 
-@With(Secure.class)
+//@With(Secure.class)
 public class Auth extends Controller{
 
 	static User user;
