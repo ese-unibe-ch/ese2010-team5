@@ -6,11 +6,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pegdown.PegDownProcessor;
+
+import utils.QaMarkdown;
+
 /**
  * The abstract Class Post.
  */
-public abstract class Post{
-
+public abstract class Post implements IPost {
+	
 	/** The owner. */
 	protected IUser owner;
 	
@@ -25,12 +29,16 @@ public abstract class Post{
 	
 	/** The votes list. */
 	private LinkedList<Vote> votes;
-
+<<<<<<< HEAD
+	private List<Comment> comments = new LinkedList<Comment>();
+	
+=======
 	
 	/** The comments list. */
 	private List<Comment> comments = new LinkedList<Comment>();	
 
 	/** The id counter. */
+>>>>>>> 060c0f818ebb55c847884485e138033debbcd3e9
 	private static long idCounter = 1;
 	
 	/**
@@ -81,8 +89,9 @@ public abstract class Post{
 	 */
 	public String getContent() {
 		return this.content;
-	}
-
+	}	
+	
+	
 	/**
 	 * Gets the timestamp of the creation of the post.
 	 *
@@ -110,6 +119,7 @@ public abstract class Post{
 	
 	/**
 	 * Rates an entry with +1 when up is true, -1 otherwise.
+	 *
 	 * @param user - The User who rates the entry.
 	 * @param up the up
 	 */
@@ -178,13 +188,17 @@ public abstract class Post{
 	 * @param editedContent the new content
 	 */
 	public void setContent(String editedContent){
+<<<<<<< HEAD
+		content = editedContent;
+	}	
+=======
 		content = editedContent;	
 		
 		
 	}
 	
-}	
 	
 	
+>>>>>>> 060c0f818ebb55c847884485e138033debbcd3e9
 
-
+}

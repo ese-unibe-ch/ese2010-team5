@@ -40,11 +40,16 @@ function filter(tagstring){
 <div class="actions">
   <div>
    #{ if user}
+<<<<<<< HEAD
+   	<a href="@{Questions.create()}">Add Question</a>
+   	<a href="@{Posts.search()}">Search Text</a>
+=======
     <b>Sorted by ${sortOrder}</b> 
     Sort by: <a href="@{Questions.listByOrder('DATE')}">date</a> | <a href="@{Questions.listByOrder('RATING')}">rating</a><br/>    
     AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
     <br/>      
    	
+>>>>>>> 060c0f818ebb55c847884485e138033debbcd3e9
    #{/if}
    #{else}
      Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..

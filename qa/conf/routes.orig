@@ -3,9 +3,15 @@
 # ~~~~
 
 # Home page
+
+<<<<<<< HEAD
 GET     /	  					                     Questions.list
+GET 	/questions/list			                     Questions.list
+=======
+GET     /	  					                               Questions.list
 GET     /{orderby}                                   Questions.listByOrder
 GET     /{tag}                                       Questions.listByTag
+>>>>>>> 060c0f818ebb55c847884485e138033debbcd3e9
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/delete/{id}                       Questions.delete
