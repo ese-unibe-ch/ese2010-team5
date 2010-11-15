@@ -37,7 +37,6 @@ public class Comment extends Post{
 		return post;
 	}
 
-	
 	protected void doDelete() {
 				
 	}

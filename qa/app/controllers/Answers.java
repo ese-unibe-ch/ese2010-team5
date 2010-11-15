@@ -1,22 +1,22 @@
 package controllers;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import models.Answer;
-import models.Comment;
-import models.IQuestion;
-import models.Question;
-import models.User;
+import models.*;
 import play.Logger;
 import play.data.validation.Required;
 import utils.QaDB;
 
+/**
+ * The Class Answers.
+ */
 public class Answers extends Posts {
 	
-	
+	/**
+	 * Edits the answer.
+	 *
+	 * @param id the id
+	 */
 	public static void edit(long id){
 				
 		Answer a = QaDB.findAnswerById(id);		
@@ -29,6 +29,12 @@ public class Answers extends Posts {
 		
 	}
 	
+	/**
+	 * Sets the content.
+	 *
+	 * @param id the id
+	 * @param content the content
+	 */
 	public static void setContent(long id, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
@@ -46,6 +52,12 @@ public class Answers extends Posts {
 		
 	}
 	
+	/**
+	 * Adds a comment.
+	 *
+	 * @param comment the comment
+	 * @param aId the id
+	 */
 	public static void addComment(String comment, long aId){
 		
 		Answer a = QaDB.findAnswerById(aId);
@@ -65,6 +77,11 @@ public class Answers extends Posts {
 
 	}	
 	
+	/**
+	 * View the answer.
+	 *
+	 * @param id the id
+	 */
 	public static void view(long id){
 		Logger.debug("Show Answer: " +id);
 		

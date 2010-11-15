@@ -8,11 +8,17 @@ import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaDB;
 
-//@With(Secure.class)
+/**
+ * The Class Auth.
+ */
 public class Auth extends Controller{
 
+	/** The user. */
 	static User user;
 
+	/**
+	 * Sets the logged in user.
+	 */
 	@Before
 	static void setUser() {
 		if (Security.isConnected()) {

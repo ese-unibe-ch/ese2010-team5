@@ -1,12 +1,6 @@
 package models;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import play.Logger;
 
@@ -30,7 +24,7 @@ public class Question extends Post implements IQuestion {
 	/** The tags. */
 	private List<Tag> tags = new LinkedList<Tag>();
 	
-	/** Rendered content in html */
+	/** Rendered content in html. */
 	private String renderedContent;
 	
 
@@ -64,7 +58,7 @@ public class Question extends Post implements IQuestion {
 	/**
 	 * Tag with.
 	 *
-	 * @param tags the tags
+	 * @param tagString the tag string
 	 */
 	private void tagWith(String tagString) {
 		String delims = ", ";
@@ -91,61 +85,30 @@ public class Question extends Post implements IQuestion {
 		return this.tags;
 	}
 	
-
-
-	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#getAnswers()
-	 */
-	
 	public List<Answer> getAnswers() {
 		return this.answers;
 	}
 
-	/* (non-Javadoc)
-	 * @see models.IQuestion#addAnswer(models.Answer)
-	 */
-	
 	public void addAnswer(Answer newAnswer) {		
 		this.answers.add(newAnswer);		
 	}
-	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#getTitle()
-	 */
 	
 	public String getTitle(){
 		return title;
 	}
 	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#addSubscriber(models.User)
-	 */
-	
 	public void addSubscriber(IUser inUser){
 		subscribers.add(inUser);
 	}
-	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#getSubscribers()
-	 */
 	
 	public List<IUser> getSubscribers(){
 		return subscribers;
 	}
 	
-
-	/* (non-Javadoc)
-	 * @see models.IQuestion#setTitle(java.lang.String)
-	 */
-	
 	public void setTitle(String title) {
 		this.title = title;		
 	}
 	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#setContent(java.lang.String)
-	 */	
 	@Override
 	public void setContent(String editedContent){
 		super.setContent(editedContent);
@@ -156,17 +119,10 @@ public class Question extends Post implements IQuestion {
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#getContent()
-	 */
 	@Override
 	public String getContent(){
 		return renderedContent;
 	}
-	
-	/* (non-Javadoc)
-	 * @see models.IQuestion#getMarkdown()
-	 */
 	
 	public String getMarkdown(){
 		return content;
@@ -176,19 +132,11 @@ public class Question extends Post implements IQuestion {
 		/* do somthing when im getting deleted*/	  	  
 	}
 
-	/* (non-Javadoc)
-	 * @see models.IQuestion#setOwner(models.User)
-	 */
-	
 	public void setOwner(IUser user) {
 		this.owner = user;
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see models.IQuestion#isTaggedWith(models.Tag)
-	 */
-	
 	public boolean isTaggedWith(Tag tag) {
 		return this.tags.contains(tag);
 	}
@@ -201,10 +149,6 @@ public class Question extends Post implements IQuestion {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see models.IQuestion#isTaggedWith(models.Tag[])
-	 */
-	
 	public boolean isTaggedWith(Tag[] tags) {
 		for (Tag tag : tags){
 			if (!this.tags.contains(tag))

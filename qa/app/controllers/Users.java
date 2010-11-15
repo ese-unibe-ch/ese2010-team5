@@ -13,8 +13,16 @@ import models.IUser;
 import models.User;
 import utils.QaDB;
 
+/**
+ * The Class Users.
+ */
 public class Users extends Auth{
 
+	/**
+	 * Edits the user.
+	 *
+	 * @param username the username
+	 */
 	public static void edit(String username) {
 		Logger.debug("Edit user profile: " + username);
 		IUser u = QaDB.findUserByName(username);
@@ -25,6 +33,15 @@ public class Users extends Auth{
 		render(u);
 	}
 	
+	/**
+	 * Update profile.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param email the email
+	 * @param birthDate the birth date
+	 * @param homepage the homepage
+	 */
 	public static void updateProfile(long id, String name, String email, String birthDate, String homepage){
 		User user = QaDB.findUserById(id);
 		if (user == null)
@@ -46,6 +63,11 @@ public class Users extends Auth{
 		redirect("/users/edit/"+user.getName());
 	}
 	
+	/**
+	 * View the user.
+	 *
+	 * @param username the username
+	 */
 	public static void view(String username) {
 		Logger.debug("Show user profile: " + username);
 		User u = QaDB.findUserByName(username);
@@ -59,6 +81,11 @@ public class Users extends Auth{
 			render(u);
 	}
 	
+	/**
+	 * Delete the user.
+	 *
+	 * @param username the username
+	 */
 	public static void delete(String username){
 		User user = QaDB.findUserByName(username);
 		if(user == null){

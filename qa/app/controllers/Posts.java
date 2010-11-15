@@ -3,13 +3,19 @@ package controllers;
 import play.Logger;
 import utils.QaDB;
 import utils.QaMarkdown;
-import models.Answer;
-import models.Post;
-import models.Question;
+import models.*;
 
+/**
+ * The Class Posts.
+ */
 public class Posts extends Auth {
  
 	
+	/**
+	 * Markdown preview.
+	 *
+	 * @param input the input
+	 */
 	public static void markdownPreview(String input){
 		
 		if(input != null){
@@ -24,6 +30,12 @@ public class Posts extends Auth {
 	
 	
 	
+	/**
+	 * Rate the post.
+	 *
+	 * @param id the id
+	 * @param up the up
+	 */
 	public static void rate(long id, boolean up){
 		
 		Post post = QaDB.findPostById(id);
