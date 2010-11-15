@@ -71,6 +71,7 @@ public class Question extends Post implements IQuestion {
 			
 			if( t != null){
 				this.tags.add(t);
+				t.registerQuestion(this);
 			}
 			else{
 				t = QaDB.addTag(new Tag(tagName, this));
