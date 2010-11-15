@@ -54,5 +54,14 @@ public class Tag {
 	public Long getId() {
 		return id;
 	}
+	
+	public int count(){
+		return this.relatedQuestions.size();
+	}
+
+	public void registerQuestion(Question question) {
+		this.relatedQuestions.add(question);
+		
+	}
 
 }
