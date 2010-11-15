@@ -146,7 +146,16 @@ public class Question extends Post implements IQuestion {
 	protected void doDelete() {
 		/* do somthing when im getting deleted*/
 		/* maybe remove the answers*/
+		
+		deleteTags();
 	}
+
+	private void deleteTags() {
+		for(Tag tag : tags){
+			tag.unregisterQuestion(this);
+		}
+	}
+
 
 	public void setOwner(IUser user) {
 		this.owner = user;
