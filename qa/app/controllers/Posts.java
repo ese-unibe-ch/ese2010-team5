@@ -1,7 +1,6 @@
 package controllers;
 
 import play.Logger;
-import play.mvc.Http.Request;
 import utils.QaDB;
 import utils.QaMarkdown;
 import models.Answer;
@@ -43,22 +42,5 @@ public class Posts extends Auth {
 		renderText(post.getVotation());
 		
 	}	
-	
-	public static void delete(long id){
-		
-		Post p = QaDB.findPostById(id);
-		
-		if(p == null){
-			flash.error("could not find Question with id "+id);
-		}else{
-			if(QaDB.delPost(p))
-				flash.put("info","Question "+p.getId()+" deleted");
-			else
-				flash.put("error","Could not delete "+p.getId());
-		}			
-		Logger.debug("request url: %s", request.url);
-		Questions.listAll();		
-		
-	}
 	
 }                      

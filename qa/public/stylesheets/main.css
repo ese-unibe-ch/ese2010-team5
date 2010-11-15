@@ -282,47 +282,69 @@ body{
 }
 
 /*question view*/
-.question{
+#question{
   clear: both;  
 }
-.question .title{
+#question .title{
   border-bottom: 1px solid black;
 }
-.question .question-table{
+#question .question-table,.answer-table{
   width: 100%;
 
 }
-.question .vote{		
-	text-align: center;
-	font-size: x-large;
-	width: 50px;	
-}
-.vote a{
-	text-decoration: none;	
+
+#question .answer{
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 20px; 
 }
 
-.question .content{	
-	height: 15em;
-	padding: 20px;	
+#question .vote{		
+	text-align: center;
+	font-size: x-large;	
+	vertical-align:top;
+	padding-top:2em;
+	width:64px;	
 }
-.question .taglist{
+.vote .arrow_up,.arrow_down{
+	cursor: pointer;	
+	width:64px;
+	height:64px;	
+}
+.arrow_up{
+	background-image: url("/public/images/arrow_up.png");
+}
+.arrow_down{
+  background-image: url("/public/images/arrow_down.png");
+}
+
+
+#question .content{	
+	height: 15em;
+	padding: 20px;
+	font-size: large;	
+}
+#question .taglist{
   margin-bottom:10px;  
 }
-.question .actions{
+#question .actions{
 	float: left;
 	margin-right: 10em;
 }
-.question .time{
+#question .time{
 	float: left;
 	margin-right: 10px;
 }
-.question .owner{
+#question .owner{
 	float: right;
 	margin-right: 10px;
 }
-.question .comments{
-	 clear:both;
-	 margin-top: 20px;
+#question .comments{
+	clear:both;
+	margin-top: 20px;
+}
+.comments .comment{
+	border-bottom: 1px dashed black;
+  padding: 1em;    
 }
 
 

@@ -3,10 +3,7 @@
 
 <!-- some javascript funcions -->
 <script type="text/javascript" charset="utf-8">
-
-
-   function rateQuestion(questionId, up){ 
-    
+   function rateQuestion(questionId, up){     
     $.post( "@{Posts.rate()}"
         ,{id:questionId,up:up}
         ,function (data){
@@ -14,41 +11,38 @@
           $("#questionRating").html(data);
                 
         },"text/html"); 
-
-  }
-
+    }
 
    
-  function rateAnswer(answerId, up){ 
-        
-    $.post( "@{Posts.rate()}"
-        ,{id:answerId,up:up}
-        ,function (data){
-          //update rating                    
-          $("#answerRating-"+answerId).html(data);
-                
-        },"text/html"); 
+	  function rateAnswer(answerId, up){
+	        
+	    $.post( "@{Posts.rate()}"
+	        ,{id:answerId,up:up}
+	        ,function (data){
+	          //update rating                    
+	          $("#answerRating-"+answerId).html(data);
+	                
+	        },"text/html");
+	  }
 
-  }
-
-  function rateComment(commentId, up){
-  	$.post("@{Posts.rate()}"
+	  function rateComment(commentId, up){
+  	 $.post("@{Posts.rate()}"
   		  	,{id:commentId,up:up}
   		  	,function (data){
   	  		  	//update rating
   	  		  	$("#commentRating").html(data);
-		},"text/html");
-   }
+  	 },"text/html");
+    }
 </script>
 
-<div class="question">    
+<div id="question">    
 	<h1 class="title">${q.getTitle()}</h1>		
 	<table class="question-table">
 	<tr>
-	 <td class="vote">		
-		  <a href="#" onclick="rateQuestion(${q.getId()},true)">/\</a>
-		  <div id="questionScore">${q.getVotation()}</div> 
-      <a href="#" onclick="rateQuestion(${q.getId()},false)">\/</a>		
+	 <td class="vote">
+	   <div class="arrow_up" onclick="rateQuestion(${q.getId()},true)"></div>
+      <div id="questionRating">${q.getVotation()}</div>
+      <div class="arrow_down" onclick="rateQuestion(${q.getId()},false)"></div>
 	 </td>
 	 <td>		
 		  <div class="content">
@@ -79,34 +73,33 @@
               <input type="text" name="comment" id="comment"></input>              
               <a href="#" onclick="$('#newQuestionComment').submit()">add</a>
             #{/form}          
-        </div>
-        <div class="comment-list">
-	        #{list items:q.getComments(), as:'comment'}
-	          <div class="comment-list-item">        
-	            <div class="comment">${comment.getContent()} - by <span class="owner"></span>${comment.getOwner().getName()}<span class="timestamp"> Timestamp: ${comment.getTimestamp().format('dd.MM.yyyy hh:mm')}</span></div>      
-	            <div class="actions">
-	              #{if comment.ownPost()}
+        </div>        
+	       #{list items:q.getComments(), as:'comment'}
+	           <div class="comment">
+	            ${comment.getContent()}
+	            <br></br>by <span>${comment.getOwner().getName()}</span>
+	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
+	            #{if comment.ownPost()}
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
 	              #{/if}
 	            </div>
-	          </div>
-	        #{/list}
-        </div>
+	         
+	       #{/list}
       </div>
 	 </td>
 	</tr>	
-	</table>
-</div><!-- end question -->
+	</table>	
 <br></br>
 <div class="answers">
 	<h1 class="title">${q.getAnswers().size()} Answers</h1>
-	<table class="answers-table">
-	#{list items:q.getAnswers(), as:'answer'}	
-	 <tr>
-	   <td class="vote">    
-      <a href="#" onclick="rateAnswer(${answer.getId()},true)">/\</a>
-      <div id="answerRating-${answer.getId()}">${answer.getVotation()}</div> 
-      <a href="#" onclick="rateAnswer(${answer.getId()},false)">\/</a>
+	#{list items:q.getAnswers(), as:'answer'}
+	<div class="answer">	
+	 <table class="answer-table">
+	   <tr>
+	   <td class="vote">
+	    <div class="arrow_up" onclick="rateAnswer(${answer.getId()},true)"></div>
+      <div id="answerRating-${answer.getId()}">${answer.getVotation()}</div>
+      <div class="arrow_down" onclick="rateAnswer(${answer.getId()},false)"></div>
       #{if answer.isBest()}
          <img src="@{'/public/images/tick.png'}"></img>
       #{/if}   
@@ -133,41 +126,42 @@
         Owner: ${answer.getOwner().getName()}
       </div>
       <div style="clear:both;"></div>
+      <div style="clear:both;"></div>
       <div class="comments">
         <h3>Comments (${answer.getComments().size()})</h3>
         <div class="yourcomment">
             #{form @Answers.addComment(), id:'newAnswerComment' } 
               Your comment:
-              <input type="hidden" id="qId" name="qId" value="${answer.getId()}"></input>  
+              <input type="hidden" id="aId" name="aId" value="${answer.getId()}"></input>  
               <input type="text" name="comment" id="comment"></input>              
               <a href="#" onclick="$('#newAnswerComment').submit()">add</a>
             #{/form}          
-        </div>
-        <div class="comment-list">
-          #{list items:answer.getComments(), as:'comment'}
-            <div class="comment-list-item">        
-              <div class="comment">${comment.getContent()} - by <span class="owner"></span>${comment.getOwner().getName()}<span class="timestamp"> Timestamp: ${comment.getTimestamp().format('dd.MM.yyyy hh:mm')}</span></div>      
-              <div class="actions">
-                #{if comment.ownPost()}
+        </div>        
+         #{list items:answer.getComments(), as:'comment'}
+             <div class="comment">
+              ${comment.getContent()}
+              <br></br>by <span>${comment.getOwner().getName()}</span>
+              <span class="timestamp"> ${comment.getTimestamp().since()}</span>
+              #{if comment.ownPost()}
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
                 #{/if}
-              </div>
-            </div>
-          #{/list}
-        </div>
-      </div><!-- end comments -->	 
+              </div>           
+         #{/list}
+      </div><!-- end comments -->
 	 </td>	
 	 </tr>
-	#{/list}	
 	</table>
-</div><!-- end answers -->
-<div class="add-answer">
-	<h3>Your Answer</h3>
-	#{form @Questions.addAnswer(), id:'addAnswerForm' } 
-		<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
-		<textarea name="answer" cols="60" rows="10"></textarea>
-		<br></br>
-		<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
-	#{/form}
-</div>
+	</div><!-- end answer -->
+	#{/list}	
+  </div><!-- end answers -->
+	<div class="add-answer">
+		<h3>Your Answer</h3>
+		#{form @Questions.addAnswer(), id:'addAnswerForm' } 
+			<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
+			<textarea name="answer" cols="60" rows="10"></textarea>
+			<br></br>
+			<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
+		#{/form}
+	</div>
+</div><!-- end question -->
 	
