@@ -7,7 +7,7 @@
 <div class="list">
   #{list items:tags, as:'t'}
     #{set tagname:t.getName()/}
-    <div class="list-item tag">
+    <div class="tag">
       <span class="title"><a href="@{Questions.list(null,tagname)}">${t.getName()}</a></span>
     </div>
   #{/list}

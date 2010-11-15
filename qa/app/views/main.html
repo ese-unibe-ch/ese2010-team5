@@ -15,11 +15,11 @@
        <div id="logo">
         <a href="/">Q & A</a>
        </div>
-       <div id="nav">
-        <a href="@{Questions.list()}">Questions</a> | 
-        <a href="@{Tags.list()}">Tags</a> |
-        #{if user}
-          <a href="@{Questions.create()}">Ask Question</a>
+       <div id="nav">        
+         <a href="@{Questions.list()}">Questions</a>
+         <a href="@{Tags.list()}">Tags</a>
+        #{if user}          
+          <a class="last" href="@{Questions.create()}">Ask Question</a>          
         #{/if}          
        </div>    	
     	 <div id="loginbox">

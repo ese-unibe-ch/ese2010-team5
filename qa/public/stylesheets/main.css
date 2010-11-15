@@ -49,8 +49,28 @@ body{
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   width:800px;
   margin-left:auto;
-  margin-right:auto;  
+  margin-right:auto;
+  overflow: hidden;     
 }
+#nav a {
+	display:block;	
+	text-decoration: none;
+  padding: 10px;
+  border-right: 1px solid black;
+  font-size: large;
+  float: left;
+  color: black;  
+}
+#nav a.last {
+  float: right;
+  border: 0px;
+  border-left: 1px solid black;
+}
+
+#nav a:hover{
+  background-color: white;
+}
+
 
 #loginbox img {
   border:1px solid #FFFFFF;
@@ -348,43 +368,27 @@ body{
 }
 
 
-#tags .list-item.tag{
-	
+.tag{	
 	font-style: oblique;
 	background-image: url("/public/images/icon_small_tag.gif");
 	background-repeat: no-repeat;
 	background-position: left center;
 	border: none;
+	padding:5px;	
+}
+.tag .title{
+	padding-left: 5px;
 }
 
-#tags a{
+.tag a{
 	padding-left: 2px;
 	font-size: 12px;
 	font-weight: bold;
-	text-decoration: none;
-	
-}
-	
-#tags a:hover{
+	text-decoration: none;	
+}	
+.tag a:hover{
 	text-decoration: none;
 	color: #FFFFFF;
 	background-color: blue;
 }
 
-.navigation{
-	margin-top: 5px;
-	margin-bottom: 5px;
-	background-color: blue;
-	padding: 2px;
-}
-
-.navigation-item a{
-	text-decoration: none;
-	color: white;
-}
-
-.navigation-item a:hover{
-	text-decoration: none;
-	color: #000000;
-	background-color: white;
-}
