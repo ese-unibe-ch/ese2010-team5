@@ -108,9 +108,17 @@ public class Questions extends Posts {
 
 	}
 
-	public static void save(String content, String title, String tags){
+	public static void save(String content, String title, String tags, String[] tag){
 		
-		Logger.debug("Create Question with content: "+content);	
+		Logger.debug("Create Question with content: "+content);
+		
+		StringBuffer tagStr = new StringBuffer();
+		int arrL = tag.length;
+		for (int j = 0; j < arrL; j++){
+			tagStr.append(tag[j]);
+			tagStr.append(", ");
+		}
+		tags = tagStr.toString();
 		 		
 		Question q = QaDB.addQuestion(new Question(user, title, content, tags));	
 		
