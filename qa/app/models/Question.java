@@ -6,6 +6,8 @@ import play.Logger;
 
 import utils.QaDB;
 import utils.QaMarkdown;
+import utils.QaSorter;
+import utils.QaDB.OrderBy;
 
 /**
  * The Class Question.
@@ -86,7 +88,11 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	public List<Answer> getAnswers() {
-		return this.answers;
+		
+		/*sort them by date*/
+		Collections.sort(answers, new QaSorter(OrderBy.DATE));
+		
+		return answers;
 	}
 
 	public void addAnswer(Answer newAnswer) {		
