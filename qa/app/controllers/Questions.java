@@ -18,6 +18,7 @@ import models.Tag;
 import models.User;
 
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaDB;
@@ -117,7 +118,17 @@ public class Questions extends Posts {
 	 * @param tags the tags
 	 * @param tag the tag
 	 */
-	public static void save(String content, String title, String tags, String[] tag){
+	public static void save(String content, String title, String[] tag){
+		
+		validation.required(title);
+		validation.required(content);
+		validation.required(tag);
+		
+		if (validation.hasErrors()){
+			 params.flash(); // add http parameters to the flash scope
+	         validation.keep(); // keep the errors for the next request
+	         create();
+		}
 		
 		Logger.debug("Create Question with content: "+content);
 		
@@ -127,7 +138,7 @@ public class Questions extends Posts {
 			tagStr.append(tag[j]);
 			tagStr.append(", ");
 		}
-		tags = tagStr.toString();
+		String tags = tagStr.toString();
 		 		
 		Question q = QaDB.addQuestion(new Question(user, title, content, tags));	
 		

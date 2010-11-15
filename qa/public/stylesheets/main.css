@@ -400,3 +400,18 @@ body{
 	border-right:1px solid #37607D;
 	text-decoration:none;
 }
+
+.error{
+	color: red;
+}
+
+.errors{
+	border: 2px solid red;
+	padding: 2px;
+	color: red;
+
+}
+
+.errors li{
+	list-style: none;
+}
