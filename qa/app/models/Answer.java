@@ -71,6 +71,11 @@ public class Answer extends Post {
 		/* do somthing when im getting deleted*/	  
 	}
 
+	/**
+	 * Sets the owner.
+	 *
+	 * @param user the new owner
+	 */
 	public void setOwner(IUser user) {
 		this.owner = user;
 		

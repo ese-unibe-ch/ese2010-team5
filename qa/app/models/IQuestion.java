@@ -2,6 +2,9 @@ package models;
 
 import java.util.List;
 
+/**
+ * The Interface IQuestion.
+ */
 public interface IQuestion {
 
 	/**
@@ -54,22 +57,62 @@ public interface IQuestion {
 	public abstract void setTitle(String title);
 
 	/**
-	 * override set content from post
+	 * override content of the question.
+	 *
+	 * @param editedContent the new content
 	 */
 	public abstract void setContent(String editedContent);
 
+	/**
+	 * Gets the content.
+	 *
+	 * @return the content
+	 */
 	public abstract String getContent();
 
+	/**
+	 * Gets the markdown parsed content.
+	 *
+	 * @return the markdown string
+	 */
 	public abstract String getMarkdown();
 
+	/**
+	 * Sets the owner.
+	 *
+	 * @param user the new owner
+	 */
 	public abstract void setOwner(IUser user);
 
+	/**
+	 * Checks if is tagged with.
+	 *
+	 * @param tag the tag
+	 * @return true, if is tagged with the tag
+	 */
 	public abstract boolean isTaggedWith(Tag tag);
 	
+	/**
+	 * Checks if is tagged with.
+	 *
+	 * @param tagString the tag string
+	 * @return true, if is tagged with
+	 */
 	public abstract boolean isTaggedWith(String tagString);
 
+	/**
+	 * Checks if is tagged with.
+	 *
+	 * @param tags a list of tags
+	 * @return true, if is tagged with all the tags in the list
+	 */
 	public abstract boolean isTaggedWith(Tag[] tags);
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public abstract long getId();
 
 }

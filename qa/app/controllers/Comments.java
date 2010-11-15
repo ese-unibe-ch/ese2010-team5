@@ -1,25 +1,24 @@
 package controllers;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import models.Answer;
-import models.Comment;
-import models.IQuestion;
-import models.Post;
-import models.Question;
-import models.User;
-
+import models.*;
 
 import play.Logger;
 import play.data.validation.Required;
 import utils.QaDB;
 
+/**
+ * The Class Comments.
+ */
 public class Comments extends Posts {
 	
 	
+	/**
+	 * Edits the comment.
+	 *
+	 * @param id the id
+	 */
 	public static void edit(long id){
 				
 		Comment c = QaDB.findCommentById(id);
@@ -33,6 +32,12 @@ public class Comments extends Posts {
 		
 	}
 	
+	/**
+	 * Sets the content.
+	 *
+	 * @param id the id
+	 * @param content the content
+	 */
 	public static void setContent(long id, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		

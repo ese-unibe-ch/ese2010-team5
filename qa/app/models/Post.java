@@ -1,10 +1,6 @@
 package models;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.pegdown.PegDownProcessor;
 
@@ -40,7 +36,7 @@ public abstract class Post{
 	/**
 	 * Instantiates a new post.
 	 *
-	 * @param inUser the in user that created the post
+	 * @param inUser the user that created the post
 	 * @param inContent the content of the post
 	 */
 	protected Post(IUser inUser, String inContent){
@@ -80,7 +76,7 @@ public abstract class Post{
 	}
 	
 	/**
-	 * Return the content
+	 * Return the content.
 	 *
 	 * @return the content
 	 */
@@ -117,8 +113,8 @@ public abstract class Post{
 	/**
 	 * Rates an entry with +1 when up is true, -1 otherwise.
 	 *
-	 * @param user - The User who rates the entry.
-	 * @param up the up
+	 * @param user the User who rates the entry.
+	 * @param up the rate value
 	 */
 	private void rate(IUser user, boolean up) {
 		
@@ -146,8 +142,7 @@ public abstract class Post{
 	/**
 	 * Rates an entry with +1.
 	 * 
-	 * @param user
-	 *            - The user who rates the entry.
+	 * @param user The user who rates the entry.
 	 */
 	public void rateUp(IUser user) {
 		rate(user,true);
@@ -156,8 +151,7 @@ public abstract class Post{
 	/**
 	 * Rates an entry with -1.
 	 * 
-	 * @param user
-	 *            - The user who rates the entry.
+	 * @param user The user who rates the entry.
 	 */
 	public void rateDown(IUser user) {
 		rate(user,false);
@@ -166,7 +160,7 @@ public abstract class Post{
 	/**
 	 * Calculates the average mark for the entry.
 	 *
-	 * @return the votation
+	 * @return the count of the votes
 	 */
 	public int getVotation() {		
 		
@@ -190,11 +184,17 @@ public abstract class Post{
 		
 	}
 
+	/**
+	 * Unregister a user from the post.
+	 */
 	public void unregister() {
 		((User)this.owner).unregister(this);
 		removeFromDB();
 	}
 	
+	/**
+	 * Removes the post from db.
+	 */
 	private void removeFromDB(){
 		System.out.println("DB Remove");
 		if (this.getClass() == Question.class){

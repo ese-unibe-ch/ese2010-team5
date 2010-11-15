@@ -1,6 +1,7 @@
 package team5customtests;
 
 import models.*;
+import models.mock.MockUser;
 
 import org.junit.Before;
 import org.junit.Test;

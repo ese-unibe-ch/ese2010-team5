@@ -3,6 +3,7 @@ import java.util.*;
 import play.test.*;
 import utils.QaDB;
 import models.*;
+import models.mock.MockUser;
 
 public class ModelTest extends UnitTest {
 

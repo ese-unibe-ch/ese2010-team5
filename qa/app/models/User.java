@@ -1,14 +1,6 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 import utils.QaDB;
 
@@ -36,7 +28,7 @@ public class User implements IUser {
 	/** The notifications. */
 	private List<INotification> notifications;
 	
-	/** The posts list */
+	/** The posts list. */
 	private List<Post> posts;
 	
 	/** The id counter. */
@@ -94,7 +86,7 @@ public class User implements IUser {
 	/**
 	 * Sets the email.
 	 *
-	 * @param email the new email
+	 * @param email the new email address
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -149,7 +141,7 @@ public class User implements IUser {
 	/**
 	 * Adds the notification.
 	 *
-	 * @param n the n
+	 * @param n the notification
 	 */
 	public void addNotification(INotification n){
 		notifications.add(n);
@@ -185,6 +177,9 @@ public class User implements IUser {
 		QaDB.removeUser(this);
 	}
 
+	/**
+	 * Assign questions to anonymous.
+	 */
 	private void assignQuestionsToAnonymous() {
 		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(this);
 		// list is empty, why?
@@ -194,6 +189,9 @@ public class User implements IUser {
 		
 	}
 	
+	/**
+	 * Delete answers.
+	 */
 	private void deleteAnswers(){
 		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
 		// list is empty, why?
@@ -208,6 +206,11 @@ public class User implements IUser {
 		
 	}
 
+	/**
+	 * Unregister from a post.
+	 *
+	 * @param post the post
+	 */
 	public void unregister(Post post) {
 		this.posts.remove(post);
 	}

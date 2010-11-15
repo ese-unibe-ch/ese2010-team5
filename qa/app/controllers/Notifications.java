@@ -7,9 +7,15 @@ import models.Notification;
 
 import utils.QaDB;
 
+/**
+ * The Class Notifications.
+ */
 public class Notifications extends Auth{
 
 	
+	/**
+	 * List the notifications.
+	 */
 	public static void list(){
 		
 		List<INotification> notifications = user.getNotifications();
