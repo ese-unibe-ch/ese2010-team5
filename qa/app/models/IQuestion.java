@@ -27,6 +27,13 @@ public interface IQuestion {
 	 * @param newAnswer the new answer
 	 */
 	public abstract void addAnswer(Answer newAnswer);
+	
+	/**
+	 * Remove a  answer.
+	 *
+	 * @param newAnswer the new answer
+	 */
+	public boolean delAnswer(Answer newAnswer);
 
 	/**
 	 * Gets the title.

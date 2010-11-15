@@ -71,6 +71,7 @@ public class Question extends Post implements IQuestion {
 			
 			if( t != null){
 				this.tags.add(t);
+				t.registerQuestion(this);
 			}
 			else{
 				t = QaDB.addTag(new Tag(tagName, this));
@@ -90,6 +91,15 @@ public class Question extends Post implements IQuestion {
 
 	public void addAnswer(Answer newAnswer) {		
 		this.answers.add(newAnswer);		
+	}
+	
+	public boolean delAnswer(Answer newAnswer) {
+		if(answers != null){
+			return answers.remove(newAnswer);
+		}
+		
+		return false;
+				
 	}
 	
 	public String getTitle(){
@@ -128,7 +138,8 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	protected void doDelete() {
-		/* do somthing when im getting deleted*/	  	  
+		/* do somthing when im getting deleted*/
+		/* maybe remove the answers*/
 	}
 
 	public void setOwner(IUser user) {

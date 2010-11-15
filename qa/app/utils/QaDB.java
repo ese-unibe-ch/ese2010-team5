@@ -69,9 +69,15 @@ public class QaDB {
 
 		if (inPost == null)
 			return false;
+		
+		/*Answers has to remove themself from the list hold by the question*/
+		/*same for comments*/
+		inPost.delete();
 
 		if (questions.containsKey(inPost.getId()))
 			return questions.remove(inPost.getId()) != null;
+		if (comments.containsKey(inPost.getId()))
+			return comments.remove(inPost.getId()) != null;
 
 		return answers.remove(inPost.getId()) != null;
 	}

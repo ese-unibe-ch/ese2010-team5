@@ -67,8 +67,9 @@ public class Answer extends Post {
 	}
 	
 	
-	protected void doDelete() {	  
-		/* do somthing when im getting deleted*/	  
+	protected void doDelete() {
+		/*remove me from question*/
+		question.delAnswer(this);
 	}
 
 	/**

@@ -48,9 +48,12 @@
 		  <div class="content">
         ${q.getContent().raw()}
       </div>
-      <div class="taglist">
-        ${q.getTags()}
-      </div>
+      <div class="tags">
+          Tags: 
+          #{list items:q.getTags(), as:'tag'}
+          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+      	  #{/list}
+      </div>      
       <div class="actions">      
         #{if q.ownPost()}
         <a href="@{Questions.delete(q.getId())}">delete</a>
@@ -66,25 +69,30 @@
 		  <div style="clear:both;"></div>
 		  <div class="comments">
         <h3>Comments (${q.getComments().size()})</h3>
-        <div class="yourcomment">
-            #{form @Questions.addComment(), id:'newQuestionComment' } 
-		          Your comment:
-              <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  
-              <input type="text" name="comment" id="comment"></input>              
-              <a href="#" onclick="$('#newQuestionComment').submit()">add</a>
-            #{/form}          
-        </div>        
+            
 	       #{list items:q.getComments(), as:'comment'}
 	           <div class="comment">
 	            ${comment.getContent()}
 	            <br></br>by <span>${comment.getOwner().getName()}</span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
+	               <a href="@{Comments.delete(comment.getId())}">delete</a>
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
 	              #{/if}
 	            </div>
 	         
 	       #{/list}
+	       <br></br>
+	        #{if user}  
+       		<div class="yourcomment">
+            #{form @Questions.addComment(), id:'newQuestionComment' } 
+		          Your comment:
+              <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  
+              <input type="text" name="comment" id="comment"></input>              
+              <a href="#" onclick="$('#newQuestionComment').submit()">add</a>
+            #{/form}          
+        </div>
+        #{/if}
       </div>
 	 </td>
 	</tr>	
@@ -110,8 +118,8 @@
       </div>      
       <div class="actions">      
         #{if answer.ownPost()}
-        <a href="@{Questions.delete(answer.getId())}">delete</a> | 
-        <a href="@{Questions.edit(answer.getId())}">edit</a>        
+        <a href="@{Answers.delete(answer.getId())}">delete</a> | 
+        <a href="@{Answers.edit(answer.getId())}">edit</a>        
         #{/if}
         #{if q.ownPost()}            
             | <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 
@@ -129,14 +137,6 @@
       <div style="clear:both;"></div>
       <div class="comments">
         <h3>Comments (${answer.getComments().size()})</h3>
-        <div class="yourcomment">
-            #{form @Answers.addComment(), id:'newAnswerComment' } 
-              Your comment:
-              <input type="hidden" id="aId" name="aId" value="${answer.getId()}"></input>  
-              <input type="text" name="comment" id="comment"></input>              
-              <a href="#" onclick="$('#newAnswerComment').submit()">add</a>
-            #{/form}          
-        </div>        
          #{list items:answer.getComments(), as:'comment'}
              <div class="comment">
               ${comment.getContent()}
@@ -144,9 +144,20 @@
               <span class="timestamp"> ${comment.getTimestamp().since()}</span>
               #{if comment.ownPost()}
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
-                #{/if}
-              </div>           
+              #{/if}
+             </div>           
          #{/list}
+         <br></br>
+         #{if user}
+        <div class="yourcomment">
+            #{form @Answers.addComment(), id:'newAnswerComment' } 
+              Your comment:
+              <input type="hidden" id="aId" name="aId" value="${answer.getId()}"></input>  
+              <input type="text" name="comment" id="comment"></input>              
+              <a href="#" onclick="$('#newAnswerComment').submit()">add</a>
+            #{/form}          
+        </div>    
+        #{/if}    
       </div><!-- end comments -->
 	 </td>	
 	 </tr>

@@ -58,6 +58,19 @@ public abstract class Post{
 	}
 	
 	/**
+	 * Del a comment .
+	 *
+	 * @param comment the comment
+	 */
+	public boolean delComment(Comment comment){
+		if(comments != null && comment != null){
+			return comments.remove(comment);
+		}
+		return false;
+		
+	}
+	
+	/**
 	 * Gets the comments made to the post.
 	 *
 	 * @return the comments
@@ -103,10 +116,13 @@ public abstract class Post{
 		return id;
 	}
 	
+	public void delete(){
+		doDelete();
+	}
+	
 	/**
 	 * The delete method.
 	 */	
-	
 	protected abstract void doDelete();
 	
 	
