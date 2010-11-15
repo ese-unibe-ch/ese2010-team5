@@ -23,6 +23,18 @@ body{
 	position: relative;
 	padding: 10px;
 }
+#header #logo{
+	width: 100px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+#logo a{
+	text-decoration: none;
+	font-size: xx-large;
+	color: white;
+}
+
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
 #header #loginbox{
