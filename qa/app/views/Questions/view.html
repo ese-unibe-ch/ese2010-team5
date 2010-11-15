@@ -76,7 +76,7 @@
 	            <br></br>by <span>${comment.getOwner().getName()}</span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
-	               <a href="@{Comments.delete(comment.getId())}">delete</a>
+	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
 	              #{/if}
 	            </div>
@@ -143,6 +143,7 @@
               <br></br>by <span>${comment.getOwner().getName()}</span>
               <span class="timestamp"> ${comment.getTimestamp().since()}</span>
               #{if comment.ownPost()}
+                  <a href="@{Comments.delete(comment.getId())}">delete</a> |
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
               #{/if}
              </div>           
