@@ -32,6 +32,9 @@ public class MockQuestion extends Post implements IQuestion{
 	public void addAnswer(Answer newAnswer) {
 		
 	}
+	public boolean delAnswer(Answer newAnswer) {
+		return true;
+	}
 
 	
 	public String getTitle() {

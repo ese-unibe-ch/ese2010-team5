@@ -77,27 +77,7 @@ public class Questions extends Posts {
 			
 	}
 	
-	/**
-	 * Delete the question.
-	 *
-	 * @param id the id
-	 */
-	public static void delete(long id){
-		
-		Post p = QaDB.findPostById(id);
-		
-		if(p == null){
-			flash.error("could not find Question with id "+id);
-		}else{
-			if(QaDB.delPost(p))
-				flash.put("info","Question "+p.getId()+" deleted");
-			else
-				flash.put("error","Could not delete "+p.getId());
-		}			
-		
-		listAll();		
-		
-	}
+	
 	
 	/**
 	 * Mark best answer.

@@ -76,6 +76,7 @@
 	            <br></br>by <span>${comment.getOwner().getName()}</span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
+	               <a href="@{Comments.delete(comment.getId())}">delete</a>
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
 	              #{/if}
 	            </div>
@@ -117,8 +118,8 @@
       </div>      
       <div class="actions">      
         #{if answer.ownPost()}
-        <a href="@{Questions.delete(answer.getId())}">delete</a> | 
-        <a href="@{Questions.edit(answer.getId())}">edit</a>        
+        <a href="@{Answers.delete(answer.getId())}">delete</a> | 
+        <a href="@{Answers.edit(answer.getId())}">edit</a>        
         #{/if}
         #{if q.ownPost()}            
             | <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 

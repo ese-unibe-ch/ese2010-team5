@@ -93,6 +93,15 @@ public class Question extends Post implements IQuestion {
 		this.answers.add(newAnswer);		
 	}
 	
+	public boolean delAnswer(Answer newAnswer) {
+		if(answers != null){
+			return answers.remove(newAnswer);
+		}
+		
+		return false;
+				
+	}
+	
 	public String getTitle(){
 		return title;
 	}
@@ -129,7 +138,8 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	protected void doDelete() {
-		/* do somthing when im getting deleted*/	  	  
+		/* do somthing when im getting deleted*/
+		/* maybe remove the answers*/
 	}
 
 	public void setOwner(IUser user) {
