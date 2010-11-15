@@ -48,9 +48,12 @@
 		  <div class="content">
         ${q.getContent().raw()}
       </div>
-      <div class="taglist">
-        ${q.getTags()}
-      </div>
+      <div class="tags">
+          Tags: 
+          #{list items:q.getTags(), as:'tag'}
+          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+      	  #{/list}
+      </div>      
       <div class="actions">      
         #{if q.ownPost()}
         <a href="@{Questions.delete(q.getId())}">delete</a>

@@ -69,7 +69,10 @@ function filter(tagstring){
         <div class="summary">
           <h3><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></h3>
           <span class="tags">
-            <span>Tags: ${q.getTags()}</span>
+          Tags: 
+          #{list items:q.getTags(), as:'tag'}
+          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+      	  #{/list}
           </span>
           <div class="started">
             <span>${q.getTimestamp().since()}</span>          
