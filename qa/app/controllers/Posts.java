@@ -41,7 +41,10 @@ public class Posts extends Auth {
 		Header refererHeader = request.headers.get("referer");
 		String referer = "/"; /*fallback*/
 		
-		if(refererHeader != null){
+		if(p instanceof Question && refererHeader != null){
+			referer = "/";
+		}
+		else if (refererHeader != null) {
 			referer = refererHeader.value();
 		}
 		
