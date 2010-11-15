@@ -1,6 +1,7 @@
 package controllers;
 
 import play.Logger;
+import play.mvc.Http.Header;
 import utils.QaDB;
 import utils.QaMarkdown;
 import models.*;
@@ -24,6 +25,37 @@ public class Posts extends Auth {
 		}else{
 			renderText("input is null");
 		}
+		
+		
+	}
+	
+	/**
+	 * Delete a post.
+	 * Redirect to referer
+	 * 
+	 * @param id the id
+	 */
+	public static void delete(long id){
+		
+		Post p = QaDB.findPostById(id);
+		Header refererHeader = request.headers.get("referer");
+		String referer = "/"; /*fallback*/
+		
+		if(refererHeader != null){
+			referer = refererHeader.value();
+		}
+		
+		if(p == null){
+			flash.error("could not find Post with id "+id);			
+		}else{
+			if(QaDB.delPost(p))
+				flash.put("info","Post "+p.getId()+" deleted");
+			else
+				flash.put("error","Could not delete "+p.getId());
+		}			
+		
+		
+		redirect(referer);
 		
 		
 	}

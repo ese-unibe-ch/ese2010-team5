@@ -11,11 +11,15 @@ GET     /questions/list/{sort}                       Questions.list
 GET     /questions/list/                             Questions.list
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
-GET     /questions/delete/{id}                       Questions.delete
 GET     /questions/edit/{id}                         Questions.edit
 GET     /questions/create                            Questions.create
+GET     /questions/delete/{id}                       Questions.delete
 GET	    /questions/{id}   			                     Questions.view
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
+GET     /answers/edit/{id}                           Answers.edit
+GET     /answers/delete/{id}                         Answers.delete
+GET     /comments/edit/{id}                          Comments.edit
+GET     /comments/delete/{id}                        Comments.delete
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list

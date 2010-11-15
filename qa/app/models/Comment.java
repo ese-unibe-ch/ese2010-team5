@@ -38,7 +38,8 @@ public class Comment extends Post{
 	}
 
 	protected void doDelete() {
-				
+			/*remove me from my post(answer or question)*/
+			post.delComment(this);
 	}
     
 }
