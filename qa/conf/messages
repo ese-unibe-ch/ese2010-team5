@@ -3,3 +3,5 @@
 #
 
 notif.NEW_ANSWER=%s added an answer to <a href='%s'>%s</a> 
+
+validation.required=A %s is required

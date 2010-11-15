@@ -1,11 +1,22 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+#{ifErrors}
+   <div class="errors">
+   <h1>Oops... Couldn't create question</h1>
+ 
+   #{errors}
+       <li>${error}</li>
+   #{/errors}
+   </div>
+#{/ifErrors}
+
 <div id="create-question-form">
 #{form @Questions.save(),id:'questionForm'}
 	<h1>Create question:</h1>	
-	<h3>Title:</h3><input type="text" name="title"></input><br></br>
-	<h3>Content:</h3><br></br>
+	<h3>Title:</h3><input type="text" name="title" value="${flash.title}"></input><span class="error"> #{error 'title' /}</span><br></br>
+	
+	<h3>Content:</h3>
 	<div class="text-editor">	 
 	 <div class="tabs">
 	   <span onclick="teTab($(this));">write</span> | <span onclick="teTab($(this));">preview</span>
@@ -15,7 +26,7 @@
 	 </div>
 	 <div class="tab-write">
 	   <div class="body">         
-	     <textarea name="content" tabindex="1"></textarea>
+	     <textarea name="content" tabindex="1">${flash.content}</textarea>
 	   </div>
 	 </div>
 	 <div class="tab-preview">
@@ -23,10 +34,14 @@
 	   </div>	   
 	 </div>
 	</div>
+	<span class="error">#{error 'content' /}</span>
+	<div class="tags">
 	<h3>Tags:</h3>
     <input type="checkbox" name="tag" value="html"> HTML 
     <input type="checkbox" name="tag" value="java"> Java 
     <input type="checkbox" name="tag" value="playframework"> Play! Framework
+    <div class="error">#{error 'tag' /}</div>
+    </div>
     <br></br>
 	<button class="x-large"  onclick="$('#questionForm').submit();">Create</button>
 #{/form}
