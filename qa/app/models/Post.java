@@ -28,7 +28,7 @@ public abstract class Post{
 	private LinkedList<Vote> votes;
 	
 	/** The comments list. */
-	private List<Comment> comments = new LinkedList<Comment>();	
+	private List<IComment> comments = new LinkedList<IComment>();	
 
 	/** The id counter. */
 	private static long idCounter = 1;
@@ -53,7 +53,7 @@ public abstract class Post{
 	 *
 	 * @param comment the comment
 	 */
-	public void addComment(Comment comment){
+	public void addComment(IComment comment){
 		this.comments.add(comment);
 	}
 	
@@ -75,7 +75,7 @@ public abstract class Post{
 	 *
 	 * @return the comments
 	 */
-	public List<Comment> getComments(){
+	public List<IComment> getComments(){
 		return comments;
 	}
 	
@@ -223,7 +223,7 @@ public abstract class Post{
 				System.out.println("Answer");
 			}
 			else{
-				QaDB.removeComment((Comment)this);
+				QaDB.removeComment((IComment)this);
 				System.out.println("Comment");
 			}
 		}

@@ -21,7 +21,7 @@ public class Comments extends Posts {
 	 */
 	public static void edit(long id){
 				
-		Comment c = QaDB.findCommentById(id);
+		IComment c = QaDB.findCommentById(id);
 		
 		if(c == null){
 			flash("error", "could not find Comment with id "+id);
