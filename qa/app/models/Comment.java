@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * The Class Comment.
  */
-public class Comment extends Post{
+public class Comment extends Post implements IComment{
 	
 	/** The comment belongs to a Post (either a Question or an Answer). */
 	private Post post;

@@ -233,7 +233,7 @@ public class QaDB {
 
 	}
 
-	public static void removeComment(Comment comment) {
+	public static void removeComment(IComment comment) {
 		comments.remove(comment);
 	}
 

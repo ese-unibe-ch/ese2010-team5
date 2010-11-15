@@ -9,6 +9,7 @@ import java.util.List;
 import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
+import utils.QaDB;
 import models.*;
 import models.mock.MockNotification;
 import models.mock.MockQuestion;
@@ -48,6 +49,7 @@ public class UserTest extends UnitTest{
 		assertEquals(use.getNotifications(),notifications);
 	}
 	
+
 	@Test
 	public void shouldProperlyRegisterandUnregister(){
 		use.registerPost((Post) quest1);

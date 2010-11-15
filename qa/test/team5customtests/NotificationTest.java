@@ -11,11 +11,12 @@ import models.mock.MockUser;
 
 import org.junit.Before;
 import org.junit.*;
+import java.security.InvalidParameterException;
 
 public class NotificationTest  extends UnitTest{
 	IUser use;
 	IQuestion quest;
-	Notification notify;
+	Notification notify,notify2;
 	Notification.Type type;
 		
 
@@ -24,6 +25,21 @@ public class NotificationTest  extends UnitTest{
 		use = new MockUser("Hans");
 		quest = new MockQuestion(use,"JunitQuestion");
 		notify = new Notification(use,quest,type.NEW_ANSWER);
+	}
+	
+	@Test (expected=InvalidParameterException.class)
+	public void shouldReturnErrorOnNULLUser(){
+		notify2 = new Notification(null,quest,type.NEW_ANSWER);
+	}
+	
+	@Test (expected=InvalidParameterException.class)
+	public void shouldReturnErrorOnNULLQuestion(){
+		notify2 = new Notification(use,null,type.NEW_ANSWER);
+	}
+	
+	@Test (expected=InvalidParameterException.class)
+	public void shouldReturnErrorOnNULLType(){
+		notify2 = new Notification(use,quest,null);
 	}
 	
 	@Test
