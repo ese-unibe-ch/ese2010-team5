@@ -1,8 +1,7 @@
 package controllers;
 
 import java.util.Collection;
-
-import edu.emory.mathcs.backport.java.util.LinkedList;
+import java.util.LinkedList;
 
 import models.INotification;
 import models.impl.Notification;
