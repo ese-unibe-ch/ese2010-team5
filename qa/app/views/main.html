@@ -57,7 +57,18 @@
       <div id="content">
          <!-- left box for notifications -->
         <div id="notif-box">
-          <p>gugu</p>
+        #{list items:notifications, as:'n'}
+			    #{set q:n.getQuestion()/}    
+			     <div class="notification ${n.isRead()?'read':'unread'}">			       
+			       <div class="title">
+			      &{'notif.'+n.getType(),
+			        actionBridge.Users.view(n.getOriginator().getId()),
+			        n.getOriginator().getName(),
+			        actionBridge.Questions.view(q.getId()),
+			        q.getTitle()
+			        }</div>			  
+			    </div>
+			  #{/list}
         </div>
         <div id="main">
           <div style="clear:both;"></div>

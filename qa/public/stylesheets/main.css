@@ -261,15 +261,23 @@ body{
 }
 
 /* notificatins*/
-#notifications .list-item{
-  padding-left: 30px;
+#notifications{
+	  
+}
+.notification{
+  border-bottom: 1px dashed black;
 }
 
-#notifications .list-item.read{  
+.notification .title{
+  padding: 1em;
+  margin-left: 1em; 
+}
+
+.notification.read{  
   background:url("/public/images/read_message.png") no-repeat scroll 0.5em 1em transparent;
   
 }
-#notifications .list-item.unread{
+.notification.unread{
   background:url("/public/images/message.png") no-repeat scroll 0.5em 1em transparent;
   background-color: #EAF2F5;
   

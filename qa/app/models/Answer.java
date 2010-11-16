@@ -30,8 +30,7 @@ public class Answer extends Post {
 	public Answer(IUser owner, String content, IQuestion inQuestion) {
 		super(owner,content);
 		this.question = inQuestion;
-		question.addAnswer(this);
-		QaDB.addAnswer(this);
+		question.addAnswer(this);		
 	}	
 	
 	/**
