@@ -40,9 +40,9 @@
 	<table class="question-table">
 	<tr>
 	 <td class="vote">
-	   <div class="arrow_up" onclick="rateQuestion(${q.getId()},true)"></div>
+	   <div class="arrow_up" onclick="rateQuestion(${q.getId()},true)" title="Vote up"></div>
       <div id="questionRating">${q.getVotation()}</div>
-      <div class="arrow_down" onclick="rateQuestion(${q.getId()},false)"></div>
+      <div class="arrow_down" onclick="rateQuestion(${q.getId()},false)" title="Vote down"></div>
 	 </td>
 	 <td>		
 		  <div class="content">
@@ -105,11 +105,11 @@
 	 <table class="answer-table">
 	   <tr>
 	   <td class="vote">
-	    <div class="arrow_up" onclick="rateAnswer(${answer.getId()},true)"></div>
+	    <div class="arrow_up" onclick="rateAnswer(${answer.getId()},true)" title="Vote up"></div>
       <div id="answerRating-${answer.getId()}">${answer.getVotation()}</div>
-      <div class="arrow_down" onclick="rateAnswer(${answer.getId()},false)"></div>
+      <div class="arrow_down" onclick="rateAnswer(${answer.getId()},false)" title="Vote down"></div>
       #{if answer.isBest()}
-         <img src="@{'/public/images/tick.png'}"></img>
+         <img src="@{'/public/images/tick.png'}" title="Marked ad best answer"></img>
       #{/if}   
      </td>	
 	   <td>
@@ -122,7 +122,7 @@
         <a href="@{Answers.edit(answer.getId())}">edit</a>        
         #{/if}
         #{if q.ownPost()}            
-            | <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 
+            <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 
                   ${answer.isBest() ? 'unmark as best':'mark as best'}
               </a>             
         #{/if}    
