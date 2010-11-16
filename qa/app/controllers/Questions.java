@@ -172,13 +172,6 @@ public class Questions extends Posts {
 		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));
 		flash.put("info", "answer Created: "+newAnswer.getId());
 		
-		/*publish notifications for subscribers*/
-		List<IUser> subscribers = q.getSubscribers();
-		for(IUser subscriber : subscribers){
-			/*the logged in user is the originator of this notification*/
-			((User) subscriber).addNotification(new Notification(user,q, Notification.Type.NEW_ANSWER));
-		}
-		
 		view(qId);		
 			
 	}

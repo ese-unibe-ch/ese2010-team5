@@ -137,18 +137,24 @@ public class Question extends Post implements IQuestion {
 		this.title = title;		
 	}
 	
-	@Override
+	
 	public void setContent(String editedContent){
 		super.setContent(editedContent);
 		
-		/*render markdown*/
-		/*also update the rendered one*/
-		renderedContent = QaMarkdown.toHtml(editedContent);
+		//mark renderedContent as dirty, so that it will be re-rendered
+		//when needed
+		renderedContent = null;
 		
 	}
 	
-	@Override
+	
 	public String getContent(){
+		
+		if(renderedContent == null){
+			/*render markdown*/			
+			renderedContent = QaMarkdown.toHtml(content);	
+		}
+		
 		return renderedContent;
 	}
 	
