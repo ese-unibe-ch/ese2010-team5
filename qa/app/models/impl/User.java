@@ -165,12 +165,11 @@ public class User implements IUser {
 	}
 
 	/**
-	 * Deletes the user and assigns all questions to an anonymous user.
-	 * Answers of the deleted user are deleted too.
+	 * Deletes the user and assigns all posts to an anonymous user.
+	 *
 	 */
 	public void delete() {
-		//assignQuestionsToAnonymous();
-		//deleteAnswers();
+	
 		
 		//clone posts to prevent concurrent modification
 		List<Post> clone = new LinkedList<Post>();
@@ -178,11 +177,47 @@ public class User implements IUser {
 			clone.add(post);
 		}
 		
-		for (Post post:clone){
+		for (Post post : clone){
 			post.unregister();
 		}
 		this.posts.clear();
 		QaDB.removeUser(this);
+		
+		//assign all the posts this user has made to anonymous
+		assignQuestionsToAnonymous();
+		assignAnswersToAnonymous();
+		assignCommentsToAnonymous();
+		
+		//destroying all the information about the user
+		this.setUsername("blank"+id);
+		this.setBirthDate(new Date(0));
+		this.setEmail(null);
+		this.setHomepage(null);
+		this.notifications.clear();
+		this.posts.clear();
+		this.subscriptions.clear();
+		
+	}
+	/**
+	 * Assign comments to anonymous.
+	 */
+	private void assignCommentsToAnonymous() {
+		List<Comment> comments = QaDB.findAllCommentsOfUser(this);
+		
+		for (Comment comment : comments){
+			comment.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
+		}
+	}
+
+		/**
+		 * Assign answers to anonymous.
+		 */
+	private void assignAnswersToAnonymous() {
+		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
+		
+		for (Answer answer : answers){
+			answer.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
+		}
 	}
 
 	/**
@@ -190,7 +225,7 @@ public class User implements IUser {
 	 */
 	private void assignQuestionsToAnonymous() {
 		List<IQuestion> result = QaDB.findAllQuestionsOfUser(this);
-		// list is empty, why?
+		
 		for (IQuestion q : result){
 			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
 		}
@@ -200,13 +235,21 @@ public class User implements IUser {
 	/**
 	 * Delete answers.
 	 */
+	//unused
 	private void deleteAnswers(){
 		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
-		// list is empty, why?
-		for (Answer a : answers){
-			a.setOwner(QaDB.ANONYMOUS);
-			QaDB.removeAnswer(a);
+		
+		for (Answer answer : answers){
+			answer.delete();
 		}
+		
+	}
+	//unused
+	private void deleteComments(){
+		List<Comment> comments = QaDB.findAllCommentsOfUser(this);
+		
+		for (Comment comment : comments)
+			comment.delete();
 	}
 
 	public void registerPost(Post post) {

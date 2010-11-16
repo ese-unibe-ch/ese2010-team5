@@ -40,6 +40,10 @@ public class Comment extends Post implements IComment{
 	public Post getPost() {
 		return post;
 	}
+	
+	public void setOwner(User owner){
+		this.owner = owner;
+	}
 
 	protected void doDelete() {
 			/*remove me from my post(answer or question)*/
