@@ -189,13 +189,21 @@ public class QaDB {
 
 	}
 
-	public static Collection<Question> findAllQuestionsOfUser(IUser user) {
-		List<Question> result = new LinkedList<Question>();
+	public static List<IQuestion> findAllQuestionsOfUser(IUser user) {
+		List<IQuestion> result = new LinkedList<IQuestion>();
 		for (Question q : questions.values()) {
 			if (q.getOwner() == user) {
 				result.add(q);
 			}
 		}
+		return result;
+	}
+	
+	public static List<IQuestion> findAllQuestionsOfUser(IUser user, OrderBy orderBy) {
+		List<IQuestion> result = findAllQuestionsOfUser(user);
+		
+		Collections.sort(result, new QaSorter(orderBy));
+		
 		return result;
 	}
 

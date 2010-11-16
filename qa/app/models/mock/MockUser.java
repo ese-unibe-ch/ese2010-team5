@@ -69,4 +69,12 @@ public class MockUser implements IUser {
 	
   public void delNotification(INotification notif) {}
 
+	
+  public void addSubscription(IQuestion quest) {}
+
+  public List<IQuestion> getSubscriptions() {
+	  return null;
+  }	
+  public void remSubscription(IQuestion quest) {}
+
 }

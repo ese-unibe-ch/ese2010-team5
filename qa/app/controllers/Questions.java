@@ -79,6 +79,48 @@ public class Questions extends Posts {
 			
 	}
 	
+	public static void listUser(String inSort){
+						
+		List<IQuestion> questions = null;
+		OrderBy	orderBy = inSort != null ?
+				OrderBy.valueOf(inSort) :
+				OrderBy.DATE;
+		String sort = orderBy.name();
+		String tagname = "";
+		
+		if(user == null){
+			flash.error("not logged in");
+			listAll();
+			return;
+		}else{
+			tagname 	= user.getName();
+			questions = QaDB.findAllQuestionsOfUser(user,orderBy);			
+			render("Questions/list.html",questions,sort,tagname);
+		}
+		
+	}
+	
+	public static void listSubscriptions(String inSort){
+						
+		List<IQuestion> questions = null;
+		OrderBy	orderBy = inSort != null ?
+				OrderBy.valueOf(inSort) :
+				OrderBy.DATE;
+		String sort = orderBy.name();
+		String tagname = "";
+		
+		if(user == null){
+			flash.error("not logged in");
+			listAll();
+			return;
+		}else{
+			tagname 	= "my subscriptions";
+			questions = user.getSubscriptions();			
+			render("Questions/list.html",questions,sort,tagname);
+		}
+		
+	}
+	
 	
 	
 	/**

@@ -32,6 +32,9 @@ public class User implements IUser {
 	/** The notifications. */
 	private List<INotification> notifications;
 	
+	/** */
+	private List<IQuestion> 		subscriptions;
+	
 	/** The posts list. */
 	private List<Post> posts;
 	
@@ -49,6 +52,7 @@ public class User implements IUser {
 		this.birthDate = new Date(0);
 		this.notifications = new LinkedList<INotification>();
 		this.posts = new LinkedList<Post>();
+		this.subscriptions = new LinkedList<IQuestion>();
 	}
 
 	/**
@@ -185,7 +189,7 @@ public class User implements IUser {
 	 * Assign questions to anonymous.
 	 */
 	private void assignQuestionsToAnonymous() {
-		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(this);
+		List<IQuestion> result = QaDB.findAllQuestionsOfUser(this);
 		// list is empty, why?
 		for (IQuestion q : result){
 			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
@@ -223,6 +227,21 @@ public class User implements IUser {
 	  
   	if(notif == null)return;
   	notifications.remove(notif);  	
+	  
+  }
+	
+  public void addSubscription(IQuestion quest) {
+	  if(quest == null) return;	  
+	  subscriptions.add(quest);	  
+  }
+	
+  public List<IQuestion> getSubscriptions() {	  
+	  return subscriptions;
+  }
+	
+  public void remSubscription(IQuestion quest) {
+	  if(quest == null) return;
+	  subscriptions.remove(quest);
 	  
   }
 

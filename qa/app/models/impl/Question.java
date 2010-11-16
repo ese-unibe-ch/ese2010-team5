@@ -149,6 +149,7 @@ public class Question extends Post implements IQuestion {
 	
 	public void addSubscriber(IUser inUser){
 		subscribers.add(inUser);
+		inUser.addSubscription(this);
 	}
 	
 	public List<IUser> getSubscribers(){
@@ -189,11 +190,20 @@ public class Question extends Post implements IQuestion {
 		/* maybe remove the answers*/
 		
 		deleteTags();
+		remSubscribers();
+		
+		
 	}
 
 	private void deleteTags() {
 		for(Tag tag : tags){
 			tag.unregisterQuestion(this);
+		}
+	}
+	
+	private void remSubscribers(){
+		for(IUser u : subscribers){
+			u.remSubscription(this);
 		}
 	}
 
@@ -232,9 +242,9 @@ public class Question extends Post implements IQuestion {
 
 	
   public void remSubscriber(IUser inUser) {
-	  if(inUser == null) return;
-	  
+	  if(inUser == null) return;	  
 	  subscribers.remove(inUser);
+	  inUser.remSubscription(this);
 	  
   }
 

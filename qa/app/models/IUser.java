@@ -28,6 +28,10 @@ public interface IUser {
 	public void setHomepage(String homepage);
 	public void setUsername(String username);
 	public void unregister(Post post);
+	public void addSubscription(IQuestion quest);
+	public void remSubscription(IQuestion quest);
+	public List<IQuestion> getSubscriptions();
+	
 	
 	 
 	
