@@ -222,6 +222,21 @@ public class Question extends Post implements IQuestion {
 		}
 		return true;
 	}
+	
+  public boolean isSubscriber(IUser inUser) {
+	  if(inUser == null)return false;
+  	
+	  return subscribers.contains(inUser);
+  }
+
+
+	
+  public void remSubscriber(IUser inUser) {
+	  if(inUser == null) return;
+	  
+	  subscribers.remove(inUser);
+	  
+  }
 
 
 	

@@ -269,4 +269,26 @@ public class Questions extends Posts {
 		
 	}
 	
+	public static void toggleSubscriber(long qId, long userId){
+		IQuestion q = QaDB.findQuestionById(qId);
+		IUser			u = QaDB.findUserById(userId);
+		
+		if(u == null || q == null){
+			flash.error("someting went wrong. user: %s, quest: %s", u,q);
+			view(qId);
+		}
+		
+		if(q.isSubscriber(u)){
+			q.remSubscriber(u);
+			flash("info", "unsubscribed from "+q.getTitle());
+
+		}else{
+			q.addSubscriber(u);
+			flash("info", "subscribed to "+q.getTitle());
+		}
+		
+		view(q.getId());
+		
+	}
+	
 }

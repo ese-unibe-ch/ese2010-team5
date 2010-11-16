@@ -79,11 +79,8 @@ public class MockQuestion extends Post implements IQuestion{
 	public boolean isTaggedWith(Tag[] tags) {
 		return false;
 	}
-
-	@Override
-	protected void doDelete() {
-		
-	}
+	
+	protected void doDelete() {}
 
 	
 	public List<Tag> getTags() {
@@ -93,6 +90,12 @@ public class MockQuestion extends Post implements IQuestion{
 	public boolean isTaggedWith(String tagString) {
 		return false;
 	}
+
+  public boolean isSubscriber(IUser inUser) {	  
+	  return false;
+  }
+	
+  public void remSubscriber(IUser inUser) {}
 	
 
 }

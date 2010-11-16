@@ -54,9 +54,15 @@
           	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
       	  #{/list}
       </div>      
-      <div class="actions">      
+      <div class="actions">
+        #{if user}
+          <a href="@{Questions.toggleSubscriber(q.getId(),user.getId())}">
+          ${q.isSubscriber(user)?'unsubscribe':'subscribe'}
+          </a>
+        #{/if}
+            
         #{if q.ownPost()}
-        <a href="@{Questions.delete(q.getId())}">delete</a>
+        | <a href="@{Questions.delete(q.getId())}">delete</a>
         | <a href="@{Questions.edit(q.getId())}">edit</a>        
         #{/if}    
 		  </div>
