@@ -5,6 +5,8 @@ import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
 import models.*;
+import models.impl.Question;
+import models.impl.Tag;
 import models.mock.MockUser;
 
 import org.junit.Before;

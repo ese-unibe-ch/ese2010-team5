@@ -11,6 +11,8 @@ import play.mvc.*;
 import play.mvc.Http.*;
 import utils.QaDB;
 import models.*;
+import models.impl.Post;
+import models.impl.User;
 import models.mock.MockNotification;
 import models.mock.MockQuestion;
 import models.mock.MockUser;

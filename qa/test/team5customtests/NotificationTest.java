@@ -5,7 +5,8 @@ import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
 import models.*;
-import models.Notification.Type;
+import models.INotification.Type;
+import models.impl.Notification;
 import models.mock.MockQuestion;
 import models.mock.MockUser;
 

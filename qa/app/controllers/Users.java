@@ -10,7 +10,7 @@ import play.mvc.Controller;
 import play.mvc.Scope.Session;
 
 import models.IUser;
-import models.User;
+import models.impl.User;
 import utils.QaDB;
 
 /**

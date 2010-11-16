@@ -1,8 +1,13 @@
-package models;
+package models.impl;
 
 import java.security.InvalidParameterException;
 import java.util.Date;
 import java.util.List;
+
+import models.INotification;
+import models.IQuestion;
+import models.IUser;
+import models.INotification.Type;
 
 /**
  * The Class Notification.
@@ -23,17 +28,7 @@ public class Notification implements INotification {
 	private Type type;
 	
 	/** The originator. */
-	private IUser originator;
-	
-	
-	/* the text of the notification will depend on the type*/
-	/* we get the text from conf/messages */
-	/**
-	 * The Enum Type.
-	 */
-	public enum Type{
-		NEW_ANSWER
-	}
+	private IUser originator;	
 
 	
 	/**

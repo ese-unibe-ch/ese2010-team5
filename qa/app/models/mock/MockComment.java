@@ -1,6 +1,7 @@
 package models.mock;
 
 import models.*;
+import models.impl.Post;
 
 /**
  * The Class MockComment used for tests.

@@ -5,6 +5,8 @@ import play.mvc.Http.Header;
 import utils.QaDB;
 import utils.QaMarkdown;
 import models.*;
+import models.impl.Post;
+import models.impl.Question;
 
 /**
  * The Class Posts.

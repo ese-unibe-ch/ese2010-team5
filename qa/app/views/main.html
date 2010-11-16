@@ -58,14 +58,14 @@
          <!-- left box for notifications -->
         <div id="notif-box">
         #{list items:notifications, as:'n'}
-			    #{set q:n.getQuestion()/}    
+			    #{set nq:n.getQuestion()/}    
 			     <div class="notification ${n.isRead()?'read':'unread'}">			       
 			       <div class="title">
 			      &{'notif.'+n.getType(),
-			        actionBridge.Users.view(n.getOriginator().getId()),
+			        actionBridge.Users.view(n.getOriginator().getName()),
 			        n.getOriginator().getName(),
-			        actionBridge.Questions.view(q.getId()),
-			        q.getTitle()
+			        actionBridge.Questions.view(nq.getId()),
+			        nq.getTitle()
 			        }</div>			  
 			    </div>
 			  #{/list}

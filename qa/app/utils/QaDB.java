@@ -9,6 +9,12 @@ import java.util.List;
 import play.Logger;
 
 import models.*;
+import models.impl.Answer;
+import models.impl.Comment;
+import models.impl.Post;
+import models.impl.Question;
+import models.impl.Tag;
+import models.impl.User;
 
 public class QaDB {
 

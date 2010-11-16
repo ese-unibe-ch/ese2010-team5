@@ -3,7 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.INotification;
-import models.Notification;
+import models.impl.Notification;
 
 import utils.QaDB;
 

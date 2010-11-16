@@ -1,4 +1,6 @@
-package models;
+package models.impl;
+
+import models.IUser;
 
 /**
  * The Class Vote.

@@ -7,8 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import models.IQuestion;
-import models.Question;
-import models.Tag;
+import models.impl.Question;
+import models.impl.Tag;
 
 import utils.QaDB;
 

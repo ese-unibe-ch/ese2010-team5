@@ -1,6 +1,10 @@
 package models.mock;
 
 import models.*;
+import models.impl.Answer;
+import models.impl.Post;
+import models.impl.Tag;
+
 import java.util.*;
 
 /**

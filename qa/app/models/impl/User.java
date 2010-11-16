@@ -1,6 +1,10 @@
-package models;
+package models.impl;
 
 import java.util.*;
+
+import models.INotification;
+import models.IQuestion;
+import models.IUser;
 
 import utils.QaDB;
 

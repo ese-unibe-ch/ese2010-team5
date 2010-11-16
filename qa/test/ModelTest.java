@@ -3,6 +3,11 @@ import java.util.*;
 import play.test.*;
 import utils.QaDB;
 import models.*;
+import models.impl.Answer;
+import models.impl.Post;
+import models.impl.Question;
+import models.impl.User;
+import models.impl.Vote;
 import models.mock.MockUser;
 
 public class ModelTest extends UnitTest {

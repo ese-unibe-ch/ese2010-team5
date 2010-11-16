@@ -1,10 +1,14 @@
-package models;
+package models.impl;
 
 import play.*;
 import play.db.jpa.*;
 import utils.QaDB;
 
 import javax.persistence.*;
+
+import models.IComment;
+import models.IUser;
+
 import java.util.*;
 
 /**

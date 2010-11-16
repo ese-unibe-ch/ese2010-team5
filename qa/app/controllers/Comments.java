@@ -3,6 +3,10 @@ package controllers;
 import java.util.*;
 
 import models.*;
+import models.impl.Answer;
+import models.impl.Comment;
+import models.impl.Post;
+import models.impl.Question;
 
 import play.Logger;
 import play.data.validation.Required;

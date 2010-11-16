@@ -7,15 +7,15 @@ import java.util.List;
 
 import org.hibernate.annotations.SortType;
 
-import models.Answer;
-import models.Comment;
 import models.IQuestion;
 import models.IUser;
-import models.Notification;
-import models.Post;
-import models.Question;
-import models.Tag;
-import models.User;
+import models.impl.Answer;
+import models.impl.Comment;
+import models.impl.Notification;
+import models.impl.Post;
+import models.impl.Question;
+import models.impl.Tag;
+import models.impl.User;
 
 import play.Logger;
 import play.data.validation.Error;

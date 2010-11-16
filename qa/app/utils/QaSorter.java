@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import utils.QaDB.OrderBy;
 
-import models.Post;
+import models.impl.Post;
 
 public class QaSorter implements Comparator<Post>{
 

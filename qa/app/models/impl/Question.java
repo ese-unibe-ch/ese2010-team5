@@ -1,6 +1,11 @@
-package models;
+package models.impl;
 
 import java.util.*;
+
+import models.INotification;
+import models.IQuestion;
+import models.IUser;
+import models.INotification.Type;
 
 import play.Logger;
 
@@ -104,8 +109,12 @@ public class Question extends Post implements IQuestion {
 		
 		/*publish notifications for subscribers*/
 		List<IUser> subscribers = getSubscribers();
-		for(IUser subscriber : subscribers){			
-			((User) subscriber).addNotification(
+		for(IUser subscriber : subscribers){
+			
+			Logger.debug("add notifications for subscriber: %s", subscriber.getName());
+			Logger.debug("originator: %s", newAnswer.getOwner().getName());
+			
+			subscriber.addNotification(
 					new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER)
 			);
 		}

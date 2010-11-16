@@ -1,5 +1,7 @@
 package models.mock;
 
+import java.util.Date;
+
 import models.*;
 
 /**
@@ -24,5 +26,41 @@ public class MockNotification implements INotification {
 		question = inQuestion;
 		originator = inOriginator;
 	}
+
+		
+    public Date createdAt() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+		
+    public IUser getOriginator() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+		
+    public IQuestion getQuestion() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+		
+    public Type getType() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+		
+    public boolean isRead() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+		
+    public void markAsRead() {
+	    // TODO Auto-generated method stub
+	    
+    }
 
 }

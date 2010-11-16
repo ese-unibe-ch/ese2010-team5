@@ -2,6 +2,9 @@ package models;
 
 import java.util.List;
 
+import models.impl.Answer;
+import models.impl.Tag;
+
 /**
  * The Interface IQuestion.
  */

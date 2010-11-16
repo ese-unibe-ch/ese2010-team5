@@ -1,6 +1,10 @@
-package models;
+package models.impl;
 
 import java.util.*;
+
+import models.IComment;
+import models.IQuestion;
+import models.IUser;
 
 import org.pegdown.PegDownProcessor;
 
@@ -204,8 +208,8 @@ public abstract class Post{
 	 * Unregister a user from the post.
 	 */
 	public void unregister() {
-		((User)this.owner).unregister(this);
-		removeFromDB();
+		this.owner.unregister(this);
+		//removeFromDB();
 	}
 	
 	/**

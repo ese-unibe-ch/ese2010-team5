@@ -1,7 +1,7 @@
 package controllers;
 
 import utils.QaDB;
-import models.User;
+import models.impl.User;
 
 /**
  * The Class Security.

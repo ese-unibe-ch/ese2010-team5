@@ -1,4 +1,4 @@
-package models;
+package models.impl;
 
 import java.util.Collection;
 import java.util.Date;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import models.IQuestion;
+import models.IUser;
 
 import utils.QaDB;
 
