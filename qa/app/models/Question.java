@@ -95,8 +95,21 @@ public class Question extends Post implements IQuestion {
 		return answers;
 	}
 
-	public void addAnswer(Answer newAnswer) {		
-		this.answers.add(newAnswer);		
+	public void addAnswer(Answer newAnswer) {
+		
+		if(newAnswer == null)
+			return;
+		
+		answers.add(newAnswer);
+		
+		/*publish notifications for subscribers*/
+		List<IUser> subscribers = getSubscribers();
+		for(IUser subscriber : subscribers){			
+			((User) subscriber).addNotification(
+					new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER)
+			);
+		}
+		
 	}
 	
 	public boolean delAnswer(Answer newAnswer) {
