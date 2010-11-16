@@ -218,5 +218,12 @@ public class User implements IUser {
 	public void unregister(Post post) {
 		this.posts.remove(post);
 	}
+	
+  public void delNotification(INotification notif) {
+	  
+  	if(notif == null)return;
+  	notifications.remove(notif);  	
+	  
+  }
 
 }

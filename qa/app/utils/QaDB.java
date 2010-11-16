@@ -105,6 +105,16 @@ public class QaDB {
 			return;
 		users.remove(user);
 	}
+	
+	public static void delNotification(INotification n){
+		if(n == null)
+			return;
+		
+		/*remove also from list of the user*/
+		n.delete();
+		
+		notifications.remove(n);
+	}
 
 	/* find single instance */
 	public static User findUserById(long id) {

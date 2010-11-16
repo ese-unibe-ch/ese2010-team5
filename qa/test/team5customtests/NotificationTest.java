@@ -25,22 +25,22 @@ public class NotificationTest  extends UnitTest{
 	public void setUp() throws Exception {
 		use = new MockUser("Hans");
 		quest = new MockQuestion(use,"JunitQuestion");
-		notify = new Notification(use,quest,type.NEW_ANSWER);
+		notify = new Notification(use,use,quest,type.NEW_ANSWER);
 	}
 	
 	@Test (expected=InvalidParameterException.class)
 	public void shouldReturnErrorOnNULLUser(){
-		notify2 = new Notification(null,quest,type.NEW_ANSWER);
+		notify2 = new Notification(use,null,quest,type.NEW_ANSWER);
 	}
 	
 	@Test (expected=InvalidParameterException.class)
 	public void shouldReturnErrorOnNULLQuestion(){
-		notify2 = new Notification(use,null,type.NEW_ANSWER);
+		notify2 = new Notification(use,use,null,type.NEW_ANSWER);
 	}
 	
 	@Test (expected=InvalidParameterException.class)
 	public void shouldReturnErrorOnNULLType(){
-		notify2 = new Notification(use,quest,null);
+		notify2 = new Notification(use,use,quest,null);
 	}
 	
 	@Test

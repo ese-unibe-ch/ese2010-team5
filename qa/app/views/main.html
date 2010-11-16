@@ -8,6 +8,23 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
         <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+
+          function delNotification(id){
+        	  if(!id) return;
+
+        	  $.post( "@{Notifications.delete()}"
+        		        ,{id:id}
+        		        ,function (data){
+        		        	//on success
+          		        //remove item from the list                    
+        		          $("#notification-"+id).hide("slow");        		                
+        		        }
+        		        ,"text/html"
+        		);
+          }
+        
+        </script>
     </head>
     <body>
      <div id="wrapper">    
@@ -24,8 +41,7 @@
        </div>    	
     	 <div id="loginbox">
 	       #{if user}
-	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>
-	        | Notifications: <a href="@{Notifications.list()}" class="unread_count">${user.getNotifications().size()}</a>    
+	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>	            
     		  | <a href="@{Secure.logout()}">logout</a>    		  
     	   #{/if}
     	   #{else}
@@ -55,11 +71,17 @@
       #{/if}
       <!-- content -->        
       <div id="content">
-         <!-- left box for notifications -->
-        <div id="notif-box">
-        #{list items:notifications, as:'n'}
+        <!-- left box for notifications -->         
+        #{set boxvisible: ! notifications.isEmpty()/}
+        
+        #{if boxvisible} 
+        <div id="notif-box">          
+          #{list items:notifications, as:'n'}
 			    #{set nq:n.getQuestion()/}    
-			     <div class="notification ${n.isRead()?'read':'unread'}">			       
+			     <div id="notification-${n.getId()}" class="notification ${n.isRead()?'read':'unread'}">
+			       <a href="#" class="delete" onclick="delNotification('${n.getId()}')">
+			         <img src="@{'/public/images/delete.png'}"></img>
+			       </a>			       
 			       <div class="title">
 			      &{'notif.'+n.getType(),
 			        actionBridge.Users.view(n.getOriginator().getName()),
@@ -67,10 +89,12 @@
 			        actionBridge.Questions.view(nq.getId()),
 			        nq.getTitle()
 			        }</div>			  
-			    </div>
-			  #{/list}
+			    </div>			    
+			   #{/list}
         </div>
-        <div id="main">
+        #{/if}
+          
+        <div id="main" class="${boxvisible ? 'right' : ''}">
           <div style="clear:both;"></div>
           #{doLayout /}
         </div>

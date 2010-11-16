@@ -21,6 +21,19 @@ public class Notifications extends Auth{
 		render(notifications);
 	}
 	
+	public static void delete(long id){
+		INotification n = QaDB.findNotificationById(id);
+		
+		if(n == null){
+			flash.error("could not find notification %d", id);
+			return;
+		}
+		
+		QaDB.delNotification(n);
+		
+		renderText("success");
+	}
+	
 	public static void markAsRead(long id){
 		INotification n = QaDB.findNotificationById(id);
 		

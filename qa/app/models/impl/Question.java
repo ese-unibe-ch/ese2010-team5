@@ -94,8 +94,24 @@ public class Question extends Post implements IQuestion {
 	
 	public List<Answer> getAnswers() {
 		
-		/*sort them by date*/
-		Collections.sort(answers, new QaSorter(OrderBy.DATE));
+		/*sort them by date*/		
+		Collections.sort(answers, new QaSorter(OrderBy.DATE));		
+		
+		if(! answers.isEmpty()){			
+			/* find best answer*/
+			int idx = -1;
+			for(Answer a: answers){
+				idx++;
+				if(a.isBest()){					
+					break;
+				}
+			}
+			/* move to the head if found*/
+			if(idx >= 0){
+				Answer bestAnswer = answers.remove(idx);
+				answers.add(0, bestAnswer);
+			}
+		}
 		
 		return answers;
 	}
@@ -112,7 +128,7 @@ public class Question extends Post implements IQuestion {
 		for(IUser subscriber : subscribers){
 			
 			subscriber.addNotification(
-					QaDB.addNotification(new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
+					QaDB.addNotification(new Notification(subscriber,newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
 			);
 		}
 		
@@ -206,6 +222,21 @@ public class Question extends Post implements IQuestion {
 		}
 		return true;
 	}
+	
+  public boolean isSubscriber(IUser inUser) {
+	  if(inUser == null)return false;
+  	
+	  return subscribers.contains(inUser);
+  }
+
+
+	
+  public void remSubscriber(IUser inUser) {
+	  if(inUser == null) return;
+	  
+	  subscribers.remove(inUser);
+	  
+  }
 
 
 	

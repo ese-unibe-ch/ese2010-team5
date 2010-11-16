@@ -9,6 +9,7 @@ GET     /questions/tagged/{tagname}/{sort}           Questions.list
 GET     /questions/tagged/{tagname}                  Questions.list
 GET     /questions/list/{sort}                       Questions.list
 GET     /questions/list/                             Questions.list
+GET     /questions/{qId}/subscribe/{userId}          Questions.toggleSubscriber
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
 GET     /questions/edit/{id}                         Questions.edit

@@ -51,6 +51,9 @@ public interface IQuestion {
 	 * @param inUser the subscriber
 	 */
 	public abstract void addSubscriber(IUser inUser);
+	
+	public void remSubscriber(IUser inUser);
+	public boolean isSubscriber(IUser inUser);
 
 	/**
 	 * Gets the subscribers.

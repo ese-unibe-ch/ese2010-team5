@@ -116,16 +116,19 @@ body{
 }
 
 #wrapper #notif-box{
-  border:1px solid #666666;
-  width: 180px;
-  min-height: 200px;
+  /*border:1px solid #666666;*/
+  width: 180px;  
   float:left;
   padding:5px;  
 }
 
-#content #main{
-	float:right;  
-  width: 800px;    
+#content #main{	  
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;    
+}
+#main.right{
+	float:right; 
 }
 
 
@@ -266,6 +269,18 @@ body{
 }
 .notification{
   border-bottom: 1px dashed black;
+  position: relative;
+}
+
+.notification a.delete{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  text-decoration: none;  
+}
+
+a.delete img{
+  border: 0px solid black;
 }
 
 .notification .title{

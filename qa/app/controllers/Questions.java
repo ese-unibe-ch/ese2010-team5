@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.annotations.SortType;
 
+import models.INotification;
 import models.IQuestion;
 import models.IUser;
 import models.impl.Answer;
@@ -214,21 +215,14 @@ public class Questions extends Posts {
 		}
 		
 		List<Answer> answers = q.getAnswers();
-		if(! answers.isEmpty()){			
-			/* find best answer*/
-			int idx = -1;
-			for(Answer a: answers){
-				idx++;
-				if(a.isBest()){					
-					break;
+		
+		if(user != null){
+			for(INotification n : user.getNotifications()){
+				if(user.equals(n.getSubscriber()) &&
+						q.equals(n.getQuestion())){
+					n.markAsRead();
 				}
 			}
-			/* move to the head if found*/
-			if(idx >= 0){
-				Answer bestAnswer = answers.remove(idx);
-				answers.add(0, bestAnswer);
-			}
-			
 		}
 		
 		render(q,answers);
@@ -272,6 +266,28 @@ public class Questions extends Posts {
 		q.setContent(content);
 		flash.put("info","Content of question "+id+" changed");
 		view(id);
+		
+	}
+	
+	public static void toggleSubscriber(long qId, long userId){
+		IQuestion q = QaDB.findQuestionById(qId);
+		IUser			u = QaDB.findUserById(userId);
+		
+		if(u == null || q == null){
+			flash.error("someting went wrong. user: %s, quest: %s", u,q);
+			view(qId);
+		}
+		
+		if(q.isSubscriber(u)){
+			q.remSubscriber(u);
+			flash("info", "unsubscribed from "+q.getTitle());
+
+		}else{
+			q.addSubscriber(u);
+			flash("info", "subscribed to "+q.getTitle());
+		}
+		
+		view(q.getId());
 		
 	}
 	
