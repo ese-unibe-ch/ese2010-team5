@@ -56,16 +56,31 @@ public class Tag {
 		return id;
 	}
 
+	/**
+	 * Gets the tag count
+	 * 
+	 * @return the number of questions tagged with this Tag.
+	 */
 	public int count() {
 		return this.relatedQuestions.size();
 	}
-
+	
+	/**
+	 * Register the question as tagged with this Tag.
+	 * 
+	 * @param the question tagged with Tag
+	 */
 	public void registerQuestion(Question question) {
 		this.relatedQuestions.add(question);
 	}
-
+	
+	/**
+	 * Unregisters the question from being tagged with Tag.
+	 * Used when deleting a question.
+	 * 
+	 * @param the question from which the Tag is removed
+	 */
 	public void unregisterQuestion(Question question) {
 		this.relatedQuestions.remove(question);
 	}
-
 }
