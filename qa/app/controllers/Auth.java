@@ -21,7 +21,7 @@ import utils.QaDB;
 public class Auth extends Controller{
 
 	/** The user. */
-	static User user;
+	static User user = null;
 
 	/**
 	 * Sets the logged in user.
@@ -29,17 +29,20 @@ public class Auth extends Controller{
 	@Before
 	static void setUser() {
 		if (Security.isConnected()) {
-			user = QaDB.findUserByName(Security.connected());
-			
-			
+			user = QaDB.findUserByName(Security.connected());			
 			renderArgs.put("username", user.getName());
 			renderArgs.put("user", user);
+		}else{
+			user = null;
+			renderArgs.put("username", null);
+			renderArgs.put("user", null);
 		}
 		
 		Collection<INotification> notifications = 
 			user != null ? 
 					user.getNotifications():
 						new LinkedList();
+					
 		renderArgs.put("notifications", notifications);
 	}	
 	

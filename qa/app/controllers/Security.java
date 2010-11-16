@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Logger;
 import utils.QaDB;
 import models.impl.User;
 
@@ -23,7 +24,7 @@ public class Security extends Secure.Security{
 	 * What to do when getting disconnected.
 	 */
 	static void onDisconnected() {
-			//return to home
+			//return to home			
 			redirect("/");
 	}
 		

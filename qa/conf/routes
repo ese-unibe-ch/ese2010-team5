@@ -4,8 +4,11 @@
 
 # Home page
 
+# Import Secure routes
+*       /                                            module:secure
+
 GET     /	  					                               Questions.listAll
-GET     /{sort}                                      Questions.list
+GET     /{sort}/?                                    Questions.list
 GET     /questions/tagged/{tagname}/{sort}           Questions.list
 GET     /questions/tagged/{tagname}/                 Questions.list
 GET     /questions/list/{sort}                       Questions.list
@@ -32,8 +35,7 @@ GET     /tags/list                                   Tags.list
 #markdown preview
 POST    /preview                                     Posts.markdownPreview
 
-# Import Secure routes
-*       /                                      module:secure                                  
+                                  
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
