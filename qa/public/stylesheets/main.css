@@ -105,15 +105,30 @@ body{
 }
 
 
-#wrapper > #content{
+#wrapper #content{
   min-height: 100%;
   padding: 10px;	
   padding-bottom: 30px;
-  width:800px;
+  width:1000px;
   margin-left: auto;
   margin-right:auto;
-
+  overflow: auto;
 }
+
+#wrapper #notif-box{
+  border:1px solid #666666;
+  width: 180px;
+  min-height: 200px;
+  float:left;
+  padding:5px;  
+}
+
+#content #main{
+	float:right;  
+  width: 800px;    
+}
+
+
 
 #content .subnav{
   border-bottom:1px solid #666666;
