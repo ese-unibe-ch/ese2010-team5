@@ -31,11 +31,10 @@ public class AnswerTest extends UnitTest{
 	}
 	
 	@Test
-	public void shouldSetProperlyToBest(){
+	public void shouldSetToBest(){
 		assertFalse(ans.isBest());
 		ans.setIsBest(true);
-		assertTrue(ans.isBest());
-		
+		assertTrue(ans.isBest());		
 	}
 	
 	@Test
