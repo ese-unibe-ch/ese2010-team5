@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Collection;
+
 import play.Logger;
 import play.mvc.Http.Header;
 import utils.QaDB;
@@ -98,7 +100,9 @@ public class Posts extends Auth {
 	
 	
 	public static void searchContent(String content){
-		Post p = QaDB.findPostByText(content);
+		QaDB.findPostByText(content);
+		
+		Collection<Question> p = QaDB.search();
 		
 		if(p == null){
 			flash("error", "could not find Post with content "+content);

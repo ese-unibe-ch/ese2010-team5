@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.management.Notification;
+import javax.naming.directory.SearchResult;
+
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import play.Logger;
 
@@ -35,6 +38,7 @@ public class QaDB {
 	private static HashMap<Long, Comment> comments = new HashMap<Long, Comment>();
 	private static HashMap<Long, Tag> tags = new HashMap<Long, Tag>();
 	private static HashMap<Long, INotification> notifications = new HashMap<Long, INotification>();
+	private static HashMap<Long, Question> searchResults = new HashMap<Long, Question>();
 
 	/* functions to add */
 	public static Answer addAnswer(Answer a) {
@@ -160,6 +164,23 @@ public class QaDB {
 		}
 
 		return null;
+	}
+
+	public static void findPostByText(String content){
+		for(long i=1; i<=questions.size(); i++){
+			if(findQuestionById(i).getContent().contains(content)){
+				Question result = findQuestionById(i);
+				searchResults.put(i, result);
+			}
+		}
+	}
+	
+	public static Collection<Question> search() {
+		List<Question> result = new LinkedList<Question>();
+		for (Question q : searchResults.values()) {
+			result.add(q);
+		}
+		return result;		
 	}
 	
 	public static INotification findNotificationById(long id){
