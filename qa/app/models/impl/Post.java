@@ -210,7 +210,7 @@ public abstract class Post implements IPost{
 	 */
 	public void unregister() {
 		this.owner.unregister(this);
-		//removeFromDB();
+		removeFromDB();
 	}
 	
 	/**

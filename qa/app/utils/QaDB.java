@@ -304,4 +304,15 @@ public class QaDB {
 		comments.remove(comment);
 	}
 
+	public static List<Comment> findAllCommentsOfUser(User user) {
+		List<Comment> result = new LinkedList<Comment>();
+		for (Comment comment : comments.values()) {
+			if (comment.getOwner() == user) {
+				result.add(comment);
+			}
+		}
+		
+		return result;
+	}
+
 }
