@@ -214,22 +214,6 @@ public class Questions extends Posts {
 		}
 		
 		List<Answer> answers = q.getAnswers();
-		if(! answers.isEmpty()){			
-			/* find best answer*/
-			int idx = -1;
-			for(Answer a: answers){
-				idx++;
-				if(a.isBest()){					
-					break;
-				}
-			}
-			/* move to the head if found*/
-			if(idx >= 0){
-				Answer bestAnswer = answers.remove(idx);
-				answers.add(0, bestAnswer);
-			}
-			
-		}
 		
 		render(q,answers);
 		

@@ -94,8 +94,24 @@ public class Question extends Post implements IQuestion {
 	
 	public List<Answer> getAnswers() {
 		
-		/*sort them by date*/
-		Collections.sort(answers, new QaSorter(OrderBy.DATE));
+		/*sort them by date*/		
+		Collections.sort(answers, new QaSorter(OrderBy.DATE));		
+		
+		if(! answers.isEmpty()){			
+			/* find best answer*/
+			int idx = -1;
+			for(Answer a: answers){
+				idx++;
+				if(a.isBest()){					
+					break;
+				}
+			}
+			/* move to the head if found*/
+			if(idx >= 0){
+				Answer bestAnswer = answers.remove(idx);
+				answers.add(0, bestAnswer);
+			}
+		}
 		
 		return answers;
 	}
