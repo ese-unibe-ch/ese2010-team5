@@ -157,11 +157,11 @@
          <br></br>
          #{if user}
         <div class="yourcomment">
-            #{form @Answers.addComment(), id:'newAnswerComment' } 
+            #{form @Answers.addComment(), id:'newAnswerComment-'+answer.getId() } 
               Your comment:
               <input type="hidden" id="aId" name="aId" value="${answer.getId()}"></input>  
               <input type="text" name="comment" id="comment"></input>              
-              <a href="#" onclick="$('#newAnswerComment').submit()">add</a>
+              <a href="#" onclick="$('#newAnswerComment-${answer.getId()}').submit()">add</a>
             #{/form}          
         </div>    
         #{/if}    
