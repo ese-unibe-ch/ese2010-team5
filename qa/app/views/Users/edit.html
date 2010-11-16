@@ -23,9 +23,9 @@
 	<input type="text" id="birthDate" name="birthDate" value="${u.getBirthDate().format('dd.MM.yyyy')}"/> (Format: dd.MM.yyyy)
     <br />
     <br />
-    <a href="#" onclick="$('#editUserForm').submit();">submit changes</a>
+    <a href="#" onclick="$('#editUserForm').submit();"><img src="@{'/public/images/save.png'}" title="Save changes to user profile"></img></a>
 #{/form}
-<h2><a href="@{Users.delete(u.getName())}">Delete user profile</a></h2>
+<div id="deluser"><a href="@{Users.delete(u.getName())}"><img src="@{'/public/images/del_user.png'}" title="Delete user profile"></img></a></div>
 
 <div id="status">
 	<h1>Question${questions.pluralize()} (${questions.size()})</h1>
