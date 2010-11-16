@@ -111,11 +111,8 @@ public class Question extends Post implements IQuestion {
 		List<IUser> subscribers = getSubscribers();
 		for(IUser subscriber : subscribers){
 			
-			Logger.debug("add notifications for subscriber: %s", subscriber.getName());
-			Logger.debug("originator: %s", newAnswer.getOwner().getName());
-			
 			subscriber.addNotification(
-					new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER)
+					QaDB.addNotification(new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
 			);
 		}
 		

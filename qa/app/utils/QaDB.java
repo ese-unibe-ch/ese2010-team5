@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.management.Notification;
+
 import play.Logger;
 
 import models.*;
@@ -32,6 +34,7 @@ public class QaDB {
 	private static HashMap<Long, User> users = new HashMap<Long, User>();
 	private static HashMap<Long, Comment> comments = new HashMap<Long, Comment>();
 	private static HashMap<Long, Tag> tags = new HashMap<Long, Tag>();
+	private static HashMap<Long, INotification> notifications = new HashMap<Long, INotification>();
 
 	/* functions to add */
 	public static Answer addAnswer(Answer a) {
@@ -68,6 +71,15 @@ public class QaDB {
 		tags.put(tag.getId(), tag);
 		return tag;
 
+	}
+	
+	public static INotification addNotification(INotification n){
+		if(n == null)
+			return null;
+		
+		notifications.put(n.getId(), n);
+		return n;
+		
 	}
 
 	/* functions to delete */
@@ -138,6 +150,10 @@ public class QaDB {
 		}
 
 		return null;
+	}
+	
+	public static INotification findNotificationById(long id){
+		return notifications.get(id);
 	}
 
 	/* find multiple instances */

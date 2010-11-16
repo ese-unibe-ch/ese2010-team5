@@ -62,5 +62,10 @@ public class MockNotification implements INotification {
 	    // TODO Auto-generated method stub
 	    
     }
+		
+    public long getId() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
 
 }

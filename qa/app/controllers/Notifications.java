@@ -16,12 +16,22 @@ public class Notifications extends Auth{
 	/**
 	 * List the notifications.
 	 */
-	public static void list(){
-		
-		List<INotification> notifications = user.getNotifications();
-		
+	public static void list(){		
+		List<INotification> notifications = user.getNotifications();		
 		render(notifications);
+	}
+	
+	public static void markAsRead(long id){
+		INotification n = QaDB.findNotificationById(id);
 		
+		if(n == null){
+			flash.error("could not find notification %d", id);
+			return;
+		}
+		
+		n.markAsRead();
+		
+		renderText("success");
 		
 	}
 	

@@ -28,7 +28,11 @@ public class Notification implements INotification {
 	private Type type;
 	
 	/** The originator. */
-	private IUser originator;	
+	private IUser originator;
+	
+	private long id;
+	
+	private static long idCounter = 1;
 
 	
 	/**
@@ -47,6 +51,7 @@ public class Notification implements INotification {
 		createdAt = System.currentTimeMillis();
 		type = inType;
 		originator = inOriginator;
+		id = idCounter++;
 	}
 	
 	/**
@@ -100,6 +105,10 @@ public class Notification implements INotification {
 	public Date createdAt(){
 		return new Date(createdAt);
 	}
+	
+  public long getId() {	  
+	  return id;
+  }
 	
 	
 }

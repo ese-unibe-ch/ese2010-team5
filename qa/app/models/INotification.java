@@ -22,6 +22,7 @@ public interface INotification {
 	public Type				getType();
 	public boolean 		isRead();
 	public void 			markAsRead();
+	public long 			getId();
 	
 	
 }
