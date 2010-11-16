@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.annotations.SortType;
 
 import models.INotification;
+import models.IPost;
 import models.IQuestion;
 import models.IUser;
 import models.impl.Answer;
@@ -115,7 +116,8 @@ public class Questions extends Posts {
 			return;
 		}else{
 			tagname 	= "my subscriptions";
-			questions = user.getSubscriptions();			
+			questions = user.getSubscriptions();
+			Collections.sort(questions, new QaSorter(orderBy));
 			render("Questions/list.html",questions,sort,tagname);
 		}
 		

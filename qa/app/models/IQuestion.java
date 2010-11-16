@@ -8,7 +8,7 @@ import models.impl.Tag;
 /**
  * The Interface IQuestion.
  */
-public interface IQuestion {
+public interface IQuestion extends IPost{
 
 	/**
 	 * Gets the tags.

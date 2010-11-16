@@ -3,6 +3,7 @@ package models.impl;
 import java.util.*;
 
 import models.IComment;
+import models.IPost;
 import models.IQuestion;
 import models.IUser;
 
@@ -14,7 +15,7 @@ import utils.QaMarkdown;
 /**
  * The abstract Class Post.
  */
-public abstract class Post{
+public abstract class Post implements IPost{
 	
 	/** The owner. */
 	protected IUser owner;
