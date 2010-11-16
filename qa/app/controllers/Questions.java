@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.annotations.SortType;
 
+import models.INotification;
 import models.IQuestion;
 import models.IUser;
 import models.impl.Answer;
@@ -214,6 +215,15 @@ public class Questions extends Posts {
 		}
 		
 		List<Answer> answers = q.getAnswers();
+		
+		if(user != null){
+			for(INotification n : user.getNotifications()){
+				if(user.equals(n.getSubscriber()) &&
+						q.equals(n.getQuestion())){
+					n.markAsRead();
+				}
+			}
+		}
 		
 		render(q,answers);
 		
