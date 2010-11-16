@@ -68,4 +68,16 @@ public class MockNotification implements INotification {
 	    return 0;
     }
 
+		
+    public void delete() {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+		
+    public IUser getSubscriber() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
 }

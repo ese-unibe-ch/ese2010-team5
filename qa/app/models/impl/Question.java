@@ -112,7 +112,7 @@ public class Question extends Post implements IQuestion {
 		for(IUser subscriber : subscribers){
 			
 			subscriber.addNotification(
-					QaDB.addNotification(new Notification(newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
+					QaDB.addNotification(new Notification(subscriber,newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
 			);
 		}
 		

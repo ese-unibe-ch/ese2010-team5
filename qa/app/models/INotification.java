@@ -18,11 +18,13 @@ public interface INotification {
 
 	public Date  			createdAt();
 	public IUser 			getOriginator();
+	public IUser			getSubscriber();
 	public IQuestion 	getQuestion();
 	public Type				getType();
 	public boolean 		isRead();
 	public void 			markAsRead();
 	public long 			getId();
+	public void				delete();
 	
 	
 }

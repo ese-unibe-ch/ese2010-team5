@@ -66,4 +66,7 @@ public class MockUser implements IUser {
 	
   public void unregister(Post post) {}
 
+	
+  public void delNotification(INotification notif) {}
+
 }

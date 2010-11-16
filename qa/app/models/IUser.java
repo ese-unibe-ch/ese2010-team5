@@ -14,6 +14,7 @@ public interface IUser {
 	
 	public void delete();
 	public void addNotification(INotification notif);
+	public void delNotification(INotification notif);
 	public Date getBirthDate();
 	public String getEmail();
 	public String getHomepage();

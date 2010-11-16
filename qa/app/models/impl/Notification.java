@@ -30,6 +30,8 @@ public class Notification implements INotification {
 	/** The originator. */
 	private IUser originator;
 	
+	private IUser subscriber;
+	
 	private long id;
 	
 	private static long idCounter = 1;
@@ -42,7 +44,8 @@ public class Notification implements INotification {
 	 * @param inQuestion the question
 	 * @param inType the type
 	 */
-	public Notification(IUser inOriginator, IQuestion inQuestion, Type inType){
+	public Notification(IUser inSubscriber, IUser inOriginator,
+											IQuestion inQuestion, Type inType){
 		
 		if(inOriginator == null || inType == null || inQuestion == null)
 			throw new InvalidParameterException("all params required");
@@ -51,6 +54,7 @@ public class Notification implements INotification {
 		createdAt = System.currentTimeMillis();
 		type = inType;
 		originator = inOriginator;
+		subscriber = inSubscriber;
 		id = idCounter++;
 	}
 	
@@ -108,6 +112,13 @@ public class Notification implements INotification {
 	
   public long getId() {	  
 	  return id;
+  }
+	
+  public void delete() {
+	  subscriber.delNotification(this);
+  }	
+  public IUser getSubscriber() {	 
+	  return subscriber;
   }
 	
 	
