@@ -82,10 +82,14 @@ public class Users extends Auth{
 			error("could not find user: \""+username+"\"");
 			return;
 		}
+		
+		List<IQuestion> questions = QaDB.findAllQuestionsOfUser(u);
+		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
+		
 		if (Security.isConnected() && Security.connected().equals(username))
 			edit(u.getName());
 		else
-			render(u);
+			render(u, questions, answers);
 	}
 	
 	/**
