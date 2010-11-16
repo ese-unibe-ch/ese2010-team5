@@ -248,19 +248,25 @@ body{
 }
 
 /* profile view */
-.profileview{
-  border: 1px solid black;
+#profileview{
+  float:left;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   padding: 10px;
-  margin: 10px;
-  background-color: red;
 }
 
-.profile-view h1{
+#profile-view h1{
   font-size: 20 px;
 }
 
-.profile-view .info{
+.info{
   display: block;
+  margin-top: 5px;
+  marigin-bottom: 5px;
 }
 
 /* notificatins*/
@@ -387,7 +393,6 @@ a.delete img{
   background-image: url("/public/images/arrow_down.png");
 }
 
-
 #question .content{	
 	height: 15em;
 	padding: 20px;
@@ -447,9 +452,31 @@ a.delete img{
 	border: 2px solid red;
 	padding: 2px;
 	color: red;
-
 }
 
 .errors li{
 	list-style: none;
 }
+
+#status{
+	margin-top: 20px;
+	border-top: 1px solid black;
+	padding-top: 20px;
+}
+
+#status .votes{		
+  background:none repeat scroll 0 0 #EEEEEE;
+  float:left;
+  height:38px;
+  margin:0 3px 0 0;
+  padding:5px;
+  width:38px;
+  text-align:center;		
+}
+
+.answerthumb{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+

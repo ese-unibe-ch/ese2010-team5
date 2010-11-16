@@ -26,3 +26,54 @@
     <a href="#" onclick="$('#editUserForm').submit();">submit changes</a>
 #{/form}
 <h2><a href="@{Users.delete(u.getName())}">Delete user profile</a></h2>
+
+<div id="status">
+	<h1>Question${questions.pluralize()} (${questions.size()})</h1>
+	<div class="question-list">
+    #{list items:questions, as:'q' }
+      #{set answers:q.getAnswers().size()/}
+      #{set tags:null/}
+      #{list items:q.getTags(), as:'tag'}
+      #{set tags:(tags?tags+' ':'')+tag /}
+      #{/list}
+      <div class="question-summary ${tags}">
+        <div class="votes">
+        <div>${q.getVotation()}</div>
+        <div>vote</div>
+      </div>
+        <div class="status ${answers == 0 ? 'unanswered' : 'answered'}">
+          <div>${q.getAnswers().size()}</div>
+          <div>answers</div>
+        </div>        
+        <div class="summary">
+          <h3><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></h3>
+          <span class="tags">
+          Tags: 
+          #{list items:q.getTags(), as:'tag'}
+          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+      	  #{/list}
+          </span>
+          <div class="started">
+            <span>${q.getTimestamp().since()}</span>          
+          </div>
+          <div style="clear: both"></div>
+          <div class="user">
+            from: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a>
+          </div>
+        </div>              
+      </div>       
+    #{/list}
+</div>
+	<h1>Answer${answers.pluralize()} (${answers.size()})</h1>
+	#{list items:answers, as:'ans'}
+	<div class="answerthumb">
+		<span class="votes">
+	        ${ans.getVotation()}
+	        <br></br>
+	        vote
+	    </span>
+		<a href="@{Questions.view(ans.getQuestion().getId())}">${ans.getQuestion().getTitle()}</a>
+	</div>
+	<br></br>
+	#{/list}
+</div>

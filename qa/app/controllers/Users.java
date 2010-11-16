@@ -3,13 +3,17 @@ package controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import play.*;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
 
+import models.IQuestion;
 import models.IUser;
+import models.impl.Answer;
+import models.impl.Question;
 import models.impl.User;
 import utils.QaDB;
 
@@ -29,8 +33,11 @@ public class Users extends Auth{
 		if(u == null){
 			error("could not find user: \""+username+"\"");
 			return;
-		}	
-		render(u);
+		}
+		List<IQuestion> questions = QaDB.findAllQuestionsOfUser(u);
+		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
+		
+		render(u, questions, answers);
 	}
 	
 	/**
