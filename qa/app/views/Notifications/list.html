@@ -5,12 +5,12 @@
 <h1>Notifications</h1>
 
 <div id="notifications">
-<div class="list">
   #{list items:notifications, as:'n'}
     #{set q:n.getQuestion()/}    
-    <div class="list-item ${n.isRead()?'read':'unread'}">
+    <div class="notification ${n.isRead()?'read':'unread'}">
       <div class="title">
       &{'notif.'+n.getType(),
+        actionBridge.Users.view(n.getOriginator().getId()),
         n.getOriginator().getName(),
         actionBridge.Questions.view(q.getId()),
         q.getTitle()
@@ -18,6 +18,5 @@
   
     </div>
   #{/list}
-</div>
 </div>
 

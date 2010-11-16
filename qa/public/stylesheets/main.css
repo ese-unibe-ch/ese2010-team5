@@ -23,6 +23,18 @@ body{
 	position: relative;
 	padding: 10px;
 }
+#header #logo{
+	width: 100px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+#logo a{
+	text-decoration: none;
+	font-size: xx-large;
+	color: white;
+}
+
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
 #header #loginbox{
@@ -49,8 +61,28 @@ body{
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   width:800px;
   margin-left:auto;
-  margin-right:auto;  
+  margin-right:auto;
+  overflow: hidden;     
 }
+#nav a {
+	display:block;	
+	text-decoration: none;
+  padding: 10px;
+  border-right: 1px solid black;
+  font-size: large;
+  float: left;
+  color: black;  
+}
+#nav a.last {
+  float: right;
+  border: 0px;
+  border-left: 1px solid black;
+}
+
+#nav a:hover{
+  background-color: white;
+}
+
 
 #loginbox img {
   border:1px solid #FFFFFF;
@@ -73,14 +105,75 @@ body{
 }
 
 
-#wrapper > #content{
+#wrapper #content{
   min-height: 100%;
   padding: 10px;	
   padding-bottom: 30px;
-  width:800px;
+  width:1000px;
   margin-left: auto;
   margin-right:auto;
+  overflow: auto;
+}
 
+#wrapper #notif-box{
+  /*border:1px solid #666666;*/
+  width: 180px;  
+  float:left;
+  padding:5px;  
+}
+
+#content #main{	  
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;    
+}
+#main.right{
+	float:right; 
+}
+
+
+
+#content .subnav{
+  border-bottom:1px solid #666666;
+  clear:both;
+  height:34px;
+  margin-bottom:15px;
+}
+
+.subnav h1 {
+  float:left;  
+  margin-bottom:0;
+}
+
+.subnav .tabs{
+  float:right;
+  font-weight: bold;
+}
+
+.tabs a{
+	background:inherit;
+	border:1px solid #FFFFFF;
+	color:#777777;
+	display:block;
+	float:left;
+	font-size:90%;
+	height:24px;
+	line-height:22px;
+	margin:8px 8px 0 0;
+	padding:0 11px;
+	text-decoration:none;
+}
+.tabs a.active{
+  background:none repeat scroll 0 0 #FFFFFF;
+  border-color:#777777 #777777 #FFFFFF;
+  border-style:solid;
+  border-width:1px;
+  color:black;
+  font-size:120%;
+  height:30px;
+  line-height:28px;
+  margin-top:3px;
+  padding:0 11px;	
 }
 
 #footer{
@@ -94,48 +187,6 @@ body{
 #footer .content{
   padding-left: 10px;
 }
-
-/* some actions like add question */
-.actions{	
-	padding: 10px;
-  border: 1px solid black;
-  
-	
-}
-
-#actions h1{
-	font-style: bold;
-	font-size: 20px;
-}
-
-/* list*/
-.list-item{    
-  border: 1px solid black;
-  padding: 10px;
-  margin-bottom:10px;
-}
-.list-item.even{
-  background-color: white;
-}
-
-.list-item.odd{
-  background-color: #dddddd;
-}
-.list-item .title{
-	font-size: x-large;
-}
-
-.list-item .question{
-  font-size: 20px;
-}
-
-.list-item .actions{
-  
-}
-.list-item .details{
-  
-}
-
 /*text-editor*/
 .text-editor {
 	  border:1px solid #CCCCCC;
@@ -197,31 +248,54 @@ body{
 }
 
 /* profile view */
-.profileview{
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
-  background-color: red;
+#profileview{
+  float:left;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
 }
 
-.profile-view h1{
+#profile-view h1{
   font-size: 20 px;
 }
 
-.profile-view .info{
+.info{
   display: block;
+  margin-top: 5px;
+  marigin-bottom: 5px;
 }
 
 /* notificatins*/
-#notifications .list-item{
-  padding-left: 30px;
+#notifications{
+	  
+}
+.notification{
+  border-bottom: 1px dashed black;
+  position: relative;
 }
 
-#notifications .list-item.read{  
+.notification a.delete{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  text-decoration: none;  
+}
+
+a.delete img{
+  border: 0px solid black;
+}
+
+.notification .title{
+  padding: 1em;
+  margin-left: 1em; 
+}
+
+.notification.read{  
   background:url("/public/images/read_message.png") no-repeat scroll 0.5em 1em transparent;
   
 }
-#notifications .list-item.unread{
+.notification.unread{
   background:url("/public/images/message.png") no-repeat scroll 0.5em 1em transparent;
   background-color: #EAF2F5;
   
@@ -281,15 +355,128 @@ body{
 }
 
 /*question view*/
-
-.question .title{
+#question{
+  clear: both;  
+}
+#question .title{
   border-bottom: 1px solid black;
 }
+#question .question-table,.answer-table{
+  width: 100%;
 
-.question .content{
-	
-	height: 15em;
-	
 }
 
+#question .answer{
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 20px; 
+}
+
+#question .vote{		
+	text-align: center;
+	font-size: x-large;	
+	vertical-align:top;
+	padding-top:2em;
+	width:64px;	
+}
+.vote .arrow_up,.arrow_down{
+	cursor: pointer;	
+	width:64px;
+	height:64px;	
+}
+.arrow_up{
+	background-image: url("/public/images/arrow_up.png");
+}
+.arrow_down{
+  background-image: url("/public/images/arrow_down.png");
+}
+
+#question .content{	
+	height: 15em;
+	padding: 20px;
+	font-size: large;	
+}
+#question .taglist{
+  margin-bottom:10px;  
+}
+#question .actions{
+	float: left;
+	margin-right: 10em;
+}
+#question .time{
+	float: left;
+	margin-right: 10px;
+}
+#question .owner{
+	float: right;
+	margin-right: 10px;
+}
+#question .comments{
+	clear:both;
+	margin-top: 20px;
+}
+.comments .comment{
+	border-bottom: 1px dashed black;
+  padding: 1em;    
+}
+
+
+.tag{
+	color:#3E6D8E;
+	background-color:#E0EAF1;
+	border-bottom:1px solid #3E6D8E;
+	border-right:1px solid #7F9FB6;
+	margin:2px 2px 2px 0;
+	padding:3px 4px 3px 4px;
+	text-decoration:none;
+	font-size:90%;
+	line-height:2.4;
+	white-space:nowrap;
+}
+
+.tag:hover{
+	background-color:#3E6D8E;
+	color:#E0EAF1;
+	border-bottom:1px solid #37607D;
+	border-right:1px solid #37607D;
+	text-decoration:none;
+}
+
+.error{
+	color: red;
+}
+
+.errors{
+	border: 2px solid red;
+	padding: 2px;
+	color: red;
+}
+
+.errors li{
+	list-style: none;
+}
+
+#status{
+	margin-top: 20px;
+	border-top: 1px solid black;
+}
+
+#status h1{
+	margin-top: 10px;
+}
+
+#status .votes{		
+  background:none repeat scroll 0 0 #EEEEEE;
+  float:left;
+  height:38px;
+  margin:0 3px 0 0;
+  padding:5px;
+  width:38px;
+  text-align:center;		
+}
+
+.answerthumb{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
 

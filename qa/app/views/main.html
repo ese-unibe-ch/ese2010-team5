@@ -3,29 +3,60 @@
 <html>
     <head>
         <title>#{get 'title' /}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">        
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>        
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
         <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+
+          function delNotification(id){
+        	  if(!id) return;
+
+        	  $.post( "@{Notifications.delete()}"
+        		        ,{id:id}
+        		        ,function (data){
+        		        	//on success
+          		        //remove item from the list                    
+        		          $("#notification-"+id).hide("slow");        		                
+        		        }
+        		        ,"text/html"
+        		);
+          }
+        
+        </script>
     </head>
     <body>
      <div id="wrapper">    
       <div id="header">
-       <div id="logo">
+       <div id="logo">        
         <a href="/">Q & A</a>
        </div>
-       <div id="nav">
-        <a href="@{Questions.create()}">Add Question</a> | 
+       <div id="nav">        
+         <a href="@{Questions.list()}">Questions</a>
+         <a href="@{Tags.list()}">Tags</a>
+        #{if user}          
+          <a class="last" href="@{Questions.create()}">Ask Question</a>          
+        #{/if}          
        </div>    	
     	 <div id="loginbox">
 	       #{if user}
-	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>
-	        | Notifications: <a href="@{Notifications.list()}" class="unread_count">${user.getNotifications().size()}</a>    
-    		  | <a href="@{Secure.logout()}">logout</a>    		  
+	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>	            
+    		  | <a href="@{Secure.logout()}">logout</a>
+    		  <br/>
+    		  <a href="@{Questions.listUser('DATE')}">My Questions</a><br></br>
+    		  <a href="@{Questions.listSubscriptions('DATE')}">My Subscriptions</a><br></br>    		      		  
     	   #{/if}
     	   #{else}
-	    	  Please <a href="@{Secure.login()}">login</a>    	
+    	      #{form @Secure.authenticate(), id:'loginForm'}
+    	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
+    	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
+    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br> 
+    	      <button type='submit'>Login</button>
+    	      #{/form}
+    	      <!-- 
+	    	  Please <a href="@{Secure.login()}">login</a>
+	    	   -->    	
  	       #{/else}
  	     </div>
       </div><!-- end header -->
@@ -41,17 +72,41 @@
          ${flash.info}
        </div>
       #{/if}
-      
-      <!-- content -->
+      <!-- content -->        
       <div id="content">
-        #{doLayout /}
-      </div>     
+        <!-- left box for notifications -->         
+        #{set boxvisible: ! notifications.isEmpty()/}
+        
+        #{if boxvisible} 
+        <div id="notif-box">          
+          #{list items:notifications, as:'n'}
+			    #{set nq:n.getQuestion()/}    
+			     <div id="notification-${n.getId()}" class="notification ${n.isRead()?'read':'unread'}">
+			       <a href="#" class="delete" onclick="delNotification('${n.getId()}')">
+			         <img src="@{'/public/images/delete.png'}"></img>
+			       </a>			       
+			       <div class="title">
+			      &{'notif.'+n.getType(),
+			        actionBridge.Users.view(n.getOriginator().getName()),
+			        n.getOriginator().getName(),
+			        actionBridge.Questions.view(nq.getId()),
+			        nq.getTitle()
+			        }</div>			  
+			    </div>			    
+			   #{/list}
+        </div>
+        #{/if}
+          
+        <div id="main" class="${boxvisible ? 'right' : ''}">
+          <div style="clear:both;"></div>
+          #{doLayout /}
+        </div>
+      </div><!-- end content -->     
       
       
       <div id="footer">      
         <div class="content">Q & A Team 5</div>
       </div>
-     </div><!-- end wrapper -->
-     
+     </div><!-- end wrapper -->     
     </body>
 </html>

@@ -1,21 +1,20 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<div class="navigation">
-	<div class="navigation-item"><a href="@{Tags.list()}">Tags</a></div>
-</div>
+
 <script type="text/javascript">
 
 function filter(tagstring){	
 
+	var match = ".question-summary";
 	
 	if(!tagstring){		
-		$(".question-summary").show();
+		$(match).show();
 		return;
 	}
 	
 	/*hide all and show those with the specified tags*/
-	$(".question-summary").hide();	
+	$(match).hide();	
 	
 	/*split*/	
 	var tags = tagstring.split(" ");
@@ -23,34 +22,32 @@ function filter(tagstring){
 	for( idx in tags ){
 		  var tag = tags[idx];		  
 		  if(tag){			  
-			  $(".question-summary."+tag).show();		    
+			  $(match+".tag").show();		    
 		  }  
 		  
-	}
-	
-
-	
+	}	
 }
-
-
 
 </script>
 
 
-<div class="actions">
-  <div>
-   #{ if user}
-    <b>Sorted by ${sortOrder}</b> 
-    Sort by: <a href="@{Questions.listByOrder('DATE')}">date</a> | <a href="@{Questions.listByOrder('RATING')}">rating</a><br/>    
-    AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>    
-    <br/>      
-   	
-   #{/if}
-   #{else}
-     Please <a href="@{Secure.login()}">login</a> to add,answer,vote questions..
-   #{/else} 
+<div class="subnav">
+#{if tagname}
+  <h1>Tagged Questions (${tagname})</h1>
+#{/if}  
+#{else}
+  <h1>Questions</h1>
+#{/else}
+  <div class="tabs">  
+    <a class="${sort == 'DATE' ? 'active':'' }"    href="DATE">Newest</a>
+    <a class="${sort == 'RATING' ? 'active':''}"  href="RATING">Votes</a>
   </div>
+  
+  <!--
+  AND tags: <input type="text" name="tags" onchange="filter($(this).val());"></input>
+  !-->
 </div>
+
 
 <br></br>
 <div class="question-list">
@@ -72,10 +69,13 @@ function filter(tagstring){
         <div class="summary">
           <h3><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></h3>
           <span class="tags">
-            <span>Tags: ${q.getTags()}</span>
+          Tags: 
+          #{list items:q.getTags(), as:'tag'}
+          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+      	  #{/list}
           </span>
           <div class="started">
-            <span>${q.getTimestamp()}</span>          
+            <span>${q.getTimestamp().since()}</span>          
           </div>
           <div style="clear: both"></div>
           <div class="user">
@@ -85,7 +85,3 @@ function filter(tagstring){
       </div>       
     #{/list}
 </div>
-
-
-
-

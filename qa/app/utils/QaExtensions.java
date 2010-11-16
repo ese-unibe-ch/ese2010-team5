@@ -2,6 +2,7 @@ package utils;
 
 import controllers.Security;
 import models.*;
+import models.impl.Post;
 import play.Logger;
 import play.templates.JavaExtensions;
 

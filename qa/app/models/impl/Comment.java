@@ -1,16 +1,20 @@
-package models;
+package models.impl;
 
 import play.*;
 import play.db.jpa.*;
 import utils.QaDB;
 
 import javax.persistence.*;
+
+import models.IComment;
+import models.IUser;
+
 import java.util.*;
 
 /**
  * The Class Comment.
  */
-public class Comment extends Post{
+public class Comment extends Post implements IComment{
 	
 	/** The comment belongs to a Post (either a Question or an Answer). */
 	private Post post;
@@ -37,9 +41,9 @@ public class Comment extends Post{
 		return post;
 	}
 
-	
 	protected void doDelete() {
-				
+			/*remove me from my post(answer or question)*/
+			post.delComment(this);
 	}
     
 }

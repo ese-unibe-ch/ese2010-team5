@@ -3,14 +3,16 @@
 
 
 <h1>Tags</h1>
-
+<br></br>
+<p>A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p> 
+<br></br>
 <div id="tags">
 <div class="list">
   #{list items:tags, as:'t'}
-    <div class="list-item}">
-      <div class="title"><a href="@{Tags.listQuestionsTaggedWith(t)}">&{t.getName()}</a></div>
+    #{set tagname:t.getName()/}
+    <div>
+      <a class="tag" href="@{Questions.list(null,tagname)}">${t.getName()}</a><span> x ${t.count()}</span>
     </div>
   #{/list}
 </div>
 </div>
-

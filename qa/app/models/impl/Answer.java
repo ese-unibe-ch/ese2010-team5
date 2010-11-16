@@ -1,4 +1,4 @@
-package models;
+package models.impl;
 
 import java.util.Collection;
 import java.util.Date;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import models.IQuestion;
+import models.IUser;
 
 import utils.QaDB;
 
@@ -15,7 +18,7 @@ import utils.QaDB;
 public class Answer extends Post {
 
 	/** The question this answer belongs to. */
-	private Question question;
+	private IQuestion question;
 	
 	/** The boolean value to see if it's rated as the best. */
 	private boolean isBest = false;
@@ -27,11 +30,10 @@ public class Answer extends Post {
 	 * @param content the content of the answer
 	 * @param inQuestion the question the answer belongs to
 	 */
-	public Answer(IUser owner, String content, Question inQuestion) {
+	public Answer(IUser owner, String content, IQuestion inQuestion) {
 		super(owner,content);
 		this.question = inQuestion;
-		question.addAnswer(this);
-		QaDB.addAnswer(this);
+		question.addAnswer(this);		
 	}	
 	
 	/**
@@ -39,7 +41,7 @@ public class Answer extends Post {
 	 *
 	 * @return the question
 	 */
-	public Question getQuestion(){
+	public IQuestion getQuestion(){
 		return question;
 	}
 	
@@ -67,8 +69,19 @@ public class Answer extends Post {
 	}
 	
 	
-	protected void doDelete() {	  
-		/* do somthing when im getting deleted*/	  
+	protected void doDelete() {
+		/*remove me from question*/
+		question.delAnswer(this);
+	}
+
+	/**
+	 * Sets the owner.
+	 *
+	 * @param user the new owner
+	 */
+	public void setOwner(IUser user) {
+		this.owner = user;
+		
 	}	
 
 }

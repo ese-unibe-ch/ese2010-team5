@@ -1,12 +1,10 @@
-package models;
+package models.impl;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+
+import models.INotification;
+import models.IQuestion;
+import models.IUser;
 
 import utils.QaDB;
 
@@ -32,7 +30,13 @@ public class User implements IUser {
 	private long id;	  
 	
 	/** The notifications. */
-	private List<Notification> notifications;
+	private List<INotification> notifications;
+	
+	/** */
+	private List<IQuestion> 		subscriptions;
+	
+	/** The posts list. */
+	private List<Post> posts;
 	
 	/** The id counter. */
 	private static long idCounter = 1;	
@@ -46,7 +50,9 @@ public class User implements IUser {
 		this.username = new String(username);
 		this.id = idCounter++;
 		this.birthDate = new Date(0);
-		this.notifications = new LinkedList<Notification>();
+		this.notifications = new LinkedList<INotification>();
+		this.posts = new LinkedList<Post>();
+		this.subscriptions = new LinkedList<IQuestion>();
 	}
 
 	/**
@@ -88,7 +94,7 @@ public class User implements IUser {
 	/**
 	 * Sets the email.
 	 *
-	 * @param email the new email
+	 * @param email the new email address
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -143,9 +149,9 @@ public class User implements IUser {
 	/**
 	 * Adds the notification.
 	 *
-	 * @param n the n
+	 * @param n the notification
 	 */
-	public void addNotification(Notification n){
+	public void addNotification(INotification n){
 		notifications.add(n);
 	}
 	
@@ -154,7 +160,7 @@ public class User implements IUser {
 	 *
 	 * @return the notifications
 	 */
-	public List<Notification> getNotifications(){
+	public List<INotification> getNotifications(){
 		return notifications;
 	}
 
@@ -163,18 +169,80 @@ public class User implements IUser {
 	 * Answers of the deleted user are deleted too.
 	 */
 	public void delete() {
-		assignQuestionsToAnonymous(this);
+		//assignQuestionsToAnonymous();
+		//deleteAnswers();
 		
+		//clone posts to prevent concurrent modification
+		List<Post> clone = new LinkedList<Post>();
+		for(Post post : posts){
+			clone.add(post);
+		}
+		
+		for (Post post:clone){
+			post.unregister();
+		}
+		this.posts.clear();
+		QaDB.removeUser(this);
 	}
 
-	private void assignQuestionsToAnonymous(User user) {
-		List<Question> result = (List<Question>) QaDB.findAllQuestionsOfUser(user);
-		
-		// for now i just set the owner to anonymous. no changes in DB.
-		for (Question q : result){
-			q.setOwner(QaDB.ANONYMOUS);
+	/**
+	 * Assign questions to anonymous.
+	 */
+	private void assignQuestionsToAnonymous() {
+		List<IQuestion> result = QaDB.findAllQuestionsOfUser(this);
+		// list is empty, why?
+		for (IQuestion q : result){
+			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
 		}
 		
 	}
+	
+	/**
+	 * Delete answers.
+	 */
+	private void deleteAnswers(){
+		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
+		// list is empty, why?
+		for (Answer a : answers){
+			a.setOwner(QaDB.ANONYMOUS);
+			QaDB.removeAnswer(a);
+		}
+	}
+
+	public void registerPost(Post post) {
+		this.posts.add(post);
+		
+	}
+
+	/**
+	 * Unregister from a post.
+	 *
+	 * @param post the post
+	 */
+	public void unregister(Post post) {
+		this.posts.remove(post);
+	}
+	
+  public void delNotification(INotification notif) {
+	  
+  	if(notif == null)return;
+  	notifications.remove(notif);  	
+	  
+  }
+	
+  public void addSubscription(IQuestion quest) {
+	  if(quest == null) return;	  
+	  subscriptions.add(quest);	  
+  }
+	
+  public List<IQuestion> getSubscriptions() {	  
+	  return subscriptions;
+  }
+	
+  public void remSubscription(IQuestion quest) {
+	  if(quest == null) return;
+	  subscriptions.remove(quest);
+	  
+  }
 
 }

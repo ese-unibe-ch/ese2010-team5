@@ -3,28 +3,52 @@ package controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import play.*;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
 
+import models.IQuestion;
 import models.IUser;
-import models.User;
+import models.impl.Answer;
+import models.impl.Question;
+import models.impl.User;
 import utils.QaDB;
 
+/**
+ * The Class Users.
+ */
 public class Users extends Auth{
 
+	/**
+	 * Edits the user.
+	 *
+	 * @param username the username
+	 */
 	public static void edit(String username) {
 		Logger.debug("Edit user profile: " + username);
 		IUser u = QaDB.findUserByName(username);
 		if(u == null){
 			error("could not find user: \""+username+"\"");
 			return;
-		}	
-		render(u);
+		}
+		List<IQuestion> questions = QaDB.findAllQuestionsOfUser(u);
+		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
+		
+		render(u, questions, answers);
 	}
 	
+	/**
+	 * Update profile.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param email the email
+	 * @param birthDate the birth date
+	 * @param homepage the homepage
+	 */
 	public static void updateProfile(long id, String name, String email, String birthDate, String homepage){
 		User user = QaDB.findUserById(id);
 		if (user == null)
@@ -46,6 +70,11 @@ public class Users extends Auth{
 		redirect("/users/edit/"+user.getName());
 	}
 	
+	/**
+	 * View the user.
+	 *
+	 * @param username the username
+	 */
 	public static void view(String username) {
 		Logger.debug("Show user profile: " + username);
 		User u = QaDB.findUserByName(username);
@@ -53,9 +82,28 @@ public class Users extends Auth{
 			error("could not find user: \""+username+"\"");
 			return;
 		}
-		if (session.get("username").equals(username))
+		
+		List<IQuestion> questions = QaDB.findAllQuestionsOfUser(u);
+		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
+		
+		if (Security.isConnected() && Security.connected().equals(username))
 			edit(u.getName());
 		else
-			render(u);
+			render(u, questions, answers);
+	}
+	
+	/**
+	 * Delete the user.
+	 *
+	 * @param username the username
+	 */
+	public static void delete(String username){
+		User user = QaDB.findUserByName(username);
+		if(user == null){
+			error("could not find user: \""+username+"\"");
+			return;
+		}
+		user.delete();
+		redirect("/");
 	}
 }

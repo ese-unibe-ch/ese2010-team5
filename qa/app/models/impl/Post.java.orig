@@ -1,16 +1,30 @@
-package models;
+package models.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import models.IComment;
+import models.IPost;
+import models.IQuestion;
+import models.IUser;
+
+<<<<<<< HEAD:qa/app/models/Post.java
 /**
  * The abstract Class Post.
  */
 public abstract class Post{
 
+=======
+import org.pegdown.PegDownProcessor;
+
+import utils.QaDB;
+import utils.QaMarkdown;
+
+/**
+ * The abstract Class Post.
+ */
+public abstract class Post implements IPost{
+	
+>>>>>>> 521ffcab343add54d075bd0533906ec738fbb7a0:qa/app/models/impl/Post.java
 	/** The owner. */
 	protected IUser owner;
 	
@@ -28,7 +42,7 @@ public abstract class Post{
 
 	
 	/** The comments list. */
-	private List<Comment> comments = new LinkedList<Comment>();	
+	private List<IComment> comments = new LinkedList<IComment>();	
 
 	/** The id counter. */
 	private static long idCounter = 1;
@@ -36,7 +50,7 @@ public abstract class Post{
 	/**
 	 * Instantiates a new post.
 	 *
-	 * @param inUser the in user that created the post
+	 * @param inUser the user that created the post
 	 * @param inContent the content of the post
 	 */
 	protected Post(IUser inUser, String inContent){
@@ -45,6 +59,7 @@ public abstract class Post{
 		this.timestamp = new Date(System.currentTimeMillis());
 		this.id = idCounter++;
 		this.votes = new LinkedList<Vote>();
+		owner.registerPost(this);
 	}
 	
 	/**
@@ -52,8 +67,21 @@ public abstract class Post{
 	 *
 	 * @param comment the comment
 	 */
-	public void addComment(Comment comment){
+	public void addComment(IComment comment){
 		this.comments.add(comment);
+	}
+	
+	/**
+	 * Del a comment .
+	 *
+	 * @param comment the comment
+	 */
+	public boolean delComment(Comment comment){
+		if(comments != null && comment != null){
+			return comments.remove(comment);
+		}
+		return false;
+		
 	}
 	
 	/**
@@ -61,7 +89,7 @@ public abstract class Post{
 	 *
 	 * @return the comments
 	 */
-	public List<Comment> getComments(){
+	public List<IComment> getComments(){
 		return comments;
 	}
 	
@@ -75,7 +103,7 @@ public abstract class Post{
 	}
 	
 	/**
-	 * Return the content
+	 * Return the content.
 	 *
 	 * @return the content
 	 */
@@ -101,17 +129,26 @@ public abstract class Post{
 		return id;
 	}
 	
+	public void delete(){
+		doDelete();
+	}
+	
 	/**
 	 * The delete method.
 	 */	
-	
 	protected abstract void doDelete();
 	
 	
 	/**
 	 * Rates an entry with +1 when up is true, -1 otherwise.
+<<<<<<< HEAD:qa/app/models/Post.java
 	 * @param user - The User who rates the entry.
 	 * @param up the up
+=======
+	 *
+	 * @param user the User who rates the entry.
+	 * @param up the rate value
+>>>>>>> 521ffcab343add54d075bd0533906ec738fbb7a0:qa/app/models/impl/Post.java
 	 */
 	private void rate(IUser user, boolean up) {
 		
@@ -139,8 +176,7 @@ public abstract class Post{
 	/**
 	 * Rates an entry with +1.
 	 * 
-	 * @param user
-	 *            - The user who rates the entry.
+	 * @param user The user who rates the entry.
 	 */
 	public void rateUp(IUser user) {
 		rate(user,true);
@@ -149,8 +185,7 @@ public abstract class Post{
 	/**
 	 * Rates an entry with -1.
 	 * 
-	 * @param user
-	 *            - The user who rates the entry.
+	 * @param user The user who rates the entry.
 	 */
 	public void rateDown(IUser user) {
 		rate(user,false);
@@ -159,7 +194,7 @@ public abstract class Post{
 	/**
 	 * Calculates the average mark for the entry.
 	 *
-	 * @return the votation
+	 * @return the count of the votes
 	 */
 	public int getVotation() {		
 		
@@ -182,6 +217,36 @@ public abstract class Post{
 		
 		
 	}
+
+	/**
+	 * Unregister a user from the post.
+	 */
+	public void unregister() {
+		this.owner.unregister(this);
+		//removeFromDB();
+	}
+	
+	/**
+	 * Removes the post from db.
+	 */
+	private void removeFromDB(){
+		System.out.println("DB Remove");
+		if (this.getClass() == Question.class){
+			QaDB.removeQuestion((IQuestion)this);
+			System.out.println("Question");
+		}
+		else{
+			if (this.getClass().equals(Answer.class)){
+				QaDB.removeAnswer((Answer)this);
+				System.out.println("Answer");
+			}
+			else{
+				QaDB.removeComment((IComment)this);
+				System.out.println("Comment");
+			}
+		}
+	}
+		
 	
 }	
 	

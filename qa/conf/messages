@@ -2,4 +2,6 @@
 # For example, for French create a messages.fr file
 #
 
-notif.NEW_ANSWER=%s added an answer to <a href='%s'>%s</a> 
+
+notif.NEW_ANSWER=<a href='%s'>%s</a> answered to <a href='%s'>%s</a>
+validation.required=A %s is required

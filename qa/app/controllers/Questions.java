@@ -2,87 +2,140 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.annotations.SortType;
 
-import models.Answer;
-import models.Comment;
-import models.Notification;
-import models.Post;
-import models.Question;
-import models.Tag;
-import models.User;
+import models.INotification;
+import models.IPost;
+import models.IQuestion;
+import models.IUser;
+import models.impl.Answer;
+import models.impl.Comment;
+import models.impl.Notification;
+import models.impl.Post;
+import models.impl.Question;
+import models.impl.Tag;
+import models.impl.User;
 
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaDB;
+import utils.QaSorter;
 import utils.QaDB.OrderBy;
 
+/**
+ * The Class Questions.
+ */
 public class Questions extends Posts {	
 	
 	
-	public static void listByTag(String tag){
+	/**
+	 * List the questions.
+	 *
+	 * @param sort the sort
+	 * @param tagname the tag's name
+	 */
+	public static void list(String sort, String tagname){
 		
-		//TODO		
+		Tag tag = null;		
+		Collection<Question> questions = null;
+		OrderBy	orderBy = OrderBy.DATE;
 		
-		OrderBy sortOrder = OrderBy.DATE;
-		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		renderTemplate("list.html",questions,sortOrder);		
-		
-	}
-	
-	
-	
-	public static void listByOrder(String orderby){
-		
-		Logger.debug("params:", params);
-		
-		OrderBy sortOrder = OrderBy.DATE;
-		
-		if(orderby != null){
-			sortOrder = OrderBy.valueOf(orderby);
+		if(tagname != null){
+			tag = QaDB.findTagByName(tagname);			
 		}
+		if(sort != null && sort.length() > 0){
+			orderBy = OrderBy.valueOf(sort);
+		}else{
+			sort = orderBy.name();
+		}	
 		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		renderTemplate("Questions/list.html",questions,sortOrder);		
+				
+		if(tag != null){
+			questions = QaDB.findAllQuestionsTaggedWith(tag, orderBy);			
+		}else{
+			questions = QaDB.findAllQuestions(orderBy);
+		}		 		
 		
-	}
+		render(questions,sort,tagname);		
+		
+				
+		
+	}	
 	
-	/*default listing*/	
-	public static void list(){		
+	/**
+	 * List all default.
+	 */
+	public static void listAll(){		
 		
-		OrderBy sortOrder = OrderBy.DATE;
+		OrderBy sortOrderEnum = OrderBy.DATE;
 		
-		Collection<Question> questions = QaDB.findAllQuestions(sortOrder);
-		render(questions,sortOrder);
+		Collection<Question> questions = QaDB.findAllQuestions(sortOrderEnum);
+		String sort = sortOrderEnum.name();
+		renderTemplate("Questions/list.html",questions,sort);
 			
 	}
 	
-	public static void delete(long id){
+	public static void listUser(String inSort){
+						
+		List<IQuestion> questions = null;
+		OrderBy	orderBy = inSort != null ?
+				OrderBy.valueOf(inSort) :
+				OrderBy.DATE;
+		String sort = orderBy.name();
+		String tagname = "";
 		
-		Post p = QaDB.findPostById(id);
-		
-		if(p == null){
-			flash.error("could not find Question with id "+id);
+		if(user == null){
+			flash.error("not logged in");
+			listAll();
+			return;
 		}else{
-			if(QaDB.delPost(p))
-				flash.put("info","Question "+p.getId()+" deleted");
-			else
-				flash.put("error","Could not delete "+p.getId());
-		}			
-		
-		list();		
+			tagname 	= user.getName();
+			questions = QaDB.findAllQuestionsOfUser(user,orderBy);			
+			render("Questions/list.html",questions,sort,tagname);
+		}
 		
 	}
 	
+	public static void listSubscriptions(String inSort){
+						
+		List<IQuestion> questions = null;
+		OrderBy	orderBy = inSort != null ?
+				OrderBy.valueOf(inSort) :
+				OrderBy.DATE;
+		String sort = orderBy.name();
+		String tagname = "";
+		
+		if(user == null){
+			flash.error("not logged in");
+			listAll();
+			return;
+		}else{
+			tagname 	= "my subscriptions";
+			questions = user.getSubscriptions();
+			Collections.sort(questions, new QaSorter(orderBy));
+			render("Questions/list.html",questions,sort,tagname);
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * Mark best answer.
+	 *
+	 * @param qId the id of the question
+	 * @param aId the id of the answer being marked as the best
+	 */
 	public static void markBestAnswer(long qId, long aId){
 		
 		Logger.debug("marking best answer "+aId+" for question "+qId);
 		
-		Question q = QaDB.findQuestionById(qId);		
+		IQuestion q = QaDB.findQuestionById(qId);		
 		
 		if(q == null){
 			flash("error", "failed setting best answer for q: "+qId);
@@ -102,30 +155,59 @@ public class Questions extends Posts {
 
 	}
 
-	public static void save(String content, String title, String tags){
+	/**
+	 * Save a question.
+	 *
+	 * @param content the content
+	 * @param title the title
+	 * @param tags the tags
+	 * @param tag the tag
+	 */
+	public static void save(String content, String title, String[] tag){
 		
-		Logger.debug("Create Question with content: "+content);	
+		validation.required(title);
+		validation.required(content);
+		validation.required(tag);
 		
-		String[] tagArray = new String[]{};
-		
-		if(tags != null){
-			tagArray = tags.split(", ");
+		if (validation.hasErrors()){
+			 params.flash(); // add http parameters to the flash scope
+	         validation.keep(); // keep the errors for the next request
+	         create();
 		}
+		
+		Logger.debug("Create Question with content: "+content);
+		
+		StringBuffer tagStr = new StringBuffer();
+		int arrL = tag.length;
+		for (int j = 0; j < arrL; j++){
+			tagStr.append(tag[j]);
+			tagStr.append(", ");
+		}
+		String tags = tagStr.toString();
 		 		
-		Question q = QaDB.addQuestion(new Question(user, title, content, tagArray));	
+		Question q = QaDB.addQuestion(new Question(user, title, content, tags));	
 		
 		Logger.debug("Question "+" created");
 		flash.put("info", "Question "+q.getId()+" created");
 		
-		list();
+		listAll();
 		
 	}
 	
+	/**
+	 * Creates the question.
+	 */
 	public static void create(){
 		render();
 		
 	}
 
+	/**
+	 * Adds the answer.
+	 *
+	 * @param answer the answer
+	 * @param qId the q id
+	 */
 	public static void addAnswer(String answer, long qId){
 		Question q = QaDB.findQuestionById(qId);
 		if(q == null){
@@ -135,18 +217,17 @@ public class Questions extends Posts {
 		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));
 		flash.put("info", "answer Created: "+newAnswer.getId());
 		
-		/*publish notifications for subscribers*/
-		List<User> subscribers = q.getSubscribers();
-		for(User subscriber : subscribers){
-			/*the logged in user is the originator of this notification*/
-			subscriber.addNotification(new Notification(user,q, Notification.Type.NEW_ANSWER));
-		}
-		
 		view(qId);		
 			
 	}
 	
 
+	/**
+	 * Adds the comment.
+	 *
+	 * @param comment the comment
+	 * @param qId the q id
+	 */
 	public static void addComment(String comment, long qId){
 		
 		Question q = QaDB.findQuestionById(qId);
@@ -163,41 +244,44 @@ public class Questions extends Posts {
 		view(qId);
 	}
 	
+	/**
+	 * View the question.
+	 *
+	 * @param id the id
+	 */
 	public static void view(long id){
 		Logger.debug("Show question: "+id);
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
 		}
 		
 		List<Answer> answers = q.getAnswers();
-		if(! answers.isEmpty()){			
-			/* find best answer*/
-			int idx = -1;
-			for(Answer a: answers){
-				idx++;
-				if(a.isBest()){					
-					break;
+		
+		if(user != null){
+			for(INotification n : user.getNotifications()){
+				if(user.equals(n.getSubscriber()) &&
+						q.equals(n.getQuestion())){
+					n.markAsRead();
 				}
 			}
-			/* move to the head if found*/
-			if(idx >= 0){
-				Answer bestAnswer = answers.remove(idx);
-				answers.add(0, bestAnswer);
-			}
-			
 		}
 		
 		render(q,answers);
 		
 	}
 	
+	/**
+	 * Edits the question.
+	 *
+	 * @param id the id
+	 */
 	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
@@ -207,10 +291,17 @@ public class Questions extends Posts {
 		
 	}
 	
+	/**
+	 * Sets the content.
+	 *
+	 * @param id the id
+	 * @param title the title
+	 * @param content the content
+	 */
 	public static void setContent(long id, String title, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
 		
-		Question q = QaDB.findQuestionById(id);
+		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
@@ -219,6 +310,28 @@ public class Questions extends Posts {
 		q.setContent(content);
 		flash.put("info","Content of question "+id+" changed");
 		view(id);
+		
+	}
+	
+	public static void toggleSubscriber(long qId, long userId){
+		IQuestion q = QaDB.findQuestionById(qId);
+		IUser			u = QaDB.findUserById(userId);
+		
+		if(u == null || q == null){
+			flash.error("someting went wrong. user: %s, quest: %s", u,q);
+			view(qId);
+		}
+		
+		if(q.isSubscriber(u)){
+			q.remSubscriber(u);
+			flash("info", "unsubscribed from "+q.getTitle());
+
+		}else{
+			q.addSubscriber(u);
+			flash("info", "subscribed to "+q.getTitle());
+		}
+		
+		view(q.getId());
 		
 	}
 	

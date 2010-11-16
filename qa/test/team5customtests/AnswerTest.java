@@ -5,20 +5,24 @@ import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
 import models.*;
+import models.impl.Answer;
+import models.mock.MockQuestion;
+import models.mock.MockUser;
+
 import org.junit.Before;
 import org.junit.*;
 
 public class AnswerTest extends UnitTest{
 	public Answer ans;
 	public IUser use1,use2;
-	public IPost quest;
+	public IQuestion quest;
 
 	@Before
 	public void setUp() throws Exception {
 		use1 = new MockUser("Hans");
 		use2 = new MockUser("Peter");
-		quest = (IPost)new MockQuestion(use1,"Will this UnitTest work?");
-		ans = new Answer((User)use1,"This UnitTest will work sometime!",(Question)quest);
+		quest = new MockQuestion(use1,"Will this UnitTest work?");
+		ans = new Answer(use1,"This UnitTest will work sometime!",quest);
 	}
 	
 	@Test
@@ -27,11 +31,10 @@ public class AnswerTest extends UnitTest{
 	}
 	
 	@Test
-	public void shouldSetProperlyToBest(){
+	public void shouldSetToBest(){
 		assertFalse(ans.isBest());
 		ans.setIsBest(true);
-		assertTrue(ans.isBest());
-		
+		assertTrue(ans.isBest());		
 	}
 	
 	@Test
@@ -45,4 +48,11 @@ public class AnswerTest extends UnitTest{
 		assertEquals("rating: 1, This UnitTest will work sometime!",ans.toString());
 	}
 
+
+	@Test
+	public void shouldReplacePreviousOwnerWithNewOwner(){
+		assertEquals(use1,ans.getOwner());
+		ans.setOwner(use2);
+		assertEquals(use2,ans.getOwner());
+	}
 }
