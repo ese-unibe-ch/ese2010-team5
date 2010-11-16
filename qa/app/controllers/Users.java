@@ -96,14 +96,17 @@ public class Users extends Auth{
 	 * Delete the user.
 	 *
 	 * @param username the username
+	 * @throws Throwable 
 	 */
-	public static void delete(String username){
+	public static void delete(String username) throws Throwable{
 		User user = QaDB.findUserByName(username);
 		if(user == null){
 			error("could not find user: \""+username+"\"");
 			return;
 		}
 		user.delete();
-		redirect("/");
+		Secure.logout();
+		//redirect("/");
+
 	}
 }
