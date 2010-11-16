@@ -31,15 +31,16 @@ public class Auth extends Controller{
 		if (Security.isConnected()) {
 			user = QaDB.findUserByName(Security.connected());
 			
-			Collection<INotification> notifications = 
-				user != null ? 
-					user.getNotifications():
-					new LinkedList();
 			
 			renderArgs.put("username", user.getName());
 			renderArgs.put("user", user);
-			renderArgs.put("notifications", notifications);
 		}
+		
+		Collection<INotification> notifications = 
+			user != null ? 
+					user.getNotifications():
+						new LinkedList();
+		renderArgs.put("notifications", notifications);
 	}	
 	
 	
