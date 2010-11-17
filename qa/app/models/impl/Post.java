@@ -112,6 +112,13 @@ public abstract class Post implements IPost{
 		return timestamp;
 	}
 	
+	public void setTimestamp(Date inDate){
+		if(inDate == null) return;
+		this.timestamp = inDate;
+	}
+	
+	
+	
 	/**
 	 * Gets the id.
 	 *

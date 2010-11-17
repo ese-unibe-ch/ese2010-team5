@@ -45,6 +45,17 @@ public class Answer extends Post {
 		return question;
 	}
 	
+	public void setQuestion(IQuestion q){
+		if(q == null) return;
+		
+		if(question != null)
+			question.delAnswer(this);
+		
+		question = q;
+		question.addAnswer(this);
+		
+	}
+	
 	
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
