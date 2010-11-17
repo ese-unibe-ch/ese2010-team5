@@ -154,8 +154,8 @@ public class QaImporter {
 						q.setOwner(userMap.get(Long.parseLong(id)));
 						break;
 					case QUESTION_TIMESTAMP:
-						timestamp = Long.parseLong(r.getText());
-						q.setTimestamp(new Date(timestamp));
+						timestamp = Long.parseLong(r.getText());						
+						q.setTimestamp(new Date(timestamp*1000));
 						break;
 					case QUESTION_TITLE:
 						q.setTitle(r.getText());
