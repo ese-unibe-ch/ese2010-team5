@@ -1,0 +1,30 @@
+#{set title:'Admin' /}
+
+
+<h1>Admin</h1>
+<!-- messages from flash scopes -->
+#{if flash.error }
+ <div class="message error">
+   ${flash.error}
+ </div>
+#{/if}
+#{if flash.success }
+ <div class="message info">
+   ${flash.success}
+ </div>
+#{/if}
+
+#{form @Admin.upload(), id:'uploadForm', enctype:'multipart/form-data'}
+
+File: <input name="file" type="file"></input>
+      <input type="submit" value="import"></input>
+#{/form}
+
+
+      
+<p>log</p>
+#{list items:logs, as:'log'}
+  <p>${log}</p>
+#{/list}
+
+

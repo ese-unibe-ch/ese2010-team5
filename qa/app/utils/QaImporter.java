@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -25,9 +27,11 @@ public class QaImporter {
 	private static IUser 			dummyUser 	= new User("dummy");
 	private static IQuestion  dummyQuest  = new Question(dummyUser,"dummy quest");
 	
-	private static HashMap<Long, IUser> 		userMap = new HashMap<Long, IUser>();
-	private static HashMap<Long, IQuestion> questMap = new HashMap<Long, IQuestion>();
+	private static HashMap<Long, User> 		userMap = new HashMap<Long, User>();
+	private static HashMap<Long, Question> questMap = new HashMap<Long, Question>();
 	private static HashMap<Long, Answer> answerMap = new HashMap<Long, Answer>();
+	
+	private static List<String> logs = new LinkedList();
 	
 	private enum STATE{
 		UNKNOWN,
@@ -56,6 +60,10 @@ public class QaImporter {
 		try {
 			XMLStreamReader r = factory.createXMLStreamReader(is);
 			STATE state = STATE.UNKNOWN;
+			logs = new LinkedList<String>();
+			userMap.clear();
+			questMap.clear();
+			answerMap.clear();
 			StringBuilder content = new StringBuilder();
 			long timestamp = 0;
 			String id = "";
@@ -112,7 +120,7 @@ public class QaImporter {
 					if(r.getLocalName().equals("user")){						
 						u = null;
 					}else if(r.getLocalName().equals("question")){						
-						q.setContent(content.toString());						
+						q.setContent(content.toString(),true);						
 						content = new StringBuilder();
 						q = null;
 					}else if(r.getLocalName().equals("answer")){						
@@ -123,9 +131,12 @@ public class QaImporter {
 					state = STATE.UNKNOWN;	
 					break;
 				case XMLStreamReader.END_DOCUMENT:
-					System.out.println("nr of imported users: "+userMap.size());
-					System.out.println("nr of imported questions: "+questMap.size());
-					System.out.println("nr of imported answers: "+answerMap.size());
+					logs.add("nr of imported users: "+userMap.size());
+					logs.add("nr of imported questions: "+questMap.size());
+					logs.add("nr of imported answers: "+answerMap.size());
+					
+					toDB();
+					
 					break;
 				default:
 					switch(state){
@@ -172,10 +183,32 @@ public class QaImporter {
 			return true;
 		} catch (XMLStreamException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logs.add("error: "+e.getMessage());
+		}	catch (Exception e){
+			logs.add("error: "+e.getMessage());
 		}
 		
-		return false;
+		return false;	
+		
+	}
+	
+	public static String[] getLog(){
+		return logs != null ? 
+				logs.toArray(new String[]{}) : 
+				new String[]{};
+	}
+	
+	private static void toDB(){
+		/*users*/
+		for(User u : userMap.values()){
+			QaDB.addUser(u);
+		}
+		for(Question q : questMap.values()){
+			QaDB.addQuestion(q);
+		}
+		for(Answer a : answerMap.values()){
+			QaDB.addAnswer(a);
+		}
 		
 		
 	}

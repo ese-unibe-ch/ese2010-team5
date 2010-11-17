@@ -8,7 +8,8 @@
 *       /                                            module:secure
 
 GET     /	  					                               Questions.listAll
-GET     /{sort}/?                                    Questions.list
+GET     /admin/?                                     Admin.index
+GET     /{<RATING|DATE>sort}/?                       Questions.list
 GET     /myquestions/{inSort}/?                      Questions.listUser
 GET     /mysubscriptions/{inSort}/?                  Questions.listSubscriptions
 GET     /questions/tagged/{tagname}/{sort}           Questions.list
