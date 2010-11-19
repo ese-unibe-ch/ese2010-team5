@@ -33,6 +33,19 @@
   	  		  	$("#commentRating").html(data);
   	 },"text/html");
     }
+    
+    
+     function likeComment(commentId){
+  	 $.post("@{Comments.incrementLike()}"
+  		  	,{id:commentId}
+  		  	,function (data){
+  	  		  	//update rating
+  	  		  	$("#likeComment").html(data);
+  	 },"text/html");
+    }
+    
+    
+    
 </script>
 
 <div id="question">    
@@ -83,8 +96,10 @@
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
 	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
-	                <a href="@{Comments.edit(comment.getId())}">edit</a>
-	              #{/if}
+	                <a href="@{Comments.edit(comment.getId())}">edit</a> |
+	            #{/if} 
+	             <a href="#" onclick="likeComment(${comment.getId()})">like</a>
+	              <div id="likeComment">${comment.getLikes()} </div> users like this comment
 	            </div>
 	         
 	       #{/list}
