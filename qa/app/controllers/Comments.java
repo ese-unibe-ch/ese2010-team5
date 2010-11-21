@@ -28,7 +28,6 @@ public class Comments extends Posts {
 			flash("error", "could not find Comment with id " + id);
 			redirect("/");
 		}
-
 		render(c);
 
 	}
@@ -65,9 +64,16 @@ public class Comments extends Posts {
 
 	}
 
-	public static void incrementLike(long id) {
+	/**
+	 * @author simon
+	 */
+	public static void LikeOrUnlike(long id, boolean likesComment) {
 		Comment comment = QaDB.findCommentById(id);
-		comment.incLike(user);
+		if (likesComment) {
+			comment.like(user);
+		} else {
+			comment.dislike(user);
+		}
 		renderText(comment.getLikes());
 	}
 

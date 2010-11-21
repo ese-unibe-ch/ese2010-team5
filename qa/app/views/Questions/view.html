@@ -35,15 +35,23 @@
     }
     
     
-     function likeComment(commentId){
-  	 $.post("@{Comments.incrementLike()}"
-  		  	,{id:commentId}
+     function likeCommentQuestion(commentId, likesComment){
+  	 $.post("@{Comments.LikeOrUnlike()}"
+  		  	,{id:commentId,likesComment:likesComment}
   		  	,function (data){
-  	  		  	//update rating
-  	  		  	$("#likeComment").html(data);
+  	  		  	//update likes and unlikes
+  	  		  	$("#likeCommentQuestion").html(data);
   	 },"text/html");
     }
     
+    function likeCommentAnswer(commentId, likesComment){
+  	 $.post("@{Comments.LikeOrUnlike()}"
+  		  	,{id:commentId,likesComment:likesComment}
+  		  	,function (data){
+  	  		  	//update likes and unlikes
+  	  		  	$("#likeCommentAnswer").html(data);
+  	 },"text/html");
+    }
     
     
 </script>
@@ -90,17 +98,22 @@
         <h3>Comments (${q.getComments().size()})</h3>
             
 	       #{list items:q.getComments(), as:'comment'}
-	           <div class="comment">
+	       	<div class="comment">
 	            ${comment.getContent()}
 	            <br></br>by <span>${comment.getOwner().getName()}</span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
 	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
-	                <a href="@{Comments.edit(comment.getId())}">edit</a> |
+	                <a href="@{Comments.edit(comment.getId())}">edit</a>
 	            #{/if} 
-	             <a href="#" onclick="likeComment(${comment.getId()})">like</a>
-	              <div id="likeComment">${comment.getLikes()} </div> users like this comment
-	            </div>
+	            #{if user  && !comment.isInLikeList(user)}
+	            	<div class="like-button">
+	            		<a href="#" onclick="likeCommentQuestion(${comment.getId()},true)">like</a> |
+	            		<a href="#" onclick="likeCommentQuestion(${comment.getId()},false)">unlike</a>
+	            	</div>	            	
+	            #{/if}
+	            <div id="likeCommentQuestion">${comment.getLikes()}</div>
+	        </div>
 	         
 	       #{/list}
 	       <br></br>
@@ -167,6 +180,13 @@
                   <a href="@{Comments.delete(comment.getId())}">delete</a> |
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
               #{/if}
+              #{if user  && !comment.isInLikeList(user)}
+	          	  <div class="like-button">
+	              <a href="#" onclick="likeCommentAnswer(${comment.getId()},true)">like</a> |
+	              <a href="#" onclick="likeCommentAnswer(${comment.getId()},false)">unlike</a>
+	              </div>	            	
+	          #{/if}
+	          <div id="likeCommentAnswer">${comment.getLikes()}</div>
              </div>           
          #{/list}
          <br></br>
