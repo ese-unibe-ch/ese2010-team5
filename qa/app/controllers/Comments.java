@@ -52,6 +52,25 @@ public class Comments extends Posts {
 		cA.setContent(content);
 		flash.put("info", "Content of answer " + id + " changed");
 
+		showMyQuestion(cA);
+
+	}
+
+	/**
+	 * @author simon and marius
+	 */
+	public static void likeOrUnlike(long id, boolean likesComment) {
+		Comment comment = QaDB.findCommentById(id);
+		if (likesComment) {
+			comment.like(user);
+		} else {
+			comment.dislike(user);
+		}
+
+		showMyQuestion(comment);
+	}
+
+	private static void showMyQuestion(Comment cA) {
 		Post a = cA.getPost();
 
 		if (a instanceof Question)
@@ -61,20 +80,6 @@ public class Comments extends Posts {
 			IQuestion q = b.getQuestion();
 			Questions.view(q.getId());
 		}
-
-	}
-
-	/**
-	 * @author simon
-	 */
-	public static void LikeOrUnlike(long id, boolean likesComment) {
-		Comment comment = QaDB.findCommentById(id);
-		if (likesComment) {
-			comment.like(user);
-		} else {
-			comment.dislike(user);
-		}
-		renderText(comment.getLikes());
 	}
 
 }

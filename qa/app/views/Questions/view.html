@@ -105,14 +105,16 @@
 	            #{if comment.ownPost()}
 	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
-	            #{/if} 
-	            #{if user  && !comment.isInLikeList(user)}
-	            	<div class="like-button">
-	            		<a href="#" onclick="likeCommentQuestion(${comment.getId()},true)">like</a> |
-	            		<a href="#" onclick="likeCommentQuestion(${comment.getId()},false)">unlike</a>
-	            	</div>	            	
 	            #{/if}
-	            <div id="likeCommentQuestion">${comment.getLikes()}</div>
+	            #{if user  && !comment.ownPost()}
+	            	#{if comment.isInLikeList(user)}
+	            		<a href="@{Comments.likeOrUnlike(comment.getId(),false)}">unlike</a>
+	            	#{/if}
+	            	#{else}
+	            		<a href="@{Comments.likeOrUnlike(comment.getId(),true)}">like</a>
+	            	#{/else} 
+	            #{/if}
+	            <div id="likeComment">${comment.getLikes()}</div>
 	        </div>
 	         
 	       #{/list}
@@ -180,13 +182,15 @@
                   <a href="@{Comments.delete(comment.getId())}">delete</a> |
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
               #{/if}
-              #{if user  && !comment.isInLikeList(user)}
-	          	  <div class="like-button">
-	              <a href="#" onclick="likeCommentAnswer(${comment.getId()},true)">like</a> |
-	              <a href="#" onclick="likeCommentAnswer(${comment.getId()},false)">unlike</a>
-	              </div>	            	
+	          #{if user  && !comment.ownPost()}
+	          	#{if comment.isInLikeList(user)}
+	          		<a href="@{Comments.likeOrUnlike(comment.getId(),false)}">unlike</a>
+	          	#{/if}
+	           	#{else}
+    	       		<a href="@{Comments.likeOrUnlike(comment.getId(),true)}">like</a>
+	           	#{/else} 
 	          #{/if}
-	          <div id="likeCommentAnswer">${comment.getLikes()}</div>
+	          <div id="likeComment">${comment.getLikes()}</div>
              </div>           
          #{/list}
          <br></br>
