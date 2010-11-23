@@ -14,7 +14,6 @@ public class Comment extends Post implements IComment {
 
 	/** The comment belongs to a Post (either a Question or an Answer). */
 	private Post post;
-	private int likes;
 	private List<IUser> likeList;
 
 	/**
@@ -31,7 +30,6 @@ public class Comment extends Post implements IComment {
 		super(owner, content);
 		this.post = quest;
 		this.post.addComment(this);
-		this.likes = 0;
 		this.likeList = new ArrayList<IUser>();
 	}
 
@@ -57,10 +55,10 @@ public class Comment extends Post implements IComment {
 	 * @author simon and marius
 	 */
 	public String getLikes() {
-		if (likes == 1) {
-			return likes + " user likes this comment.";
+		if (likeList.size() == 1) {
+			return likeList.size() + " user likes this comment.";
 		} else {
-			return likes + " users like this comment.";
+			return likeList.size() + " users like this comment.";
 		}
 	}
 
@@ -70,14 +68,12 @@ public class Comment extends Post implements IComment {
 
 	public void like(User user) {
 		if (!(likeList.contains(user) || this.getOwner().equals(user))) {
-			likes++;
 			likeList.add(user);
 		}
 	}
 
 	public void dislike(User user) {
 		if (likeList.contains(user)) {
-			likes--;
 			likeList.remove(user);
 		}
 	}
