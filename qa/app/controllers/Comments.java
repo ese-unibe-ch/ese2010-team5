@@ -2,6 +2,7 @@ package controllers;
 
 import models.IComment;
 import models.IQuestion;
+import models.IUser;
 import models.impl.Answer;
 import models.impl.Comment;
 import models.impl.Post;
@@ -62,9 +63,9 @@ public class Comments extends Posts {
 	public static void likeOrUnlike(long id, boolean likesComment) {
 		Comment comment = QaDB.findCommentById(id);
 		if (likesComment) {
-			comment.like(user);
+			comment.like((IUser) user);
 		} else {
-			comment.dislike(user);
+			comment.dislike((IUser) user);
 		}
 
 		showMyQuestion(comment);

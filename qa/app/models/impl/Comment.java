@@ -62,17 +62,17 @@ public class Comment extends Post implements IComment {
 		}
 	}
 
-	public boolean isInLikeList(User user) {
+	public boolean isInLikeList(IUser user) {
 		return likeList.contains(user);
 	}
 
-	public void like(User user) {
+	public void like(IUser user) {
 		if (!(likeList.contains(user) || this.getOwner().equals(user))) {
 			likeList.add(user);
 		}
 	}
 
-	public void dislike(User user) {
+	public void dislike(IUser user) {
 		if (likeList.contains(user)) {
 			likeList.remove(user);
 		}
