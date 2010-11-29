@@ -38,7 +38,7 @@ code {
 #header {	
 	background-color: grey;
 	position: relative;
-	padding: 10px;
+	padding: 25px;
 }
 #header #logo{
 	width: 100px;
@@ -51,7 +51,6 @@ code {
 	font-size: xx-large;
 	color: white;
 }
-
 
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
