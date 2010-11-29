@@ -32,21 +32,23 @@
        <div id="logo">        
         <a href="/">Q & A</a>
        </div>
-       <div id="nav">        
+  
+       <div id="nav">               
          <a href="@{Questions.list()}">Questions</a>
          <a href="@{Tags.list()}">Tags</a>
-         <a href="@{Posts.search()}">Search</a>
          
-         #{form @Posts.searchContent(),id:'textSearchForm'}
-		<textarea name="content" cols="10" rows="2"></textarea>
-		<a href="#" onclick="$('#textSearchForm').submit();">search</a>
+       	#{form @Posts.searchContent(),id:'textSearchForm'}
+		<textarea name="content" cols="15" rows="2"></textarea>
+		<a href="#" onclick="$('#textSearchForm').submit();">Search</a>
 		#{/form}
-         
-         
+       
+      		    		
         #{if user}          
           <a class="last" href="@{Questions.create()}">Ask Question</a>          
-        #{/if}          
-       </div>    	
+        #{/if}      
+              
+       </div>  
+       	        
     	 <div id="loginbox">
 	       #{if user}
 	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>	            
