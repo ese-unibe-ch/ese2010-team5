@@ -167,10 +167,16 @@ public class QaDB {
 	}
 
 	public static void findPostByText(String content){
-		for(long i=1; i<=questions.size(); i++){
-			if(findQuestionById(i).getContent().contains(content)){
-				Question result = findQuestionById(i);
-				searchResults.put(i, result);
+		if(searchResults != null)
+			searchResults.clear();
+		
+		Collection<Question> allQuestions = findAllQuestions();
+		
+		for(Question q : allQuestions ){
+			if(q != null){
+				if(q.getContent().contains(content)){
+					searchResults.put(q.getId(), q);
+				}
 			}
 		}
 	}

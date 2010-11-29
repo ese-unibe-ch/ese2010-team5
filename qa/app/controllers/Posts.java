@@ -104,8 +104,8 @@ public class Posts extends Auth {
 		
 		Collection<Question> p = QaDB.search();
 		
-		if(p == null){
-			flash("error", "could not find Post with content "+content);
+		if(p.size() == 0){
+			flash.put("error", "could not find Post with content "+content);
 			redirect("/");
 		}
 		
