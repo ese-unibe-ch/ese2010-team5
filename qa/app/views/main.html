@@ -35,20 +35,21 @@
   
        <div id="nav">               
          <a href="@{Questions.list()}">Questions</a>
-         <a href="@{Tags.list()}">Tags</a>
-         
-       	#{form @Posts.searchContent(),id:'textSearchForm'}
-		<textarea name="content" cols="15" rows="2"></textarea>
-		<a href="#" onclick="$('#textSearchForm').submit();">Search</a>
-		#{/form}
-       
-      		    		
+         <a href="@{Tags.list()}">Tags</a>		
+  
         #{if user}          
-          <a class="last" href="@{Questions.create()}">Ask Question</a>          
+          <a href="@{Questions.create()}">Ask Question</a>          
         #{/if}      
-              
-       </div>  
-       	        
+        
+        #{form @Posts.searchContent(),id:'textSearchForm'}
+        <a class="last" href="#" onclick="$('#textSearchForm').submit();">Search</a>
+		<p align="right"><textarea  name="content" cols="15" rows="2"></textarea></p>
+		
+		#{/form}      
+        
+       </div>
+           
+       	       	       	        
     	 <div id="loginbox">
 	       #{if user}
 	        <img src="@{'/public/images/gravatar-16.png'}"/><a href="@{Users.edit(username)}">${username}</a>	            
