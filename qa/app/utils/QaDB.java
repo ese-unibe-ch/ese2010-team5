@@ -168,19 +168,23 @@ public class QaDB {
 
 	public static void findPostByText(String content){
 		for(long i=1; i<questions.size(); i++){
-			if(findQuestionById(i).getContent().contains(content)){
-				Question result = findQuestionById(i);
-				searchResults.put(i, result);
+			if( findQuestionById(i) != null){
+				if (questions.containsKey(i)){
+					if(findQuestionById(i).getContent().contains(content)){
+						Question result = findQuestionById(i);
+						searchResults.put(i, result);
+											}
+				}
 			}
 		}
 	}
 	
 	public static Collection<Question> search() {
-		List<Question> result = new LinkedList<Question>();
+		List<Question> findSearch = new LinkedList<Question>();
 		for (Question q : searchResults.values()) {
-			result.add(q);
+			findSearch.add(q);
 		}
-		return result;		
+		return findSearch;		
 	}
 	
 	public static INotification findNotificationById(long id){

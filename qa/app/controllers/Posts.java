@@ -102,14 +102,12 @@ public class Posts extends Auth {
 	public static void searchContent(String content){
 		QaDB.findPostByText(content);
 		
-		Collection<Question> p = QaDB.search();
-		
-		if(p == null){
+		Collection<Question> q = QaDB.search();
+	
+		if(q == null){
 			flash("error", "could not find Post with content "+content);
 			redirect("/");
 		}
-		
-		render(p);
-		
+		render(q);
 	}
 }                      

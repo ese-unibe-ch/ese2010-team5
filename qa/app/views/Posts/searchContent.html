@@ -1,13 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+
+
 <div class="list">
-    #{list items:p, as:'q' }
-      <div class="list-item ${q_parity}">
-      	<div class="title"><a href="@{Questions.view(q.getId())}">${q.getTitle()}</a></div>
-      	<div class="question">${q.getContent()}</div>  
-        <div class="details">Answers: ${q.getAnswers().size()}, Rating: ${q.getVotation()}, Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a></div>
-        <div class="tags">Tags: ${q.getTags()}</div>      
-      </div>       
-    #{/list}
+	#{list items:q, as:'q'}
+		<div class ="q">
+		${q.getTitle()}
+			<div class="content">
+				${q.getContent()}
+			</div>
+		</div>
+	#{/list}
 </div>
