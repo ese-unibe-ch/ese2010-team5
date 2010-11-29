@@ -36,6 +36,13 @@
          <a href="@{Questions.list()}">Questions</a>
          <a href="@{Tags.list()}">Tags</a>
          <a href="@{Posts.search()}">Search</a>
+         
+         #{form @Posts.searchContent(),id:'textSearchForm'}
+		<textarea name="content" cols="10" rows="2"></textarea>
+		<a href="#" onclick="$('#textSearchForm').submit();">search</a>
+		#{/form}
+         
+         
         #{if user}          
           <a class="last" href="@{Questions.create()}">Ask Question</a>          
         #{/if}          
