@@ -49,6 +49,7 @@ public class Question extends Post implements IQuestion {
 		setContent(content);
 		addSubscriber(user);
 		tagWith(tags);
+		QaDB.addQuestion(this);
 	}
 	
 	
