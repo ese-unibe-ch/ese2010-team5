@@ -12,6 +12,23 @@ body{
   font-size: 80%;	
 }
 
+pre {
+  background-color:#EEEEEE;
+  font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  margin-bottom:10px;
+  max-height:600px;
+  overflow:auto;
+  padding:5px;
+  width:auto;
+}
+
+code {
+  background-color:#EEEEEE;
+  font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+}
+
+
+
 #wrapper{
 	width: 100%;
 	min-height: 100%;	
@@ -391,10 +408,12 @@ a.delete img{
 }
 
 #question .content{	
-	height: 15em;
+	min-height: 15em;
 	padding: 20px;
 	font-size: large;	
+	width: 700px;
 }
+
 #question .taglist{
   margin-bottom:10px;  
 }

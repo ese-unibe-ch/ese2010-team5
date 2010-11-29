@@ -161,14 +161,21 @@ public class Question extends Post implements IQuestion {
 		this.title = title;		
 	}
 	
+	public void setContent(String editedContent, boolean rendered){
+		if(rendered){
+			super.setContent(editedContent);
+			renderedContent = editedContent;
+		}else{
+			super.setContent(editedContent);
+			//mark renderedContent as dirty, so that it will be re-rendered
+			//when needed
+			renderedContent = null;
+		}
+		
+	}
 	
 	public void setContent(String editedContent){
-		super.setContent(editedContent);
-		
-		//mark renderedContent as dirty, so that it will be re-rendered
-		//when needed
-		renderedContent = null;
-		
+		setContent(editedContent,false);		
 	}
 	
 	

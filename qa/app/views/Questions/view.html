@@ -33,6 +33,27 @@
   	  		  	$("#commentRating").html(data);
   	 },"text/html");
     }
+    
+    
+     function likeCommentQuestion(commentId, likesComment){
+  	 $.post("@{Comments.LikeOrUnlike()}"
+  		  	,{id:commentId,likesComment:likesComment}
+  		  	,function (data){
+  	  		  	//update likes and unlikes
+  	  		  	$("#likeCommentQuestion").html(data);
+  	 },"text/html");
+    }
+    
+    function likeCommentAnswer(commentId, likesComment){
+  	 $.post("@{Comments.LikeOrUnlike()}"
+  		  	,{id:commentId,likesComment:likesComment}
+  		  	,function (data){
+  	  		  	//update likes and unlikes
+  	  		  	$("#likeCommentAnswer").html(data);
+  	 },"text/html");
+    }
+    
+    
 </script>
 
 <div id="question">    
@@ -77,15 +98,24 @@
         <h3>Comments (${q.getComments().size()})</h3>
             
 	       #{list items:q.getComments(), as:'comment'}
-	           <div class="comment">
+	       	<div class="comment">
 	            ${comment.getContent()}
 	            <br></br>by <span>${comment.getOwner().getName()}</span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
 	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
 	                <a href="@{Comments.edit(comment.getId())}">edit</a>
-	              #{/if}
-	            </div>
+	            #{/if}
+	            #{if user  && !comment.ownPost()}
+	            	#{if comment.isInLikeList(user)}
+	            		<a href="@{Comments.likeOrUnlike(comment.getId(),false)}">unlike</a>
+	            	#{/if}
+	            	#{else}
+	            		<a href="@{Comments.likeOrUnlike(comment.getId(),true)}">like</a>
+	            	#{/else} 
+	            #{/if}
+	            <div id="likeComment">${comment.getLikes()}</div>
+	        </div>
 	         
 	       #{/list}
 	       <br></br>
@@ -152,6 +182,15 @@
                   <a href="@{Comments.delete(comment.getId())}">delete</a> |
                   <a href="@{Comments.edit(comment.getId())}">edit</a>
               #{/if}
+	          #{if user  && !comment.ownPost()}
+	          	#{if comment.isInLikeList(user)}
+	          		<a href="@{Comments.likeOrUnlike(comment.getId(),false)}">unlike</a>
+	          	#{/if}
+	           	#{else}
+    	       		<a href="@{Comments.likeOrUnlike(comment.getId(),true)}">like</a>
+	           	#{/else} 
+	          #{/if}
+	          <div id="likeComment">${comment.getLikes()}</div>
              </div>           
          #{/list}
          <br></br>
