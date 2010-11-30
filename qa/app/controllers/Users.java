@@ -26,8 +26,11 @@ public class Users extends Auth{
 	 * Edits the user.
 	 *
 	 * @param username the username
+	 * @throws Throwable 
 	 */
 	public static void edit(String username) {
+		if (!Security.connected().equals(username))
+			redirect("/");
 		Logger.debug("Edit user profile: " + username);
 		IUser u = QaDB.findUserByName(username);
 		if(u == null){
@@ -50,6 +53,15 @@ public class Users extends Auth{
 	 * @param homepage the homepage
 	 */
 	public static void updateProfile(long id, String name, String email, String birthDate, String homepage){
+		validation.email(email);
+		validation.match(homepage, "^http\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}(/\\S*)?$");
+		
+		if (validation.hasErrors()){
+			 params.flash(); // add http parameters to the flash scope
+	         validation.keep(); // keep the errors for the next request
+	         edit(user.getName());
+		}
+		
 		User user = QaDB.findUserById(id);
 		if (user == null)
 			flash("error", "could not find user with id: "+id);
@@ -87,7 +99,12 @@ public class Users extends Auth{
 		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
 		
 		if (Security.isConnected() && Security.connected().equals(username))
-			edit(u.getName());
+			try {
+				edit(u.getName());
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		else
 			render(u, questions, answers);
 	}

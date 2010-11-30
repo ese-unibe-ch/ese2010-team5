@@ -11,12 +11,12 @@
 	<br />
 	<br />
 	Email:<br />
-	<input type="text" name="email" size="20" value="${u.getEmail()}"/>
+	<input type="text" name="email" size="20" value="${u.getEmail()}"/><span class="error"> #{error 'email' /}</span>
 	<br />
 	<br />
 	
     Website:<br />
-	<input type="text" name="homepage" size="20" value="${u.getHomepage()}"/>
+	<input type="text" name="homepage" size="20" value="${u.getHomepage()}"/><span class="error"> #{error 'homepage' /}</span>
 	<br />
 	<br />
 	Date of birth:<br />

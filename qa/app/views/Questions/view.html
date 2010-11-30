@@ -61,9 +61,11 @@
 	<table class="question-table">
 	<tr>
 	 <td class="vote">
+	  #{if user}
 	   <div class="arrow_up" onclick="rateQuestion(${q.getId()},true)" title="Vote up"></div>
       <div id="questionRating">${q.getVotation()}</div>
       <div class="arrow_down" onclick="rateQuestion(${q.getId()},false)" title="Vote down"></div>
+      #{/if}
 	 </td>
 	 <td>		
 		  <div class="content">
@@ -141,9 +143,11 @@
 	 <table class="answer-table">
 	   <tr>
 	   <td class="vote">
+	    #{if user}
 	    <div class="arrow_up" onclick="rateAnswer(${answer.getId()},true)" title="Vote up"></div>
       <div id="answerRating-${answer.getId()}">${answer.getVotation()}</div>
       <div class="arrow_down" onclick="rateAnswer(${answer.getId()},false)" title="Vote down"></div>
+       #{/if}
       #{if answer.isBest()}
          <img src="@{'/public/images/tick.png'}" title="Marked ad best answer"></img>
       #{/if}   
@@ -212,6 +216,7 @@
 	#{/list}	
   </div><!-- end answers -->
 	<div class="add-answer">
+	 #{if user}
 		<h3>Your Answer</h3>
 		#{form @Questions.addAnswer(), id:'addAnswerForm' } 
 			<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
@@ -219,6 +224,7 @@
 			<br></br>
 			<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
 		#{/form}
+	 #{/if}
 	</div>
 </div><!-- end question -->
 	

@@ -198,8 +198,9 @@ public class Questions extends Posts {
 	 * Creates the question.
 	 */
 	public static void create(){
-		render();
-		
+		if (Security.connected() == null)
+			listAll();
+		render();	
 	}
 
 	/**
