@@ -181,7 +181,7 @@ public class QaDB {
 		}
 	}
 	
-	public static Collection<Question> search() {
+	public static List<Question> search() {
 		List<Question> result = new LinkedList<Question>();
 		for (Question q : searchResults.values()) {
 			result.add(q);

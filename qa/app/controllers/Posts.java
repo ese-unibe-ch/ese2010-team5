@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.List;
 import java.util.Collection;
 
 import play.Logger;
@@ -100,16 +101,17 @@ public class Posts extends Auth {
 	
 	
 	public static void searchContent(String content){
+		
 		QaDB.findPostByText(content);
 		
-		Collection<Question> p = QaDB.search();
+		Collection<Question> questions = QaDB.search();
 		
-		if(p.size() == 0){
+		if(questions.size() == 0){
 			flash.put("error", "could not find Post with content "+content);
 			redirect("/");
 		}
 		
-		render(p);
+		render(questions);
 		
 	}
 }                      
