@@ -174,7 +174,7 @@ public class QaDB {
 		
 		for(Question q : allQuestions ){
 			if(q != null){
-				if(q.getContent().contains(content)){
+				if(q.getContent().toLowerCase().contains(content.toLowerCase())){
 					searchResults.put(q.getId(), q);
 				}
 			}
