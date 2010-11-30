@@ -74,17 +74,15 @@ code {
 }
 #header #nav{
   -moz-border-radius: 3px;
-
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   width:800px;
   margin-left:auto;
   margin-right:auto;
-  overflow: hidden; 
-  padding: 10px;   
+  overflow: hidden;  
 }
 #nav a {
-	display:block;	
-	text-decoration: none;
+  display:block;	
+  text-decoration: none;
   padding: 10px;
   border-right: 1px solid black;
   font-size: large;
@@ -100,7 +98,6 @@ code {
 #nav a:hover{
 	font-weight: bold;
 }
-
 
 #loginbox img {
   border:1px solid #FFFFFF;
@@ -122,6 +119,9 @@ code {
   text-shadow:none;
 }
 
+#search{
+	margin-top: 10px;
+}
 
 #wrapper #content{
   min-height: 100%;
@@ -542,4 +542,14 @@ a.delete img{
 
 img{
 	border: none;
+}
+
+.add-answer{
+	margin-top: 10px;
+	-moz-border-radius:5px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: white;
+  padding: 10px;
 }
