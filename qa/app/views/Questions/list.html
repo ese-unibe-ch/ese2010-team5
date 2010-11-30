@@ -79,7 +79,12 @@ function filter(tagstring){
           </div>
           <div style="clear: both"></div>
           <div class="user">
-            from: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a>
+          	#{if q.getOwner().getName().equals("ANONYMOUS")}
+			    from: ANONYMOUS
+			#{/if}
+			#{else}
+			    from: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a>
+			#{/else}
           </div>
         </div>              
       </div>       

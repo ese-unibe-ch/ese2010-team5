@@ -9,6 +9,7 @@
 
 GET     /	  					                               Questions.listAll
 GET     /admin/?                                     Admin.index
+GET     /questions                                   Questions.list
 GET     /{<RATING|DATE>sort}/?                       Questions.list
 GET     /myquestions/{inSort}/?                      Questions.listUser
 GET     /mysubscriptions/{inSort}/?                  Questions.listSubscriptions

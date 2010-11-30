@@ -93,7 +93,12 @@
 		    updated: ${q.getTimestamp().since()}
 		  </div>
 		  <div class="owner">
-			  Owner: ${q.getOwner().getName()}
+		  	#{if q.getOwner().getName().equals("ANONYMOUS")}
+			    Owner: ANONYMOUS
+			#{/if}
+			#{else}
+			    Owner: <a href="@{Users.view(q.getOwner().getName())}">${q.getOwner().getName()}</a>
+			#{/else}
 		  </div>
 		  <div style="clear:both;"></div>
 		  <div class="comments">
