@@ -65,18 +65,9 @@ public class Users extends Auth{
 		User user = QaDB.findUserById(id);
 		if (user == null)
 			flash("error", "could not find user with id: "+id);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-		Date date = new Date();
-		try {
-			date = sdf.parse(birthDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		if (date != null){
-			user.setBirthDate(date);
-		}
-		user.setEmail(email);
-		user.setHomepage(homepage);
+		
+		user.update(email, birthDate, homepage);
+		
 		Logger.debug("updated user profile of: " + user.getName());
 		flash.put("info", "Profile information of " + user.getName() + " changed");
 		redirect("/users/edit/"+user.getName());

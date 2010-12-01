@@ -98,6 +98,13 @@ public interface IQuestion extends IPost{
 	public abstract void setOwner(IUser user);
 
 	/**
+	 * Tag question with tags specified in a String of comma and whitespace separated tag names.
+	 *
+	 * @param tagString the String of tag names
+	 */
+	
+	
+	/**
 	 * Checks if is tagged with.
 	 *
 	 * @param tag the tag

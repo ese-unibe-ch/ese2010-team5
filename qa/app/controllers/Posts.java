@@ -16,22 +16,18 @@ import models.impl.Question;
  */
 public class Posts extends Auth {
  
-	
 	/**
 	 * Markdown preview.
 	 *
 	 * @param input the input
 	 */
 	public static void markdownPreview(String input){
-		
 		if(input != null){
 			String preview = QaMarkdown.toHtml(input);			
 			renderText(preview);			
 		}else{
 			renderText("input is null");
 		}
-		
-		
 	}
 	
 	/**
@@ -61,14 +57,8 @@ public class Posts extends Auth {
 			else
 				flash.put("error","Could not delete "+p.getId());
 		}			
-		
-		
 		redirect(referer);
-		
-		
 	}
-	
-	
 	
 	/**
 	 * Rate the post.
@@ -94,11 +84,6 @@ public class Posts extends Auth {
 		renderText(post.getVotation());
 		
 	}	
-	
-	public static void search(){
-		render();
-	}
-	
 	
 	public static void searchContent(String content){
 		

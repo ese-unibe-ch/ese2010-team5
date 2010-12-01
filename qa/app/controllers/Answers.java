@@ -26,9 +26,7 @@ public class Answers extends Posts {
 			flash("error", "could not find answer with id "+id);
 			redirect("/");
 		}
-		
 		render(a);
-		
 	}
 	
 	/**
@@ -76,7 +74,6 @@ public class Answers extends Posts {
 		
 		long qId = q.getId();
 		Questions.view(qId);
-
 	}	
 	
 	/**
@@ -92,7 +89,6 @@ public class Answers extends Posts {
 			flash("error", "could not find answer with id: " + id);
 			redirect("/");
 		}
-		
 	}
 	
 }

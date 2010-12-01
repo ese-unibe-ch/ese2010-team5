@@ -32,7 +32,6 @@ import utils.QaDB.OrderBy;
  */
 public class Questions extends Posts {	
 	
-	
 	/**
 	 * List the questions.
 	 *
@@ -62,8 +61,6 @@ public class Questions extends Posts {
 		}		 		
 		
 		render(questions,sort,tagname);		
-		
-				
 		
 	}	
 	
@@ -175,20 +172,10 @@ public class Questions extends Posts {
 	         create();
 		}
 		
-		Logger.debug("Create Question with content: "+content);
+		Question.createQuestion(user, title, content, tag);	
 		
-		StringBuffer tagStr = new StringBuffer();
-		int arrL = tag.length;
-		for (int j = 0; j < arrL; j++){
-			tagStr.append(tag[j]);
-			tagStr.append(", ");
-		}
-		String tags = tagStr.toString();
-		 		
-		Question q = QaDB.addQuestion(new Question(user, title, content, tags));	
-		
-		Logger.debug("Question "+" created");
-		flash.put("info", "Question "+q.getId()+" created");
+		Logger.debug("Question with title \"" + title + "\" created.");
+		flash.put("info", "Question with title \"" + title + "\" created.");
 		
 		listAll();
 		
@@ -210,16 +197,14 @@ public class Questions extends Posts {
 	 * @param qId the q id
 	 */
 	public static void addAnswer(String answer, long qId){
-		Question q = QaDB.findQuestionById(qId);
-		if(q == null){
+		Question question = QaDB.findQuestionById(qId);
+		if(question == null){
 			flash.error("could not find question q: "+qId);			
 			redirect("/");
 		}
-		Answer newAnswer = QaDB.addAnswer(new Answer(user, answer,q));
-		flash.put("info", "answer Created: "+newAnswer.getId());
-		
-		view(qId);		
-			
+		question.addAnswer(user, answer);
+		flash.put("info", "Answer to question \""+question.getTitle()+"\" created.");
+		view(qId);			
 	}
 	
 
@@ -230,18 +215,14 @@ public class Questions extends Posts {
 	 * @param qId the q id
 	 */
 	public static void addComment(String comment, long qId){
-		
 		Question q = QaDB.findQuestionById(qId);
-		
 		if(q == null){
 			flash.error("could not find question q: "+qId);
 			redirect("/");
 			return;
 		}
-		
-		Comment newComment = QaDB.addComment(new Comment(user,comment,q));
-		
-		flash.put("info", "new Comment created "+newComment.getId());
+		Comment newComment = q.addComment(user, comment);
+		flash.put("info", "new Comment created " + newComment.getId());
 		view(qId);
 	}
 	
@@ -269,9 +250,7 @@ public class Questions extends Posts {
 				}
 			}
 		}
-		
 		render(q,answers);
-		
 	}
 	
 	/**
@@ -281,15 +260,12 @@ public class Questions extends Posts {
 	 */
 	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
-		
 		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
 			redirect("/");
 		}
-		
-		render(q);
-		
+		render(q);	
 	}
 	
 	/**
@@ -301,7 +277,6 @@ public class Questions extends Posts {
 	 */
 	public static void setContent(long id, String title, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
-		
 		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){
 			flash("error", "could not find question with id "+id);
@@ -309,14 +284,13 @@ public class Questions extends Posts {
 		}
 		q.setTitle(title);
 		q.setContent(content);
-		flash.put("info","Content of question "+id+" changed");
+		flash.put("info","Content of question \"" + q.getTitle() + "\" changed");
 		view(id);
-		
 	}
 	
 	public static void toggleSubscriber(long qId, long userId){
 		IQuestion q = QaDB.findQuestionById(qId);
-		IUser			u = QaDB.findUserById(userId);
+		IUser u = QaDB.findUserById(userId);
 		
 		if(u == null || q == null){
 			flash.error("someting went wrong. user: %s, quest: %s", u,q);
@@ -331,9 +305,6 @@ public class Questions extends Posts {
 			q.addSubscriber(u);
 			flash("info", "subscribed to "+q.getTitle());
 		}
-		
 		view(q.getId());
-		
 	}
-	
 }

@@ -1,5 +1,7 @@
 package models.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import models.INotification;
@@ -287,5 +289,21 @@ public class User implements IUser {
 	  subscriptions.remove(quest);
 	  
   }
+
+public void update(String email, String birthDate, String homepage) {
+	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+	Date date = new Date();
+	try {
+		date = sdf.parse(birthDate);
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	if (date != null){
+		setBirthDate(date);
+	}
+	setEmail(email);
+	setHomepage(homepage);
+	
+}
 
 }

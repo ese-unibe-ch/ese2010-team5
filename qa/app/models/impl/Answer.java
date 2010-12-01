@@ -83,6 +83,7 @@ public class Answer extends Post {
 	protected void doDelete() {
 		/*remove me from question*/
 		question.delAnswer(this);
+		//QaDB.removeAnswer(this);
 	}
 
 	/**

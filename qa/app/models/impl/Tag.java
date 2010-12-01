@@ -3,6 +3,8 @@ package models.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import utils.QaDB;
+
 /**
  * The Class Tag.
  */
@@ -82,5 +84,17 @@ public class Tag {
 	 */
 	public void unregisterQuestion(Question question) {
 		this.relatedQuestions.remove(question);
+	}
+
+	public static Tag findOrCreateTagByName(String tagName, Question question) {
+		Tag tag = QaDB.findTagByName(tagName);
+		if (tag == null){
+			tag = new Tag(tagName, question);
+			QaDB.addTag(tag);
+		}
+		else{
+			tag.registerQuestion(question);
+		}
+		return tag;
 	}
 }

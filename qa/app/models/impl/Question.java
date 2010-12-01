@@ -52,7 +52,6 @@ public class Question extends Post implements IQuestion {
 		QaDB.addQuestion(this);
 	}
 	
-	
 	/**
 	 * Instantiates a new question.
 	 *
@@ -68,7 +67,7 @@ public class Question extends Post implements IQuestion {
 	 *
 	 * @param tagString the tag string
 	 */
-	private void tagWith(String tagString) {
+	public void tagWith(String tagString) {
 		String delims = ", ";
 		
 		String[] stringTags = tagString.split(delims);
@@ -87,7 +86,6 @@ public class Question extends Post implements IQuestion {
 			}
 		}
 	}
-	
 	
 	public List<Tag> getTags(){
 		return this.tags;
@@ -112,8 +110,7 @@ public class Question extends Post implements IQuestion {
 				Answer bestAnswer = answers.remove(idx);
 				answers.add(0, bestAnswer);
 			}
-		}
-		
+		}	
 		return answers;
 	}
 
@@ -131,17 +128,14 @@ public class Question extends Post implements IQuestion {
 			subscriber.addNotification(
 					QaDB.addNotification(new Notification(subscriber,newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
 			);
-		}
-		
+		}	
 	}
 	
 	public boolean delAnswer(Answer newAnswer) {
 		if(answers != null){
 			return answers.remove(newAnswer);
-		}
-		
-		return false;
-				
+		}	
+		return false;		
 	}
 	
 	public String getTitle(){
@@ -196,15 +190,24 @@ public class Question extends Post implements IQuestion {
 	protected void doDelete() {
 		/* do somthing when im getting deleted*/
 		/* maybe remove the answers*/
-		
 		deleteTags();
 		remSubscribers();
-		
-		
+		//deleteAnswers();
+		//deleteComments();
+		//QaDB.removeQuestion(this);
+	}
+
+	private void deleteAnswers() {
+		if (answers != null){
+			for (Answer answer : answers){
+				answer.doDelete();
+			}
+		}
 	}
 
 	private void deleteTags() {
 		for(Tag tag : tags){
+			// ensure that a tag is deleted from DB when there is no question tagged with it
 			tag.unregisterQuestion(this);
 		}
 	}
@@ -214,7 +217,6 @@ public class Question extends Post implements IQuestion {
 			u.remSubscription(this);
 		}
 	}
-
 
 	public void setOwner(IUser user) {
 		this.owner = user;
@@ -246,17 +248,38 @@ public class Question extends Post implements IQuestion {
   	
 	  return subscribers.contains(inUser);
   }
-
-
 	
   public void remSubscriber(IUser inUser) {
 	  if(inUser == null) return;	  
 	  subscribers.remove(inUser);
 	  inUser.remSubscription(this);
-	  
   }
 
-
+	public void addTag(String tagName) {
+		Tag tag = Tag.findOrCreateTagByName(tagName, this);
+		tags.add(tag);
+	}
 	
+	public static void createQuestion(User user, String title, String content,
+			String[] tag) {
+		
+		StringBuffer tagStr = new StringBuffer();
+		int arrL = tag.length;
+		for (int j = 0; j < arrL; j++){
+			tagStr.append(tag[j]);
+			tagStr.append(", ");
+		}
+		String tags = tagStr.toString();
+		QaDB.addQuestion(new Question(user, title, content, tags));
+	}
+	
+	public void addAnswer(User user, String answer) {
+		QaDB.addAnswer(new Answer(user, answer, this));
+	}
+
+	public Comment addComment(User user, String comment) {
+		Comment newComment = QaDB.addComment(new Comment(user, comment, this));
+		return newComment;
+	}
 
 }
