@@ -46,6 +46,8 @@ public class QaImporter {
 		QUESTION_TIMESTAMP,
 		QUESTION_TITLE,
 		QUESTION_CONTENT,
+		QUESTION_TAGS,
+		QUESTION_TAG,
 		
 		ANSWER,
 		ANSWER_OWNER,		
@@ -102,6 +104,11 @@ public class QaImporter {
 					}else if(r.getLocalName().equals("title")){
 						state = q != null ? STATE.QUESTION_TITLE 
 								: STATE.UNKNOWN;
+					}else if(r.getLocalName().equals("tags")){
+						state = q != null ? STATE.QUESTION_TAGS
+								: STATE.UNKNOWN;
+					}else if(r.getLocalName().equals("tag")){
+						state = STATE.QUESTION_TAG;
 					}else if(r.getLocalName().equals("questionid")){
 						state = STATE.ANSWER_QUESTIONID;
 					}else if(r.getLocalName().equals("answer")){
@@ -161,6 +168,11 @@ public class QaImporter {
 						q.setTitle(r.getText());
 						break;
 					case QUESTION_CONTENT:
+						content.append(r.getText());
+						break;
+					case QUESTION_TAG:
+						q.addTag(r.getText());
+						break;
 					case ANSWER_CONTENT:
 						content.append(r.getText());
 						break;
