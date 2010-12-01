@@ -75,7 +75,7 @@ code {
 #header #nav{
   -moz-border-radius: 3px;
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
-  width:800px;
+  width:1000px;
   margin-left:auto;
   margin-right:auto;
   overflow: hidden;  
@@ -259,8 +259,13 @@ code {
 }
 
 .message.error{
+	width:900px;
+	margin-left: auto;
+	margin-right: auto;
 	background-color: red;
+	color: black;
 }
+
 .message.info{
   background-color: green;
 }
@@ -271,11 +276,11 @@ code {
 
 /* profile view */
 #profileview{
-  float:left;
   width: 700px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
+  margin-bottom; 5px;
 }
 
 #profile-view h1{
@@ -385,9 +390,7 @@ a.delete img{
 
 /*question view*/
 
-
 #question{
-  
   -moz-border-radius:5px;
   -moz-box-shadow: 2px 2px 2px #666;
   -webkit-box-shadow: 2px 2px 2px #666;
@@ -402,11 +405,10 @@ a.delete img{
 
 #question .question-table,.answer-table{
   width: 100%;
-  
 }
 
 .answers{
-	-moz-border-radius:5px;
+  -moz-border-radius:5px;
   -moz-box-shadow: 2px 2px 2px #666;
   -webkit-box-shadow: 2px 2px 2px #666;
   box-shadow: 2px 2px 2px #666;
@@ -441,7 +443,11 @@ a.delete img{
 #question .content{	
 	min-height: 15em;
 	padding: 20px;
-	font-size: large;	
+	font-size: large;
+	width: 650px;	
+}
+
+p{
 	
 }
 
@@ -469,12 +475,12 @@ a.delete img{
   color: white;
   padding: 5px;
   margin-top: 10px;
+  width: 90%;
 }
 .comments .comment{
-	border-bottom: 1px dashed white;
+  border-bottom: 1px dashed white;
   padding: 1em;    
 }
-
 
 .tag{
 	color:#3E6D8E;
@@ -545,11 +551,14 @@ img{
 }
 
 .add-answer{
-	margin-top: 10px;
-	-moz-border-radius:5px;
+  margin-top: 10px;
+  -moz-border-radius:5px;
   -moz-box-shadow: 2px 2px 2px #666;
   -webkit-box-shadow: 2px 2px 2px #666;
   box-shadow: 2px 2px 2px #666;
   background-color: white;
   padding: 10px;
+}
+
+.yourcomment{
 }

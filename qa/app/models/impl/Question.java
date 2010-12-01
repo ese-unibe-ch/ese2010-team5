@@ -275,6 +275,8 @@ public class Question extends Post implements IQuestion {
 		String tags = tagStr.toString();
 		QaDB.addQuestion(new Question(user, title, content, tags));
 	}
+
+
 	
 	public void addAnswer(User user, String answer) {
 		QaDB.addAnswer(new Answer(user, answer, this));

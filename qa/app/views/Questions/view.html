@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:q.getTitle() /}
 
 <!-- some javascript funcions -->
 <script type="text/javascript" charset="utf-8">
@@ -52,6 +52,17 @@
   	  		  	$("#likeCommentAnswer").html(data);
   	 },"text/html");
     }
+    
+    function showCommentField(id)
+	{
+	var element = document.getElementById(id);
+	
+	if(element.style.display != 'none')
+	        element.style.display='none';
+	else
+	        element.style.display='';
+	}
+    
     
     
 </script>
@@ -126,8 +137,8 @@
 	         
 	       #{/list}
 	       <br></br>
-	        #{if user}  
-       		<div class="yourcomment">
+	        #{if user}
+       		<div id="${q.getId()}" class="yourcomment">
             #{form @Questions.addComment(), id:'newQuestionComment' } 
 		          Your comment:
               <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  
