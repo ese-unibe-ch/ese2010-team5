@@ -107,7 +107,7 @@
 	       #{list items:q.getComments(), as:'comment'}
 	       	<div class="comment">
 	            ${comment.getContent()}
-	            <br></br>by <span>${comment.getOwner().getName()}</span>
+	            <br></br>by <span><a href="@{Users.view(comment.getOwner().getName())}">${comment.getOwner().getName()}</a></span>
 	            <span class="timestamp"> ${comment.getTimestamp().since()}</span>
 	            #{if comment.ownPost()}
 	                <a href="@{Comments.delete(comment.getId())}">delete</a> |
@@ -176,7 +176,7 @@
         updated: ${answer.getTimestamp().since()}
       </div>
       <div class="owner">
-        Owner: ${answer.getOwner().getName()}
+        Owner: <a href="@{Users.view(answer.getOwner().getName())}">${answer.getOwner().getName()}</a>
       </div>
       <div style="clear:both;"></div>
       <div style="clear:both;"></div>
@@ -185,7 +185,7 @@
          #{list items:answer.getComments(), as:'comment'}
              <div class="comment">
               ${comment.getContent()}
-              <br></br>by <span>${comment.getOwner().getName()}</span>
+              <br></br>by <span><a href="@{Users.view(comment.getOwner().getName())}">${comment.getOwner().getName()}</a></span>
               <span class="timestamp"> ${comment.getTimestamp().since()}</span>
               #{if comment.ownPost()}
                   <a href="@{Comments.delete(comment.getId())}">delete</a> |
