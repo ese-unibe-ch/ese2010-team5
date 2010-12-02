@@ -73,17 +73,20 @@ public class Question extends Post implements IQuestion {
 		String[] stringTags = tagString.split(delims);
 				
 		for(String tagName : stringTags){
-			//check DB if tag already exists			
-			Tag t = QaDB.findTagByName(tagName);
+			if (!tagName.isEmpty()){
+				//check DB if tag already exists			
+				Tag t = QaDB.findTagByName(tagName);
+				
+				if( t != null){
+					this.tags.add(t);
+					t.registerQuestion(this);
+				}
+				else{
+					t = QaDB.addTag(new Tag(tagName, this));
+					this.tags.add(t);
+				}
+			}
 			
-			if( t != null){
-				this.tags.add(t);
-				t.registerQuestion(this);
-			}
-			else{
-				t = QaDB.addTag(new Tag(tagName, this));
-				this.tags.add(t);
-			}
 		}
 	}
 	
