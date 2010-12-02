@@ -4,7 +4,7 @@
 /.buildpath
 /.project
 /.settings
-/.metadata
+/.metadata/
 /eclipse
 /log
 /cache

@@ -63,26 +63,27 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	/**
-	 * Tag with a String of tag names.
+	 * Tag with.
 	 *
-	 * @param tagString the string containing the tag names
+	 * @param tagString the tag string
 	 */
 	public void tagWith(String tagString) {
 		String delims = ", ";
-		String[] stringTags = tagString.split(delims);		
+		
+		String[] stringTags = tagString.split(delims);
+				
 		for(String tagName : stringTags){
-			if (!tagName.isEmpty()){
-				//check DB if tag already exists			
-				Tag t = QaDB.findTagByName(tagName);
-				if( t != null){
-					this.tags.add(t);
-					t.registerQuestion(this);
-				}
-				else{
-					t = QaDB.addTag(new Tag(tagName, this));
-					this.tags.add(t);
-				}
-			}	
+			//check DB if tag already exists			
+			Tag t = QaDB.findTagByName(tagName);
+			
+			if( t != null){
+				this.tags.add(t);
+				t.registerQuestion(this);
+			}
+			else{
+				t = QaDB.addTag(new Tag(tagName, this));
+				this.tags.add(t);
+			}
 		}
 	}
 	
