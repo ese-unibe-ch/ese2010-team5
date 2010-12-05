@@ -39,8 +39,8 @@ function filter(tagstring){
   <h1>Questions</h1>
 #{/else}
   <div class="tabs">  
-    <a class="${sort == 'DATE' ? 'active':'' }"    href="DATE">Newest</a>
-    <a class="${sort == 'RATING' ? 'active':''}"  href="RATING">Votes</a>
+    <a class="${sort == 'DATE' ? 'active':'' }"    href="?sort=DATE">Newest</a>
+    <a class="${sort == 'RATING' ? 'active':''}"  href="?sort=RATING">Votes</a>
   </div>
   
   <!--
@@ -71,7 +71,7 @@ function filter(tagstring){
           <span class="tags">
           Tags: 
           #{list items:q.getTags(), as:'tag'}
-          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+          	<a class="tag" href="@{Questions.list(tag.getName())}">${tag.getName()}</a>
       	  #{/list}
           </span>
           <div class="started">

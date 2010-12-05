@@ -38,7 +38,7 @@ public class Questions extends Posts {
 	 * @param sort the sort
 	 * @param tagname the tag's name
 	 */
-	public static void list(String sort, String tagname){
+	public static void list(String tagname, String sort){
 		
 		Tag tag = null;		
 		Collection<Question> questions = null;
