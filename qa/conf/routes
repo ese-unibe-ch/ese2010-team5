@@ -18,8 +18,7 @@ GET     /questions/edit/{id}                         Questions.edit
 GET     /questions/create                            Questions.create
 GET     /questions/delete/{id}                       Questions.delete
 GET	    /questions/{<[0-9]+>id}                      Questions.view
-GET     /questions/{sort}                            Questions.list
-GET     /questions/                                  Questions.listAll
+GET     /questions/                                  Questions.list
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
 GET     /answers/edit/{id}                           Answers.edit
 GET     /answers/delete/{id}                         Answers.delete
