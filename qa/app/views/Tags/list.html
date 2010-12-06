@@ -11,7 +11,7 @@
   #{list items:tags, as:'t'}
     #{set tagname:t.getName()/}
     <div>
-      <a class="tag" href="@{Questions.list(null,tagname)}">${t.getName()}</a><span> x ${t.count()}</span>
+      <a class="tag" href="@{Questions.list(tagname)}">${t.getName()}</a><span> x ${t.count()}</span>
     </div>
   #{/list}
 </div>
