@@ -104,6 +104,11 @@ code {
 #nav a:hover{
 	font-weight: bold;
 }
+#nav #searchField{
+  float:right;
+  margin:5px;
+  padding:5px;
+}
 
 #loginbox img {
   border:1px solid #FFFFFF;

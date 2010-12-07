@@ -55,7 +55,9 @@
         
         #{form @Posts.searchContent(),id:'textSearchForm'}
         <input id="searchField" type='text' name="content" value="type in words to search" onclick='$(this).val("")'></input>
+        <!-- 
         <a class="last" href="#" onclick="$('#textSearchForm').submit();">Search</a>
+         -->
         #{/form}      
         
        </div>
@@ -73,9 +75,8 @@
     	      #{form @Secure.authenticate(), id:'loginForm'}
     	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
     	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
-    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br> 
-    	      <a href="@{Users.signup()}">signup</a> 
-    	      <button type='submit'>Login</button>
+    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br>    	       
+    	      <button type='submit'>Login</button> or <a href="@{Users.signup()}">signup</a>
     	      #{/form}
     	      <!-- 
 	    	  Please <a href="@{Secure.login()}">login</a>
