@@ -166,7 +166,7 @@ public class QaDB {
 		return null;
 	}
 
-	public static void findPostByText(String content){
+	public static void findPostByText(String query){
 		if(searchResults != null)
 			searchResults.clear();
 		
@@ -174,8 +174,17 @@ public class QaDB {
 		
 		for(Question q : allQuestions ){
 			if(q != null){
-				if(q.getContent().toLowerCase().contains(content.toLowerCase())){
-					searchResults.put(q.getId(), q);
+				
+				String content = q.getContent();
+				String title   = q.getTitle();
+				
+				if(content != null){
+					if(content.toLowerCase().contains(query.toLowerCase()))
+						searchResults.put(q.getId(), q);
+				}
+				if(title != null){
+					if(title.toLowerCase().contains(query.toLowerCase()))
+						searchResults.put(q.getId(), q);
 				}
 			}
 		}
