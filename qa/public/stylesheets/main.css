@@ -39,13 +39,15 @@ code {
 #header {	
 	background-color: grey;
 	position: relative;
-	padding: 25px;
+	overflow: hidden;
+	padding: 10px;
+	width: 1024px;
+	margin-left: auto;
+	margin-right: auto;	
 }
 #header #logo{
 	width: 100px;
-	position: absolute;
-	top: 10px;
-	left: 10px;
+	float: left;
 }
 #logo a{
 	text-decoration: none;
@@ -56,13 +58,12 @@ code {
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
 #header #loginbox{
-	position: fixed;
+	/*position: fixed;
 	top: 0px;
-	right: 10px;
+	right: 10px;*/
 	-moz-border-radius-topleft:0;
   -moz-border-radius-topright:0;
-  border-top:medium none;
-  float:right;
+  border-top:medium none;  
   font-size:12px;
   padding:8px 5px 7px 10px;
   -moz-border-radius:5px 5px 5px 5px;
@@ -70,15 +71,20 @@ code {
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   border-color:#E9E9E9 #E9E9E9 #F5F5F5;
   border-style:solid;
-  border-width:1px;  
+  border-width:1px;
+  width: 100px;
+  float:right;  
 }
 #header #nav{
   -moz-border-radius: 3px;
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
-  width:1000px;
+  width:600px;
+  /*
   margin-left:auto;
-  margin-right:auto;
-  overflow: hidden;  
+  margin-right:auto;*/
+  overflow: hidden;
+  float: left; 
+  
 }
 #nav a {
   display:block;	
@@ -146,6 +152,7 @@ code {
   width: 78%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   -moz-border-radius: 3px;
   background-color: white;
   padding: 10px;
@@ -199,15 +206,19 @@ code {
 }
 
 #footer{
-	width:100%;	
-	background-color: grey;
-	position: absolute;
-	/*because we have 10px padding on #wrapper*/
+	width:100%;
+	-moz-border-radius: 3px;
+  background-color: white;
+	position: absolute;	
 	bottom: 0px;	
 	left:0px;			
 }
 #footer .content{
-  padding-left: 10px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  font-size: large;
+  
 }
 /*text-editor*/
 .text-editor {

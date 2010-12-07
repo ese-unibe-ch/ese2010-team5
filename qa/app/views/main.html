@@ -24,6 +24,17 @@
         		        ,"text/html"
         		);
           }
+
+          function doSearch(what){
+
+        	  $.ajax({
+        		  async: false,
+        		  url: "@{Posts.searchContent()}",
+        		  data: {content:what},
+        		  method: "GET"
+            	  });        	  
+        	  
+        	}
         
         </script>
     </head>
@@ -43,11 +54,9 @@
         #{/if}      
         
         #{form @Posts.searchContent(),id:'textSearchForm'}
-        <a class="last" href="#" onclick="$('#textSearchForm').submit()">Search</a>
-        <p align="right"><input type='text' id="search" name='content' value="type in words to search" onclick='$(this).val("")'></input></p>
-		
-		
-		#{/form}      
+        <input id="searchField" type='text' name="content" value="type in words to search" onclick='$(this).val("")'></input>
+        <a class="last" href="#" onclick="$('#textSearchForm').submit();">Search</a>
+        #{/form}      
         
        </div>
            
@@ -91,7 +100,8 @@
          ${flash.success}
        </div>
       #{/if}
-      <!-- content -->        
+      <!-- content -->
+      <div style="clear:both;"></div>        
       <div id="content">
         <!-- left box for notifications -->         
         #{set boxvisible: ! (notifications == null || notifications.isEmpty()) /}
