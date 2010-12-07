@@ -1,0 +1,30 @@
+#{extends 'main.html' /}
+#{set title:'signup' /}
+
+<h1>Signup Now</h1>
+<h2>Its Freeeeee ;-)</h2>
+<br />
+#{form @Users.create() , id:'createUserForm'}
+  Name:<br />
+  <input type="text" name="username" size="20" value="${flash.username}"/><span class="error"> #{error 'username' /}</span>
+  <br />
+  <br />
+  Email:<br />
+  <input type="text" name="email" size="20" value="${flash.email}"/><span class="error"> #{error 'email' /}</span>
+  <br />
+  <br />  
+  Website:<br />
+  <input type="text" name="homepage" size="20" value="${flash.homepage}"/><span class="error"> #{error 'homepage' /}</span>
+  <br />
+  <br />
+  Date of birth:<br />
+  <input type="text" id="birthDate" name="birthDate" value="${flash.birthDate}"/> (Format: dd.MM.yyyy)
+    <br />
+    <br />
+  <button type="submit"> Create </button>
+  <!--  
+    <a href="#" onclick="$('#editUserForm').submit();"><img src="@{'/public/images/save.png'}" title="Save changes to user profile"></img></a>
+    -->
+#{/form}
+
+

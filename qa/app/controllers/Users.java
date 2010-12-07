@@ -6,9 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.annotations.OptimisticLock;
+
 import play.*;
+import play.data.validation.Email;
+import play.data.validation.Required;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
+import play.mvc.results.Redirect;
 
 import models.IQuestion;
 import models.IUser;
@@ -115,6 +120,43 @@ public class Users extends Auth{
 		user.delete();
 		Secure.logout();
 		//redirect("/");
-
 	}
+	
+	public static void create(@Required String username, @Required @Email String email, 
+			String birthDate, String homepage){
+		
+		if(validation.hasErrors()){
+			params.flash();
+			validation.keep();
+			signup();
+		}
+		 
+		User u = QaDB.addUser(new User(username));
+		u.update(email, birthDate, homepage);
+		String password = "test";		
+		
+		try {			
+			/** be careful! this generate a http-redirect response, 
+			 *  which results in a GET /login */			
+	    Secure.authenticate(username, password, false);
+	    if(Security.isConnected()){
+	    	Logger.debug("connected");
+	    	flash.put("Welcome %s", username);
+	    	
+	    }
+    } catch (Throwable e) {    	
+    	flash.error("strange error %s",e.getMessage());
+    	redirect("/");
+    }		
+		
+		
+	}
+	
+	
+	public static void signup(){
+		
+		render();
+		
+	}
+	
 }

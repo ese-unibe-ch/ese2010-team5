@@ -4,7 +4,8 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>        
+        #{get 'moreStyles' /}
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>                
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
         <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="utf-8"></script>
@@ -64,6 +65,7 @@
     	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
     	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
     	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br> 
+    	      <a href="@{Users.signup()}">signup</a> 
     	      <button type='submit'>Login</button>
     	      #{/form}
     	      <!-- 
@@ -84,10 +86,15 @@
          ${flash.info}
        </div>
       #{/if}
+      #{if flash.success }
+       <div class="message info">
+         ${flash.success}
+       </div>
+      #{/if}
       <!-- content -->        
       <div id="content">
         <!-- left box for notifications -->         
-        #{set boxvisible: ! notifications.isEmpty()/}
+        #{set boxvisible: ! (notifications == null || notifications.isEmpty()) /}
         
         #{if boxvisible} 
         <div id="notif-box">          

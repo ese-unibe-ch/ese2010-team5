@@ -16,9 +16,14 @@ public class Security extends Secure.Security{
 	 * @param password the password
 	 * @return true, if successful
 	 */
-	static boolean authenticate(String username, String password) {
-        return QaDB.findUserByName(username) != null;
-    }
+	static boolean authenticate(String username, String password) {			
+			return QaDB.findUserByName(username) != null;
+  }
+	
+	static void onAuthenticated() {
+		/*little welcom message*/
+		flash.success("Welcome %s", connected());
+  }
 	
 	/**
 	 * What to do when getting disconnected.

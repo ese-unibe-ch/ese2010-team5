@@ -4,6 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
+
+import play.Logger;
+
 import models.INotification;
 import models.IQuestion;
 import models.IUser;
@@ -55,6 +59,10 @@ public class User implements IUser {
 		this.notifications = new LinkedList<INotification>();
 		this.posts = new LinkedList<Post>();
 		this.subscriptions = new LinkedList<IQuestion>();
+	}
+	
+	public User(){
+		this("");
 	}
 
 	/**
@@ -291,18 +299,22 @@ public class User implements IUser {
   }
 
 public void update(String email, String birthDate, String homepage) {
-	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-	Date date = new Date();
-	try {
-		date = sdf.parse(birthDate);
-	} catch (ParseException e) {
-		e.printStackTrace();
+	if(StringUtils.isNotEmpty(birthDate)){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+		Date date = new Date();
+		try {
+			date = sdf.parse(birthDate);
+			setBirthDate(date);
+		} catch (ParseException e) {
+			Logger.error("error parsing birthdate %s", e.getMessage());
+		}
 	}
-	if (date != null){
-		setBirthDate(date);
+	if(StringUtils.isNotEmpty(email)) {
+		setEmail(email);		
 	}
-	setEmail(email);
-	setHomepage(homepage);
+	if(StringUtils.isNotEmpty(homepage)) {
+		setHomepage(homepage);		
+	}
 	
 }
 

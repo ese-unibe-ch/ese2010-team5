@@ -5,7 +5,10 @@
 # Home page
 
 # Import Secure routes
-*       /                                            module:secure
+GET     /login                                       Secure.login
+*       /signin                                      Secure.authenticate
+GET     /signup                                      Users.signup
+GET     /logout                                      Secure.logout
 
 GET     /admin/?                                     Admin.index
 GET     /myquestions/{inSort}/?                      Questions.listUser
@@ -24,6 +27,7 @@ GET     /answers/edit/{id}                           Answers.edit
 GET     /answers/delete/{id}                         Answers.delete
 GET     /comments/edit/{id}                          Comments.edit
 GET     /comments/delete/{id}                        Comments.delete
+GET     /users/{username}                            Users.view
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
