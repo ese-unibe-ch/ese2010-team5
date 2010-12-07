@@ -43,8 +43,8 @@ public class BootStrap extends Job {
     	
     	log.info("fill Model with test-data");
     	
-    	int users = 5;
-    	int questionsPerUser = 5;
+    	int users = 1;
+    	int questionsPerUser = 2;
     	
     	//create some users
     	for(int i=1;  i <= users ; i++){
