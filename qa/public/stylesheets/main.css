@@ -40,10 +40,11 @@ code {
 	background-color: grey;
 	position: relative;
 	overflow: hidden;
-	padding: 10px;
-	width: 1024px;
+	padding-top: 5px;
+	width: 1000px;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;
+		
 }
 #header #logo{
 	width: 100px;
@@ -58,10 +59,7 @@ code {
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
 #header #loginbox{
-	/*position: fixed;
-	top: 0px;
-	right: 10px;*/
-	-moz-border-radius-topleft:0;
+  -moz-border-radius-topleft:0;
   -moz-border-radius-topright:0;
   border-top:medium none;  
   font-size:12px;
@@ -73,7 +71,8 @@ code {
   border-style:solid;
   border-width:1px;
   width: 200px;
-  float:right;  
+  float:right;
+  margin-right: 1px;
 }
 #header #nav{
   -moz-border-radius: 3px;
@@ -136,7 +135,7 @@ code {
 
 #wrapper #content{
   min-height: 100%;
-  padding: 10px;	
+  padding-top: 10px;	
   padding-bottom: 30px;
   width:1000px;
   margin-left: auto;
@@ -272,17 +271,18 @@ code {
   margin: 10px;
   padding:10px;
   font-size: large;
-	width:1024px;
-	margin-left: auto;
-	margin-right: auto;  
-	color: black;
+  width:800px;
+  margin-left: auto;
+  margin-right: auto;  
 }
 
 .message.error{
-	background-color: red;
+  color:black;
+  background-color: red;
 }
 
 .message.info{
+  color: black;
   background-color: green;
 }
 
@@ -519,20 +519,19 @@ p{
 	text-decoration:none;
 }
 
-/*
-.error{
-	color: red;
 
+.error{
+ color: red;
+}
 .errors{
 	border: 2px solid red;
 	padding: 2px;
 	color: red;
 }
-
 .errors li{
 	list-style: none;
 }
-}*/
+
 
 #status{
 	margin-top: 20px;
