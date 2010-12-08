@@ -13,6 +13,7 @@ import play.data.validation.Email;
 import play.data.validation.Equals;
 import play.data.validation.Match;
 import play.data.validation.Required;
+import play.data.validation.URL;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
 import play.mvc.results.Redirect;
@@ -129,7 +130,7 @@ public class Users extends Auth{
 	    @Required @Equals("password") String passwordConfirm,
 	    @Required @Email String email, 
 			String birthDate, 
-			String homepage){
+			@URL String homepage){
 		
 		if(validation.hasErrors()){
 			params.flash();
