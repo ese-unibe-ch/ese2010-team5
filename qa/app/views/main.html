@@ -24,18 +24,7 @@
         		        ,"text/html"
         		);
           }
-
-          function doSearch(what){
-
-        	  $.ajax({
-        		  async: false,
-        		  url: "@{Posts.searchContent()}",
-        		  data: {content:what},
-        		  method: "GET"
-            	  });        	  
-        	  
-        	}
-        
+                  
         </script>
     </head>
     <body>
@@ -74,7 +63,7 @@
     	   #{else}
     	      #{form @Secure.authenticate(), id:'loginForm'}
     	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
-    	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
+    	      <input type='password' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
     	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br>    	       
     	      <button type='submit'>Login</button> or <a href="@{Users.signup()}">signup</a>
     	      #{/form}

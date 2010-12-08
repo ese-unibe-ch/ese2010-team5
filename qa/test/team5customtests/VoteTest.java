@@ -16,7 +16,7 @@ public class VoteTest extends UnitTest{
 
 	@Before
 	public void setUp() throws Exception {
-		use = new User("Hans");
+		use = new User("Hans","");
 		vote = new Vote(1,use);
 	}
 	

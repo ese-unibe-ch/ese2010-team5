@@ -16,8 +16,13 @@ public class Security extends Secure.Security{
 	 * @param password the password
 	 * @return true, if successful
 	 */
-	static boolean authenticate(String username, String password) {			
-			return QaDB.findUserByName(username) != null;
+	static boolean authenticate(String username, String password) {
+	  User u = QaDB.findUserByName(username);
+	  if(u != null) {	    
+	    return u.getPassword().equals(password);
+	  }
+	  
+		return false; 
   }
 	
 	static void onAuthenticated() {

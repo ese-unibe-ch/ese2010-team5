@@ -29,7 +29,7 @@ public class QaDB {
 	}
 
 	/* anonymous user, needed to assign questions of deleted users */
-	public static User ANONYMOUS = new User("ANONYMOUS");
+	public static User ANONYMOUS = new User("ANONYMOUS","");
 
 	/* maps: id -> instance> */
 	private static HashMap<Long, Answer> answers = new HashMap<Long, Answer>();

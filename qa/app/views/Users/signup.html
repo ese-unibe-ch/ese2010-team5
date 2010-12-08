@@ -9,15 +9,23 @@
   <input type="text" name="username" size="20" value="${flash.username}"/><span class="error"> #{error 'username' /}</span>
   <br />
   <br />
+  Password:<br />
+  <input type="password" name="password" size="20" /><span class="error"> #{error 'password' /}</span>
+  <br />
+  <br />
+  Confirm Password:<br />
+  <input type="password" name="passwordConfirm" size="20" /><span class="error"> #{error 'passwordConfirm' /}</span>
+  <br />
+  <br />
   Email:<br />
   <input type="text" name="email" size="20" value="${flash.email}"/><span class="error"> #{error 'email' /}</span>
   <br />
   <br />  
-  Website:<br />
+  Website (optional):<br />
   <input type="text" name="homepage" size="20" value="${flash.homepage}"/><span class="error"> #{error 'homepage' /}</span>
   <br />
   <br />
-  Date of birth:<br />
+  Date of birth (optional):<br />
   <input type="text" id="birthDate" name="birthDate" value="${flash.birthDate}"/> (Format: dd.MM.yyyy)
     <br />
     <br />
