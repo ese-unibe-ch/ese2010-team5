@@ -77,4 +77,9 @@ public class MockUser implements IUser {
   }	
   public void remSubscription(IQuestion quest) {}
 
+  
+  public String getPassword() {
+    return "dummyPassword";
+  }
+
 }

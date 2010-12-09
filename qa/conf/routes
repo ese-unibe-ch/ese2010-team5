@@ -5,18 +5,15 @@
 # Home page
 
 # Import Secure routes
-*       /                                            module:secure
+GET     /login                                       Secure.login
+*       /signin                                      Secure.authenticate
+GET     /signup                                      Users.signup
+GET     /logout                                      Secure.logout
 
-GET     /	  					                               Questions.listAll
 GET     /admin/?                                     Admin.index
-GET     /questions                                   Questions.list
-GET     /{<RATING|DATE>sort}/?                       Questions.list
 GET     /myquestions/{inSort}/?                      Questions.listUser
 GET     /mysubscriptions/{inSort}/?                  Questions.listSubscriptions
-GET     /questions/tagged/{tagname}/{sort}           Questions.list
 GET     /questions/tagged/{tagname}/                 Questions.list
-GET     /questions/list/{sort}                       Questions.list
-GET     /questions/list/                             Questions.list
 GET     /questions/{qId}/subscribe/{userId}          Questions.toggleSubscriber
 *       /questions/{qId}/addComment/{comment}        Questions.addComment
 GET     /questions/{qId}/mark/{aId}                  Questions.markBestAnswer
@@ -24,15 +21,18 @@ GET     /questions/edit/{id}                         Questions.edit
 GET     /questions/create                            Questions.create
 GET     /questions/delete/{id}                       Questions.delete
 GET	    /questions/{<[0-9]+>id}                      Questions.view
+GET     /questions/                                  Questions.list
 *       /answers/{aId}/addComment/{comment}          Answers.addComment
 GET     /answers/edit/{id}                           Answers.edit
 GET     /answers/delete/{id}                         Answers.delete
 GET     /comments/edit/{id}                          Comments.edit
 GET     /comments/delete/{id}                        Comments.delete
+GET     /users/{username}                            Users.view
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
-GET     /tags/list                                   Tags.list
+GET     /tags/                                       Tags.list
+GET     /	  					                               Questions.list
 
 #markdown preview
 POST    /preview                                     Posts.markdownPreview

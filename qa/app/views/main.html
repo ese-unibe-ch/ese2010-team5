@@ -4,7 +4,8 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>        
+        #{get 'moreStyles' /}
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>                
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>        
         <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="utf-8"></script>
@@ -23,7 +24,7 @@
         		        ,"text/html"
         		);
           }
-        
+                  
         </script>
     </head>
     <body>
@@ -42,11 +43,11 @@
         #{/if}      
         
         #{form @Posts.searchContent(),id:'textSearchForm'}
-        <a class="last" href="#" onclick="$('#textSearchForm').submit()">Search</a>
-        <p align="right"><input type='text' name='content' value="type in words to search" onclick='$(this).val("")'></input></p>
-		
-		
-		#{/form}      
+        <input id="searchField" type='text' name="content" value="type in words to search" onclick='$(this).val("")'></input>
+        <!-- 
+        <a class="last" href="#" onclick="$('#textSearchForm').submit();">Search</a>
+         -->
+        #{/form}      
         
        </div>
            
@@ -62,9 +63,9 @@
     	   #{else}
     	      #{form @Secure.authenticate(), id:'loginForm'}
     	      <input type='text' name='username' value='user..' onclick='$(this).val("")'></input><br></br>
-    	      <input type='text' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
-    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br> 
-    	      <button type='submit'>Login</button>
+    	      <input type='password' name='password' value='pw..' onclick='$(this).val("")'></input><br></br>
+    	      remember me ? <input type='checkbox' name='rememberme' value='true'></input><br></br>    	       
+    	      <button type='submit'>Login</button> or <a href="@{Users.signup()}">signup</a>
     	      #{/form}
     	      <!-- 
 	    	  Please <a href="@{Secure.login()}">login</a>
@@ -84,10 +85,16 @@
          ${flash.info}
        </div>
       #{/if}
-      <!-- content -->        
+      #{if flash.success }
+       <div class="message info">
+         ${flash.success}
+       </div>
+      #{/if}
+      <!-- content -->
+      <div style="clear:both;"></div>        
       <div id="content">
         <!-- left box for notifications -->         
-        #{set boxvisible: ! notifications.isEmpty()/}
+        #{set boxvisible: ! (notifications == null || notifications.isEmpty()) /}
         
         #{if boxvisible} 
         <div id="notif-box">          

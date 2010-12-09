@@ -24,7 +24,7 @@ public class QaImporter {
 	private static final XMLInputFactory factory	
 		= XMLInputFactory.newInstance();
 	
-	private static IUser 			dummyUser 	= new User("dummy");
+	private static IUser 			dummyUser 	= new User("dummy","");
 	private static IQuestion  dummyQuest  = new Question(dummyUser,"dummy quest");
 	
 	private static HashMap<Long, User> 		userMap = new HashMap<Long, User>();
@@ -77,7 +77,7 @@ public class QaImporter {
 				case XMLStreamReader.START_ELEMENT:					
 					if(r.getLocalName().equals("user")){
 						state = STATE.USER;
-						u = new User("gaga");
+						u = new User("gaga","");
 						/*we do a mapping*/						
 						id = r.getAttributeValue(0);
 						userMap.put(Long.valueOf(id), u);
@@ -115,8 +115,8 @@ public class QaImporter {
 						state = STATE.ANSWER;
 						a=	new Answer(dummyUser, "dummy", dummyQuest);						
 						id = r.getAttributeValue(0);
-						answerMap.put(Long.valueOf(id), a);						
-						System.out.println("new answer: "+id);
+						answerMap.put(Long.valueOf(id), a);					
+						
 					}else if(r.getLocalName().equals("accepted")){
 						state = STATE.ANSWER_MARKASBEST;
 					}

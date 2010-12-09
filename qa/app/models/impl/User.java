@@ -4,6 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
+
+import play.Logger;
+
 import models.INotification;
 import models.IQuestion;
 import models.IUser;
@@ -18,6 +22,8 @@ public class User implements IUser {
 
 	/** The username. */
 	private String username;
+	
+	private String password;
 	
 	/** The email. */
 	private String email;
@@ -48,14 +54,16 @@ public class User implements IUser {
 	 *
 	 * @param username the username
 	 */
-	public User(String username) {
+	public User(String username, String password) {
 		this.username = new String(username);
+		this.password = password;
 		this.id = idCounter++;
 		this.birthDate = new Date(0);
 		this.notifications = new LinkedList<INotification>();
 		this.posts = new LinkedList<Post>();
 		this.subscriptions = new LinkedList<IQuestion>();
-	}
+	}	
+	
 
 	/**
 	 * Gets the name.
@@ -290,20 +298,28 @@ public class User implements IUser {
 	  
   }
 
-public void update(String email, String birthDate, String homepage) {
-	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-	Date date = new Date();
-	try {
-		date = sdf.parse(birthDate);
-	} catch (ParseException e) {
-		e.printStackTrace();
-	}
-	if (date != null){
-		setBirthDate(date);
-	}
-	setEmail(email);
-	setHomepage(homepage);
-	
-}
+  public void update(String email, String birthDate, String homepage) {
+    if (StringUtils.isNotEmpty(birthDate)) {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+      Date date = new Date();
+      try {
+        date = sdf.parse(birthDate);
+        setBirthDate(date);
+      } catch (ParseException e) {
+        Logger.error("error parsing birthdate %s", e.getMessage());
+      }
+    }
+    if (StringUtils.isNotEmpty(email)) {
+      setEmail(email);
+    }
+    if (StringUtils.isNotEmpty(homepage)) {
+      setHomepage(homepage);
+    }
+
+  }
+
+  public String getPassword() {    
+    return password;
+  }
 
 }

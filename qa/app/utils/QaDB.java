@@ -29,7 +29,7 @@ public class QaDB {
 	}
 
 	/* anonymous user, needed to assign questions of deleted users */
-	public static User ANONYMOUS = new User("ANONYMOUS");
+	public static User ANONYMOUS = new User("ANONYMOUS","");
 
 	/* maps: id -> instance> */
 	private static HashMap<Long, Answer> answers = new HashMap<Long, Answer>();
@@ -166,7 +166,7 @@ public class QaDB {
 		return null;
 	}
 
-	public static void findPostByText(String content){
+	public static void findPostByText(String query){
 		if(searchResults != null)
 			searchResults.clear();
 		
@@ -174,8 +174,17 @@ public class QaDB {
 		
 		for(Question q : allQuestions ){
 			if(q != null){
-				if(q.getContent().toLowerCase().contains(content.toLowerCase())){
-					searchResults.put(q.getId(), q);
+				
+				String content = q.getContent();
+				String title   = q.getTitle();
+				
+				if(content != null){
+					if(content.toLowerCase().contains(query.toLowerCase()))
+						searchResults.put(q.getId(), q);
+				}
+				if(title != null){
+					if(title.toLowerCase().contains(query.toLowerCase()))
+						searchResults.put(q.getId(), q);
 				}
 			}
 		}

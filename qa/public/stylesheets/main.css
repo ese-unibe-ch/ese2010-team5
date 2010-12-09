@@ -4,7 +4,8 @@
 
 html,body{
 	min-height:100%;
-	height:100%;		
+	height:100%;	
+	background-color: grey;	
 }
 
 body{
@@ -38,13 +39,16 @@ code {
 #header {	
 	background-color: grey;
 	position: relative;
-	padding: 25px;
+	overflow: hidden;
+	padding-top: 5px;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+		
 }
 #header #logo{
 	width: 100px;
-	position: absolute;
-	top: 10px;
-	left: 10px;
+	float: left;
 }
 #logo a{
 	text-decoration: none;
@@ -55,13 +59,9 @@ code {
 /*taken from github.com ;)*/
 /*looks nice only on mozilla i think*/
 #header #loginbox{
-	position: fixed;
-	top: 0px;
-	right: 10px;
-	-moz-border-radius-topleft:0;
+  -moz-border-radius-topleft:0;
   -moz-border-radius-topright:0;
-  border-top:medium none;
-  float:right;
+  border-top:medium none;  
   font-size:12px;
   padding:8px 5px 7px 10px;
   -moz-border-radius:5px 5px 5px 5px;
@@ -69,21 +69,25 @@ code {
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
   border-color:#E9E9E9 #E9E9E9 #F5F5F5;
   border-style:solid;
-  border-width:1px;  
+  border-width:1px;
+  width: 200px;
+  float:right;
+  margin-right: 1px;
 }
 #header #nav{
-  border-color:#E9E9E9 #E9E9E9 #F5F5F5;
-  border-style:solid;
-  border-width:1px;
+  -moz-border-radius: 3px;
   background:-moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
-  width:800px;
+  width:600px;
+  /*
   margin-left:auto;
-  margin-right:auto;
-  overflow: hidden;     
+  margin-right:auto;*/
+  overflow: hidden;
+  float: left; 
+  
 }
 #nav a {
-	display:block;	
-	text-decoration: none;
+  display:block;	
+  text-decoration: none;
   padding: 10px;
   border-right: 1px solid black;
   font-size: large;
@@ -97,9 +101,13 @@ code {
 }
 
 #nav a:hover{
-  background-color: white;
+	font-weight: bold;
 }
-
+#nav #searchField{
+  float:right;
+  margin:5px;
+  padding:5px;
+}
 
 #loginbox img {
   border:1px solid #FFFFFF;
@@ -121,10 +129,13 @@ code {
   text-shadow:none;
 }
 
+#search{
+	margin-top: 10px;
+}
 
 #wrapper #content{
   min-height: 100%;
-  padding: 10px;	
+  padding-top: 10px;	
   padding-bottom: 30px;
   width:1000px;
   margin-left: auto;
@@ -136,19 +147,24 @@ code {
   /*border:1px solid #666666;*/
   width: 180px;  
   float:left;
-  padding:5px;  
+  padding:5px;
+  background-color: white; 
+  -moz-border-radius: 3px;
 }
 
 #content #main{	  
-  width: 800px;
+  width: 78%;
   margin-left: auto;
-  margin-right: auto;    
+  margin-right: auto;
+  margin-bottom: 30px;
+  -moz-border-radius: 3px;
+  background-color: white;
+  padding: 10px;
+  
 }
 #main.right{
 	float:right; 
 }
-
-
 
 #content .subnav{
   border-bottom:1px solid #666666;
@@ -194,15 +210,19 @@ code {
 }
 
 #footer{
-	width:100%;	
-	background-color: grey;
-	position: absolute;
-	/*because we have 10px padding on #wrapper*/
+	width:100%;
+	-moz-border-radius: 3px;
+  background-color: white;
+	position: absolute;	
 	bottom: 0px;	
 	left:0px;			
 }
 #footer .content{
-  padding-left: 10px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  font-size: large;
+  
 }
 /*text-editor*/
 .text-editor {
@@ -251,12 +271,18 @@ code {
   margin: 10px;
   padding:10px;
   font-size: large;
+  width:800px;
+  margin-left: auto;
+  margin-right: auto;  
 }
 
 .message.error{
-	background-color: red;
+  color:black;
+  background-color: red;
 }
+
 .message.info{
+  color: black;
   background-color: green;
 }
 
@@ -266,11 +292,11 @@ code {
 
 /* profile view */
 #profileview{
-  float:left;
   width: 700px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
+  margin-bottom; 5px;
 }
 
 #profile-view h1{
@@ -324,11 +350,18 @@ a.delete img{
 }
 
 .question-summary {
-  border-bottom:1px dotted #999999;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  -moz-border-radius:5px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: lightgrey;
   float:left;
   overflow:hidden;
-  padding:11px 0;
-  width:100%;  
+  padding:10px;
+  width:95%;  
 }
 .question-summary .votes{
   background:none repeat scroll 0 0 #EEEEEE;
@@ -372,15 +405,31 @@ a.delete img{
 }
 
 /*question view*/
+
 #question{
-  clear: both;  
+  -moz-border-radius:5px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: lightgrey;
+  padding: 10px;
 }
+
 #question .title{
   border-bottom: 1px solid black;
 }
+
 #question .question-table,.answer-table{
   width: 100%;
+}
 
+.answers{
+  -moz-border-radius:5px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: white;
+  padding: 10px;
 }
 
 #question .answer{
@@ -410,8 +459,12 @@ a.delete img{
 #question .content{	
 	min-height: 15em;
 	padding: 20px;
-	font-size: large;	
-	width: 700px;
+	font-size: large;
+	width: 650px;	
+}
+
+p{
+	
 }
 
 #question .taglist{
@@ -427,17 +480,23 @@ a.delete img{
 }
 #question .owner{
 	float: right;
-	margin-right: 10px;
+	margin-right: 30px;
 }
 #question .comments{
-	clear:both;
-	margin-top: 20px;
+  -moz-border-radius: 2px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  margin-top: 10px;
+  width: 90%;
 }
 .comments .comment{
-	border-bottom: 1px dashed black;
+  border-bottom: 1px dashed white;
   padding: 1em;    
 }
-
 
 .tag{
 	color:#3E6D8E;
@@ -460,19 +519,19 @@ a.delete img{
 	text-decoration:none;
 }
 
-.error{
-	color: red;
-}
 
+.error{
+ color: red;
+}
 .errors{
 	border: 2px solid red;
 	padding: 2px;
 	color: red;
 }
-
 .errors li{
 	list-style: none;
 }
+
 
 #status{
 	margin-top: 20px;
@@ -505,4 +564,17 @@ a.delete img{
 
 img{
 	border: none;
+}
+
+.add-answer{
+  margin-top: 10px;
+  -moz-border-radius:5px;
+  -moz-box-shadow: 2px 2px 2px #666;
+  -webkit-box-shadow: 2px 2px 2px #666;
+  box-shadow: 2px 2px 2px #666;
+  background-color: white;
+  padding: 10px;
+}
+
+.yourcomment{
 }

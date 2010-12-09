@@ -18,6 +18,7 @@ public interface IUser {
 	public Date getBirthDate();
 	public String getEmail();
 	public String getHomepage();
+	public String getPassword();
 	public long getId();
 	public String getName();
 	public List<INotification> getNotifications();

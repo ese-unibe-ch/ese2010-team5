@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:q.getTitle() /}
 
 <!-- some javascript funcions -->
 <script type="text/javascript" charset="utf-8">
@@ -53,6 +53,17 @@
   	 },"text/html");
     }
     
+    function showCommentField(id)
+	{
+	var element = document.getElementById(id);
+	
+	if(element.style.display != 'none')
+	        element.style.display='none';
+	else
+	        element.style.display='';
+	}
+    
+    
     
 </script>
 
@@ -74,7 +85,7 @@
       <div class="tags">
           Tags: 
           #{list items:q.getTags(), as:'tag'}
-          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+          	<a class="tag" href="@{Questions.list(tag.getName())}">${tag.getName()}</a>
       	  #{/list}
       </div>      
       <div class="actions">
@@ -126,8 +137,8 @@
 	         
 	       #{/list}
 	       <br></br>
-	        #{if user}  
-       		<div class="yourcomment">
+	        #{if user}
+       		<div id="${q.getId()}" class="yourcomment">
             #{form @Questions.addComment(), id:'newQuestionComment' } 
 		          Your comment:
               <input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>  

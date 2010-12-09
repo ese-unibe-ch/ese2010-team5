@@ -71,7 +71,7 @@ function filter(tagstring){
           <span class="tags">
           Tags: 
           #{list items:q.getTags(), as:'tag'}
-          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+          	<a class="tag" href="@{Questions.list(tag.getName())}">${tag.getName()}</a>
       	  #{/list}
           </span>
           <div class="started">

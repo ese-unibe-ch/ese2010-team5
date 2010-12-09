@@ -38,7 +38,7 @@ public class Questions extends Posts {
 	 * @param sort the sort
 	 * @param tagname the tag's name
 	 */
-	public static void list(String sort, String tagname){
+	public static void list(String tagname, String sort){
 		
 		Tag tag = null;		
 		Collection<Question> questions = null;
@@ -67,15 +67,18 @@ public class Questions extends Posts {
 	/**
 	 * List all default.
 	 */
-	public static void listAll(){		
+	public static void listAll(){	
 		
-		OrderBy sortOrderEnum = OrderBy.DATE;
+		OrderBy sortOrderEnum = OrderBy.DATE;		
+		if(params._contains("sort")){
+			sortOrderEnum = OrderBy.valueOf(params.get("sort"));
+		}
 		
 		Collection<Question> questions = QaDB.findAllQuestions(sortOrderEnum);
 		String sort = sortOrderEnum.name();
-		renderTemplate("Questions/list.html",questions,sort);
-			
+		renderTemplate("Questions/list.html",questions,sort);		
 	}
+	 
 	
 	public static void listUser(String inSort){
 						
@@ -87,7 +90,7 @@ public class Questions extends Posts {
 		String tagname = "";
 		
 		if(user == null){
-			flash.error("not logged in");
+			flash.error("not logged in");			
 			listAll();
 			return;
 		}else{
@@ -222,6 +225,7 @@ public class Questions extends Posts {
 			return;
 		}
 		Comment newComment = q.addComment(user, comment);
+		
 		flash.put("info", "new Comment created " + newComment.getId());
 		view(qId);
 	}

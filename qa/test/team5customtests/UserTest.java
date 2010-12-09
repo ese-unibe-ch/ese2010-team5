@@ -30,7 +30,7 @@ public class UserTest extends UnitTest{
 
 	@Before
 	public void setUp() throws Exception {
-		use = new User("Hans");
+		use = new User("Hans","");
 		use1 = new MockUser("Fritz");
 		use2 = new MockUser("Johann");
 		quest1 = new MockQuestion(use1,"TestQuestion");
