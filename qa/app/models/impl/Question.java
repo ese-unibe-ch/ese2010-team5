@@ -49,7 +49,7 @@ public class Question extends Post implements IQuestion {
 		setContent(content);
 		addSubscriber(user);
 		tagWith(tags);
-		QaDB.addQuestion(this);
+		
 	}
 	
 	/**
@@ -285,6 +285,11 @@ public class Question extends Post implements IQuestion {
 	public Comment addComment(User user, String comment) {
 		Comment newComment = QaDB.addComment(new Comment(user, comment, this));
 		return newComment;
+	}
+	
+	public boolean save(){
+		QaDB.addQuestion(this);
+		return true;
 	}
 
 }
