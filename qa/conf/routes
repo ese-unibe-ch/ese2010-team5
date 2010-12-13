@@ -27,6 +27,7 @@ GET     /answers/edit/{id}                           Answers.edit
 GET     /answers/delete/{id}                         Answers.delete
 GET     /comments/edit/{id}                          Comments.edit
 GET     /comments/delete/{id}                        Comments.delete
+GET     /users/toggleAdmin/{id}                      Users.toggleAdmin
 GET     /users/{username}                            Users.view
 GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit

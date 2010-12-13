@@ -47,14 +47,16 @@ public class User implements IUser {
 	private List<Post> posts;
 	
 	/** The id counter. */
-	private static long idCounter = 1;	
+	private static long idCounter = 1;
+	
+	private boolean isAdmin = false;
 
 	/**
 	 * Instantiates a new user.
 	 *
 	 * @param username the username
 	 */
-	public User(String username, String password) {
+	public User(String username, String password, boolean isAdmin) {
 		this.username = new String(username);
 		this.password = password;
 		this.id = idCounter++;
@@ -62,7 +64,12 @@ public class User implements IUser {
 		this.notifications = new LinkedList<INotification>();
 		this.posts = new LinkedList<Post>();
 		this.subscriptions = new LinkedList<IQuestion>();
+		this.isAdmin = isAdmin;
 	}	
+	
+	public User(String username, String password){
+		this(username,password,false);
+	}
 	
 
 	/**
@@ -320,6 +327,15 @@ public class User implements IUser {
 
   public String getPassword() {    
     return password;
+  }
+
+	
+  public boolean isAdmin() {	  
+	  return isAdmin;
+  }
+  
+  public void setAdmin(boolean isAdmin){
+  	this.isAdmin = isAdmin;
   }
 
 }

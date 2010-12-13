@@ -6,6 +6,9 @@
 	<div class="info">Email: ${u.getEmail()}</div>
 	<div class="info">Website: ${u.getHomepage()}</div>
 	<div class="info">Date of birth: ${u.getBirthDate().format('dd.MM.yyyy')}</div>
+	#{if user && user.isAdmin()}
+	 <a href="@{Users.toggleAdmin(u.getId())}">${u.isAdmin()? "remove " : "give "} admin rights</a>
+	#{/if}
 
 
 <div id="status">
@@ -31,7 +34,7 @@
           <span class="tags">
           Tags: 
           #{list items:q.getTags(), as:'tag'}
-          	<a class="tag" href="@{Questions.list(null,tag.getName())}">${tag.getName()}</a>
+          	<a class="tag" href="@{Questions.list(tag.getName())}">${tag.getName()}</a>
       	  #{/list}
           </span>
           <div class="started">
