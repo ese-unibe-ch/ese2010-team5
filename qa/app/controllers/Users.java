@@ -23,6 +23,7 @@ import models.IUser;
 import models.impl.Answer;
 import models.impl.Question;
 import models.impl.User;
+import utils.NoLogin;
 import utils.QaDB;
 
 /**
@@ -86,6 +87,7 @@ public class Users extends Auth{
 	 *
 	 * @param username the username
 	 */
+	@NoLogin
 	public static void view(String username) {
 		Logger.debug("Show user profile: " + username);
 		User u = QaDB.findUserByName(username);
@@ -125,6 +127,7 @@ public class Users extends Auth{
 		//redirect("/");
 	}
 	
+	@NoLogin
 	public static void create(@Required String username, 
 	    @Required String password,
 	    @Required @Equals("password") String passwordConfirm,
@@ -154,7 +157,7 @@ public class Users extends Auth{
 		
 	}
 	
-	
+	@NoLogin
 	public static void signup(){
 		
 		render();

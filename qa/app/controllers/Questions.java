@@ -23,6 +23,7 @@ import play.Logger;
 import play.data.validation.Error;
 import play.mvc.Controller;
 import play.mvc.With;
+import utils.NoLogin;
 import utils.QaDB;
 import utils.QaSorter;
 import utils.QaDB.OrderBy;
@@ -38,6 +39,7 @@ public class Questions extends Posts {
 	 * @param sort the sort
 	 * @param tagname the tag's name
 	 */
+	@NoLogin
 	public static void list(String tagname, String sort){
 		
 		Tag tag = null;		
@@ -64,9 +66,10 @@ public class Questions extends Posts {
 		
 	}	
 	
-	/**
+	/** 
 	 * List all default.
 	 */
+	@NoLogin
 	public static void listAll(){	
 		
 		OrderBy sortOrderEnum = OrderBy.DATE;		
@@ -79,7 +82,7 @@ public class Questions extends Posts {
 		renderTemplate("Questions/list.html",questions,sort);		
 	}
 	 
-	
+	@NoLogin
 	public static void listUser(String inSort){
 						
 		List<IQuestion> questions = null;
@@ -182,14 +185,9 @@ public class Questions extends Posts {
 		
 		listAll();
 		
-	}
+	}	
 	
-	/**
-	 * Creates the question.
-	 */
 	public static void create(){
-		if (Security.connected() == null)
-			listAll();
 		render();	
 	}
 
@@ -235,6 +233,7 @@ public class Questions extends Posts {
 	 *
 	 * @param id the id
 	 */
+	@NoLogin
 	public static void view(long id){
 		Logger.debug("Show question: "+id);
 		

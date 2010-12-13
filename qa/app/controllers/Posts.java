@@ -4,7 +4,9 @@ import java.awt.List;
 import java.util.Collection;
 
 import play.Logger;
+import play.mvc.With;
 import play.mvc.Http.Header;
+import utils.NoLogin;
 import utils.QaDB;
 import utils.QaMarkdown;
 import models.*;
@@ -85,6 +87,7 @@ public class Posts extends Auth {
 		
 	}	
 	
+	@NoLogin
 	public static void searchContent(String content){
 		
 		QaDB.findPostByText(content);
