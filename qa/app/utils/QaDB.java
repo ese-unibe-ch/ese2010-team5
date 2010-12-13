@@ -306,18 +306,20 @@ public class QaDB {
 		
 		List<IQuestion> searchResult = new LinkedList<IQuestion>();
 				
-		for(Question q : findAllQuestions() ){
+		for(Question q : questions.values()){
 			if(q != null){
 				
 				String content = q.getContent();
 				String title   = q.getTitle();
 				
 				if(content != null){
-					if(content.toLowerCase().contains(query.toLowerCase()))
+					if(content.toLowerCase().contains(query.toLowerCase())
+							&& !searchResult.contains(q))
 						searchResult.add(q);
 				}
 				if(title != null){
-					if(title.toLowerCase().contains(query.toLowerCase()))
+					if(title.toLowerCase().contains(query.toLowerCase())
+							&& !searchResult.contains(q))
 						searchResult.add(q);
 				}
 			}
@@ -332,12 +334,13 @@ public class QaDB {
 		
 		List<IUser> searchResult = new LinkedList<IUser>();
 				
-		for(IUser u : findAllUsers() ){
+		for(IUser u : users.values() ){
 			if(u != null){				
 				String name = u.getName();				
 				
 				if(name != null){
-					if(name.toLowerCase().contains(query.toLowerCase()))
+					if(name.toLowerCase().contains(query.toLowerCase())
+							&& ! searchResult.contains(u))
 						searchResult.add(u);
 				}				
 			}
