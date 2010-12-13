@@ -313,13 +313,12 @@ public class QaDB {
 				String title   = q.getTitle();
 				
 				if(content != null){
-					if(content.toLowerCase().contains(query.toLowerCase())
-							&& !searchResult.contains(q))
+					if(content.toLowerCase().contains(query.toLowerCase()))
 						searchResult.add(q);
 				}
 				if(title != null){
 					if(title.toLowerCase().contains(query.toLowerCase())
-							&& !searchResult.contains(q))
+							&& !searchResult.contains(q) )
 						searchResult.add(q);
 				}
 			}
@@ -339,8 +338,7 @@ public class QaDB {
 				String name = u.getName();				
 				
 				if(name != null){
-					if(name.toLowerCase().contains(query.toLowerCase())
-							&& ! searchResult.contains(u))
+					if(name.toLowerCase().contains(query.toLowerCase()))
 						searchResult.add(u);
 				}				
 			}
