@@ -85,21 +85,6 @@ public class Posts extends Auth {
 		//render new voting
 		renderText(post.getVotation());
 		
-	}	
-	
-	@NoLogin
-	public static void searchContent(String content){
-		
-		QaDB.findPostByText(content);
-		
-		Collection<Question> questions = QaDB.search();
-		
-		if(questions.size() == 0){
-			flash.put("error", "could not find Post with content "+content);
-			redirect("/");
-		}
-		
-		render(questions);
-		
 	}
+	
 }                      

@@ -42,8 +42,8 @@
           <a href="@{Questions.create()}">Ask Question</a>          
         #{/if}      
         
-        #{form @Posts.searchContent(),id:'textSearchForm'}
-        <input id="searchField" type='text' name="content" value="type in words to search" onclick='$(this).val("")'></input>        
+        #{form @Search.questions(),id:'textSearchForm',method:'GET'}
+        <input id="searchField" type='text' name="q" value="type in words to search" onclick='$(this).val("")'></input>        
         #{/form}      
         
        </div>

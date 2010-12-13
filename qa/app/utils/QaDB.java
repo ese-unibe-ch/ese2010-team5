@@ -38,7 +38,7 @@ public class QaDB {
 	private static HashMap<Long, Comment> comments = new HashMap<Long, Comment>();
 	private static HashMap<Long, Tag> tags = new HashMap<Long, Tag>();
 	private static HashMap<Long, INotification> notifications = new HashMap<Long, INotification>();
-	private static HashMap<Long, Question> searchResults = new HashMap<Long, Question>();
+	
 
 	/* functions to add */
 	public static Answer addAnswer(Answer a) {
@@ -166,37 +166,8 @@ public class QaDB {
 		return null;
 	}
 
-	public static void findPostByText(String query){
-		if(searchResults != null)
-			searchResults.clear();
-		
-		Collection<Question> allQuestions = findAllQuestions();
-		
-		for(Question q : allQuestions ){
-			if(q != null){
-				
-				String content = q.getContent();
-				String title   = q.getTitle();
-				
-				if(content != null){
-					if(content.toLowerCase().contains(query.toLowerCase()))
-						searchResults.put(q.getId(), q);
-				}
-				if(title != null){
-					if(title.toLowerCase().contains(query.toLowerCase()))
-						searchResults.put(q.getId(), q);
-				}
-			}
-		}
-	}
 	
-	public static List<Question> search() {
-		List<Question> result = new LinkedList<Question>();
-		for (Question q : searchResults.values()) {
-			result.add(q);
-		}
-		return result;		
-	}
+	
 	
 	public static INotification findNotificationById(long id){
 		return notifications.get(id);
@@ -329,5 +300,52 @@ public class QaDB {
 		
 		return result;
 	}
+	
+	/*searching*/
+	public static List<IQuestion> findAllQuestionsByQuery(String query){
+		
+		List<IQuestion> searchResult = new LinkedList<IQuestion>();
+				
+		for(Question q : findAllQuestions() ){
+			if(q != null){
+				
+				String content = q.getContent();
+				String title   = q.getTitle();
+				
+				if(content != null){
+					if(content.toLowerCase().contains(query.toLowerCase()))
+						searchResult.add(q);
+				}
+				if(title != null){
+					if(title.toLowerCase().contains(query.toLowerCase()))
+						searchResult.add(q);
+				}
+			}
+		}
+		
+		Collections.sort(searchResult, new QaSorter(OrderBy.DATE));
+		
+		return searchResult;		
+	}	
+	
+	public static List<IUser> findAllUsersByQuery(String query){
+		
+		List<IUser> searchResult = new LinkedList<IUser>();
+				
+		for(IUser u : findAllUsers() ){
+			if(u != null){				
+				String name = u.getName();				
+				
+				if(name != null){
+					if(name.toLowerCase().contains(query.toLowerCase()))
+						searchResult.add(u);
+				}				
+			}
+		}
+		
+		return searchResult;
+	}
+		
+	
 
 }
