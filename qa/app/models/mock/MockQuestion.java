@@ -96,6 +96,11 @@ public class MockQuestion extends Post implements IQuestion{
   }
 	
   public void remSubscriber(IUser inUser) {}
+
+	
+  public boolean save() {	  
+	  return true;
+  }
 	
 
 }

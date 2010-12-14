@@ -3,6 +3,8 @@ package models.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.QaDB;
+
 import models.IComment;
 import models.IUser;
 
@@ -76,6 +78,11 @@ public class Comment extends Post implements IComment {
 		if (likeList.contains(user)) {
 			likeList.remove(user);
 		}
+	}
+	
+	public boolean save(){
+		QaDB.addComment(this);
+		return true;
 	}
 
 }

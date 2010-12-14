@@ -24,8 +24,7 @@ public class Admin extends Controller {
 	
 		String[] logs = new String[]{};
 		
-		if(file != null){
-			flash.success("importing..");
+		if(file != null){			
 			
 			FileInputStream fis;
       try {

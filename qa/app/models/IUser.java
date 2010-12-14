@@ -32,6 +32,8 @@ public interface IUser {
 	public void addSubscription(IQuestion quest);
 	public void remSubscription(IQuestion quest);
 	public List<IQuestion> getSubscriptions();
+	public boolean isAdmin();
+	public void setAdmin(boolean isAdmin);
 	
 	
 	 

@@ -40,6 +40,7 @@ public class BootStrap extends Job {
     public void doJob() {
     	
     	QaDB.addUser(QaDB.ANONYMOUS);
+    	QaDB.addUser(new User("admin","admin",true));
     	
     	log.info("fill Model with test-data");
     	

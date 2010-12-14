@@ -1,0 +1,26 @@
+#{extends 'main.html' /}
+#{set title:'Search Result' /}
+
+
+<div class="subnav">
+	#{if q}
+	  <h1>Search Result for "${q}"</h1>
+	#{/if}
+	<div class="tabs">  
+	    <a class=""  href="@{Search.questions(q)}">Questions</a>
+	    <a class="active"  href="#">Users</a>
+	</div>
+</div>
+
+<div id="tags">
+<div class="list">
+  #{if result.isEmpty()}
+  <h2>No users found ;(</h2>
+  #{/if}
+  #{list items:result, as:'u'}    
+    <div>
+      <a class="tag" href="@{Users.view(u.getName())}">${u.getName()}</a>
+    </div>
+  #{/list}
+</div>
+</div>

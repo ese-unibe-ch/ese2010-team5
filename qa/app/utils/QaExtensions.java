@@ -15,7 +15,7 @@ public class QaExtensions extends JavaExtensions {
 		if(Security.isConnected()){
 			IUser connectedUser = QaDB.findUserByName(Security.connected());			
 			if(connectedUser != null)				
-				return connectedUser.equals(inPost.getOwner());			
+				return connectedUser.equals(inPost.getOwner()) || connectedUser.isAdmin();			
 			
 		}
 		

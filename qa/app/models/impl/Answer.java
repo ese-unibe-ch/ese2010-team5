@@ -95,5 +95,10 @@ public class Answer extends Post {
 		this.owner = user;
 		
 	}	
+	
+	public boolean save(){
+		QaDB.addAnswer(this);
+		return true;
+	}
 
 }

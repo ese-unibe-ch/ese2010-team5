@@ -26,4 +26,8 @@ public class MockComment extends Post implements IComment {
 
 	protected void doDelete() {
 	}
+	
+  public boolean save() {	  
+	  return true;
+  }
 }

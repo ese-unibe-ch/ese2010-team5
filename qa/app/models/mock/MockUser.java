@@ -81,5 +81,13 @@ public class MockUser implements IUser {
   public String getPassword() {
     return "dummyPassword";
   }
+	
+  public boolean isAdmin() {
+	  // TODO Auto-generated method stub
+	  return false;
+  }
+  
+  public void setAdmin(boolean isAdmin){  	
+  }
 
 }

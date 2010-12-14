@@ -10,6 +10,7 @@ import models.IQuestion;
 import models.impl.Question;
 import models.impl.Tag;
 
+import utils.NoLogin;
 import utils.QaDB;
 
 /**
@@ -17,22 +18,25 @@ import utils.QaDB;
  */
 public class Tags extends Auth {
 
-    /**
-     * List the tags.
-     */
-    public static void list() {
-    	Collection<Tag> tags = QaDB.findAllTags();
-    	render(tags);
-    }
-    
-    /**
-     * List questions tagged with.
-     *
-     * @param tag the tag
-     */
-    public static void listQuestionsTaggedWith(String tag){
-    	Collection<Question> questions = QaDB.findAllQuestionsTaggedWith(tag);
-    	render(questions);
-    }
+	/**
+	 * List the tags.
+	 */
+	@NoLogin
+	public static void list() {
+		Collection<Tag> tags = QaDB.findAllTags();
+		render(tags);
+	}
+
+	/**
+	 * List questions tagged with.
+	 * 
+	 * @param tag
+	 *          the tag
+	 */
+	@NoLogin
+	public static void listQuestionsTaggedWith(String tag) {
+		Collection<Question> questions = QaDB.findAllQuestionsTaggedWith(tag);
+		render(questions);
+	}
 
 }

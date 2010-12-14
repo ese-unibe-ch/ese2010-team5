@@ -7,6 +7,7 @@ import models.impl.Answer;
 import models.impl.Comment;
 import play.Logger;
 import play.data.validation.Required;
+import utils.NoLogin;
 import utils.QaDB;
 
 /**
@@ -81,6 +82,7 @@ public class Answers extends Posts {
 	 *
 	 * @param id the id
 	 */
+	@NoLogin
 	public static void view(long id){
 		Logger.debug("Show Answer: " +id);
 		
