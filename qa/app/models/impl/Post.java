@@ -63,7 +63,7 @@ public abstract class Post implements IPost{
 	}
 	
 	/**
-	 * Del a comment .
+	 * Delete a comment .
 	 *
 	 * @param comment the comment
 	 */

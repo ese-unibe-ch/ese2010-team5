@@ -9,8 +9,16 @@ import play.data.validation.Required;
 import utils.NoLogin;
 import utils.QaDB;
 
+/**
+ * The Class Search.
+ */
 public class Search extends Auth {
 
+	/**
+	 * Search in Questions.
+	 *
+	 * @param q the searchstring
+	 */
 	@NoLogin
 	public static void questions(@Required String q){
 		if(validation.hasErrors()){
@@ -22,6 +30,12 @@ public class Search extends Auth {
 		render(q,result);
 		
 	}
+	
+	/**
+	 * Search in Users.
+	 *
+	 * @param q the searchstring
+	 */
 	@NoLogin
 	public static void users(@Required String q){
 		if(validation.hasErrors()){

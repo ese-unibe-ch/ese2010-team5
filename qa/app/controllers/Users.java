@@ -34,8 +34,7 @@ public class Users extends Auth{
 	/**
 	 * Edits the user.
 	 *
-	 * @param username the username
-	 * @throws Throwable 
+	 * @param username
 	 */
 	public static void edit(String username) {
 		if (!Security.connected().equals(username))
@@ -55,11 +54,11 @@ public class Users extends Auth{
 	/**
 	 * Update profile.
 	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param email the email
-	 * @param birthDate the birth date
-	 * @param homepage the homepage
+	 * @param id
+	 * @param name 
+	 * @param email 
+	 * @param birthDate
+	 * @param homepage 
 	 */
 	public static void updateProfile(long id, String name, String email, String birthDate, String homepage){
 		validation.email(email);
@@ -85,7 +84,7 @@ public class Users extends Auth{
 	/**
 	 * View the user.
 	 *
-	 * @param username the username
+	 * @param username 
 	 */
 	@NoLogin
 	public static void view(String username) {
@@ -103,7 +102,6 @@ public class Users extends Auth{
 			try {
 				edit(u.getName());
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		else
@@ -113,8 +111,8 @@ public class Users extends Auth{
 	/**
 	 * Delete the user.
 	 *
-	 * @param username the username
-	 * @throws Throwable 
+	 * @param username 
+	 * @throws Throwable
 	 */
 	public static void delete(String username) throws Throwable{
 		User user = QaDB.findUserByName(username);
@@ -127,6 +125,16 @@ public class Users extends Auth{
 		//redirect("/");
 	}
 	
+	/**
+	 * Creates a user.
+	 *
+	 * @param username 
+	 * @param password 
+	 * @param passwordConfirm 
+	 * @param email
+	 * @param birthDate 
+	 * @param homepage
+	 */
 	@NoLogin
 	public static void create(@Required String username, 
 	    @Required String password,
@@ -157,11 +165,19 @@ public class Users extends Auth{
 		
 	}
 	
+	/**
+	 * Signup.
+	 */
 	@NoLogin
 	public static void signup(){		
 		render();		
 	}
 	
+	/**
+	 * Toggle admin.
+	 *
+	 * @param id the id
+	 */
 	public static void toggleAdmin(long id){
 		User u = QaDB.findUserById(id);
 		if (u == null){

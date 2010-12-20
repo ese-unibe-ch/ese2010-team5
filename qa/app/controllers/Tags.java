@@ -31,7 +31,6 @@ public class Tags extends Auth {
 	 * List questions tagged with.
 	 * 
 	 * @param tag
-	 *          the tag
 	 */
 	@NoLogin
 	public static void listQuestionsTaggedWith(String tag) {

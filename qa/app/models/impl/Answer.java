@@ -95,7 +95,11 @@ public class Answer extends Post {
 		this.owner = user;
 		
 	}	
-	
+	/**
+	 * Save this answer
+	 * 
+	 * @return true if no error occured
+	 */	
 	public boolean save(){
 		QaDB.addAnswer(this);
 		return true;
