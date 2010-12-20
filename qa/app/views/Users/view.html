@@ -9,6 +9,9 @@
 	#{if user && user.isAdmin()}
 	 <a href="@{Users.toggleAdmin(u.getId())}">${u.isAdmin()? "remove " : "give "} admin rights</a>
 	#{/if}
+	#{if user && user.isAdmin()}
+	 <a href="@{Users.toggleBlock(u.getId())}">${u.isBlocked()? "unblock " : "block "} user</a>
+	#{/if}
 
 
 <div id="status">

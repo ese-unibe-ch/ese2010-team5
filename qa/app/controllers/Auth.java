@@ -48,9 +48,6 @@ public class Auth extends Controller{
 		renderArgs.put("notifications", notifications);
 	}
 	
-	/**
-	 * Check if requested method requires login or not.
-	 */
 	@Before
 	static void checkNoLogin() {
 		/* check if requested action method is annotated with NoLogin

@@ -17,8 +17,9 @@ public class Comments extends Posts {
 
 	/**
 	 * Edits the comment.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 */
 	public static void edit(long id) {
 
@@ -34,9 +35,11 @@ public class Comments extends Posts {
 
 	/**
 	 * Sets the content.
-	 *
-	 * @param id the id
-	 * @param content the content
+	 * 
+	 * @param id
+	 *            the id
+	 * @param content
+	 *            the content
 	 */
 	public static void setContent(long id, String content) {
 		Logger.debug("Setting new content: \"" + content + "\"");
@@ -54,12 +57,8 @@ public class Comments extends Posts {
 
 	}
 
-
 	/**
-	 * Like or unlike.
-	 *
-	 * @param id
-	 * @param likesComment boolean value to determine if the comment is liked or not
+	 * @author simon and marius
 	 */
 	public static void likeOrUnlike(long id, boolean likesComment) {
 		Comment comment = QaDB.findCommentById(id);
@@ -72,11 +71,6 @@ public class Comments extends Posts {
 		showMyQuestion(comment);
 	}
 
-	/**
-	 * Show my question.
-	 *
-	 * @param cA a comment
-	 */
 	private static void showMyQuestion(Comment cA) {
 		Post a = cA.getPost();
 

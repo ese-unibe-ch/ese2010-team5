@@ -4,13 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import models.impl.Post;
+import models.impl.User;
 
 /**
  * The Interface IUser.
  */
 public interface IUser {
-
-	
 	
 	public void delete();
 	public void addNotification(INotification notif);
@@ -34,11 +33,8 @@ public interface IUser {
 	public List<IQuestion> getSubscriptions();
 	public boolean isAdmin();
 	public void setAdmin(boolean isAdmin);
+	public boolean canBlockUser();
+	public void blockUser(User user);
+	public boolean isBlocked();
 	
-	
-	 
-	
-	
-	
-
 }

@@ -154,12 +154,6 @@ public class Question extends Post implements IQuestion {
 		this.title = title;		
 	}
 	
-	/**
-	 * Sets the content.
-	 *
-	 * @param editedContent the edited content
-	 * @param rendered 
-	 */
 	public void setContent(String editedContent, boolean rendered){
 		if(rendered){
 			super.setContent(editedContent);
@@ -202,9 +196,6 @@ public class Question extends Post implements IQuestion {
 		//QaDB.removeQuestion(this);
 	}
 
-	/**
-	 * Delete answers.
-	 */
 	private void deleteAnswers() {
 		if (answers != null){
 			for (Answer answer : answers){
@@ -213,9 +204,6 @@ public class Question extends Post implements IQuestion {
 		}
 	}
 
-	/**
-	 * Delete tags.
-	 */
 	private void deleteTags() {
 		for(Tag tag : tags){
 			// ensure that a tag is deleted from DB when there is no question tagged with it
@@ -223,9 +211,6 @@ public class Question extends Post implements IQuestion {
 		}
 	}
 	
-	/**
-	 * Remind subscribers.
-	 */
 	private void remSubscribers(){
 		for(IUser u : subscribers){
 			u.remSubscription(this);
@@ -269,24 +254,11 @@ public class Question extends Post implements IQuestion {
 	  inUser.remSubscription(this);
   }
 
-	/**
-	 * Adds the tag.
-	 *
-	 * @param tagName the tag name
-	 */
 	public void addTag(String tagName) {
 		Tag tag = Tag.findOrCreateTagByName(tagName, this);
 		tags.add(tag);
 	}
 	
-	/**
-	 * Creates the question.
-	 *
-	 * @param user
-	 * @param title 
-	 * @param content 
-	 * @param tag
-	 */
 	public static void createQuestion(User user, String title, String content,
 			String tag) {
 		
@@ -296,23 +268,10 @@ public class Question extends Post implements IQuestion {
 
 
 	
-	/**
-	 * Adds the answer.
-	 *
-	 * @param user
-	 * @param answer
-	 */
 	public void addAnswer(User user, String answer) {
 		QaDB.addAnswer(new Answer(user, answer, this));
 	}
 
-	/**
-	 * Adds the comment.
-	 *
-	 * @param user
-	 * @param comment 
-	 * @return the comment
-	 */
 	public Comment addComment(User user, String comment) {
 		Comment newComment = QaDB.addComment(new Comment(user, comment, this));
 		return newComment;

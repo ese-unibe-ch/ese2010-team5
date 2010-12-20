@@ -34,7 +34,8 @@ public class Users extends Auth{
 	/**
 	 * Edits the user.
 	 *
-	 * @param username
+	 * @param username the username
+	 * @throws Throwable 
 	 */
 	public static void edit(String username) {
 		if (!Security.connected().equals(username))
@@ -54,10 +55,10 @@ public class Users extends Auth{
 	/**
 	 * Update profile.
 	 *
-	 * @param id
-	 * @param email 
-	 * @param birthDate
-	 * @param homepage 
+	 * @param id the id
+	 * @param email the email
+	 * @param birthDate the birth date
+	 * @param homepage the homepage
 	 */
 	public static void updateProfile(long id, String email, String birthDate, String homepage){
 		validation.email(email);
@@ -83,7 +84,7 @@ public class Users extends Auth{
 	/**
 	 * View the user.
 	 *
-	 * @param username 
+	 * @param username the username
 	 */
 	@NoLogin
 	public static void view(String username) {
@@ -101,6 +102,7 @@ public class Users extends Auth{
 			try {
 				edit(u.getName());
 			} catch (Throwable e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		else
@@ -110,8 +112,8 @@ public class Users extends Auth{
 	/**
 	 * Delete the user.
 	 *
-	 * @param username 
-	 * @throws Throwable
+	 * @param username the username
+	 * @throws Throwable 
 	 */
 	public static void delete(String username) throws Throwable{
 		User user = QaDB.findUserByName(username);
@@ -124,16 +126,6 @@ public class Users extends Auth{
 		//redirect("/");
 	}
 	
-	/**
-	 * Creates a user.
-	 *
-	 * @param username 
-	 * @param password 
-	 * @param passwordConfirm 
-	 * @param email
-	 * @param birthDate 
-	 * @param homepage
-	 */
 	@NoLogin
 	public static void create(@Required String username, 
 	    @Required String password,
@@ -164,19 +156,11 @@ public class Users extends Auth{
 		
 	}
 	
-	/**
-	 * Signup.
-	 */
 	@NoLogin
 	public static void signup(){		
 		render();		
 	}
 	
-	/**
-	 * Toggle admin.
-	 *
-	 * @param id the id
-	 */
 	public static void toggleAdmin(long id){
 		User u = QaDB.findUserById(id);
 		if (u == null){
@@ -191,6 +175,22 @@ public class Users extends Auth{
 		
 		view(u.getName());
 		
+	}
+	
+	public static void toggleBlock(long id){
+		User user = QaDB.findUserById(id);
+		if (user == null){
+			flash.error("user not found! id=%d", id);
+		}
+		if(!user.isBlocked()){
+			user.setBlocked(true);
+			flash.success(user.getName()+" is now blocked");
+		}
+		else{
+			user.setBlocked(false);
+			flash.success(user.getName()+" is no longer blocked");
+		}
+		view(user.getName());
 	}
 	
 }

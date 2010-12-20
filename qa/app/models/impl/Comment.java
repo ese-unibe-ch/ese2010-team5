@@ -16,15 +16,15 @@ public class Comment extends Post implements IComment {
 
 	/** The comment belongs to a Post (either a Question or an Answer). */
 	private Post post;
-	
-	/** The like list. */
 	private List<IUser> likeList;
 
 	/**
 	 * Instantiates a new comment.
 	 * 
 	 * @param owner
+	 *            the owner
 	 * @param content
+	 *            the content
 	 * @param quest
 	 *            the post that corresponds to this comment
 	 */
@@ -44,11 +44,6 @@ public class Comment extends Post implements IComment {
 		return post;
 	}
 
-	/**
-	 * Sets the owner.
-	 *
-	 * @param owner the new owner
-	 */
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
@@ -59,9 +54,7 @@ public class Comment extends Post implements IComment {
 	}
 
 	/**
-	 * Gets the likes.
-	 *
-	 * @return the likes
+	 * @author simon and marius
 	 */
 	public String getLikes() {
 		if (likeList.size() == 1) {
@@ -71,32 +64,16 @@ public class Comment extends Post implements IComment {
 		}
 	}
 
-	/**
-	 * Checks if is in like list.
-	 *
-	 * @param user the user
-	 * @return true, if is in like list
-	 */
 	public boolean isInLikeList(IUser user) {
 		return likeList.contains(user);
 	}
 
-	/**
-	 * Add a user to the like list.
-	 *
-	 * @param user the user
-	 */
 	public void like(IUser user) {
 		if (!(likeList.contains(user) || this.getOwner().equals(user))) {
 			likeList.add(user);
 		}
 	}
 
-	/**
-	 * Add a user to the dislike list.
-	 *
-	 * @param user the user
-	 */
 	public void dislike(IUser user) {
 		if (likeList.contains(user)) {
 			likeList.remove(user);

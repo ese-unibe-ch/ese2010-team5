@@ -8,16 +8,10 @@ import play.mvc.Controller;
 import play.mvc.With;
 import utils.QaImporter;
 
-/**
- * The Class Admin.
- */
 public class Admin extends Controller {
 
 	
 	
-	/**
-	 * Index.
-	 */
 	public static void index(){		
 		
 		render();
@@ -26,11 +20,6 @@ public class Admin extends Controller {
 	
 	
 	
-	/**
-	 * Upload an XML sample file.
-	 *
-	 * @param file XML-Import file
-	 */
 	public static void upload(File file){
 	
 		String[] logs = new String[]{};
@@ -43,6 +32,7 @@ public class Admin extends Controller {
 	      QaImporter.importXml(fis);
 	      logs = QaImporter.getLog();
       } catch (FileNotFoundException e) {
+	      // TODO Auto-generated catch block
 	      flash.error("something went wrong: %s", e.getMessage());
       }
 		}else{

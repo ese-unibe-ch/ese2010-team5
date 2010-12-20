@@ -13,9 +13,9 @@ public class Security extends Secure.Security{
 	/**
 	 * Authenticate.
 	 *
-	 * @param username 
-	 * @param password 
-	 * @return true, if successfully authenticated
+	 * @param username the username
+	 * @param password the password
+	 * @return true, if successful
 	 */
 	static boolean authenticate(String username, String password) {
 	  User u = QaDB.findUserByName(username);
@@ -39,9 +39,9 @@ public class Security extends Secure.Security{
 			redirect("/");
 	}
 	/**
-	 * checks the profile of a user
+	 * {@link #check(String)}
 	 * @param profile
-	 * @return true, if profile exists
+	 * @return
 	 */	
 	static boolean check(String profile) {
 		
@@ -63,7 +63,7 @@ public class Security extends Secure.Security{
 	/**
 	 * This method returns the current connected username.
 	 *
-	 * @return the username
+	 * @return the string
 	 */
     public static String connected() {
         return session.get("username");

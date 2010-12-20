@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.*;
 import models.impl.Post;
+import models.impl.User;
 
 /**
  * The Class MockUser used for tests.
@@ -89,5 +90,20 @@ public class MockUser implements IUser {
   
   public void setAdmin(boolean isAdmin){  	
   }
+
+	public boolean canBlockUser() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void blockUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isBlocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

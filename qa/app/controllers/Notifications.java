@@ -21,11 +21,6 @@ public class Notifications extends Auth{
 		render(notifications);
 	}
 	
-	/**
-	 * Delete.
-	 *
-	 * @param id
-	 */
 	public static void delete(long id){
 		INotification n = QaDB.findNotificationById(id);
 		
@@ -39,11 +34,6 @@ public class Notifications extends Auth{
 		renderText("success");
 	}
 	
-	/**
-	 * Mark as read.
-	 *
-	 * @param id
-	 */
 	public static void markAsRead(long id){
 		INotification n = QaDB.findNotificationById(id);
 		

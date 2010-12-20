@@ -36,8 +36,8 @@ public class Questions extends Posts {
 	/**
 	 * List the questions.
 	 *
+	 * @param sort the sort
 	 * @param tagname the tag's name
-	 * @param sort the sorttype
 	 */
 	@NoLogin
 	public static void list(String tagname, String sort){
@@ -82,11 +82,6 @@ public class Questions extends Posts {
 		renderTemplate("Questions/list.html",questions,sort);		
 	}
 	 
-	/**
-	 * List user.
-	 *
-	 * @param inSort the sortvalue
-	 */
 	@NoLogin
 	public static void listUser(String inSort){
 						
@@ -109,11 +104,6 @@ public class Questions extends Posts {
 		
 	}
 	
-	/**
-	 * List subscriptions.
-	 *
-	 * @param inSort sortvalue
-	 */
 	public static void listSubscriptions(String inSort){
 						
 		List<IQuestion> questions = null;
@@ -171,9 +161,10 @@ public class Questions extends Posts {
 	/**
 	 * Save a question.
 	 *
-	 * @param content
-	 * @param title
-	 * @param tag
+	 * @param content the content
+	 * @param title the title
+	 * @param tags the tags
+	 * @param tag the tag
 	 */
 	public static void save(String content, String title, String tag){
 		
@@ -195,9 +186,6 @@ public class Questions extends Posts {
 		
 	}	
 	
-	/**
-	 * Creates the view.
-	 */
 	public static void create(){
 		render();	
 	}
@@ -205,8 +193,8 @@ public class Questions extends Posts {
 	/**
 	 * Adds the answer.
 	 *
-	 * @param answer
-	 * @param qId the question's id
+	 * @param answer the answer
+	 * @param qId the q id
 	 */
 	public static void addAnswer(String answer, long qId){
 		Question question = QaDB.findQuestionById(qId);
@@ -223,8 +211,8 @@ public class Questions extends Posts {
 	/**
 	 * Adds the comment.
 	 *
-	 * @param comment
-	 * @param qId the question's id
+	 * @param comment the comment
+	 * @param qId the q id
 	 */
 	public static void addComment(String comment, long qId){
 		Question q = QaDB.findQuestionById(qId);
@@ -242,7 +230,7 @@ public class Questions extends Posts {
 	/**
 	 * View the question.
 	 *
-	 * @param id
+	 * @param id the id
 	 */
 	@NoLogin
 	public static void view(long id){
@@ -269,7 +257,7 @@ public class Questions extends Posts {
 	/**
 	 * Edits the question.
 	 *
-	 * @param id
+	 * @param id the id
 	 */
 	public static void edit(long id){
 		Logger.debug("Edit question: "+id);
@@ -284,9 +272,9 @@ public class Questions extends Posts {
 	/**
 	 * Sets the content.
 	 *
-	 * @param id
-	 * @param title
-	 * @param content
+	 * @param id the id
+	 * @param title the title
+	 * @param content the content
 	 */
 	public static void setContent(long id, String title, String content){
 		Logger.debug("Setting new content: \""+content+"\"");
@@ -301,12 +289,6 @@ public class Questions extends Posts {
 		view(id);
 	}
 	
-	/**
-	 * Toggle subscriber.
-	 *
-	 * @param qId the question's id
-	 * @param userId the user's id
-	 */
 	public static void toggleSubscriber(long qId, long userId){
 		IQuestion q = QaDB.findQuestionById(qId);
 		IUser u = QaDB.findUserById(userId);

@@ -45,6 +45,8 @@ public abstract class Post implements IPost{
 	 * @param inContent the content of the post
 	 */
 	protected Post(IUser inUser, String inContent){
+		if (inUser.isBlocked())
+			return;
 		this.owner = inUser;		
 		this.content = inContent;
 		this.timestamp = new Date(System.currentTimeMillis());
@@ -63,7 +65,7 @@ public abstract class Post implements IPost{
 	}
 	
 	/**
-	 * Delete a comment .
+	 * Del a comment .
 	 *
 	 * @param comment the comment
 	 */

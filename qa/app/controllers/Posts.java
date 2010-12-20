@@ -21,7 +21,7 @@ public class Posts extends Auth {
 	/**
 	 * Markdown preview.
 	 *
-	 * @param input
+	 * @param input the input
 	 */
 	public static void markdownPreview(String input){
 		if(input != null){
@@ -36,7 +36,7 @@ public class Posts extends Auth {
 	 * Delete a post.
 	 * Redirect to referer
 	 * 
-	 * @param id
+	 * @param id the id
 	 */
 	public static void delete(long id){
 		
@@ -65,8 +65,8 @@ public class Posts extends Auth {
 	/**
 	 * Rate the post.
 	 *
-	 * @param id
-	 * @param up boolean value to determine if user is voted up or down
+	 * @param id the id
+	 * @param up the up
 	 */
 	public static void rate(long id, boolean up){
 		

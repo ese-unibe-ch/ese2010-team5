@@ -30,20 +30,16 @@ public class Notification implements INotification {
 	/** The originator. */
 	private IUser originator;
 	
-	/** The subscriber. */
 	private IUser subscriber;
 	
-	/** The id. */
 	private long id;
 	
-	/** The id counter. */
 	private static long idCounter = 1;
 
 	
 	/**
 	 * Instantiates a new notification.
 	 *
-	 * @param inSubscriber the subscriber
 	 * @param inOriginator the originator
 	 * @param inQuestion the question
 	 * @param inType the type
@@ -121,7 +117,6 @@ public class Notification implements INotification {
   public void delete() {
 	  subscriber.delNotification(this);
   }	
-  
   public IUser getSubscriber() {	 
 	  return subscriber;
   }

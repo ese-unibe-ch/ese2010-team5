@@ -14,6 +14,7 @@ import models.IUser;
 
 import utils.QaDB;
 
+
 /**
  * The Class User.
  */
@@ -22,7 +23,6 @@ public class User implements IUser {
 	/** The username. */
 	private String username;
 	
-	/** The password. */
 	private String password;
 	
 	/** The email. */
@@ -40,7 +40,7 @@ public class User implements IUser {
 	/** The notifications. */
 	private List<INotification> notifications;
 	
-	/** The subscriptions. */
+	/** */
 	private List<IQuestion> 		subscriptions;
 	
 	/** The posts list. */
@@ -49,15 +49,14 @@ public class User implements IUser {
 	/** The id counter. */
 	private static long idCounter = 1;
 	
-	/** The is admin. */
 	private boolean isAdmin = false;
+
+	private boolean isBlocked;
 
 	/**
 	 * Instantiates a new user.
 	 *
 	 * @param username the username
-	 * @param password the password
-	 * @param isAdmin the is admin
 	 */
 	public User(String username, String password, boolean isAdmin) {
 		this.username = new String(username);
@@ -70,12 +69,6 @@ public class User implements IUser {
 		this.isAdmin = isAdmin;
 	}	
 	
-	/**
-	 * Instantiates a new user.
-	 *
-	 * @param username the username
-	 * @param password the password
-	 */
 	public User(String username, String password){
 		this(username,password,false);
 	}
@@ -271,9 +264,6 @@ public class User implements IUser {
 		
 	}
 	//unused
-	/**
-	 * Delete comments.
-	 */
 	private void deleteComments(){
 		List<Comment> comments = QaDB.findAllCommentsOfUser(this);
 		
@@ -317,13 +307,6 @@ public class User implements IUser {
 	  
   }
 
-  /**
-   * Update.
-   *
-   * @param email the email
-   * @param birthDate the birth date
-   * @param homepage the homepage
-   */
   public void update(String email, String birthDate, String homepage) {
     if (StringUtils.isNotEmpty(birthDate)) {
       SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
@@ -357,4 +340,39 @@ public class User implements IUser {
   	this.isAdmin = isAdmin;
   }
 
+  /**
+   * Checks whether the user has the right to block other users
+   */
+  public boolean canBlockUser() {
+	  return isAdmin;
+  }
+
+
+  public void blockUser(User user) {
+	  if (canBlockUser())
+		  user.setBlocked(true);
+  }
+
+  public void unblockUser(User user){
+	  if (canBlockUser())
+		  user.setBlocked(false);
+  }
+
+  public void setBlocked(boolean blocked) {
+	  this.isBlocked = blocked;
+  }
+
+  public boolean isBlocked() {
+	  return isBlocked;
+  }
+
+  public List<Question> getQuestions(){
+	  List<Question> questions = new LinkedList<Question>();
+	  for (Post post : posts){
+		  if (post.getClass().equals(Question.class))
+			  questions.add((Question) post);
+	  }
+	  return questions;
+  }
+ 
 }

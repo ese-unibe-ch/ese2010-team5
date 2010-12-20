@@ -33,7 +33,8 @@ GET     /users/edit/{username}                       Users.edit
 GET     /users/updateProfile                         Users.edit
 GET     /notifications/                              Notifications.list
 GET     /tags/                                       Tags.list
-GET     /	  					                               Questions.list
+GET     /	  					                     Questions.list
+GET     /users/toggleBlock/{id}                      Users.toggleBlock
 
 #markdown preview
 POST    /preview                                     Posts.markdownPreview
