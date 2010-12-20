@@ -19,28 +19,42 @@ import models.impl.Answer;
 import models.impl.Question;
 import models.impl.User;
 
+/**
+ * The Class QaImporter.
+ */
 public class QaImporter {
 
+	/** The Constant factory. */
 	private static final XMLInputFactory factory	
 		= XMLInputFactory.newInstance();
 	
+	/** The dummy user. */
 	private static IUser 			dummyUser 	= new User("dummy","");
+	
+	/** The dummy quest. */
 	private static IQuestion  dummyQuest  = new Question(dummyUser,"dummy quest");
 	
+	/** The user map. */
 	private static HashMap<Long, User> 		userMap = new HashMap<Long, User>();
+	
+	/** The quest map. */
 	private static HashMap<Long, Question> questMap = new HashMap<Long, Question>();
+	
+	/** The answer map. */
 	private static HashMap<Long, Answer> answerMap = new HashMap<Long, Answer>();
 	
+	/** The logs. */
 	private static List<String> logs = new LinkedList();
 	
+	/**
+	 * The Enum STATE.
+	 */
 	private enum STATE{
 		UNKNOWN,
-		
 		USER,
 		USER_NAME,
 		USER_MAIL,
 		USER_HOMEPAGE,		
-		
 		QUESTION,
 		QUESTION_OWNER,
 		QUESTION_TIMESTAMP,
@@ -48,16 +62,20 @@ public class QaImporter {
 		QUESTION_CONTENT,
 		QUESTION_TAGS,
 		QUESTION_TAG,
-		
 		ANSWER,
 		ANSWER_OWNER,		
 		ANSWER_TIMESTAMP,
 		ANSWER_CONTENT,
 		ANSWER_QUESTIONID,
 		ANSWER_MARKASBEST,		
-		
 	}
 	
+	/**
+	 * Import xml.
+	 *
+	 * @param is the Inputstream
+	 * @return true, if successful
+	 */
 	public static boolean importXml(InputStream is){
 		try {
 			XMLStreamReader r = factory.createXMLStreamReader(is);
@@ -204,12 +222,20 @@ public class QaImporter {
 		
 	}
 	
+	/**
+	 * Gets the log.
+	 *
+	 * @return the log
+	 */
 	public static String[] getLog(){
 		return logs != null ? 
 				logs.toArray(new String[]{}) : 
 				new String[]{};
 	}
 	
+	/**
+	 * adds Data to the DB.
+	 */
 	private static void toDB(){
 		/*users*/
 		for(User u : userMap.values()){
@@ -225,6 +251,11 @@ public class QaImporter {
 		
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		
 		File f = new File(args[0]);
