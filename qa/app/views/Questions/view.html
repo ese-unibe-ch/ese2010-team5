@@ -137,7 +137,7 @@
 	         
 	       #{/list}
 	       <br></br>
-	        #{if user}
+	        #{if user && !user.isBlocked()}
        		<div id="${q.getId()}" class="yourcomment">
             #{form @Questions.addComment(), id:'newQuestionComment' } 
 		          Your comment:
@@ -214,7 +214,7 @@
              </div>           
          #{/list}
          <br></br>
-         #{if user}
+         #{if user && !user.isBlocked()}
         <div class="yourcomment">
             #{form @Answers.addComment(), id:'newAnswerComment-'+answer.getId() } 
               Your comment:
@@ -231,8 +231,8 @@
 	</div><!-- end answer -->
 	#{/list}	
   </div><!-- end answers -->
-	<div class="add-answer">
-	 #{if user}
+	 #{if user && !user.isBlocked()}
+	  <div class="add-answer">
 		<h3>Your Answer</h3>
 		#{form @Questions.addAnswer(), id:'addAnswerForm' } 
 			<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
@@ -251,7 +251,7 @@
 			</div>
 			<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
 		#{/form}
+	  </div>
 	 #{/if}
-	</div>
 </div><!-- end question -->
 	
