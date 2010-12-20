@@ -374,5 +374,20 @@ public class User implements IUser {
 	  }
 	  return questions;
   }
+  
+  public boolean isModeratorForQuestion(Question question){
+	  return isAdmin || this == question.owner;
+  }
+
+public void closeQuestion(Question question) {
+	if (isAdmin || this == question.owner)
+		question.close();
+	
+}
+
+public void reopenQuestion(Question question) {
+	if (isAdmin || this == question.owner)
+		question.reopen();
+}
  
 }

@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 
 import models.impl.Answer;
+import models.impl.Question;
 import models.impl.Tag;
 
 /**
@@ -134,5 +135,10 @@ public interface IQuestion extends IPost{
 	 * @return the id
 	 */
 	public abstract long getId();
+ 
+	public abstract void close();
 
+	public abstract boolean isClosed();
+
+	public abstract void reopen();
 }

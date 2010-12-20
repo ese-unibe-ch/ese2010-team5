@@ -98,8 +98,12 @@
         #{if q.ownPost()}
         | <a href="@{Questions.delete(q.getId())}">delete</a>
         | <a href="@{Questions.edit(q.getId())}">edit</a>        
-        #{/if}    
-		  </div>
+        #{/if}
+        
+        #{if user.isModeratorForQuestion(q)}
+        	| <a href="@{Questions.toggleClose(q.getId())}">${q.isClosed()? "reopen " : "close "} question</a>
+        #{/if}
+	  </div>
 		  <div class="time">
 		    updated: ${q.getTimestamp().since()}
 		  </div>
@@ -231,7 +235,7 @@
 	</div><!-- end answer -->
 	#{/list}	
   </div><!-- end answers -->
-	 #{if user && !user.isBlocked()}
+	 #{if user && !user.isBlocked() && !q.isClosed()}
 	  <div class="add-answer">
 		<h3>Your Answer</h3>
 		#{form @Questions.addAnswer(), id:'addAnswerForm' } 

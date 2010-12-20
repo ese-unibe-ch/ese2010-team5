@@ -35,6 +35,7 @@ GET     /notifications/                              Notifications.list
 GET     /tags/                                       Tags.list
 GET     /	  					                     Questions.list
 GET     /users/toggleBlock/{id}                      Users.toggleBlock
+GET     /questions/toggleClose/{id}                  Questions.toggleClose
 
 #markdown preview
 POST    /preview                                     Posts.markdownPreview

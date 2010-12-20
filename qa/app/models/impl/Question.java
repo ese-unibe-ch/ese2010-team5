@@ -33,6 +33,8 @@ public class Question extends Post implements IQuestion {
 	
 	/** Rendered content in html. */
 	private String renderedContent;
+
+	private boolean closed;
 	
 
 	/**
@@ -265,8 +267,6 @@ public class Question extends Post implements IQuestion {
 		QaDB.addQuestion(new Question(user, title, content, tag));
 	
 	}
-
-
 	
 	public void addAnswer(User user, String answer) {
 		QaDB.addAnswer(new Answer(user, answer, this));
@@ -280,6 +280,19 @@ public class Question extends Post implements IQuestion {
 	public boolean save(){
 		QaDB.addQuestion(this);
 		return true;
+	}
+
+	public void close() {
+		closed = true;
+		
+	}
+
+	public boolean isClosed() {
+		return closed;
+	}
+
+	public void reopen() {
+		closed = false;
 	}
 
 }

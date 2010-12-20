@@ -308,4 +308,29 @@ public class Questions extends Posts {
 		}
 		view(q.getId());
 	}
+	
+	public static void close(long id){
+		IQuestion q = QaDB.findQuestionById(id);
+		q.close();
+		view(q.getId());
+	}
+	
+	public static void toggleClose(long id){
+		IQuestion q = QaDB.findQuestionById(id);
+		
+		if(q == null){
+			flash.error("someting went wrong. question: %s", q);
+			view(id); 
+		}
+		
+		if(q.isClosed()){
+			q.reopen();
+			flash("info", "reopened " + q.getTitle());
+
+		}else{
+			q.close();
+			flash("info", "closed question: " + q.getTitle());
+		}
+		view(q.getId());
+	}
 }

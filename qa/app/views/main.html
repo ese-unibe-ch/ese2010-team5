@@ -38,7 +38,7 @@
          <a href="@{Questions.list()}">Questions</a>
          <a href="@{Tags.list()}">Tags</a>		
   
-        #{if user && !user.isBlocked()}          
+        #{if user && !user.isBlocked()}           
           <a href="@{Questions.create()}">Ask Question</a>          
         #{/if}      
         

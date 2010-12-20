@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.*;
 import models.impl.Question;
+import models.impl.User;
 import models.mock.MockComment;
 import models.mock.MockUser;
 
@@ -17,12 +18,15 @@ import utils.QaMarkdown;
 public class QuestionTest extends UnitTest {
 	public Question quest;
 	public IUser use1,use2;
+	public User questOwner, admin;
 	public IComment com1,com2;
 
 	@Before
 	public void SetUp() {
 		use1 = new MockUser("Hans");
 		use2 = new MockUser("Peter");
+		questOwner = new User("questOwner", "q");
+		admin = new User("admin", "a");
 		quest = new Question(use1, "Testquestion for JUnit");
 		com1 = new MockComment(use1,"testcomment1",quest);
 		com2 = new MockComment(use2,"testcomment2",quest);
@@ -87,7 +91,7 @@ public class QuestionTest extends UnitTest {
 		quest.rateUp(use2);
 		assertEquals(1,quest.getVotation());
 		quest.rateUp(use2);
-		assertEquals(1,quest.getVotation());
+		assertEquals(1,quest.getVotation()); 
 	}
 	
 	@Test
@@ -107,4 +111,18 @@ public class QuestionTest extends UnitTest {
 		quest.addSubscriber(use2);
 		assertEquals(subscribers,quest.getSubscribers());
 	}
+	
+	@Test
+	public void shouldBePossibleToCloseQuestionByModerator(){
+		Question question = new Question(questOwner, "test question");
+		admin.closeQuestion(question);
+		assertEquals(true, question.isClosed());
+		int oldAnswerCount = question.getAnswers().size();
+		question.addAnswer(admin, "this q can't be answered!");
+		assertEquals(oldAnswerCount, question.getAnswers().size());
+		questOwner.reopenQuestion(question);
+		question.addAnswer(admin, "now it can be answered again");
+	}
+	
+	
 }
