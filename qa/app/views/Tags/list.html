@@ -10,9 +10,11 @@
 <div class="list">
   #{list items:tags, as:'t'}
     #{set tagname:t.getName()/}
+    #{if t.count() > 0}
     <div>
       <a class="tag" href="@{Questions.list(tagname)}">${t.getName()}</a><span> x ${t.count()}</span>
     </div>
+    #{/if}
   #{/list}
 </div>
 </div>

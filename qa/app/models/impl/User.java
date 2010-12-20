@@ -22,35 +22,38 @@ public class User implements IUser {
 
 	/** The username. */
 	private String username;
-	
+
+	/** The password */
 	private String password;
-	
+
 	/** The email. */
 	private String email;
-	
+
 	/** The birth date. */
 	private Date birthDate;
-	
+
 	/** The homepage. */
 	private String homepage;
-	
+
 	/** The id. */
 	private long id;	  
-	
+
 	/** The notifications. */
 	private List<INotification> notifications;
-	
-	/** */
-	private List<IQuestion> 		subscriptions;
-	
+
+	/** The list of subscribed questions */
+	private List<IQuestion> subscriptions;
+
 	/** The posts list. */
 	private List<Post> posts;
-	
+
 	/** The id counter. */
 	private static long idCounter = 1;
-	
+
+	/** Flag indicating admin rights */
 	private boolean isAdmin = false;
 
+	/** Flag indicating whether the User is blocked */
 	private boolean isBlocked;
 
 	/**
@@ -68,11 +71,10 @@ public class User implements IUser {
 		this.subscriptions = new LinkedList<IQuestion>();
 		this.isAdmin = isAdmin;
 	}	
-	
+
 	public User(String username, String password){
 		this(username,password,false);
 	}
-	
 
 	/**
 	 * Gets the name.
@@ -82,7 +84,7 @@ public class User implements IUser {
 	public String getName() {
 		return this.username;
 	}	
-	
+
 	/**
 	 * Gets the username.
 	 *
@@ -91,7 +93,7 @@ public class User implements IUser {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
 	 * Sets the username.
 	 *
@@ -125,7 +127,7 @@ public class User implements IUser {
 	 * @return the birth date
 	 */
 	public Date getBirthDate() {
-		
+
 		return birthDate;
 	}
 
@@ -164,7 +166,7 @@ public class User implements IUser {
 	public long getId(){
 		return id;
 	}
-	
+
 	/**
 	 * Adds the notification.
 	 *
@@ -173,7 +175,7 @@ public class User implements IUser {
 	public void addNotification(INotification n){
 		notifications.add(n);
 	}
-	
+
 	/**
 	 * Gets the notifications.
 	 *
@@ -188,25 +190,25 @@ public class User implements IUser {
 	 *
 	 */
 	public void delete() {
-	
-		
+
+
 		//clone posts to prevent concurrent modification
 		List<Post> clone = new LinkedList<Post>();
 		for(Post post : posts){
 			clone.add(post);
 		}
-		
+
 		for (Post post : clone){
 			post.unregister();
 		}
 		this.posts.clear();
 		QaDB.removeUser(this);
-		
+
 		//assign all the posts this user has made to anonymous
 		assignQuestionsToAnonymous();
 		assignAnswersToAnonymous();
 		assignCommentsToAnonymous();
-		
+
 		//destroying all the information about the user
 		this.setUsername("blank"+id);
 		this.setBirthDate(new Date(0));
@@ -215,25 +217,25 @@ public class User implements IUser {
 		this.notifications.clear();
 		this.posts.clear();
 		this.subscriptions.clear();
-		
+
 	}
 	/**
 	 * Assign comments to anonymous.
 	 */
 	private void assignCommentsToAnonymous() {
 		List<Comment> comments = QaDB.findAllCommentsOfUser(this);
-		
+
 		for (Comment comment : comments){
 			comment.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
 		}
 	}
 
-		/**
-		 * Assign answers to anonymous.
-		 */
+	/**
+	 * Assign answers to anonymous.
+	 */
 	private void assignAnswersToAnonymous() {
 		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
-		
+
 		for (Answer answer : answers){
 			answer.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
 		}
@@ -244,36 +246,15 @@ public class User implements IUser {
 	 */
 	private void assignQuestionsToAnonymous() {
 		List<IQuestion> result = QaDB.findAllQuestionsOfUser(this);
-		
+
 		for (IQuestion q : result){
 			q.setOwner(QaDB.findUserByName(QaDB.ANONYMOUS.getName()));
 		}
-		
-	}
-	
-	/**
-	 * Delete answers.
-	 */
-	//unused
-	private void deleteAnswers(){
-		List<Answer> answers = QaDB.findAllAnswersOfUser(this);
-		
-		for (Answer answer : answers){
-			answer.delete();
-		}
-		
-	}
-	//unused
-	private void deleteComments(){
-		List<Comment> comments = QaDB.findAllCommentsOfUser(this);
-		
-		for (Comment comment : comments)
-			comment.delete();
+
 	}
 
 	public void registerPost(Post post) {
-		this.posts.add(post);
-		
+		this.posts.add(post);	
 	}
 
 	/**
@@ -284,110 +265,110 @@ public class User implements IUser {
 	public void unregister(Post post) {
 		this.posts.remove(post);
 	}
-	
-  public void delNotification(INotification notif) {
-	  
-  	if(notif == null)return;
-  	notifications.remove(notif);  	
-	  
-  }
-	
-  public void addSubscription(IQuestion quest) {
-	  if(quest == null) return;	  
-	  subscriptions.add(quest);	  
-  }
-	
-  public List<IQuestion> getSubscriptions() {	  
-	  return subscriptions;
-  }
-	
-  public void remSubscription(IQuestion quest) {
-	  if(quest == null) return;
-	  subscriptions.remove(quest);
-	  
-  }
 
-  public void update(String email, String birthDate, String homepage) {
-    if (StringUtils.isNotEmpty(birthDate)) {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-      Date date = new Date();
-      try {
-        date = sdf.parse(birthDate);
-        setBirthDate(date);
-      } catch (ParseException e) {
-        Logger.error("error parsing birthdate %s", e.getMessage());
-      }
-    }
-    if (StringUtils.isNotEmpty(email)) {
-      setEmail(email);
-    }
-    if (StringUtils.isNotEmpty(homepage)) {
-      setHomepage(homepage);
-    }
+	public void delNotification(INotification notif) {
 
-  }
+		if(notif == null)return;
+		notifications.remove(notif);  	
 
-  public String getPassword() {    
-    return password;
-  }
+	}
 
-	
-  public boolean isAdmin() {	  
-	  return isAdmin;
-  }
-  
-  public void setAdmin(boolean isAdmin){
-  	this.isAdmin = isAdmin;
-  }
+	public void addSubscription(IQuestion quest) {
+		if(quest == null) return;	  
+		subscriptions.add(quest);	  
+	}
 
-  /**
-   * Checks whether the user has the right to block other users
-   */
-  public boolean canBlockUser() {
-	  return isAdmin;
-  }
+	public List<IQuestion> getSubscriptions() {	  
+		return subscriptions;
+	}
+
+	public void remSubscription(IQuestion quest) {
+		if(quest == null) return;
+		subscriptions.remove(quest);
+
+	}
+
+	public void update(String email, String birthDate, String homepage) {
+		if (StringUtils.isNotEmpty(birthDate)) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+			Date date = new Date();
+			try {
+				date = sdf.parse(birthDate);
+				setBirthDate(date);
+			} catch (ParseException e) {
+				Logger.error("error parsing birthdate %s", e.getMessage());
+			}
+		}
+		if (StringUtils.isNotEmpty(email)) {
+			setEmail(email);
+		}
+		if (StringUtils.isNotEmpty(homepage)) {
+			setHomepage(homepage);
+		}
+
+	}
+
+	public String getPassword() {    
+		return password;
+	}
 
 
-  public void blockUser(User user) {
-	  if (canBlockUser())
-		  user.setBlocked(true);
-  }
+	public boolean isAdmin() {	  
+		return isAdmin;
+	}
 
-  public void unblockUser(User user){
-	  if (canBlockUser())
-		  user.setBlocked(false);
-  }
+	public void setAdmin(boolean isAdmin){
+		this.isAdmin = isAdmin;
+	}
 
-  public void setBlocked(boolean blocked) {
-	  this.isBlocked = blocked;
-  }
+	/**
+	 * Checks whether the user has the right to block other users
+	 */
+	public boolean canBlockUser() {
+		return isAdmin;
+	}
 
-  public boolean isBlocked() {
-	  return isBlocked;
-  }
 
-  public List<Question> getQuestions(){
-	  List<Question> questions = new LinkedList<Question>();
-	  for (Post post : posts){
-		  if (post.getClass().equals(Question.class))
-			  questions.add((Question) post);
-	  }
-	  return questions;
-  }
-  
-  public boolean isModeratorForQuestion(Question question){
-	  return isAdmin || this == question.owner;
-  }
+	public void blockUser(User user) {
+		if (canBlockUser())
+			user.setBlocked(true);
+	}
 
-public void closeQuestion(Question question) {
-	if (isAdmin || this == question.owner)
-		question.close();
-	
-}
+	public void unblockUser(User user){
+		if (canBlockUser())
+			user.setBlocked(false);
+	}
 
-public void reopenQuestion(Question question) {
-	if (isAdmin || this == question.owner)
-		question.reopen();
-}
- 
+	public void setBlocked(boolean blocked) {
+		this.isBlocked = blocked;
+	}
+
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public List<Question> getQuestions(){
+		List<Question> questions = new LinkedList<Question>();
+		for (Post post : posts){
+			if (post.getClass().equals(Question.class))
+				questions.add((Question) post);
+		}
+		return questions;
+	}
+
+	public boolean isModeratorForQuestion(Question question){
+		return isAdmin || this == question.owner;
+	}
+
+	public void closeQuestion(Question question) {
+		if (isAdmin || this == question.owner)
+			question.close();
+
+	}
+
+	public void reopenQuestion(Question question) {
+		if (isAdmin || this == question.owner)
+			question.reopen();
+	}
+
 }

@@ -210,7 +210,7 @@ public class Question extends Post implements IQuestion {
 		for(Tag tag : tags){
 			// ensure that a tag is deleted from DB when there is no question tagged with it
 			tag.unregisterQuestion(this);
-			if (tag.count() < 1)
+			if (tag.count() == 0)
 				QaDB.removeTag(tag);
 		}
 	}

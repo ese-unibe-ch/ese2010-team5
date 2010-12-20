@@ -36,10 +36,6 @@ public class Tag {
 		this.id = idCounter++;
 	}
 
-	public String toString() {
-		return this.name;
-	}
-
 	/**
 	 * Gets the name.
 	 * 
@@ -86,6 +82,15 @@ public class Tag {
 		this.relatedQuestions.remove(question);
 	}
 
+	/**
+	 * Returns the Tag for the given tagName.
+	 * If the Tag doesn't exist yet, it's created and returned.
+	 * Else the existing Tag is returned. 
+	 * 
+	 * @param tagName
+	 * @param question
+	 * @return the tag for the given tagName
+	 */
 	public static Tag findOrCreateTagByName(String tagName, Question question) {
 		Tag tag = QaDB.findTagByName(tagName);
 		if (tag == null){
