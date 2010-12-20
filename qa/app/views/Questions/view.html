@@ -236,8 +236,19 @@
 		<h3>Your Answer</h3>
 		#{form @Questions.addAnswer(), id:'addAnswerForm' } 
 			<input type="hidden" id="qId" name="qId" value="${q.getId()}"></input>
-			<textarea name="answer" cols="60" rows="10"></textarea>
-			<br></br>
+			<div class="text-editor">
+				<div class="tabs"><span onclick="teTab($(this));">write</span> | <span
+					onclick="teTab($(this));">preview</span></div>
+				<div class="help">This is Markdown <a target="_blank"
+					href="http://daringfireball.net/projects/markdown/syntax">syntax</a></div>
+				<div class="tab-write">
+				<div class="body"><textarea name="answer" tabindex="1">${flash.content}</textarea>
+				</div>
+				</div>
+				<div class="tab-preview">
+				<div class="body"></div>
+				</div>
+			</div>
 			<a href="#" onclick="$('#addAnswerForm').submit()">add</a>
 		#{/form}
 	 #{/if}

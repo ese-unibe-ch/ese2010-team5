@@ -166,7 +166,7 @@ public class Questions extends Posts {
 	 * @param tags the tags
 	 * @param tag the tag
 	 */
-	public static void save(String content, String title, String[] tag){
+	public static void save(String content, String title, String tag){
 		
 		validation.required(title);
 		validation.required(content);
@@ -180,7 +180,6 @@ public class Questions extends Posts {
 		
 		Question.createQuestion(user, title, content, tag);	
 		
-		Logger.debug("Question with title \"" + title + "\" created.");
 		flash.put("info", "Question with title \"" + title + "\" created.");
 		
 		listAll();
@@ -235,7 +234,6 @@ public class Questions extends Posts {
 	 */
 	@NoLogin
 	public static void view(long id){
-		Logger.debug("Show question: "+id);
 		
 		IQuestion q = QaDB.findQuestionById(id);
 		if(q == null){

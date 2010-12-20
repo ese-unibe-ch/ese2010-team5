@@ -56,12 +56,11 @@ public class Users extends Auth{
 	 * Update profile.
 	 *
 	 * @param id the id
-	 * @param name the name
 	 * @param email the email
 	 * @param birthDate the birth date
 	 * @param homepage the homepage
 	 */
-	public static void updateProfile(long id, String name, String email, String birthDate, String homepage){
+	public static void updateProfile(long id, String email, String birthDate, String homepage){
 		validation.email(email);
 		validation.match(homepage, "^http\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}(/\\S*)?$");
 		

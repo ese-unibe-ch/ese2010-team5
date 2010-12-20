@@ -48,7 +48,7 @@ public class Question extends Post implements IQuestion {
 		this.title = title;
 		setContent(content);
 		addSubscriber(user);
-		tagWith(tags);
+		tagWith(tags.toLowerCase());
 		
 	}
 	
@@ -260,16 +260,10 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	public static void createQuestion(User user, String title, String content,
-			String[] tag) {
+			String tag) {
 		
-		StringBuffer tagStr = new StringBuffer();
-		int arrL = tag.length;
-		for (int j = 0; j < arrL; j++){
-			tagStr.append(tag[j]);
-			tagStr.append(", ");
-		}
-		String tags = tagStr.toString();
-		QaDB.addQuestion(new Question(user, title, content, tags));
+		QaDB.addQuestion(new Question(user, title, content, tag));
+	
 	}
 
 

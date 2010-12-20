@@ -6,10 +6,6 @@
 <br />
 #{form @Users.updateProfile() , id:'editUserForm'}
 	<input type="hidden" id="id" name="id" value="${u.getId()}"></input> 
-  	Name:<br />
-	<input type="text" name="name" size="20" value="${u.getName()}" readonly="readonly"/>
-	<br />
-	<br />
 	Email:<br />
 	<input type="text" name="email" size="20" value="${u.getEmail()}"/><span class="error"> #{error 'email' /}</span>
 	<br />
