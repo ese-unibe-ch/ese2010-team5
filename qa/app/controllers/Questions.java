@@ -285,7 +285,7 @@ public class Questions extends Posts {
 		}
 		q.setTitle(title);
 		q.setContent(content);
-		flash.put("info","Content of question \"" + q.getTitle() + "\" changed");
+		flash.put("info","changes saved");
 		view(id);
 	}
 	

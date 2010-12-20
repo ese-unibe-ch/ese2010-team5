@@ -101,6 +101,21 @@ public class MockQuestion extends Post implements IQuestion{
   public boolean save() {	  
 	  return true;
   }
+
+  public void close() {
+	  // TODO Auto-generated method stub
+
+  }
+
+  public boolean isClosed() {
+	  // TODO Auto-generated method stub
+	  return false;
+  }
+
+  public void reopen() {
+	  // TODO Auto-generated method stub
+
+  }
 	
 
 }

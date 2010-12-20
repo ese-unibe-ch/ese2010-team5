@@ -165,9 +165,6 @@ public class QaDB {
 
 		return null;
 	}
-
-	
-	
 	
 	public static INotification findNotificationById(long id){
 		return notifications.get(id);
@@ -345,6 +342,13 @@ public class QaDB {
 		}
 		
 		return searchResult;
+	}
+
+	public static void removeTag(Tag tag) {
+		System.out.println("removing..." + tag.getName());
+		Tag rtag = findTagByName(tag.getName());
+		tags.remove(rtag);
+		
 	}
 		
 	

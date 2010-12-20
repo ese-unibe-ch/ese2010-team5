@@ -30,10 +30,5 @@
     #{list items:q.getTags(), as:'tag'}
         #{set tags:(tags?tags+', ':'')+tag /}
     #{/list}   
-    
-    <h3>Tags:</h3><input type="text" name="tags" value="${tags}"></input><br/> 
-    Important: Tags must be separated by a comma and a whitespace (", ")<br/>
-    <br></br>
     <button class="x-large"  onclick="$('#editForm').submit();">Update</button>   
-    
 #{/form}
