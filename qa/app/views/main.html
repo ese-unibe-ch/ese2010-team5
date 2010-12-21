@@ -81,7 +81,12 @@
       <!-- messages from flash scopes -->
       #{if flash.error }
 	     <div class="message error">
- 	       ${flash.error}
+	       #{if messages.get(flash.error)}
+	         &{flash.error}
+	       #{/if}	       
+	       #{else}
+	         ${flash.error}
+	       #{/else} 	       
 	 	   </div>
  	    #{/if}
  	    #{if flash.info }
@@ -91,7 +96,12 @@
       #{/if}
       #{if flash.success }
        <div class="message info">
-         ${flash.success}
+         #{if messages.get(flash.success)}
+           &{flash.success}
+         #{/if}        
+         #{else}
+           ${flash.success}
+         #{/else}         
        </div>
       #{/if}
       <!-- content -->
