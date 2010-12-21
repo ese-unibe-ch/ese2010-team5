@@ -28,7 +28,8 @@ public class Security extends Secure.Security{
 	
 	static void onAuthenticated() {
 		/*little welcom message*/
-		flash.success("Welcome %s", connected());
+		if (Security.connected() != null)
+			flash.success("Welcome %s", connected());
   }
 	
 	/**

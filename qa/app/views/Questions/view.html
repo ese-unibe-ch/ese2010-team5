@@ -179,7 +179,7 @@
       <div class="actions">      
         #{if answer.ownPost()}
         <a href="@{Answers.delete(answer.getId())}">delete</a> | 
-        <a href="@{Answers.edit(answer.getId())}">edit</a>        
+        <a href="@{Answers.edit(answer.getId())}">edit</a> |     
         #{/if}
         #{if q.ownPost()}            
             <a href="@{Questions.markBestAnswer(q.getId(),answer.getId())}"> 
