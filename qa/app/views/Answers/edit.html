@@ -1,29 +1,28 @@
 #{extends 'main.html' /}
 #{set title:'Edit Answer' /}
 
-<h1>Answer ${a.getId()}</h1>
+<h1>Edit answer:</h1>
 #{form @Answers.setContent(),id:'editForm'}
-
-	<table cellspacing="10px">
-	<tr>
-	  <td>Rating:</td>
-	  <td>
-	    <span id="answerRating">${a.getVotation()}</span>
-	  </td> 
-	</tr>	
-	<tr>
-	  <td>Created At:</td><td>${a.getTimestamp()}</td>
-	</tr>	
-	<tr>
-	    <input type="hidden" id="id" name="id" value="${a.getId()}"/>
-	    <td>
-	      Edit content:
-	    </td>
-	    <td>
-	      <input type="text" id="content" name="content" value="${a.getContent()}"/>
-	      <br/><a href="#" onclick="$('#editForm').submit();">update</a>      
-	    </td>   
-	</tr>
-	</table>
-
+	<input type="hidden" id="id" name="id" value="${a.getId()}"></input>  
+    <h3>Content:</h3>
+    <br></br>        
+		<div class="text-editor">  
+		   <div class="tabs">
+		     <span onclick="teTab($(this));">write</span> | <span onclick="teTab($(this));">preview</span>
+		   </div>
+		   <div class="help">
+		     This is Markdown <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">syntax</a>
+		   </div>
+		   <div class="tab-write">
+		     <div class="body">         
+		       <textarea name="content" tabindex="1">${a.getMarkdown()}</textarea>
+		     </div>
+		   </div>
+		   <div class="tab-preview">
+		     <div class="body">
+		     </div>    
+		   </div>
+		</div>
+    <br></br> 
+    <button class="x-large"  onclick="$('#editForm').submit();">Update</button>   
 #{/form}

@@ -11,6 +11,7 @@ import models.IQuestion;
 import models.IUser;
 
 import utils.QaDB;
+import utils.QaMarkdown;
 
 /**
  * The Class Answer that inherits from the abstract Class Post.
@@ -22,6 +23,8 @@ public class Answer extends Post {
 	
 	/** The boolean value to see if it's rated as the best. */
 	private boolean isBest = false;
+
+	private String renderedContent;
 		
 	/**
 	 * Instantiates a new answer.
@@ -33,7 +36,8 @@ public class Answer extends Post {
 	public Answer(IUser owner, String content, IQuestion inQuestion) {
 		super(owner,content);
 		this.question = inQuestion;
-		question.addAnswer(this);		
+		question.addAnswer(this);
+		setContent(content);
 	}	
 	
 	/**
@@ -56,7 +60,36 @@ public class Answer extends Post {
 		
 	}
 	
+	public void setContent(String editedContent, boolean rendered){
+		if(rendered){
+			super.setContent(editedContent);
+			renderedContent = editedContent;
+		}else{
+			super.setContent(editedContent);
+			//mark renderedContent as dirty, so that it will be re-rendered
+			//when needed
+			renderedContent = null;
+		}
+		
+	}
 	
+	public void setContent(String editedContent){
+		setContent(editedContent,  false);		
+	}
+	
+	public String getContent(){
+		
+		if(renderedContent == null){
+			/*render markdown*/			
+			renderedContent = QaMarkdown.toHtml(content);	
+		}
+		return renderedContent;
+	}
+	
+	public String getMarkdown(){
+		return content;
+	}
+		
 	public  String toString(){
 		return "rating: "+getVotation()+", "+getContent();
 	}
