@@ -136,8 +136,6 @@ public class Questions extends Posts {
 	 */
 	public static void markBestAnswer(long qId, long aId){
 		
-		Logger.debug("marking best answer "+aId+" for question "+qId);
-		
 		IQuestion q = QaDB.findQuestionById(qId);		
 		
 		if(q == null){
@@ -147,13 +145,17 @@ public class Questions extends Posts {
 		
 		Collection<Answer> answers = q.getAnswers();		
 		for(Answer a : answers){
-			if(!a.isBest() && a.getId() == aId)
+			if(!a.isBest() && a.getId() == aId){
 				a.setIsBest(true);
-			else
+				flash("info","answer marked as best");
+			}
+			else{
 				a.setIsBest(false);
+				flash("info","answer unmarked as best");
+			}
 		}
 		
-		flash("info","answer "+aId+" marked as best");
+		
 		view(qId);
 
 	}

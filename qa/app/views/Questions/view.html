@@ -93,6 +93,9 @@
           <a href="@{Questions.toggleSubscriber(q.getId(),user.getId())}">
           ${q.isSubscriber(user)?'unsubscribe':'subscribe'}
           </a>
+          #{if user.isModeratorForQuestion(q)}
+        	| <a href="@{Questions.toggleClose(q.getId())}">${q.isClosed()? "reopen " : "close "} question</a>
+        #{/if}
         #{/if}
             
         #{if q.ownPost()}
@@ -100,9 +103,6 @@
         | <a href="@{Questions.edit(q.getId())}">edit</a>        
         #{/if}
         
-        #{if user.isModeratorForQuestion(q)}
-        	| <a href="@{Questions.toggleClose(q.getId())}">${q.isClosed()? "reopen " : "close "} question</a>
-        #{/if}
 	  </div>
 		  <div class="time">
 		    updated: ${q.getTimestamp().since()}
