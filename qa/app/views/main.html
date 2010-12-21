@@ -39,8 +39,11 @@
          <a href="@{Tags.list()}">Tags</a>		
   
         #{if user && !user.isBlocked()}           
-          <a href="@{Questions.create()}">Ask Question</a>          
-        #{/if}      
+          <a href="@{Questions.create()}">Ask Question</a>    
+           #{if user.isAdmin()}           
+          <a href="@{Admin.index()}">Admin</a>          
+           #{/if}      
+        #{/if}
         
         #{form @Search.questions(),id:'textSearchForm',method:'GET'}
         <input id="searchField" type='text' name="q" value="type in words to search" onclick='$(this).val("")'></input>        
