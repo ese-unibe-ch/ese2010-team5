@@ -27,6 +27,7 @@ public class QuestionTest extends UnitTest {
 		use2 = new MockUser("Peter");
 		questOwner = new User("questOwner", "q");
 		admin = new User("admin", "a");
+		admin.setAdmin(true);
 		quest = new Question(use1, "Testquestion for JUnit");
 		com1 = new MockComment(use1,"testcomment1",quest);
 		com2 = new MockComment(use2,"testcomment2",quest);

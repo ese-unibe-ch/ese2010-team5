@@ -62,16 +62,19 @@ public class Answers extends Posts {
 	public static void addComment(String comment, long aId){
 		
 		Answer a = QaDB.findAnswerById(aId);
-		IQuestion q = a.getQuestion();
+		
 		
 		if(a == null){
 			flash.error("could not find answer a: "+aId);
 			redirect("/");
 			return;
 		}
+		
+		IQuestion q = a.getQuestion();
+		
 		Comment newComment = QaDB.addComment(new Comment(user,comment,a));
 		
-		flash.put("info", "new Comment created "+newComment.getId());
+		flash.put("info", "new Comment created");
 		
 		long qId = q.getId();
 		Questions.view(qId);

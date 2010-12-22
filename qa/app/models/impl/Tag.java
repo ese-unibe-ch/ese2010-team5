@@ -102,4 +102,8 @@ public class Tag {
 		}
 		return tag;
 	}
+
+	public String toString() {
+		return name;
+	}
 }

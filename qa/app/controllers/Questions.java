@@ -225,7 +225,7 @@ public class Questions extends Posts {
 		}
 		Comment newComment = q.addComment(user, comment);
 		
-		flash.put("info", "new Comment created " + newComment.getId());
+		flash.put("info", "new Comment created");
 		view(qId);
 	}
 	

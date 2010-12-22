@@ -24,7 +24,6 @@ import org.junit.*;
 public class UserTest extends UnitTest{
 	Date curDate;
 	User use, admin;
-	Question question;
 	IUser use1,use2;
 	INotification notify1,notify2;
 	IQuestion quest1,quest2;
@@ -105,9 +104,8 @@ public class UserTest extends UnitTest{
 	}
 	
 	@Test
-	public void shouldNotBeAllowedToPostWhenBlocked(){
+	public void shouldNotBeAllowedToPostQuestionsWhenBlocked(){
 		
-		//questions
 		admin.blockUser(use);
 		assertEquals(true, use.isBlocked());
 		int oldQuestCount = use.getQuestions().size();
@@ -118,18 +116,21 @@ public class UserTest extends UnitTest{
 		q = new Question(use, "test 2");
 		assertEquals(oldQuestCount + 1, use.getQuestions().size());
 		
-		//answers
-		question = new Question(use, "test question to be answered");
-		admin.blockUser(use);
+	}
+	
+	@Test
+	public void shouldNotBeAllowedToPostAnswersWhenBlocked(){
+		User u = new User("u", "p");
+		Question question =  new Question(u, "test question");
+		admin.blockUser(u);
 		int oldAnswerCount = question.getAnswers().size();
-		question.addAnswer(use, "answer 1");
+		question.addAnswer(u, "answer 1");
 		assertEquals(oldAnswerCount, question.getAnswers().size());
 		admin.unblockUser(use);
 		question.addAnswer(use, "answer 2");
 		assertEquals(oldAnswerCount + 1, question.getAnswers().size());
 		
 	}
-	
 	
 
 }

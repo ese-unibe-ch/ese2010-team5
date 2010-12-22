@@ -88,13 +88,11 @@ public class Users extends Auth{
 	 */
 	@NoLogin
 	public static void view(String username) {
-		Logger.debug("Show user profile: " + username);
 		User u = QaDB.findUserByName(username);
 		if(u == null){
 			error("could not find user: \""+username+"\"");
 			return;
 		}
-		
 		List<IQuestion> questions = QaDB.findAllQuestionsOfUser(u);
 		List<Answer> answers = QaDB.findAllAnswersOfUser(u);
 		

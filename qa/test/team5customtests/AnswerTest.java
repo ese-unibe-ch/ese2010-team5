@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
+import utils.QaMarkdown;
 import models.*;
 import models.impl.Answer;
 import models.mock.MockQuestion;
@@ -45,7 +46,7 @@ public class AnswerTest extends UnitTest{
 	@Test
 	public void shouldReturnProperTextRepresentation(){
 		ans.rateUp(use2);
-		assertEquals("rating: 1, This UnitTest will work sometime!",ans.toString());
+		assertEquals("rating: 1, " + new String(QaMarkdown.toHtml("This UnitTest will work sometime!")), ans.toString());
 	}
 
 

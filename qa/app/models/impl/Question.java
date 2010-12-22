@@ -116,20 +116,21 @@ public class Question extends Post implements IQuestion {
 	}
 
 	public void addAnswer(Answer newAnswer) {
-		
-		if(newAnswer == null)
-			return;
-		
-		answers.add(newAnswer);
-		
-		/*publish notifications for subscribers*/
-		List<IUser> subscribers = getSubscribers();
-		for(IUser subscriber : subscribers){
+		if (!closed){
+			if(newAnswer == null)
+				return;
 			
-			subscriber.addNotification(
-					QaDB.addNotification(new Notification(subscriber,newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
-			);
-		}	
+			answers.add(newAnswer);
+			
+			/*publish notifications for subscribers*/
+			List<IUser> subscribers = getSubscribers();
+			for(IUser subscriber : subscribers){
+				
+				subscriber.addNotification(
+						QaDB.addNotification(new Notification(subscriber,newAnswer.getOwner(),this, Notification.Type.NEW_ANSWER))
+				);
+			}	
+		}
 	}
 	
 	public boolean delAnswer(Answer newAnswer) {
@@ -271,7 +272,8 @@ public class Question extends Post implements IQuestion {
 	}
 	
 	public void addAnswer(User user, String answer) {
-		QaDB.addAnswer(new Answer(user, answer, this));
+		if (!user.isBlocked())
+			QaDB.addAnswer(new Answer(user, answer, this));
 	}
 
 	public Comment addComment(User user, String comment) {
